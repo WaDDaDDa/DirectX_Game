@@ -14,7 +14,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
 	GameEngineWindow::MainWindow.Open("TestWindow", hInstance);
 	GameEngineWindow::MainWindow.SetPosAndScale({ 100, 100 }, { 1280, 720 });
-
 	GameEngineWindow::MessageLoop(hInstance, nullptr, nullptr, nullptr);
 }
 
