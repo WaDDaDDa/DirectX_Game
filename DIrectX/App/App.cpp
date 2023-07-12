@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <Windows.h>
+#include <memory>
 #include <GameEnginePlatform/GameEngineWindow.h>
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,

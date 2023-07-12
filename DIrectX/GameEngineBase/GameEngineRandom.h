@@ -26,7 +26,6 @@
 class GameEngineRandom
 {
 public:
-	static GameEngineRandom MainRandom;
 
 	// constrcuter destructer
 	GameEngineRandom();
