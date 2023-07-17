@@ -2,7 +2,6 @@
 #include "GameEngineTime.h"
 #include <Windows.h>
 
-
 GameEngineTime::GameEngineTime() 
 {
 	QueryPerformanceFrequency(&Count);

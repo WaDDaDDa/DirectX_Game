@@ -7,7 +7,7 @@ GameEnginePath::GameEnginePath()
 	SetCurrentPath();
 }
 
-GameEnginePath::GameEnginePath(const std::string_view& _path) 
+GameEnginePath::GameEnginePath(const std::string_view& _path)
 	: Path(_path)
 {
 

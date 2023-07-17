@@ -6,7 +6,6 @@
 class GameEngineTime
 {
 public:
-
 	// constrcuter destructer
 	GameEngineTime();
 	~GameEngineTime();

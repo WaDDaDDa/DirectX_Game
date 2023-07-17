@@ -54,13 +54,13 @@ public:
 		return GlobalVolume;
 	}
 
-	static void SoundLoad(const std::string_view& _Path) 
+	static void SoundLoad(const std::string_view& _Path)
 	{
 		GameEnginePath Path = GameEnginePath(_Path);
 		SoundLoad(Path.GetFileName(), _Path);
 	}
 
-	static GameEngineSound* FindSound(const std::string_view& _Name);
+	static GameEngineSound* FindSound(const std::string_view& _path);
 
 	static void SoundLoad(const std::string_view& _Name, const std::string_view& _Path);
 
