@@ -27,10 +27,18 @@ public:
 	static const float4 UP;
 	static const float4 DOWN;
 
-	float X = 0.0f;
-	float Y = 0.0f;
-	float Z = 0.0f;
-	float W = 1.0f;
+	union
+	{
+		struct
+		{
+			float X;
+			float Y;
+			float Z;
+			float W;
+		};
+
+		float Arr1D[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	};
 
 	inline int iX() const
 	{
@@ -237,6 +245,15 @@ public:
 		return Angle;
 	}
 
+	// 외적 함수  두 벡터에 수직인 벡터를 얻을수 있다.
+	static float4 Cross3D(const float4& _Left, const float4& _Right)
+	{
+		float4 Result;
+		Result.X = (_Left.Y * _Right.Z) - (_Left.Z * _Right.Y);
+		Result.Y = (_Left.Z * _Right.X) - (_Left.X * _Right.Z);
+		Result.Z = (_Left.X * _Right.Y) - (_Left.Y * _Right.X);
+		return Result;
+	}
 
 	float4 VectorRotationToDegX(const float _Deg)
 	{
@@ -253,8 +270,8 @@ public:
 		// 왜 이 공식인지를 이해해야 합니다.
 		float4 Rot;
 		Rot.X = _Value.X;
-		Rot.Y = _Value.Y * sinf(_Rad) + _Value.Z * cosf(_Rad);
-		Rot.Z = _Value.Y * cosf(_Rad) - _Value.Z * sinf(_Rad);
+		Rot.Y = _Value.Z * sinf(_Rad) + _Value.Y * cosf(_Rad);
+		Rot.Z = _Value.Z * cosf(_Rad) - _Value.Y * sinf(_Rad);
 		return Rot;
 	}
 
@@ -273,9 +290,9 @@ public:
 	{
 		// 왜 이 공식인지를 이해해야 합니다.
 		float4 Rot;
-		Rot.X = _Value.Z * cosf(_Rad) - _Value.X * sinf(_Rad);
+		Rot.X = _Value.X * cosf(_Rad) - _Value.Z * sinf(_Rad);
 		Rot.Y = _Value.Y;
-		Rot.Z = _Value.Z * sinf(_Rad) + _Value.X * cosf(_Rad);
+		Rot.Z = _Value.X * sinf(_Rad) + _Value.Z * cosf(_Rad);
 		return Rot;
 	}
 
@@ -400,4 +417,44 @@ public:
 	{
 		return Pos.iY() + Scale.ihY();
 	}
+};
+
+
+class float4x4
+{
+public:
+	union
+	{
+		struct
+		{
+			float _00;
+			float _10;
+			float _20;
+			float _30;
+
+			float _01;
+			float _11;
+			float _21;
+			float _31;
+
+			float _02;
+			float _12;
+			float _22;
+			float _32;
+
+			float _03;
+			float _13;
+			float _23;
+			float _33;
+		};
+
+		float Arr1D[16];
+		float Arr2D[4][4] =
+		{
+			{1.0f, 0.0f, 0.0f, 0.0f},
+			{0.0f, 1.0f, 0.0f, 0.0f},
+			{0.0f, 0.0f, 1.0f, 0.0f},
+			{0.0f, 0.0f, 0.0f, 1.0f}
+		};
+	};
 };
