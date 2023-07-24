@@ -48,21 +48,31 @@ void ContentsCore::Update(float _Delta)
 		static float4 Scale = { 100.0f, 100.0f, 100.0f }; // 크기
 		static float4 Rotation = { 0, 0, 0 }; // 회전
 		static float4 Position = { 100.0f, 100.0f, 100.0f }; // 이동
-
-		//static float Dir = 1.0f;
-
-		//Scale -= float4(100.0f, 100.0f, 100.0f) * _Delta * Dir;
-
-		//if (100.0f <= abs(Scale.X))
-		//{
-		//	Dir *= -1.0f;
-		//}
-
-
+		
 		Rotation.X += 360.0f * _Delta;
 		Rotation.Y += 360.0f * _Delta;
 		Rotation.Z += 360.0f * _Delta;
 
+		float4x4 Scale4x4;
+		float4x4 Rotation4x4X;
+		float4x4 Rotation4x4Y;
+		float4x4 Rotation4x4Z;
+		float4x4 Rotation4x4;
+		float4x4 Position4x4;
+		
+		// 크기
+		Scale4x4.Scale({ 100, 100, 100});
+
+		//Rotation4x4X.RotationXDegs(Rotation.X);
+		//Rotation4x4Y.RotationYDegs(Rotation.Y);
+		//Rotation4x4Z.RotationZDegs(Rotation.Z);
+		//// 회전 통합
+		//Rotation4x4 = Rotation4x4X * Rotation4x4Y * Rotation4x4Z;
+		//// 이동
+		//Position4x4.Pos({ 100, 100, 100 });
+
+		// 곱하는 순서 지킬것 반드시 크기 -> 회전 -> 이동  순서
+		float4x4 World4x4 = Scale4x4 * Rotation4x4 * Position4x4;
 
 		// 로컬과 월드의 차이입니다.
 		// 사각형을 만들기 위해서 점을 4개 만들었습니다.
@@ -196,11 +206,7 @@ void ContentsCore::Update(float _Delta)
 
 				// WorldPoint *= World;
 
-				WorldPoint *= Scale;
-				WorldPoint = WorldPoint.VectorRotationToDegX(Rotation.X);
-				WorldPoint = WorldPoint.VectorRotationToDegY(Rotation.Y);
-				WorldPoint = WorldPoint.VectorRotationToDegZ(Rotation.Z);
-				WorldPoint += Position;
+				WorldPoint = WorldPoint * World4x4;
 
 				Trifloat4[VertexCount] = WorldPoint;
 				Tri[VertexCount] = WorldPoint.WindowPOINT();
