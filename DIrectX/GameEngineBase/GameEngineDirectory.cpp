@@ -18,8 +18,6 @@ GameEngineDirectory::GameEngineDirectory(const std::string_view& _path)
 	{
 		MsgBoxAssert("디렉토리 경로가 아닙니다." + std::string(_path));
 	}
-
-
 }
 
 // 자신의 디렉토리의 파일만 넣습니다.

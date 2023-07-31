@@ -31,6 +31,8 @@ public:
 	static const float4 RIGHT;
 	static const float4 UP;
 	static const float4 DOWN;
+	static const float4 FORWARD;
+	static const float4 BACKWARD;
 
 	union
 	{
@@ -252,11 +254,19 @@ public:
 	}
 
 
-	float4 VectorRotationToDegX(const float _Deg)
+	float4 VectorRotationToDegXReturn(const float _Deg)
 	{
 		return VectorRotationToDegX(*this, _Deg);
 	}
 
+	// 내적
+	static float DotProduct3D(const float4& _Left, const float4& _Right)
+	{
+		float Result = (_Left.X * _Right.X) + (_Left.Y * _Right.Y) + (_Left.Z * _Right.Z);
+		return Result;
+	}
+
+	// 외적
 	static float4 Cross3D(const float4& _Left, const float4& _Right)
 	{
 		float4 Result;
@@ -273,7 +283,7 @@ public:
 
 	static float4 VectorRotationToRadX(const float4& _Value, const float _Rad);
 
-	float4 VectorRotationToDegY(const float _Deg)
+	float4 VectorRotationToDegYReturn(const float _Deg)
 	{
 		return VectorRotationToDegY(*this, _Deg);
 	}
@@ -286,7 +296,7 @@ public:
 
 	static float4 VectorRotationToRadY(const float4& _Value, const float _Rad);
 
-	float4 VectorRotationToDegZ(const float _Deg)
+	float4 VectorRotationToDegZReturn(const float _Deg)
 	{
 		return VectorRotationToDegZ(*this, _Deg);
 	}
@@ -298,6 +308,19 @@ public:
 
 	static float4 VectorRotationToRadZ(const float4& _Value, const float _Rad);
 
+
+	void VectorRotationToDegX(const float _Rad)
+	{
+		*this = VectorRotationToDegX(*this, _Rad);
+	}
+	void VectorRotationToDegY(const float _Rad)
+	{
+		*this = VectorRotationToDegY(*this, _Rad);
+	}
+	void VectorRotationToDegZ(const float _Rad)
+	{
+		*this = VectorRotationToDegZ(*this, _Rad);
+	}
 
 	//                                       90.0f
 	static float4 GetUnitVectorFromRad(const float _Rad)
@@ -405,9 +428,12 @@ public:
 class float4x4
 {
 public:
+	static const int MatrixYCount = 4;
+	static const int MatrixXCount = 4;
+
 	union
 	{
-		float Arr2D[4][4] =
+		float Arr2D[MatrixYCount][MatrixXCount] =
 		{
 			// 00   01   02    03
 			{1.0f, 0.0f, 0.0f, 0.0f},
@@ -415,6 +441,8 @@ public:
 			{0.0f, 0.0f, 1.0f, 0.0f},
 			{0.0f, 0.0f, 0.0f, 1.0f}
 		};
+
+		float4 ArrVector[4];
 
 		struct
 		{
@@ -439,7 +467,7 @@ public:
 			float _33;
 		};
 
-		float Arr1D[16];
+		float Arr1D[MatrixYCount * MatrixXCount];
 
 	};
 
@@ -450,7 +478,7 @@ public:
 
 	void Identity()
 	{
-		memset(&Arr1D, 0, sizeof(Arr1D));
+		memset(Arr1D, 0, sizeof(Arr1D));
 
 		Arr2D[0][0] = 1.0f;
 		Arr2D[1][1] = 1.0f;
@@ -468,16 +496,6 @@ public:
 		Arr2D[1][1] = _Value.Y;
 		Arr2D[2][2] = _Value.Z;
 	}
-
-	void Pos(const float4& _Value)
-	{
-		Identity();
-
-		Arr2D[3][0] = _Value.X;
-		Arr2D[3][1] = _Value.Y;
-		Arr2D[3][2] = _Value.Z;
-	}
-
 
 	void RotationXDegs(const float _Value)
 	{
@@ -551,6 +569,108 @@ public:
 
 		// 회전을 시킬수 있는 행렬이 되어야 할거빈다.
 
+	}
+
+	void Pos(const float4& _Value)
+	{
+		Identity();
+
+		Arr2D[3][0] = _Value.X;
+		Arr2D[3][1] = _Value.Y;
+		Arr2D[3][2] = _Value.Z;
+	}
+
+	// 전치행렬로 만드는것.
+	// 대각선 기준으로 대칭이 되는 행렬로 만든다.
+	void TransPose()
+	{
+		// [][][][]
+		// [][][][]
+		// [][][][]
+		// [][][][]
+
+		float4x4 This = *this;
+		Identity();
+		for (size_t y = 0; y < MatrixYCount; ++y)
+		{
+			for (size_t x = 0; x < MatrixXCount; ++x)
+			{
+				Arr2D[x][y] = This.Arr2D[y][x];
+			}
+		}
+	}
+
+	// 왼손 좌표 기준으로 바라본다.
+	void LookAtLH(const float4& _EyePos, const float4& _EyeDir, const float4& _EyeUp)
+	{
+		Identity();
+
+		float4 EyePos = _EyePos;
+		float4 EyeForward = _EyeDir;
+		float4 EyeUp = _EyeUp;
+
+		// 카메라의 Z앞
+		EyeForward.Normalize();
+		// 카마라의 Y위 
+		EyeUp.Normalize();
+		// 카마라의 X위 
+		float4 EyeRight = float4::Cross3D(EyeUp, EyeForward);
+
+		// 회전행렬을 벡터만으로 만드는 방법.
+		// float4x4 RotMat;
+		ArrVector[0] = EyeRight;
+		ArrVector[1] = EyeUp;
+		ArrVector[2] = EyeForward;
+
+
+		// 45도 돌아간 카메라라면 
+		// 다른 모든 물체는 -45도 돌아야 한다.
+		TransPose();
+
+
+		// XYZ돌아서 어떤 물체를 바라보고 있는 카메라
+		// 회전행렬을 역으로 돌려야 한다.
+		// -X-Y-Z돌아서 어떤 물체를 원점으로 돌리게 만들어야 하는데.
+		// 전치행렬 Transpose를 만들어야 한다..
+
+		float4 NegEyePos = -EyePos;
+
+		// 모든 물체가 이동해야할 방향을 구하고 있다.
+		float XValue = float4::DotProduct3D(EyeRight, NegEyePos);
+		float YValue = float4::DotProduct3D(EyeUp, NegEyePos);
+		float ZValue = float4::DotProduct3D(EyeForward, NegEyePos);
+
+		// 위치
+		ArrVector[3] = { XValue, YValue, ZValue };
+	}
+
+	//               보통 모니터 크기를 넣어주는데
+	//               그냥 보고싶은 너비와 높이의 수치만 넣어주면 됩니다.
+	//                      1280                 720           5000
+	void OrthographicLH(float _Width, float _Height, float _Far, float _Near)
+	{
+		// DirectX::XMMatrixOrthographicLH
+		Identity();
+		//                     5000 - 0.1
+		float fRange = 1.0f / (_Far - _Near);
+		Arr2D[0][0] = 2.0f / _Width;
+		Arr2D[1][1] = 2.0f / _Height;
+		Arr2D[2][2] = fRange;
+		Arr2D[3][2] = -fRange * _Near;
+	}
+
+	void ViewPort(float _Width, float _Height, float _Left, float _Right, float _ZMin = 0.0f, float _ZMax = 1.0f)
+	{
+		Identity();
+
+		Arr2D[0][0] = _Width * 0.5f;
+		Arr2D[1][1] = -_Height * 0.5f; // 여기서 y축 반전을 시킨다.
+		Arr2D[2][2] = _ZMax != 0.0f ? 1.0f : _ZMin / _ZMax;
+
+		Arr2D[3][0] = Arr2D[0][0] + _Left;
+		Arr2D[3][1] = -Arr2D[1][1] + _Right;
+		Arr2D[3][2] = _ZMax != 0.0f ? 0.0f : _ZMin / _ZMax;
+		Arr2D[3][3] = 1.0f;
 	}
 
 	float4x4 operator*(const float4x4& _Other)

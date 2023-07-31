@@ -11,25 +11,6 @@ ContentsCore::~ContentsCore()
 
 void ContentsCore::Start()
 {
-	// 회전방향을 외적으로 알아내는 방법
-	float4 PlayerPos = { 3, 5 };
-	float4 MonsterPos = { 5, 5 };
-
-	float4 PlayerDir = { 0, 1, 0 };
-	float4 PlayerLook = (PlayerPos - MonsterPos).NormalizeReturn();
-
-
-	float4 Check = float4::Cross3D(PlayerDir, PlayerLook);
-
-	// float4 Rev = float4::Cross3D({0, 10, 0}, { 0.01f, -10.0f, 0 });
-
-	if (0 > Check.Z)
-	{
-		// 왼쪽으로 돌아라.
-	}
-
-	int a = 0;
-
 }
 
 void ContentsCore::Update(float _Delta)
@@ -44,36 +25,6 @@ void ContentsCore::Update(float _Delta)
 
 
 	{
-		// 물체로서의 크기 회전 위치
-		static float4 Scale = { 100.0f, 100.0f, 100.0f }; // 크기
-		static float4 Rotation = { 0, 0, 0 }; // 회전
-		static float4 Position = { 100.0f, 100.0f, 100.0f }; // 이동
-		
-		Rotation.X += 360.0f * _Delta;
-		Rotation.Y += 360.0f * _Delta;
-		Rotation.Z += 360.0f * _Delta;
-
-		float4x4 Scale4x4;
-		float4x4 Rotation4x4X;
-		float4x4 Rotation4x4Y;
-		float4x4 Rotation4x4Z;
-		float4x4 Rotation4x4;
-		float4x4 Position4x4;
-		
-		// 크기
-		Scale4x4.Scale({ 100, 100, 100});
-
-		//Rotation4x4X.RotationXDegs(Rotation.X);
-		//Rotation4x4Y.RotationYDegs(Rotation.Y);
-		//Rotation4x4Z.RotationZDegs(Rotation.Z);
-		//// 회전 통합
-		//Rotation4x4 = Rotation4x4X * Rotation4x4Y * Rotation4x4Z;
-		//// 이동
-		//Position4x4.Pos({ 100, 100, 100 });
-
-		// 곱하는 순서 지킬것 반드시 크기 -> 회전 -> 이동  순서
-		float4x4 World4x4 = Scale4x4 * Rotation4x4 * Position4x4;
-
 		// 로컬과 월드의 차이입니다.
 		// 사각형을 만들기 위해서 점을 4개 만들었습니다.
 		// 바로 월드로 바로만든것
@@ -85,10 +36,10 @@ void ContentsCore::Update(float _Delta)
 
 		float4 BaseVertexs[4];
 
-		BaseVertexs[0] = { -0.5f, -0.5f, -0.5f };
-		BaseVertexs[1] = { 0.5f, -0.5f, -0.5f };
-		BaseVertexs[2] = { 0.5f, 0.5f, -0.5f };
-		BaseVertexs[3] = { -0.5f, 0.5f, -0.5f };
+		BaseVertexs[0] = { -0.5f, -0.5f, -0.5f, 1.0f };
+		BaseVertexs[1] = { 0.5f, -0.5f, -0.5f, 1.0f };
+		BaseVertexs[2] = { 0.5f, 0.5f, -0.5f, 1.0f };
+		BaseVertexs[3] = { -0.5f, 0.5f, -0.5f, 1.0f };
 
 		// 앞면
 		Vertex[0] = BaseVertexs[0];
@@ -164,6 +115,100 @@ void ContentsCore::Update(float _Delta)
 		// 
 		// short Arr[2][3] = {{0, 1, 2}, {0, 2, 3}}; 24
 
+
+		// 월드의 영역
+		static float4 Scale = { 100.0f, 100.0f, 100.0f }; // 크기
+		static float4 Rotation = { 0, 0, 0 }; // 회전
+		static float4 Position = { 100.0f, 100.0f, 0.0f }; // 이동
+		Rotation.X += 360.0f * _Delta;
+		Rotation.Y += 360.0f * _Delta;
+		Rotation.Z += 360.0f * _Delta;
+
+		float4x4 Scale4x4;
+		float4x4 Rotation4x4X;
+		float4x4 Rotation4x4Y;
+		float4x4 Rotation4x4Z;
+		float4x4 Rotation4x4;
+		float4x4 Position4x4;
+
+
+		Scale4x4.Scale(Scale);
+
+		//Rotation4x4X.RotationXDegs(Rotation.X);
+		//Rotation4x4Y.RotationYDegs(Rotation.Y);
+		//Rotation4x4Z.RotationZDegs(Rotation.Z);
+		//Rotation4x4 = Rotation4x4X * Rotation4x4Y * Rotation4x4Z;
+
+		Position4x4.Pos(Position);
+
+		// 행렬의 곱샘은 교환법칙이 성립하지 않습니다.
+		float4x4 World4x4 = Scale4x4 * Rotation4x4 * Position4x4;
+
+
+		// 카메라의 영역
+
+		static float4 EyePos = { 0.0f, 0.0f, -500.0f, 1.0f };
+		static float4 EyeDir = { 0.0f, 0.0f, 1.0f, 1.0f };
+		// View4x4.LookToLH
+		// float4 EyeLookPos = { 0.0f, 0.0f, 0.0f, 1.0f };
+		// 내부에서 계산된다.
+		// float4 EyeDir = EyePos - EyeLookPos;
+		static float4 EyeUp = { 0.0f, 1.0f, 0.0f, 1.0f };
+
+		float CamSpeed = 300.0f;
+		if (GameEngineInput::IsPress(VK_NUMPAD4))
+		{
+			EyePos -= float4::LEFT * _Delta * CamSpeed;
+		}
+
+		if (GameEngineInput::IsPress(VK_NUMPAD6))
+		{
+			EyePos -= float4::RIGHT * _Delta * CamSpeed;
+		}
+
+		if (GameEngineInput::IsPress(VK_NUMPAD8))
+		{
+			EyePos -= float4::FORWARD * _Delta * CamSpeed;
+		}
+
+		if (GameEngineInput::IsPress(VK_NUMPAD5))
+		{
+			EyePos -= float4::BACKWARD * _Delta * CamSpeed;
+		}
+
+		if (GameEngineInput::IsPress(VK_NUMPAD7))
+		{
+			EyeUp.VectorRotationToDegZ(360.0f * _Delta);
+		}
+
+		if (GameEngineInput::IsPress(VK_NUMPAD9))
+		{
+			EyeUp.VectorRotationToDegZ(-360.0f * _Delta);
+		}
+
+		float4x4 View4x4;
+		View4x4.LookAtLH(EyePos, EyeDir, EyeUp);
+
+		float4x4 Projection4x4;
+
+		// 
+		//                           보고싶은 화면의 너비 
+		//                           12800                       7200
+		// 윈도우 크기가 아니라 내가 세상을 바라보고 싶은 크기
+		// 줌인 줌아웃을 아주 쉽게 만들수 있을것이다.
+
+		static float Zoom = 1.0f;
+
+		// Zoom += _Delta;
+
+		Projection4x4.OrthographicLH(GetStartWindowSize().X * Zoom, GetStartWindowSize().Y * Zoom, 1000.0f, 0.1f);
+
+		float4x4 ViewPort4x4;
+		//                    확장 시키려는 화면 크기고요 윈도우의 크기
+		ViewPort4x4.ViewPort(GetStartWindowSize().X, GetStartWindowSize().Y, 0.0f, 0.0f);
+
+		float4x4 WorldViewProjection4x4 = World4x4 * View4x4 * Projection4x4;
+
 		for (size_t indexCount = 0; indexCount < Index.size() / 3; indexCount++)
 		{
 			int ArrIndex[3];
@@ -179,43 +224,19 @@ void ContentsCore::Update(float _Delta)
 				// 위치를 더해줌으로해서 월드 상태로 이전시켰다고 한다.
 				float4 WorldPoint = Vertex[ArrIndex[VertexCount]];
 
-				// 위치 크기 회전을 적용시킬때 수학적으로 증명된
-				// 절대적인 기준이 있습니다.
-				// 크기 회전 위치 순서대로 적용시켜야 합니다.
+				//변환식은 이제 딱 한가지 인것.
+				WorldPoint = WorldPoint * WorldViewProjection4x4;
 
-				// 모든걸 다 행렬이라는 것으로 처리합니다.
-				// 이렇게 벡터식으로 처리하지 않고 
-				// 전부다 행렬이라는것을 사용해서 복잡한 변환을 수행합니다.
-				// 그럼 행렬은 뭐냐?
-				// x열 y행의 숫자가 모여있는 2차원 배열입니다.
-				// 우리가 사용하는 float4 4열 1행 행렬이다.
-				// 행렬의 기준으로 본다면 행렬이 아닌게 없다.
-				// 1 <= 숫자하나가 덩그러니 있으면 1행 1열짜리 행렬일 것이다.
-
-				// 당연히 float4 행렬이 다른 행렬끼리 연산이 되므로
-				// 더 큰 행렬도 이에 사용될수 있을 것이다.
-
-				// 보통은 4x4 행렬을 사용해서
-				// 크기 회전 위치를 표현하는 변환행렬을 만듭니다.
-
-				// 로컬 => 월드 => 뷰 => 투영 => 뷰포트 => 모니터
-
-				// 일단 연산량의 차이.
-				// 행렬이 훨씬 연산이 작아요.
-				// 다양한 변환을 한번에 할수가 있다.
-
-				// WorldPoint *= World;
-
-				WorldPoint = WorldPoint * World4x4;
+				WorldPoint = WorldPoint * ViewPort4x4;
 
 				Trifloat4[VertexCount] = WorldPoint;
+
+
 				Tri[VertexCount] = WorldPoint.WindowPOINT();
 			}
 			float4 Dir0 = Trifloat4[0] - Trifloat4[1];
 			float4 Dir1 = Trifloat4[1] - Trifloat4[2];
-			float4 Check = float4::Cross3D(Dir0, Dir1);
-			// Z값이 -면은 뒤에있는 면들 이므로 그런 면들은 그리지 않겠다.
-			// 그러면 앞면을 덮어서 그려지는 형상이 생기지 않게 된다.
+			float4 Check = float4::Cross3D(Dir1, Dir0);
 			if (Check.Z < 1.0f)
 			{
 				continue;
@@ -223,6 +244,8 @@ void ContentsCore::Update(float _Delta)
 			Polygon(DC, &Tri[0], Tri.size());
 		}
 
+		// 화면에 3d물체를 구별하고 선별하기 위한 변환은 다 끝났고
+		// 어떤 모니터에 뿌릴까만이 남게 된다. 최종적으로 화면에 어떻게 뿌릴것인가만이 남아있다.
 
 		GameEngineCore::MainWindow.DoubleBuffering();
 	}

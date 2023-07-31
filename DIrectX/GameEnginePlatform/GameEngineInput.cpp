@@ -12,6 +12,19 @@ GameEngineInput::~GameEngineInput()
 {
 }
 
+
+class InputSystemCreator
+{
+public:
+	InputSystemCreator()
+	{
+		GameEngineInput::InputInit();
+	}
+};
+
+InputSystemCreator InputInitInst;
+
+
 void GameEngineInput::InputInit()
 {
 	static bool Check = false;
