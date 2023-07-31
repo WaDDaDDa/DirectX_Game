@@ -33,6 +33,13 @@ float4 float4::operator*(const float4x4& _Other) const
 	return Result;
 }
 
+float4& float4::operator*=(const class float4x4& _Other)
+{
+	float4 Result = operator*(_Other);
+	*this = Result;
+	return *this;
+}
+
 float4 float4::VectorRotationToRadX(const float4& _Value, const float _Rad)
 {
 	float4x4 Rot;
