@@ -16,5 +16,11 @@
     <Filter Include="PreCompile">
       <UniqueIdentifier>{e2f3126a-53e3-4dff-8bab-f76e0adfb37b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{c1ef8500-e967-4050-9628-9e42b372b15c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level">
+      <UniqueIdentifier>{6c4e9cbc-6133-48d0-a5fb-f7021e74176a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
