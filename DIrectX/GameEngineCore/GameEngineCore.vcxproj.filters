@@ -10,6 +10,9 @@
     <Filter Include="Object\TransForm">
       <UniqueIdentifier>{e9e87f48-18c0-468c-8e97-19145f58e3a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering">
+      <UniqueIdentifier>{925acdaa-1ce9-4be2-9050-372923b6ccfe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineActor.h">
@@ -31,6 +34,12 @@
     <ClInclude Include="GameEngineTransform.h">
       <Filter>Object\TransForm</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineRenderer.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineCamera.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -51,6 +60,12 @@
     </ClCompile>
     <ClCompile Include="GameEngineTransform.cpp">
       <Filter>Object\TransForm</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineRenderer.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineCamera.cpp">
+      <Filter>Rendering</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
