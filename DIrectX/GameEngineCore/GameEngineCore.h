@@ -1,5 +1,6 @@
 #pragma once
 #include "GameEngineLevel.h"
+#include "GameEngineDevice.h"
 #include <GameEnginePlatform/GameEngineWindow.h>
 
 // Ό³Έν :
@@ -10,6 +11,7 @@ class GameEngineCore
 public:
 	static GameEngineTime MainTime;
 	static GameEngineWindow MainWindow;
+	static GameEngineDevice MainDevcie;
 
 	// constrcuter destructer
 	GameEngineCore();

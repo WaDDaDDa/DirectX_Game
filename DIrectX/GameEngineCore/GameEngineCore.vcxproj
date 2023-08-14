@@ -180,6 +180,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="GameEngineCoreObject.h" />
+    <ClInclude Include="GameEngineDevice.h" />
     <ClInclude Include="GameEngineLevel.h">
       <SubType>
       </SubType>
@@ -189,6 +190,8 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GameEngineResources.h" />
+    <ClInclude Include="GameEngineTexture.h" />
     <ClInclude Include="GameEngineTransform.h">
       <SubType>
       </SubType>
@@ -213,6 +216,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEngineCoreObject.cpp" />
+    <ClCompile Include="GameEngineDevice.cpp" />
     <ClCompile Include="GameEngineLevel.cpp">
       <SubType>
       </SubType>
@@ -222,6 +226,8 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GameEngineResources.cpp" />
+    <ClCompile Include="GameEngineTexture.cpp" />
     <ClCompile Include="GameEngineTransform.cpp">
       <SubType>
       </SubType>

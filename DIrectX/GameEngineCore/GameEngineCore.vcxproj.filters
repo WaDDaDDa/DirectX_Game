@@ -43,6 +43,13 @@
     <ClInclude Include="GameEngineCoreObject.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineDevice.h" />
+    <ClInclude Include="GameEngineTexture.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineResources.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -72,6 +79,13 @@
     </ClCompile>
     <ClCompile Include="GameEngineCoreObject.cpp">
       <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineDevice.cpp" />
+    <ClCompile Include="GameEngineTexture.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineResources.cpp">
+      <Filter>Rendering</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

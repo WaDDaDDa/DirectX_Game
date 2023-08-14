@@ -30,17 +30,23 @@ public:
 		return Hdc;
 	}
 
-	float4 GetScale()
+	HWND GetHWND() const
+	{
+		return hWnd;
+	}
+
+
+	float4 GetScale() const
 	{
 		return Scale;
 	}
 
-	GameEngineWindowTexture* GetWindowBuffer()
+	GameEngineWindowTexture* GetWindowBuffer() const
 	{
 		return WindowBuffer;
 	}
 
-	GameEngineWindowTexture* GetBackBuffer()
+	GameEngineWindowTexture* GetBackBuffer() const
 	{
 		return BackBuffer;
 	}

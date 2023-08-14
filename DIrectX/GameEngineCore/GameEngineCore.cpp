@@ -7,6 +7,7 @@
 std::shared_ptr<GameEngineObject> GameEngineCore::CoreObject;
 GameEngineTime GameEngineCore::MainTime;
 GameEngineWindow GameEngineCore::MainWindow;
+GameEngineDevice GameEngineCore::MainDevcie;
 
 std::shared_ptr<GameEngineLevel> GameEngineCore::CurLevel;
 std::shared_ptr<GameEngineLevel> GameEngineCore::NextLevel;
