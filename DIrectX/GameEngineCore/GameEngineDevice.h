@@ -12,6 +12,8 @@
 // 설명 :
 class GameEngineDevice
 {
+	friend class GameEngineCore;
+
 public:
 	// constrcuter destructer
 	GameEngineDevice();
@@ -28,6 +30,15 @@ public:
 	// 그런데 선생님구조는 그 window를 또 감싼다.
 	void Initiallize(const class GameEngineWindow& _Window);
 
+	ID3D11Device* GetDevice()
+	{
+		return Device;
+	}
+
+	ID3D11DeviceContext* GetContext()
+	{
+		return Context;
+	}
 
 protected:
 
@@ -53,6 +64,11 @@ private:
 
 
 	std::shared_ptr<class GameEngineTexture> BackBufferTexture;
+
+	std::shared_ptr<class GameEngineRenderTarget> BackBufferRenderTarget;
+
+	void RenderStart();
+	void RenderEnd();
 
 
 	void CreateSwapChain();
