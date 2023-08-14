@@ -3,17 +3,24 @@
 #include "Player.h"
 #include <GameEngineCore/GameEngineRenderer.h>
 
-PlayLevel::PlayLevel() 
+PlayLevel::PlayLevel()
 {
 }
 
-PlayLevel::~PlayLevel() 
+PlayLevel::~PlayLevel()
 {
 }
 
 void PlayLevel::Start()
 {
-	CreateActor<Player>();
+	GetMainCamera()->Transform.SetLocalPosition({ 0.0f, 0.0f, -500.0f });
+	// 카메라 투영 타입 세팅
+	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Perspective);
+
+	std::shared_ptr<Player> NewPlayer = CreateActor<Player>();
+
+	// GetMainCamera()->SetParent(NewPlayer);
+
 
 	// CreateActor<GameEngineRenderer>();
 }

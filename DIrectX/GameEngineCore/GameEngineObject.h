@@ -6,13 +6,15 @@
 // Update 이녀석이 업데이트될때
 // Release 이녀석이 지워질때
 
-// 설명 :                              // std::shared_ptr에서 this를 사용할수있게함.
+// 설명 :
 class GameEngineObject : public std::enable_shared_from_this<GameEngineObject>
 {
 	friend class GameEngineLevel;
 	friend class GameEngineCore;
 
 public:
+	GameEngineTransform Transform;
+
 	// constrcuter destructer
 	GameEngineObject();
 	virtual ~GameEngineObject();
@@ -58,7 +60,6 @@ public:
 		return UpdateOrder;
 	}
 
-
 	template<typename EnumType>
 	void SetOrder(EnumType _Order)
 	{
@@ -69,7 +70,6 @@ public:
 	{
 		UpdateOrder = _Order;
 	}
-
 
 	float GetLiveTime()
 	{
@@ -93,16 +93,26 @@ public:
 
 	virtual void AllUpdate(float _Delta);
 
-
-	void SetParent(GameEngineObject* _Parent)
+	void SetParent(GameEngineObject* _Parent, int _Order)
 	{
 		Parent = _Parent;
+		Parent->Childs[_Order].push_back(shared_from_this());
+		Transform.SetParent(_Parent->Transform);
+	}
+
+	template<typename ParentType>
+	void SetParent(std::shared_ptr<ParentType> _Parent)
+	{
+		Parent = _Parent.get();
+		Transform.SetParent(_Parent->Transform);
+		// Parent->Transform.SetParent(_Parent->Transform);
 	}
 
 	GameEngineObject* GetParentObject()
 	{
 		return Parent;
 	}
+
 
 	template<typename ParentType>
 	ParentType* GetParent()
@@ -112,7 +122,7 @@ public:
 
 	template<typename ConvertType>
 	std::shared_ptr<ConvertType> GetDynamic_Cast_This()
-	{                                                 // shared_ptr의 this
+	{
 		std::shared_ptr<GameEngineObject> ObjectPtr = shared_from_this();
 		std::shared_ptr<ConvertType> CameraPtr = std::dynamic_pointer_cast<ConvertType>(ObjectPtr);
 
@@ -126,13 +136,10 @@ public:
 
 protected:
 	GameEngineObject* Parent = nullptr;
-
 	// 오더링을 위해서
 	std::map<int, std::list<std::shared_ptr<class GameEngineObject>>> Childs;
 
-
 private:
-	GameEngineTransform Transform;
 
 	std::string Name;
 	float LiveTime = 0.0f;

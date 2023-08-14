@@ -21,6 +21,12 @@ public:
 
 	std::shared_ptr<class GameEngineCamera> CreateCamera(int _Order, int _CameraOrder);
 
+	template<typename ObjectType, typename EnumType>
+	std::shared_ptr<ObjectType> CreateActor(EnumType _Order)
+	{
+		return CreateActor<ObjectType>(static_cast<int>(_Order));
+	}
+
 	template<typename ObjectType>
 	std::shared_ptr<ObjectType> CreateActor(int _Order = 0)
 	{
@@ -38,6 +44,16 @@ public:
 		return std::dynamic_pointer_cast<ObjectType>(NewChild);
 	}
 
+	std::shared_ptr<GameEngineCamera> GetMainCamera()
+	{
+		return Cameras[0];
+	}
+
+	std::shared_ptr<GameEngineCamera> GetCamera(int _Select)
+	{
+		return Cameras[_Select];
+	}
+
 protected:
 
 private:
@@ -50,15 +66,16 @@ private:
 	// 액터관련 기능들
 	void AllUpdate(float _Delta) override;
 
-	// void Render(float _Delta);
+	//void Render(float _Delta);
 
 	void ActorRelease();
 
 	void ActorInit(std::shared_ptr<class GameEngineActor> _Actor, int _Order);
 
+	void Render(float _Delta);
+
 	// 이미 액터가 child로 관리하고 있지만
 	// 따로 카메라도 들고 있을 겁니다.
 	std::map<int, std::shared_ptr<class GameEngineCamera>> Cameras;
 };
-
 
