@@ -6,5 +6,5 @@
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEnginePlatform/GameEngineSound.h>
 
-
+#include "GameEngineCore.h"
 

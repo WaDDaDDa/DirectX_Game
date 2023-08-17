@@ -13,6 +13,24 @@
     <Filter Include="Rendering">
       <UniqueIdentifier>{925acdaa-1ce9-4be2-9050-372923b6ccfe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Device">
+      <UniqueIdentifier>{2545b241-51c3-4792-b395-3089f5545a49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{528b3843-499e-4f58-9b96-e46d4cb953f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Buffer">
+      <UniqueIdentifier>{c63e1c47-b223-42df-baa6-ba049204c8fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shader">
+      <UniqueIdentifier>{5374ded2-2873-4e37-8d2a-a51218d71545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Texture">
+      <UniqueIdentifier>{b4d5633d-e7c0-494d-994b-709c51444284}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VerTex">
+      <UniqueIdentifier>{ebdbe935-157d-4871-9510-c9fd0cb2fd21}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineActor.h">
@@ -43,15 +61,29 @@
     <ClInclude Include="GameEngineCoreObject.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineDevice.h" />
-    <ClInclude Include="GameEngineTexture.h">
-      <Filter>Rendering</Filter>
+    <ClInclude Include="GameEngineDevice.h">
+      <Filter>Device</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineResources.h">
-      <Filter>Rendering</Filter>
+    <ClInclude Include="GameEngineDirectBuffer.h">
+      <Filter>Resources\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineVertexBuffer.h">
+      <Filter>Resources\Buffer</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineRenderTarget.h">
-      <Filter>Rendering</Filter>
+      <Filter>Resources\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineTexture.h">
+      <Filter>Resources\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineResources.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineVertex.h">
+      <Filter>VerTex</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineInputLayOut.h">
+      <Filter>VerTex</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,15 +115,32 @@
     <ClCompile Include="GameEngineCoreObject.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineDevice.cpp" />
-    <ClCompile Include="GameEngineTexture.cpp">
-      <Filter>Rendering</Filter>
+    <ClCompile Include="GameEngineDevice.cpp">
+      <Filter>Device</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineResources.cpp">
-      <Filter>Rendering</Filter>
+    <ClCompile Include="GameEngineDevice_Resources.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineDirectBuffer.cpp">
+      <Filter>Resources\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineVertexBuffer.cpp">
+      <Filter>Resources\Buffer</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineRenderTarget.cpp">
-      <Filter>Rendering</Filter>
+      <Filter>Resources\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineTexture.cpp">
+      <Filter>Resources\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineResources.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineVertex.cpp">
+      <Filter>VerTex</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineInputLayOut.cpp">
+      <Filter>VerTex</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

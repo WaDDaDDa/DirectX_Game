@@ -72,5 +72,7 @@ private:
 
 
 	void CreateSwapChain();
+
+	void ResourcesInit();
 };
 

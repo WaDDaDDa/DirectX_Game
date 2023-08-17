@@ -9,7 +9,6 @@
 #pragma comment(lib, "dxguid")
 #pragma comment(lib, "DXGI")
 
-
 GameEngineDevice::GameEngineDevice()
 {
 }
@@ -121,6 +120,8 @@ void GameEngineDevice::Initiallize(const GameEngineWindow& _Window)
 	Window = &_Window;
 
 	CreateSwapChain();
+
+	ResourcesInit();
 }
 
 IDXGIAdapter* GameEngineDevice::GetHighPerformanceAdapter()
