@@ -12,7 +12,7 @@ void GameEngineDevice::ResourcesInit()
 	// 기본 매쉬
 	// 기본 텍스처
 	// 기본 쉐이더
-	// 여기에서 자기 텍스처 로드하지마세요.  기본으로 제공되는 엔진제공 텍스쳐 로드공간.
+	// 여기에서 자기 텍스처 로드하지마세요.
 
 	{
 		// 엔진용 쉐이더를 전부다 전부다 로드하는 코드를 친다.
@@ -23,12 +23,12 @@ void GameEngineDevice::ResourcesInit()
 
 		for (size_t i = 0; i < Files.size(); i++)
 		{
-			GameEngineVertexShader::Load(Files[i].GetStringPath(), "ColorShader_VS");
-
-			// GameEngineShader::AutoCompile();
+			// 구조적으로 잘 이해하고 있는지를 자신이 명확하게 인지하기 위해서
+			GameEngineFile& File = Files[i];
+			GameEngineShader::AutoCompile(File);
 		}
-
 	}
+
 
 	{
 		std::vector<GameEngineVertex2D> Vertex;

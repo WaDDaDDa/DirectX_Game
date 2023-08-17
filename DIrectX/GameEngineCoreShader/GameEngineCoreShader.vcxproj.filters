@@ -4,4 +4,14 @@
     <FxCompile Include="ColorShader.fx" />
     <FxCompile Include="TextureShader.fx" />
   </ItemGroup>
+  <ItemGroup>
+    <Filter Include="DOC">
+      <UniqueIdentifier>{fb89e198-a781-41e5-abb7-56cee3666663}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ShaderRule.txt">
+      <Filter>DOC</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
