@@ -3,6 +3,7 @@
 
 #include "GameEngineVertex.h"
 #include "GameEngineVertexBuffer.h"
+#include "GameEngineIndexBuffer.h"
 #include "GameEngineShader.h"
 #include "GameEngineVertexShader.h"
 

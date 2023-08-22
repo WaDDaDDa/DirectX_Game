@@ -91,6 +91,8 @@
     <ClInclude Include="GameEngineShader.h">
       <Filter>Resources\Shader</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineRasterizer.h" />
+    <ClInclude Include="GameEngineIndexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -154,5 +156,7 @@
     <ClCompile Include="GameEngineShader.cpp">
       <Filter>Resources\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineRasterizer.cpp" />
+    <ClCompile Include="GameEngineIndexBuffer.cpp" />
   </ItemGroup>
 </Project>
