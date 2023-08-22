@@ -31,6 +31,9 @@
     <Filter Include="VerTex">
       <UniqueIdentifier>{ebdbe935-157d-4871-9510-c9fd0cb2fd21}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\RenderingSetting">
+      <UniqueIdentifier>{ae3696e7-8d72-4203-a30e-eb0668750161}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineActor.h">
@@ -91,9 +94,18 @@
     <ClInclude Include="GameEngineShader.h">
       <Filter>Resources\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineRasterizer.h" />
-    <ClInclude Include="GameEngineIndexBuffer.h" />
-    <ClInclude Include="GameEnginePixelShader.h" />
+    <ClInclude Include="GameEnginePixelShader.h">
+      <Filter>Resources\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineRasterizer.h">
+      <Filter>Resources\RenderingSetting</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineConstantBuffer.h">
+      <Filter>Resources\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineIndexBuffer.h">
+      <Filter>Resources\Buffer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -157,8 +169,17 @@
     <ClCompile Include="GameEngineShader.cpp">
       <Filter>Resources\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineRasterizer.cpp" />
-    <ClCompile Include="GameEngineIndexBuffer.cpp" />
-    <ClCompile Include="GameEnginePixelShader.cpp" />
+    <ClCompile Include="GameEnginePixelShader.cpp">
+      <Filter>Resources\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineRasterizer.cpp">
+      <Filter>Resources\RenderingSetting</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineConstantBuffer.cpp">
+      <Filter>Resources\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineIndexBuffer.cpp">
+      <Filter>Resources\Buffer</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

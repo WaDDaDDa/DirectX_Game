@@ -8,5 +8,11 @@
   <ItemGroup>
     <FxCompile Include="ColorShader.fx" />
     <FxCompile Include="TextureShader.fx" />
+    <FxCompile Include="Transform.fx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ShaderRule.txt">
+      <Filter>DOC</Filter>
+    </Text>
   </ItemGroup>
 </Project>
