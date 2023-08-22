@@ -7,6 +7,11 @@ GameEngineRasterizer::GameEngineRasterizer()
 
 GameEngineRasterizer::~GameEngineRasterizer()
 {
+	if (nullptr != State)
+	{
+		State->Release();
+		State = nullptr;
+	}
 }
 
 

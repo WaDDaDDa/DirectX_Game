@@ -93,6 +93,7 @@
     </ClInclude>
     <ClInclude Include="GameEngineRasterizer.h" />
     <ClInclude Include="GameEngineIndexBuffer.h" />
+    <ClInclude Include="GameEnginePixelShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -158,5 +159,6 @@
     </ClCompile>
     <ClCompile Include="GameEngineRasterizer.cpp" />
     <ClCompile Include="GameEngineIndexBuffer.cpp" />
+    <ClCompile Include="GameEnginePixelShader.cpp" />
   </ItemGroup>
 </Project>
