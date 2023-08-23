@@ -43,8 +43,7 @@ void GameEngineShader::CreateVersion(ShaderType _Type, UINT _VersionHigh, UINT _
 	// "vs_5_0"
 }
 
-// 부모가 자식클래스를 알고 있는 경우
-// 자식의 헤더를 추가할 경우를 피고하고 싶지만 예외는 있다.
+// 부모가 자식클래스를 알고 있는 경우라 조금 선생님 타입
 #include "GameEngineVertexShader.h"
 #include "GameEnginePixelShader.h"
 

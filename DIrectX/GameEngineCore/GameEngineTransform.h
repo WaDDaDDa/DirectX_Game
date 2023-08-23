@@ -47,7 +47,7 @@ public:
 
 		LocalWorldMatrix = ScaleMatrix * RotationMatrix * PositionMatrix * RevolutionMatrix;
 	}
-	// 뷰포트는 아직 적용X
+
 	void WorldViewProjectionCalculation()
 	{
 		WorldViewPorjectionMatrix = WorldMatrix * ViewMatrix * ProjectionMatrix;
@@ -68,12 +68,11 @@ public:
 	GameEngineTransform& operator=(const GameEngineTransform& _Other) = delete;
 	GameEngineTransform& operator=(GameEngineTransform&& _Other) noexcept = delete;
 
-	// 직교투영
 	void OrthographicLH(float _Width, float _Height, float _Near, float _Far)
 	{
 		TransData.ProjectionMatrix.OrthographicLH(_Width, _Height, _Near, _Far);
 	}
-	// 시야각 투영
+
 	void PerspectiveFovLHDeg(float _FovAngle, float _Width, float _Height, float _Near, float _Far)
 	{
 		TransData.ProjectionMatrix.PerspectiveFovLHDeg(_FovAngle, _Width, _Height, _Near, _Far);
@@ -88,8 +87,6 @@ public:
 	{
 		return TransData;
 	}
-
-	// set
 
 	void SetLocalScale(const float4& _Value)
 	{
@@ -115,6 +112,7 @@ public:
 		TransData.Position += _Value;
 		TransformUpdate();
 	}
+
 
 
 
@@ -186,5 +184,6 @@ private:
 	GameEngineTransform* Parent = nullptr;
 	std::list<GameEngineTransform*> Childs;
 	TransformData TransData;
+
 };
 

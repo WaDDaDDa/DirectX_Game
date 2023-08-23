@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "GameEngineVertex.h"
 
+
 GameEngineInputLayOutInfo GameEngineVertex2D::VertexInfo;
 
 class GameEngineVertex2DStart

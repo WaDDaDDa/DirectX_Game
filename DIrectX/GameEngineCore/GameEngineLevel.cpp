@@ -67,6 +67,7 @@ void GameEngineLevel::ActorRelease()
 
 }
 
+
 void GameEngineLevel::ActorInit(std::shared_ptr<class GameEngineActor> _Actor, int _Order)
 {
 	_Actor->SetParent(this, _Order);

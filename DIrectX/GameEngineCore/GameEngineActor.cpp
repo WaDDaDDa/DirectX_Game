@@ -3,13 +3,14 @@
 #include "GameEngineLevel.h"
 #include "GameEngineComponent.h"
 
-GameEngineActor::GameEngineActor() 
+GameEngineActor::GameEngineActor()
 {
 }
 
-GameEngineActor::~GameEngineActor() 
+GameEngineActor::~GameEngineActor()
 {
 }
+
 
 GameEngineLevel* GameEngineActor::GetLevel()
 {
@@ -17,7 +18,6 @@ GameEngineLevel* GameEngineActor::GetLevel()
 
 	return GetParent<GameEngineLevel>();
 }
-
 
 void GameEngineActor::ComponentInit(std::shared_ptr<GameEngineComponent> _Component, int _Order)
 {

@@ -31,7 +31,6 @@ void GameEngineCamera::Update(float _Delta)
 {
 	GameEngineActor::Update(_Delta);
 
-
 	float4 Position = Transform.GetWorldPosition();
 	float4 Forward = Transform.GetWorldForwardVector();
 	float4 Up = Transform.GetWorldUpVector();
@@ -94,8 +93,6 @@ void GameEngineCamera::Render(float _DeltaTime)
 
 		for (std::shared_ptr<class GameEngineRenderer>& Renderer : RendererList)
 		{
-			// Transform
-
 			Renderer->Transform.CalculationViewAndProjection(Transform.GetConstTransformDataRef());
 			Renderer->Render(this, _DeltaTime);
 		}

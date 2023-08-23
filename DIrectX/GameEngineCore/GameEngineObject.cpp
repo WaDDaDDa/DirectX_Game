@@ -9,6 +9,9 @@ GameEngineObject::~GameEngineObject()
 {
 }
 
+
+
+
 void GameEngineObject::AllUpdate(float _Delta)
 {
 	Update(_Delta);

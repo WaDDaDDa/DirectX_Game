@@ -106,6 +106,12 @@
     <ClInclude Include="GameEngineIndexBuffer.h">
       <Filter>Resources\Buffer</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineSprite.h">
+      <Filter>Resources\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineSpriteRenderer.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -180,6 +186,12 @@
     </ClCompile>
     <ClCompile Include="GameEngineIndexBuffer.cpp">
       <Filter>Resources\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineSprite.cpp">
+      <Filter>Resources\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineSpriteRenderer.cpp">
+      <Filter>Rendering</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

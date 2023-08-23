@@ -20,6 +20,7 @@ protected:
 	void Update(float _Delta);
 
 private:
+	std::shared_ptr<class GameEngineSpriteRenderer> Renderer0;
 
 };
 

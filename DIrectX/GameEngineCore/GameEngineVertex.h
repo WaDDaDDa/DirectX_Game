@@ -8,14 +8,19 @@ class GameEngineVertex2D
 public:
 	static GameEngineInputLayOutInfo VertexInfo;
 
-	// 내가 얼마든지 순서를 바꿀수 있다.
-	// 그렇기 때문에 그래픽 카드에게 LayOutInfo를 통해 
-	// 어느곳에 어떤데이터가 있는지 명시해 주어야 GPU는 알수있다.
+	// 내가 얼마든지 바꿀수 있다.
 public:
 	float4 POSITION;
 	float4 COLOR;
 };
 
+//struct Vertex
+//{
+//    float4 Pos0 : POSITION0;
+//    float4 Pos1 : POSITION1;
+//    float4 COLOR : COLOR;
+//    float4 COLOR : TEXCOORD;
+//};
 
 class GameEngine3DVertex
 {
