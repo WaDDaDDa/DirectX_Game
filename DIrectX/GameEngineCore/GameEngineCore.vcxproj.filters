@@ -34,6 +34,18 @@
     <Filter Include="Resources\RenderingSetting">
       <UniqueIdentifier>{ae3696e7-8d72-4203-a30e-eb0668750161}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{8efba72e-0baa-4c19-a642-2bf3fd90756f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\Debug">
+      <UniqueIdentifier>{339a198f-f3c4-44bb-a182-51b328edc1bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\inc">
+      <UniqueIdentifier>{14c7fa55-1512-474d-bd06-6aa407e127cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\Release">
+      <UniqueIdentifier>{f09094ba-0941-46b8-8eda-74844ddcb19b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineActor.h">
@@ -111,6 +123,9 @@
     </ClInclude>
     <ClInclude Include="GameEngineSpriteRenderer.h">
       <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\DirectXTex\inc\DirectXTex.h">
+      <Filter>ThirdParty\inc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -193,5 +208,24 @@
     <ClCompile Include="GameEngineSpriteRenderer.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ThirdParty\DirectXTex\inc\DirectXTex.inl">
+      <Filter>ThirdParty\inc</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="ThirdParty\DirectXTex\lib\Release\DirectXTex.lib">
+      <Filter>ThirdParty\Release</Filter>
+    </Library>
+    <Library Include="ThirdParty\DirectXTex\lib\Debug\DirectXTex.lib">
+      <Filter>ThirdParty\Debug</Filter>
+    </Library>
+    <Library Include="ThirdParty\DirectXTex\lib\Debug\DirectXTex.pdb">
+      <Filter>ThirdParty\Debug</Filter>
+    </Library>
+    <Library Include="ThirdParty\DirectXTex\lib\Release\DirectXTex.pdb">
+      <Filter>ThirdParty\Release</Filter>
+    </Library>
   </ItemGroup>
 </Project>
