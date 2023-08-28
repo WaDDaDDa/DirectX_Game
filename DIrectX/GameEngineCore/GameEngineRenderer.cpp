@@ -62,7 +62,7 @@ void GameEngineRenderer::ResSetting()
 {
 
 	{
-		float4x4 WorldViewProjection = Transform.GetWorldViewPorjectionMatrix();
+		float4x4 WorldViewProjection = Transform.GetWorldViewProjectionMatrix();
 
 		// 인풋어셈블러1 버텍스 버퍼 세팅
 		std::shared_ptr<GameEngineVertexBuffer> VertexBuffer = GameEngineVertexBuffer::Find("Rect");
@@ -138,18 +138,20 @@ void GameEngineRenderer::ResSetting()
 			Rasterizer->Setting();
 		}
 
-		std::shared_ptr<GameEnginePixelShader> PixelShader = GameEnginePixelShader::Find("ColorShader_PS");
+		std::shared_ptr<GameEnginePixelShader> PixelShader = GameEnginePixelShader::Find("TextureShader_PS");
 		if (nullptr != PixelShader)
 		{
 			PixelShader->Setting();
 		}
+
+
+
 
 		std::shared_ptr<class GameEngineRenderTarget> BackBufferRenderTarget = GameEngineCore::GetBackBufferRenderTarget();
 		if (nullptr != BackBufferRenderTarget)
 		{
 			BackBufferRenderTarget->Setting();
 		}
-
 
 
 

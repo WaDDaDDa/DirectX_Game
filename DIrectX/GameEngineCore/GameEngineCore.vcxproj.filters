@@ -127,6 +127,7 @@
     <ClInclude Include="ThirdParty\DirectXTex\inc\DirectXTex.h">
       <Filter>ThirdParty\inc</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineSampler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -208,6 +209,7 @@
     <ClCompile Include="GameEngineSpriteRenderer.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineSampler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ThirdParty\DirectXTex\inc\DirectXTex.inl">

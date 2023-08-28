@@ -59,6 +59,11 @@ std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(std::vector<std::str
 			}
 		}
 
+		if (0 == UpperFilter.size())
+		{
+			Check = true;
+		}
+
 		if (false == Check)
 		{
 			continue;
