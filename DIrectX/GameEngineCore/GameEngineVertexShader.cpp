@@ -17,12 +17,12 @@ GameEngineVertexShader::~GameEngineVertexShader()
 void GameEngineVertexShader::ShaderLoad(
 	std::string_view _Path,
 	std::string_view _EntryPoint,
-	UINT _VersionHight,
+	UINT _VersionHigh,
 	UINT _VersionLow)
 {
 	std::wstring UniPath = GameEngineString::AnsiToUnicode(_Path);
 
-	CreateVersion(ShaderType::Vertex, _VersionHight, _VersionLow);
+	CreateVersion(ShaderType::Vertex, _VersionHigh, _VersionLow);
 
 	EntryName = _EntryPoint;
 

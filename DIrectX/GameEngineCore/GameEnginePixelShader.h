@@ -18,15 +18,15 @@ public:
 	GameEnginePixelShader& operator=(const GameEnginePixelShader& _Other) = delete;
 	GameEnginePixelShader& operator=(GameEnginePixelShader&& _Other) noexcept = delete;
 
-	static std::shared_ptr<GameEnginePixelShader> Load(std::string_view _Path, std::string_view _EntryPoint, UINT _VersionHight = 5, UINT _VersionLow = 0)
+	static std::shared_ptr<GameEnginePixelShader> Load(std::string_view _Path, std::string_view _EntryPoint, UINT _VersionHigh = 5, UINT _VersionLow = 0)
 	{
-		return Load(_Path, _EntryPoint, _EntryPoint, _VersionHight, _VersionLow);
+		return Load(_Path, _EntryPoint, _EntryPoint, _VersionHigh, _VersionLow);
 	}
 
-	static std::shared_ptr<GameEnginePixelShader> Load(std::string_view _Path, std::string_view _Name, std::string_view _EntryPoint, UINT _VersionHight = 5, UINT _VersionLow = 0)
+	static std::shared_ptr<GameEnginePixelShader> Load(std::string_view _Path, std::string_view _Name, std::string_view _EntryPoint, UINT _VersionHigh = 5, UINT _VersionLow = 0)
 	{
 		std::shared_ptr<GameEnginePixelShader> Res = GameEnginePixelShader::CreateRes(_Name);
-		Res->ShaderLoad(_Path, _EntryPoint, _VersionHight, _VersionLow);
+		Res->ShaderLoad(_Path, _EntryPoint, _VersionHigh, _VersionLow);
 		return Res;
 	}
 
@@ -38,7 +38,7 @@ private:
 	std::string EntryName = "";
 	ID3D11PixelShader* ShaderPtr = nullptr;
 
-	void ShaderLoad(std::string_view _Path, std::string_view _EntryPoint, UINT _VersionHight = 5, UINT _VersionLow = 0);
+	void ShaderLoad(std::string_view _Path, std::string_view _EntryPoint, UINT _VersionHigh = 5, UINT _VersionLow = 0);
 
 };
 
