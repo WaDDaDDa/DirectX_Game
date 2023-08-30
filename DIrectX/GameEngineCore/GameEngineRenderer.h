@@ -35,13 +35,13 @@ public:
 
 protected:
 	void Start();
-	virtual void Render(GameEngineCamera* _Camera, float _Delta);
+	virtual void Render(class GameEngineCamera* _Camera, float _Delta);
 
 	void ResSetting();
 	void Draw();
 
 private:
-	std::map<class GameEngineCamera*, int> ViewInfo;
+	std::map<GameEngineCamera*, int> ViewInfo;
 	std::shared_ptr<class GameEngineInputLayOut> LayOut = nullptr;
 
 	// int CameraOrder = 0;

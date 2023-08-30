@@ -2,6 +2,7 @@
 #include "PlayLevel.h"
 #include "Player.h"
 #include <GameEngineCore/GameEngineRenderer.h>
+#include <GameEngineCore/GameEngineSprite.h>
 
 PlayLevel::PlayLevel()
 {
@@ -13,15 +14,33 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::Start()
 {
+
+	{
+		// 해당레벨에서 사용할 리소스들 로드
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("GameEngineResources");
+		Dir.MoveChild("ContentsResources");
+		Dir.MoveChild("Texture");
+		std::vector<GameEngineFile> Files = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Files.size(); i++)
+		{
+			GameEngineFile& File = Files[i];
+			GameEngineTexture::Load(File.GetStringPath());
+		}
+
+		GameEngineSprite::CreateCut("TestPlayer.png", 6, 6);
+
+	}
+
+
+
 	GetMainCamera()->Transform.SetLocalPosition({ 0.0f, 0.0f, -500.0f });
-	// 카메라 투영 타입 세팅
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Perspective);
 
 	std::shared_ptr<Player> NewPlayer = CreateActor<Player>();
 
 	// GetMainCamera()->SetParent(NewPlayer);
-
-
 	// CreateActor<GameEngineRenderer>();
 }
 
