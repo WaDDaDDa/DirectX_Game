@@ -8,3 +8,7 @@
 
 #include "GameEngineCore.h"
 
+
+// Rendering
+#include <GameEngineCore/GameEngineRenderer.h>
+#include <GameEngineCore/GameEngineSprite.h>

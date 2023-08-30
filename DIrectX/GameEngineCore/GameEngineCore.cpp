@@ -35,14 +35,13 @@ void GameEngineCore::Update()
 	{
 		if (nullptr != CurLevel)
 		{
-			//CurLevel->LevelEnd(NextLevel);
-			//CurLevel->ActorLevelEnd();
+			// get() 은 shared_ptr에서의 this
+			CurLevel->AllLevelEnd(NextLevel.get());
 		}
 
 		// NextLevel->OverCheck(CurLevel);
 
-		//NextLevel->LevelStart(CurLevel);
-		//NextLevel->ActorLevelStart();
+		NextLevel->AllLevelStart(CurLevel.get());
 
 		CurLevel = NextLevel;
 
