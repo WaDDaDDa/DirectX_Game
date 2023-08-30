@@ -57,7 +57,6 @@ public:
 	//항상 이미지대로
 	void AutoSpriteSizeOn();
 	void AutoSpriteSizeOff();
-
 protected:
 	void Update(float _Delta) override;
 	void Render(GameEngineCamera* _Camera, float _Delta) override;

@@ -11,6 +11,12 @@
     <ClCompile Include="PlayLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="IntroLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroCut.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -22,6 +28,12 @@
     </ClInclude>
     <ClInclude Include="PlayLevel.h">
       <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroCut.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

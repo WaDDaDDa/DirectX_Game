@@ -164,6 +164,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
+    <ClCompile Include="IntroCut.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="IntroLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayLevel.cpp" />
     <ClCompile Include="PreCompile.cpp">
@@ -175,6 +183,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
+    <ClInclude Include="IntroCut.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="IntroLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayLevel.h" />
     <ClInclude Include="PreCompile.h" />
