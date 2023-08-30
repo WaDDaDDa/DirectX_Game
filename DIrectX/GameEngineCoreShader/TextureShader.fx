@@ -24,7 +24,22 @@ PixelOutPut TextureShader_VS(GameEngineVertex2D _Input)
     
     // 내가 원하는 값을 이안에 넣어줄수 있어야 한다.
     Result.POSITION = mul(_Input.POSITION, WorldViewProjectionMatrix);
-    Result.TEXCOORD = _Input.TEXCOORD;
+       // Result.TEXCOORD = _Input.TEXCOORD;
+    
+    // 6의 버텍스가 들어올것이다.
+    
+    // 이걸 CPU에서 보내줘야 한다.
+    // 그래픽카드는 알도리가 없는 거니까.
+    float SizeX = 1.0f / 6.0f;
+    float SizeY = 1.0f / 6.0f;
+    float StartX = SizeX * 5.0f;
+    float StartY = SizeY * 0.0f;
+    
+    Result.TEXCOORD.x = (_Input.TEXCOORD.x * SizeX) + StartX;
+    Result.TEXCOORD.y = (_Input.TEXCOORD.y * SizeY) + StartY;
+    
+    // 버텍스 들은 어떻게 되어있나?
+    
     
     return Result;
 }

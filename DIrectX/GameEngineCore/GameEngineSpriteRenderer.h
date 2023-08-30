@@ -20,7 +20,10 @@ public:
 	void SetSprite(std::string_view _Name, unsigned int index = 0);
 
 protected:
+
 	void Render(GameEngineCamera* _Camera, float _Delta) override;
+
+	int Index = 0;
 
 private:
 	std::shared_ptr<GameEngineSprite> Sprite;
