@@ -48,8 +48,14 @@ void IntroCut::Start()
 
 		MainSpriteRenderer->CreateAnimation("Intro", "Intro", 1.0f);
 		MainSpriteRenderer->ChangeAnimation("Intro");
-		MainSpriteRenderer->AutoSpriteSizeOn();
 	}
+
+	float4 WindowScale = GameEngineCore::MainWindow.GetScale();
+	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
+	MainSpriteRenderer->Transform.SetLocalScale(WindowScale);
+
+	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
+
 }
 
 void IntroCut::Update(float _Delta)
