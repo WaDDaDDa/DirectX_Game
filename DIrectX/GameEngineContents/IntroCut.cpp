@@ -38,6 +38,12 @@ void IntroCut::Start()
 
 void IntroCut::Update(float _Delta)
 {
+	if (GameEngineInput::IsDown('P'))
+	{
+		GameEngineCore::ChangeLevel("BattleLevel");
+		return;
+	}
+
 	StateUpdate(_Delta);
 }
 

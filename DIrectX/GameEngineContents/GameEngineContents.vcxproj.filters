@@ -23,6 +23,12 @@
     <ClCompile Include="TextArrow.cpp">
       <Filter>Global</Filter>
     </ClCompile>
+    <ClCompile Include="BattleLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="GameUnit.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -49,6 +55,12 @@
     </ClInclude>
     <ClInclude Include="TextArrow.h">
       <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="GameUnit.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

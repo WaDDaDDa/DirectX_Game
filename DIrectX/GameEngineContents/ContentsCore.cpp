@@ -4,6 +4,7 @@
 // ·¹º§
 #include "IntroLevel.h"
 #include "PlayLevel.h"
+#include "BattleLevel.h"
 
 ContentsCore::ContentsCore()
 {
@@ -17,6 +18,7 @@ void ContentsCore::Start()
 {
 	GameEngineCore::CreateLevel<IntroLevel>("IntroLevel");
 	GameEngineCore::CreateLevel<PlayLevel>("PlayLevel");
+	GameEngineCore::CreateLevel<BattleLevel>("BattleLevel");
 	GameEngineCore::ChangeLevel("IntroLevel");
 
 }
