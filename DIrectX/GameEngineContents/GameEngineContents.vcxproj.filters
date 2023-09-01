@@ -17,6 +17,12 @@
     <ClCompile Include="IntroCut.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="NewGame_UI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="TextArrow.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -35,6 +41,15 @@
     <ClInclude Include="IntroCut.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="ContentsEnum.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="NewGame_UI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TextArrow.h">
+      <Filter>Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -45,6 +60,12 @@
     </Filter>
     <Filter Include="Level">
       <UniqueIdentifier>{6c4e9cbc-6133-48d0-a5fb-f7021e74176a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{67a73d0d-7248-48c8-b750-c71cc884cbf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{4c39215a-7913-403e-992a-07d620a9f227}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
