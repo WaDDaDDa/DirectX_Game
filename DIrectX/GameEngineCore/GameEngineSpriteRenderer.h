@@ -6,13 +6,18 @@ class GameEngineFrameAnimation
 {
 	friend class GameEngineSpriteRenderer;
 
+	GameEngineSpriteRenderer* Parent = nullptr;
+
 	std::string AnimationName;
 	std::string SpriteName;
 
-	std::shared_ptr<GameEngineSprite> Sprite;
+	std::shared_ptr<GameEngineSprite> Sprite = nullptr;
 
 	float Inter;
 	bool Loop;
+	bool IsEnd;
+
+	bool EventCheck = false;
 
 	unsigned int Start;
 	unsigned int End;
@@ -22,13 +27,27 @@ class GameEngineFrameAnimation
 
 	void Reset();
 
+	std::map<int, std::function<void(GameEngineSpriteRenderer*)>> FrameEventFunction;
+
+	std::function<void(GameEngineSpriteRenderer*)> EndEvent;
+
+	void EventCall(int _Frame);
+
 	SpriteData Update(float _DeltaTime);
 
+};
+
+enum class SamplerOption
+{
+	LINEAR,
+	POINT,
 };
 
 // 설명 :
 class GameEngineSpriteRenderer : public GameEngineRenderer
 {
+	friend GameEngineFrameAnimation;
+
 public:
 	// constrcuter destructer
 	GameEngineSpriteRenderer();
@@ -52,9 +71,8 @@ public:
 		bool _Loop = true
 	);
 
-	void ChangeAnimation(std::string_view _AnimationName);
+	void ChangeAnimation(std::string_view _AnimationName, bool _Force = false);
 
-	//항상 이미지대로
 	void AutoSpriteSizeOn();
 	void AutoSpriteSizeOff();
 
@@ -62,6 +80,21 @@ public:
 	{
 		AutoScaleRatio = _Ratio;
 	}
+
+	void SetSamplerState(SamplerOption _Option);
+
+	bool IsCurAnimationEnd()
+	{
+		return CurFrameAnimations->IsEnd;
+	}
+
+	void AnimationPauseSwitch();
+	void AnimationPauseOn();
+	void AnimationPauseOff();
+
+	void SetStartEvent(std::string_view _AnimationName, std::function<void(GameEngineSpriteRenderer*)> _Function);
+	void SetEndEvent(std::string_view _AnimationName, std::function<void(GameEngineSpriteRenderer*)> _Function);
+	void SetFrameEvent(std::string_view _AnimationName, int _Frame, std::function<void(GameEngineSpriteRenderer*)> _Function);
 
 protected:
 	void Update(float _Delta) override;
@@ -76,8 +109,11 @@ private:
 	std::shared_ptr<GameEngineSprite> Sprite;
 	SpriteData CurSprite;
 
+	std::shared_ptr<class GameEngineSampler> Sampler;
+
 	bool IsImageSize = false;
 	float AutoScaleRatio = 1.0f;
+	bool IsPause = false;
 
 };
 
