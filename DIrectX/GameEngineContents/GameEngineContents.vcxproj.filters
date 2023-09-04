@@ -27,7 +27,13 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="GameUnit.cpp">
-      <Filter>Object</Filter>
+      <Filter>GameUnit</Filter>
+    </ClCompile>
+    <ClCompile Include="Knight.cpp">
+      <Filter>GameUnit</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleField.cpp">
+      <Filter>BackGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -60,7 +66,13 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="GameUnit.h">
-      <Filter>Object</Filter>
+      <Filter>GameUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="Knight.h">
+      <Filter>GameUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleField.h">
+      <Filter>BackGround</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -78,6 +90,12 @@
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{4c39215a-7913-403e-992a-07d620a9f227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameUnit">
+      <UniqueIdentifier>{15a92824-070d-4f38-9156-af247525b1d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BackGround">
+      <UniqueIdentifier>{bb44e4dc-a31b-49c2-a2ba-70deb0ba262d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

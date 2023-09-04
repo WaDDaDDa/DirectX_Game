@@ -33,8 +33,8 @@ void IntroCut::Start()
 	TextBoxRenderer->Transform.AddLocalPosition(TextBoxPos);
 
 	ChangeState(IntroCutState::CutScene1);
-
 }
+
 
 void IntroCut::Update(float _Delta)
 {
@@ -120,6 +120,7 @@ void IntroCut::ChangeState(IntroCutState _State)
 void IntroCut::BlackStart()
 {
 	Arrow->Death();
+	Arrow = nullptr;
 	MainSpriteRenderer->SetSprite("Black_0.png");
 	Scene += 1;
 }
@@ -156,6 +157,7 @@ void IntroCut::CutScene1Update(float _Delta)
 void IntroCut::CutScene2Start()
 {
 	MainSpriteRenderer->SetSprite("cutscene2.png");
+	Arrow = GetLevel()->CreateActor<TextArrow>();
 
 }
 
@@ -172,6 +174,7 @@ void IntroCut::CutScene3Start()
 {
 	MainSpriteRenderer->SetSprite("cutscene3.png");
 
+	Arrow = GetLevel()->CreateActor<TextArrow>();
 }
 
 void IntroCut::CutScene3Update(float _Delta)
@@ -187,6 +190,7 @@ void IntroCut::CutScene4Start()
 {
 	MainSpriteRenderer->SetSprite("cutscene4.png");
 
+	Arrow = GetLevel()->CreateActor<TextArrow>();
 }
 
 void IntroCut::CutScene4Update(float _Delta)
@@ -201,6 +205,7 @@ void IntroCut::CutScene4Update(float _Delta)
 void IntroCut::CutScene5Start()
 {
 	MainSpriteRenderer->SetSprite("cutscene5.png");
+	Arrow = GetLevel()->CreateActor<TextArrow>();
 
 }
 
@@ -216,6 +221,7 @@ void IntroCut::CutScene5Update(float _Delta)
 void IntroCut::CutScene6Start()
 {
 	MainSpriteRenderer->SetSprite("cutscene6.png");
+	Arrow = GetLevel()->CreateActor<TextArrow>();
 }
 
 void IntroCut::CutScene6Update(float _Delta)
@@ -224,6 +230,9 @@ void IntroCut::CutScene6Update(float _Delta)
 	{
 		// 임시 - 마지막 씬이므로 Team UI 생성.
 		//ChangeState(IntroCutState::Black);
+		Arrow->Death();
+		Arrow = nullptr;
+
 		GetLevel()->CreateActor<NewGame_UI>();
 		return;
 	}

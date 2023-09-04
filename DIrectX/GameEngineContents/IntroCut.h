@@ -26,8 +26,8 @@ public:
     IntroCut& operator=(IntroCut&& _Other) noexcept = delete;
 
 protected:
-	void Start();
-	void Update(float _Delta);
+	void Start() override;
+	void Update(float _Delta) override;
 
     void BlackStart();
     void BlackUpdate(float _Delta);

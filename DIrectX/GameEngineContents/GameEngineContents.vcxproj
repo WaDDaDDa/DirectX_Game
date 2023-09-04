@@ -163,6 +163,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BattleField.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="BattleLevel.cpp">
       <SubType>
       </SubType>
@@ -180,6 +184,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Knight.cpp" />
     <ClCompile Include="NewGame_UI.cpp">
       <SubType>
       </SubType>
@@ -198,6 +203,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BattleField.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="BattleLevel.h">
       <SubType>
       </SubType>
@@ -216,6 +225,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Knight.h" />
     <ClInclude Include="NewGame_UI.h">
       <SubType>
       </SubType>
