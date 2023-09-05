@@ -119,8 +119,12 @@ void IntroCut::ChangeState(IntroCutState _State)
 
 void IntroCut::BlackStart()
 {
-	Arrow->Death();
-	Arrow = nullptr;
+	if (nullptr != Arrow)
+	{
+		Arrow->Death();
+		Arrow = nullptr;
+	}
+
 	MainSpriteRenderer->SetSprite("Black_0.png");
 	Scene += 1;
 }
@@ -230,8 +234,12 @@ void IntroCut::CutScene6Update(float _Delta)
 	{
 		// 임시 - 마지막 씬이므로 Team UI 생성.
 		//ChangeState(IntroCutState::Black);
-		Arrow->Death();
-		Arrow = nullptr;
+
+		if (nullptr != Arrow)
+		{
+			Arrow->Death();
+			Arrow = nullptr;
+		}
 
 		GetLevel()->CreateActor<NewGame_UI>();
 		return;

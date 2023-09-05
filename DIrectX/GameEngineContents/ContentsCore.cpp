@@ -19,7 +19,7 @@ void ContentsCore::Start()
 	GameEngineCore::CreateLevel<IntroLevel>("IntroLevel");
 	GameEngineCore::CreateLevel<PlayLevel>("PlayLevel");
 	GameEngineCore::CreateLevel<BattleLevel>("BattleLevel");
-	GameEngineCore::ChangeLevel("BattleLevel");
+	GameEngineCore::ChangeLevel("IntroLevel");
 
 }
 
