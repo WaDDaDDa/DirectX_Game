@@ -1,8 +1,9 @@
 #pragma once
+#include <GameEngineBase/GameEngineMath.h>
+#include <list>
 
 // 기하구조를 표현하고
 // 부모자식관계를 처리한다.
-
 
 enum class ColType
 {
@@ -26,6 +27,31 @@ public:
 	GameEngineTransform& Right;
 	ColType LeftType = ColType::AABBBOX2D;
 	ColType RightType = ColType::AABBBOX2D;
+
+	inline int GetLeftTypeToInt() const
+	{
+		return static_cast<int>(LeftType);
+	}
+
+	inline int GetRightTypeToInt() const
+	{
+		return static_cast<int>(RightType);
+	}
+
+	CollisionParameter(
+		GameEngineTransform& _Left,
+		GameEngineTransform& _Right,
+		ColType _LeftType = ColType::AABBBOX2D,
+		ColType _RightType = ColType::AABBBOX2D
+	)
+		:
+		Left(_Left),
+		Right(_Right),
+		LeftType(_LeftType),
+		RightType(_RightType)
+	{
+
+	}
 };
 
 class CollisionData
@@ -46,7 +72,6 @@ public:
 	}
 };
 
-
 // 왜 굳이. 
 class TransformData
 {
@@ -55,14 +80,17 @@ public:
 
 	float4 Scale = float4::ONENULL;
 	float4 Rotation = float4::ZERONULL;
+	float4 Quaternion = float4::ZERO;
 	float4 Position = float4::ZERO;
 
 	float4 LocalScale;
 	float4 LocalRotation;
+	float4 LocalQuaternion;
 	float4 LocalPosition;
 
 	float4 WorldScale;
 	float4 WorldRotation;
+	float4 WorldQuaternion;
 	float4 WorldPosition;
 
 	float4x4 ScaleMatrix; // 크
@@ -171,6 +199,7 @@ public:
 		return TransData.LocalScale;
 	}
 
+
 	// 회전 그 자체로 한 오브젝트의 앞 위 오른쪽
 	// [1][0][0][0] 오른쪽
 	// [0][1][0][0] 위
@@ -231,17 +260,16 @@ public:
 	//                    내가 사각형이고            날                           상대는 구               상대
 	static bool Collision(const CollisionParameter& _Data);
 
-	// ColType _ThisType, GameEngineTransform& _LeftTrans, ColType _OtherType, GameEngineTransform& _RightTrans
-
+	CollisionData ColData;
 
 protected:
 
 private:
-	CollisionData ColData;
 
 	GameEngineTransform* Parent = nullptr;
 	std::list<GameEngineTransform*> Childs;
 	TransformData TransData;
 
 };
+
 
