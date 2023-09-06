@@ -1,14 +1,17 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include <vector>
 
 enum class GameUnitState
 {
+    Spwan,
     Idle,
     Move,
     Att,
     Skill,
     Ult,
     Damage,
+    Die,
     Max,
 };
 
@@ -23,12 +26,28 @@ public:
     GameUnit& operator=(const GameUnit& _Other) = delete;
     GameUnit& operator=(GameUnit&& _Other) noexcept = delete;
 
-    // 적유닛에게 내가 적이다 라고 하는것.
-    void EnemySetting(std::shared_ptr<GameUnit>& _Unit)
+    GameUnit* GetPointer()
     {
-        _Unit->EnemyUnit1 = this;
+        return this;
     }
 
+    // 적유닛에게 내가 적이다 라고 하는것.
+    void EnemySetting(std::vector<GameUnit*>& _UnitGroup)
+    {
+        EnemyGroup = _UnitGroup;
+    }
+
+    void AggroSetting()
+    {
+        for (size_t i = 0; i < EnemyGroup.size(); i++)
+        {
+            if (EnemyGroup[i]->GetState() != GameUnitState::Die)
+            {
+                AggroUnit = EnemyGroup[i];
+                return;
+            }
+        }
+    }
 
 protected:
     void Start() override;
@@ -37,12 +56,19 @@ protected:
     void LevelStart(GameEngineLevel* _PrevLevel) override;
     void LevelEnd(GameEngineLevel* _NextLevel) override;
 
+    GameUnitState GetState()
+    {
+        return State;
+    }
     void ChangeState(GameUnitState _State);
     void StateUpdate(float _Delta);
 
     // State
     void MaxStart();
     void MaxUpdate(float _Delta);
+
+    virtual void SpwanStart();
+    void SpwanUpdate(float _Delta);
 
     virtual void IdleStart();
     void IdleUpdate(float _Delta);
@@ -53,13 +79,12 @@ protected:
     GameUnitState State = GameUnitState::Max;
     std::shared_ptr<class GameEngineSpriteRenderer> MainSpriteRenderer;
 
-    GameUnit* EnemyUnit1;
+    std::vector<GameUnit*> EnemyGroup;
 
-   // std::shared_ptr<GameUnit> EnemyUnit2;
-
-    //std::shared_ptr<GameUnit> TeamUnit;
+    GameUnit* AggroUnit = nullptr;
 
 private:
+    std::shared_ptr<GameEngineSpriteRenderer> SpwanRenderer;
 
 };
 

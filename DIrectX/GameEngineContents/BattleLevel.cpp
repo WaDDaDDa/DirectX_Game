@@ -34,20 +34,7 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
 
 	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistsChild("GameEngineResources");
-		Dir.MoveChild("ContentsResources\\Test\\");
-		std::vector<GameEngineDirectory> Directorys = Dir.GetAllDirectory();
-
-		for (size_t i = 0; i < Directorys.size(); i++)
-		{
-			GameEngineDirectory& Dir = Directorys[i];
-
-			GameEngineSprite::CreateFolder(Dir.GetStringPath());
-		}
-	}
-
-	{
+		// 폴더 로드
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExistsChild("GameEngineResources");
 		Dir.MoveChild("ContentsResources\\Stadium\\");
@@ -62,6 +49,7 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	}
 
 	{
+		// 싱글 스프라이트 로드
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExistsChild("GameEngineResources");
 		Dir.MoveChild("ContentsResources\\Stadium");
@@ -78,27 +66,35 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		GameEngineSprite::CreateSingle("stadium_sky_bg.png");
 	}
 
+	GameEngineRandom NewRandom;
 
 	std::shared_ptr<BattleField> BF = CreateActor<BattleField>();
 
+
 	// 레드팀 유닛
-	std::shared_ptr<GameUnit> RedUnit1 = CreateActor<Knight>();
-	//std::shared_ptr<GameUnit> RedUnit2 = CreateActor<Knight>();
-	
-	// 레드팀 스타트 위치셋팅
-	RedUnit1->Transform.AddLocalPosition({-200.0f,0.0f});
+	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
+	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
 
 	// 블루팀 유닛
-	std::shared_ptr<GameUnit> BlueUnit1 = CreateActor<Knight>();
-	//std::shared_ptr<GameUnit> BlueUnit2 = CreateActor<Knight>();
-
-	// 블루팀 스타트 위치셋팅
-	BlueUnit1->Transform.AddLocalRotation({0.0f, 180.0f});
-	BlueUnit1->Transform.AddLocalPosition({ 200.0f,0.0f });
-
+	BlueTeam.push_back(CreateActor<Knight>()->GetPointer());
+	BlueTeam.push_back(CreateActor<Knight>()->GetPointer());
+	
 	// 팀설정
-	RedUnit1->EnemySetting(BlueUnit1);
-	BlueUnit1->EnemySetting(RedUnit1);
+	for (size_t i = 0; i < RedTeam.size(); i++)
+	{
+		RedTeam[static_cast<int>(i)]->EnemySetting(BlueTeam);
+		float4 StartPos = NewRandom.RandomVectorBox2D(-200.0f, -180.0f, 0.0f, -100.0f);
+		RedTeam[static_cast<int>(i)]->Transform.AddLocalPosition(StartPos);
+	}
+
+	for (size_t i = 0; i < BlueTeam.size(); i++)
+	{
+		BlueTeam[static_cast<int>(i)]->EnemySetting(RedTeam);
+
+		BlueTeam[static_cast<int>(i)]->Transform.AddLocalRotation({ 0.0f, 180.0f });
+		float4 StartPos = NewRandom.RandomVectorBox2D(200.0f, 180.0f, 0.0f, -100.0f);
+		BlueTeam[static_cast<int>(i)]->Transform.AddLocalPosition(StartPos);
+	}
 
 }
 

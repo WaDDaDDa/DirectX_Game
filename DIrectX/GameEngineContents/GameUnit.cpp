@@ -14,12 +14,35 @@ GameUnit::~GameUnit()
 
 void GameUnit::Start()
 {
+	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
+	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("GameEngineResources");
+		Dir.MoveChild("ContentsResources\\GameUnit\\Unit_Effect\\");
+		std::vector<GameEngineDirectory> Directorys = Dir.GetAllDirectory();
+
+		for (size_t i = 0; i < Directorys.size(); i++)
+		{
+			GameEngineDirectory& Dir = Directorys[i];
+
+			GameEngineSprite::CreateFolder(Dir.GetStringPath());
+		}
+
+		{
+			SpwanRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
+			SpwanRenderer->CreateAnimation("SpwanEffect", "SpwanEffect", 0.1f, 0, 10, false);
+			// SpwanRenderer->ChangeAnimation("SpwanEffect");
+			SpwanRenderer->AutoSpriteSizeOn();
+		}
+	}
 }
 
 void GameUnit::LevelStart(GameEngineLevel* _PrevLevel)
 {
-
+	AggroUnit = EnemyGroup[0];
+	ChangeState(GameUnitState::Spwan);
 }
 
 void GameUnit::LevelEnd(GameEngineLevel* _NextLevel)
@@ -70,6 +93,8 @@ void GameUnit::StateUpdate(float _Delta)
 {
 	switch (State)
 	{
+	case GameUnitState::Spwan:
+		return SpwanUpdate(_Delta);
 	case GameUnitState::Idle:
 		return IdleUpdate(_Delta);
 	case GameUnitState::Move:
@@ -91,6 +116,9 @@ void GameUnit::ChangeState(GameUnitState _State)
 	{
 		switch (_State)
 		{
+		case GameUnitState::Spwan:
+			SpwanStart();
+			break;
 		case GameUnitState::Idle:
 			IdleStart();
 			break;
@@ -118,6 +146,22 @@ void GameUnit::ChangeState(GameUnitState _State)
 	State = _State;
 }
 
+void GameUnit::SpwanStart()
+{
+	SpwanRenderer->On();
+	SpwanRenderer->ChangeAnimation("SpwanEffect");
+}
+
+void GameUnit::SpwanUpdate(float _Delta)
+{
+	if (true == SpwanRenderer->IsCurAnimationEnd())
+	{
+		SpwanRenderer->Off();
+		ChangeState(GameUnitState::Idle);
+		return;
+	}
+}
+
 void GameUnit::IdleStart()
 {
 
@@ -127,14 +171,14 @@ void GameUnit::IdleUpdate(float _Delta)
 {
 	if (GetLiveTime() >= 1.0f)
 	{
-		//ChangeState(GameUnitState::Move);
+		ChangeState(GameUnitState::Move);
 		return;
 	}
 }
 
 void GameUnit::MoveStart()
 {
-
+	AggroSetting();
 }
 
 void GameUnit::MoveUpdate(float _Delta)
@@ -146,7 +190,7 @@ void GameUnit::MoveUpdate(float _Delta)
 	}
 
 	// 적위치 - 내위치
-	float4 EnemyPos = EnemyUnit1->Transform.GetWorldPosition();
+	float4 EnemyPos = AggroUnit->Transform.GetWorldPosition();
 	float4 MyPos = Transform.GetWorldPosition();
 
 	float4 MoveDir = EnemyPos - MyPos;

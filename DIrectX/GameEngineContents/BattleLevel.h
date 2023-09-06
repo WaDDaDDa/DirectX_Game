@@ -12,6 +12,9 @@ public:
     BattleLevel& operator=(const BattleLevel& _Other) = delete;
     BattleLevel& operator=(BattleLevel&& _Other) noexcept = delete;
 
+    std::vector<class GameUnit*> RedTeam;
+    std::vector<class GameUnit*> BlueTeam;
+
 protected:
     void Start() override;
 
@@ -19,6 +22,7 @@ protected:
 
     void LevelStart(GameEngineLevel* _PrevLevel) override;
     void LevelEnd(GameEngineLevel* _NextLevel) override;
+
 private:
 
 };
