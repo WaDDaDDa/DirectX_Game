@@ -1,5 +1,6 @@
 #pragma once
 #include <random>
+#include "GameEngineMath.h"
 
 // 없을리가 없어.
 // 내가 만드는 최후의 수단.
@@ -47,6 +48,8 @@ public:
 	{
 		MtGen = std::mt19937_64(_Seed);
 	}
+
+	float4 RandomVectorBox2D(float _MinX, float _MaxX, float _MinY, float _MaxY);
 
 protected:
 

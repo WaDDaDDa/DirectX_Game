@@ -78,21 +78,17 @@ void GameEngineCamera::Render(float _DeltaTime)
 		return;
 	}
 
-	//x + 1;
-	//y + 1;
-	//z + 1;
-
-	//for (size_t i = 0; i < 1280 * 720; i++)
-	//{
-	//	GameEngineCore::MainWindow.GetBackBuffer()->GetColor(0, {0, 0});
-	//}
-
 	for (std::pair<const int, std::list<std::shared_ptr<class GameEngineRenderer>>>& RendererPair : Renderers)
 	{
 		std::list<std::shared_ptr<class GameEngineRenderer>>& RendererList = RendererPair.second;
 
 		for (std::shared_ptr<class GameEngineRenderer>& Renderer : RendererList)
 		{
+			if (false == Renderer->IsUpdate())
+			{
+				continue;
+			}
+
 			Renderer->Transform.CalculationViewAndProjection(Transform.GetConstTransformDataRef());
 			Renderer->Render(this, _DeltaTime);
 		}
