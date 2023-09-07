@@ -12,3 +12,18 @@ enum class ContentsOrder
 	UI,
 	Text,
 };
+
+enum class ColOrder
+{
+	RedTeamBody,
+	BlueTeamBody,
+	UnitBody,
+	UnitAttack,
+	UnitTarget,
+};
+
+enum class TeamType
+{
+	Red,
+	Blue,
+};

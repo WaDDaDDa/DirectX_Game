@@ -171,6 +171,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Bird.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="GameUnit.cpp">
       <SubType>
@@ -211,6 +212,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Bird.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="GameUnit.h">

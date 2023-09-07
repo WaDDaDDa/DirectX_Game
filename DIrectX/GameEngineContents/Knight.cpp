@@ -58,11 +58,18 @@ void Knight::SpwanStart()
 
 void Knight::IdleStart()
 {
+	GameUnit::IdleStart();
 	MainSpriteRenderer->ChangeAnimation("Knight_Idle");
 }
 
 void Knight::MoveStart()
 {
 	GameUnit::MoveStart();
+	MainSpriteRenderer->ChangeAnimation("Knight_Move");
+}
+
+void Knight::SearchMoveStart()
+{
+	GameUnit::SearchMoveStart();
 	MainSpriteRenderer->ChangeAnimation("Knight_Move");
 }

@@ -25,6 +25,8 @@ protected:
 
     void MoveStart() override;
 
+    void SearchMoveStart() override;
+
 private:
 
 };

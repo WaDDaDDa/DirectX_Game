@@ -36,6 +36,11 @@ void GameUnit::Start()
 			// SpwanRenderer->ChangeAnimation("SpwanEffect");
 			SpwanRenderer->AutoSpriteSizeOn();
 		}
+
+		{	// 콜리젼
+			//BodyCol = CreateComponent<GameEngineCollision>(ColOrder::UnitBody);
+			//BodyCol->Transform.SetLocalScale(BodyColScale);
+		}
 	}
 }
 
@@ -50,42 +55,33 @@ void GameUnit::LevelEnd(GameEngineLevel* _NextLevel)
 
 }
 
+void GameUnit::TeamSet(TeamType _Team)
+{
+	GameEngineRandom NewRandom;
+
+	if (TeamType::Blue == _Team)
+	{
+		BodyCol = CreateComponent<GameEngineCollision>(ColOrder::BlueTeamBody);
+		BodyCol->Transform.SetLocalScale(BodyColScale);
+
+		float4 StartPos = NewRandom.RandomVectorBox2D(-250.0f, -280.0f, 100.0f, -100.0f);
+		Transform.AddLocalPosition(StartPos);
+	}
+	else if (TeamType::Red == _Team)
+	{
+		BodyCol = CreateComponent<GameEngineCollision>(ColOrder::RedTeamBody);
+		BodyCol->Transform.SetLocalScale(BodyColScale);
+
+		//ChangeDir(GameUnitDir::Left);
+		float4 StartPos = NewRandom.RandomVectorBox2D(250.0f, 280.0f, 100.0f, -100.0f);
+		Transform.AddLocalPosition(StartPos);
+	}
+}
+
+
 void GameUnit::Update(float _Delta)
 {
 	StateUpdate(_Delta);
-
-	//float Speed = 100.0f;
-
-	//float4 WPos = Transform.GetWorldPosition();
-	//if (GameEngineInput::IsPress('A'))
-	//{
-	//	Transform.AddLocalPosition(float4::LEFT * _Delta * Speed);
-	//}
-
-	//if (GameEngineInput::IsPress('D'))
-	//{
-	//	Transform.AddLocalPosition(float4::RIGHT * _Delta * Speed);
-	//}
-
-	//if (GameEngineInput::IsPress('W'))
-	//{
-	//	Transform.AddLocalPosition(float4::UP * _Delta * Speed);
-	//}
-
-	//if (GameEngineInput::IsPress('S'))
-	//{
-	//	Transform.AddLocalPosition(float4::DOWN * _Delta * Speed);
-	//}
-
-	//if (GameEngineInput::IsPress('Q'))
-	//{
-	//	Transform.AddLocalRotation({ 0.0f, 0.0f, 360.0f * _Delta });
-	//}
-
-	//if (GameEngineInput::IsPress('E'))
-	//{
-	//	Transform.AddLocalRotation({ 0.0f, 0.0f, -360.0f * _Delta });
-	//}
 }
 
 
@@ -99,6 +95,10 @@ void GameUnit::StateUpdate(float _Delta)
 		return IdleUpdate(_Delta);
 	case GameUnitState::Move:
 		return MoveUpdate(_Delta);
+	case GameUnitState::BackMove:
+		return BackMoveUpdate(_Delta);
+	case GameUnitState::SearchMove:
+		return SearchMoveUpdate(_Delta);
 	case GameUnitState::Att:
 	case GameUnitState::Skill:
 	case GameUnitState::Ult:
@@ -124,6 +124,12 @@ void GameUnit::ChangeState(GameUnitState _State)
 			break;
 		case GameUnitState::Move:
 			MoveStart();
+			break;
+		case GameUnitState::BackMove:
+			BackMoveStart();
+			break;
+		case GameUnitState::SearchMove:
+			SearchMoveStart();
 			break;
 		case GameUnitState::Att:
 			break;
@@ -164,11 +170,12 @@ void GameUnit::SpwanUpdate(float _Delta)
 
 void GameUnit::IdleStart()
 {
-
+	ChangeDir();
 }
 
 void GameUnit::IdleUpdate(float _Delta)
 {
+
 	if (GetLiveTime() >= 1.0f)
 	{
 		ChangeState(GameUnitState::Move);
@@ -179,9 +186,71 @@ void GameUnit::IdleUpdate(float _Delta)
 void GameUnit::MoveStart()
 {
 	AggroSetting();
+
+	// 적위치 - 내위치
+	float4 EnemyPos = AggroUnit->Transform.GetWorldPosition();
+	float4 MyPos = Transform.GetWorldPosition();
+
+	MoveDir = EnemyPos - MyPos;
+	MoveDir.Normalize();
 }
 
 void GameUnit::MoveUpdate(float _Delta)
+{
+	ChangeDir();
+	if (GetLiveTime() >= 3.0f)
+	{
+		ChangeState(GameUnitState::Idle);
+		return;
+	}
+
+	Transform.AddLocalPosition((MoveDir * 50.0f * _Delta));
+}
+
+void GameUnit::BackMoveStart()
+{
+	AggroSetting();
+
+	// 적위치 - 내위치
+	float4 EnemyPos = AggroUnit->Transform.GetWorldPosition();
+	float4 MyPos = Transform.GetWorldPosition();
+
+	float4 MoveDir = -(EnemyPos - MyPos);
+	MoveDir.Normalize();
+}
+
+void GameUnit::BackMoveUpdate(float _Delta)
+{
+	ChangeDir();
+
+	if (GetLiveTime() >= 4.0f)
+	{
+		ChangeState(GameUnitState::Idle);
+		return;
+	}
+
+	Transform.AddLocalPosition((MoveDir * 50.0f * _Delta));
+}
+
+void GameUnit::SearchMoveStart()
+{
+	GameEngineRandom Rand;
+	static long long RandSeed = reinterpret_cast<long long>(this);
+	RandSeed++;
+	Rand.SetSeed(RandSeed);
+
+	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
+	//Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
+
+	TargetPos = Rand.RandomVectorBox2D(-340.0f, 340.0f, -250.0f, 110.0f);
+	TargetPos += { HalfWindowScale.X, -HalfWindowScale.Y, -500.0f };
+	if (Dir == GameUnitDir::Right)
+	{
+	//	TargetPos.X
+	}
+}
+
+void GameUnit::SearchMoveUpdate(float _Delta)
 {
 	if (GetLiveTime() >= 5.0f)
 	{
@@ -193,10 +262,11 @@ void GameUnit::MoveUpdate(float _Delta)
 	float4 EnemyPos = AggroUnit->Transform.GetWorldPosition();
 	float4 MyPos = Transform.GetWorldPosition();
 
-	float4 MoveDir = EnemyPos - MyPos;
+	float4 MoveDir = TargetPos - MyPos;
+
 	MoveDir.Normalize();
 
-	Transform.AddLocalPosition((MoveDir * 10.0f * _Delta));
+	Transform.AddLocalPosition((MoveDir * 100.0f * _Delta));
 }
 
 

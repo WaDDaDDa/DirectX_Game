@@ -9,6 +9,7 @@ enum class IntroCutState
     CutScene4,
     CutScene5,
     CutScene6,
+    NewGame,
     Black,
     Max,
 };
@@ -58,6 +59,9 @@ protected:
 
     void CutScene6Start();
     void CutScene6Update(float _Delta);
+
+    void NewGameStart();
+    void NewGameUpdate(float _Delta);
 
     void MaxStart();
     void MaxUpdate(float _Delta);

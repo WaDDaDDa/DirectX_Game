@@ -66,6 +66,8 @@ void IntroCut::StateUpdate(float _Delta)
 		return CutScene5Update(_Delta);
 	case IntroCutState::CutScene6:
 		return CutScene6Update(_Delta);
+	case IntroCutState::NewGame:
+		return NewGameUpdate(_Delta);
 	case IntroCutState::Max:
 		return MaxUpdate(_Delta);
 	default:
@@ -99,6 +101,9 @@ void IntroCut::ChangeState(IntroCutState _State)
 			break;
 		case IntroCutState::CutScene6:
 			CutScene6Start();
+			break;
+		case IntroCutState::NewGame:
+			NewGameStart();
 			break;
 		case IntroCutState::Max:
 			MaxStart();
@@ -241,7 +246,28 @@ void IntroCut::CutScene6Update(float _Delta)
 			Arrow = nullptr;
 		}
 
-		GetLevel()->CreateActor<NewGame_UI>();
+		ChangeState(IntroCutState::NewGame);
+		return;
+	}
+}
+
+
+void IntroCut::NewGameStart()
+{
+	if (nullptr != Arrow)
+	{
+		Arrow->Death();
+		Arrow = nullptr;
+	}
+
+	GetLevel()->CreateActor<NewGame_UI>();
+}
+
+void IntroCut::NewGameUpdate(float _Delta)
+{
+	if (GameEngineInput::IsDown(VK_SPACE))
+	{
+		GameEngineCore::ChangeLevel("BattleLevel");
 		return;
 	}
 }

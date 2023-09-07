@@ -4,6 +4,7 @@
 #include "GameUnit.h"
 #include "Knight.h"
 #include "BattleField.h"
+#include "Bird.h"
 
 BattleLevel::BattleLevel()
 {
@@ -72,31 +73,32 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 	// À¯´Ö »ý¼º
 	
-	// ·¹µåÆÀ À¯´Ö
+	// ·¹µåÆÀ À¯´Ö (¿À¸¥ÂÊ)
 	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
 	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
 
-	// ºí·çÆÀ À¯´Ö
+
+	// ºí·çÆÀ À¯´Ö (¿ÞÂÊ)
 	BlueTeam.push_back(CreateActor<Knight>()->GetPointer());
 	BlueTeam.push_back(CreateActor<Knight>()->GetPointer());
+
 	
 	// ÆÀ¼³Á¤
 	for (size_t i = 0; i < RedTeam.size(); i++)
 	{
 		RedTeam[static_cast<int>(i)]->EnemySetting(BlueTeam);
 
-		float4 StartPos = NewRandom.RandomVectorBox2D(-200.0f, -180.0f, 0.0f, -100.0f);
-		RedTeam[static_cast<int>(i)]->Transform.AddLocalPosition(StartPos);
+		RedTeam[static_cast<int>(i)]->TeamSet(TeamType::Red);
 	}
 
 	for (size_t i = 0; i < BlueTeam.size(); i++)
 	{
 		BlueTeam[static_cast<int>(i)]->EnemySetting(RedTeam);
 
-		BlueTeam[static_cast<int>(i)]->Transform.AddLocalRotation({ 0.0f, 180.0f });
-		float4 StartPos = NewRandom.RandomVectorBox2D(200.0f, 180.0f, 0.0f, -100.0f);
-		BlueTeam[static_cast<int>(i)]->Transform.AddLocalPosition(StartPos);
+		BlueTeam[static_cast<int>(i)]->TeamSet(TeamType::Blue);
 	}
+
+	CreateActor<Bird>();
 
 }
 

@@ -35,6 +35,9 @@
     <ClCompile Include="BattleField.cpp">
       <Filter>BackGround</Filter>
     </ClCompile>
+    <ClCompile Include="Bird.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -73,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="BattleField.h">
       <Filter>BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Bird.h">
+      <Filter>Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
