@@ -32,7 +32,7 @@ public:
     }
 
     // 적유닛에게 내가 적이다 라고 하는것.
-    void EnemySetting(std::vector<GameUnit*>& _UnitGroup)
+    void EnemySetting(const std::vector<GameUnit*>& _UnitGroup)
     {
         EnemyGroup = _UnitGroup;
     }

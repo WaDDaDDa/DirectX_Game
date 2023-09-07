@@ -46,6 +46,9 @@
     <Filter Include="ThirdParty\Release">
       <UniqueIdentifier>{f09094ba-0941-46b8-8eda-74844ddcb19b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{92c51415-1e22-4bf7-8c00-a0704dfbb00b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineActor.h">
@@ -128,6 +131,12 @@
       <Filter>ThirdParty\inc</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineSampler.h" />
+    <ClInclude Include="GameEngineCollision.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineCollisionGroup.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -210,6 +219,12 @@
       <Filter>Rendering</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineSampler.cpp" />
+    <ClCompile Include="GameEngineCollision.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineCollisionGroup.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ThirdParty\DirectXTex\inc\DirectXTex.inl">

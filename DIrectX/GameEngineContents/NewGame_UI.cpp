@@ -27,5 +27,5 @@ void NewGame_UI::Start()
 
 void NewGame_UI::Update(float _Delta)
 {
-	
+
 }

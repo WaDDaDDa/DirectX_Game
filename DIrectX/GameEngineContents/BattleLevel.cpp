@@ -70,7 +70,8 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 	std::shared_ptr<BattleField> BF = CreateActor<BattleField>();
 
-
+	// À¯´Ö »ý¼º
+	
 	// ·¹µåÆÀ À¯´Ö
 	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
 	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
@@ -83,6 +84,7 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	for (size_t i = 0; i < RedTeam.size(); i++)
 	{
 		RedTeam[static_cast<int>(i)]->EnemySetting(BlueTeam);
+
 		float4 StartPos = NewRandom.RandomVectorBox2D(-200.0f, -180.0f, 0.0f, -100.0f);
 		RedTeam[static_cast<int>(i)]->Transform.AddLocalPosition(StartPos);
 	}
