@@ -22,15 +22,15 @@ void IntroCut::Start()
 {
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
-
 	MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::BackGround);
 	TextBoxRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::UI);
 
 	TextBoxRenderer->SetSprite("equipment_slot_bg_0.png");
 
 	// 텍스트 출력 위치.
-	TextBoxRenderer->Transform.SetLocalScale(TextBoxScale);
+	TextBoxRenderer->SetImageScale(TextBoxScale);
 	TextBoxRenderer->Transform.AddLocalPosition(TextBoxPos);
+	//TextBoxRenderer->SetPivotType(PivotType::Bottom);
 
 	ChangeState(IntroCutState::CutScene1);
 }
@@ -38,6 +38,40 @@ void IntroCut::Start()
 
 void IntroCut::Update(float _Delta)
 {
+	float Speed = 100.0f;
+
+	float4 WPos = Transform.GetWorldPosition();
+
+	if (GameEngineInput::IsPress('A'))
+	{
+		Transform.AddLocalPosition(float4::LEFT * _Delta * Speed);
+	}
+
+	if (GameEngineInput::IsPress('D'))
+	{
+		Transform.AddLocalPosition(float4::RIGHT * _Delta * Speed);
+	}
+
+	if (GameEngineInput::IsPress('W'))
+	{
+		Transform.AddLocalPosition(float4::UP * _Delta * Speed);
+	}
+
+	if (GameEngineInput::IsPress('S'))
+	{
+		Transform.AddLocalPosition(float4::DOWN * _Delta * Speed);
+	}
+
+	if (GameEngineInput::IsPress('Q'))
+	{
+		Transform.AddLocalRotation({ 0.0f, 0.0f, 360.0f * _Delta });
+	}
+
+	if (GameEngineInput::IsPress('E'))
+	{
+		Transform.AddLocalRotation({ 0.0f, 0.0f, -360.0f * _Delta });
+	}
+
 	if (GameEngineInput::IsDown('P'))
 	{
 		GameEngineCore::ChangeLevel("BattleLevel");
@@ -115,7 +149,7 @@ void IntroCut::ChangeState(IntroCutState _State)
 	// 스프라이트 셋팅이 바뀔때 마다 Transform의 로컬스케일이 변하므로 
 	// 변할때마다 스케일 세팅을 다시한다.
 	float4 WindowScale = GameEngineCore::MainWindow.GetScale();
-	MainSpriteRenderer->Transform.SetLocalScale(WindowScale);
+	MainSpriteRenderer->SetImageScale(WindowScale);
 
 	ResetLiveTime();
 

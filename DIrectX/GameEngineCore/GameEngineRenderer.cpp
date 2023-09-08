@@ -52,6 +52,7 @@ void GameEngineRenderer::SetCameraOrder(int _Order)
 void GameEngineRenderer::Start()
 {
 	// 메인카메라에 들어갔다.
+	DataTransform = &Transform;
 	SetViewCameraSelect(0);
 }
 
@@ -109,7 +110,7 @@ void GameEngineRenderer::ResSetting()
 
 		if (nullptr != Buffer)
 		{
-			const TransformData& Data = Transform.GetConstTransformDataRef();
+			const TransformData& Data = DataTransform->GetConstTransformDataRef();
 			Buffer->ChangeData(Data);
 			Buffer->Setting(0);
 		}
@@ -168,8 +169,6 @@ void GameEngineRenderer::ResSetting()
 		{
 			PixelShader->Setting();
 		}
-
-
 
 
 		std::shared_ptr<class GameEngineRenderTarget> BackBufferRenderTarget = GameEngineCore::GetBackBufferRenderTarget();

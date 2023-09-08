@@ -181,7 +181,7 @@ void GameUnit::IdleUpdate(float _Delta)
 
 	if (GetLiveTime() >= 1.0f)
 	{
-		ChangeState(GameUnitState::SearchMove);
+		ChangeState(GameUnitState::Move);
 		return;
 	}
 }

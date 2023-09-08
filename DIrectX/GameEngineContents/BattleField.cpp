@@ -26,7 +26,9 @@ void BattleField::LevelStart(GameEngineLevel* _PrevLevel)
 
 	BackGround = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::BackGround);
 	BackGround->SetSprite("stadium_sky_bg.png");
-	BackGround->Transform.SetLocalScale(WindowScale);
+	BackGround->SetImageScale(WindowScale);
+	//BackGround->SetPivotType(PivotType::Bottom);
+
 
 	Water1 = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Water);
 	Water1->CreateAnimation("Waterfall", "Waterfall");

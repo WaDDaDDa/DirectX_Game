@@ -14,7 +14,7 @@ TextArrow::~TextArrow()
 
 void TextArrow::Start()
 {
-	Transform.SetLocalPosition({ 1240.0f , -680.0f , -500.0f });
+	Transform.SetLocalPosition({ 1240.0f , -680.0f});
 
 	{
 		GameEngineDirectory Dir;
@@ -35,6 +35,8 @@ void TextArrow::Start()
 	Renderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Text);
 	Renderer->CreateAnimation("TextArrow", "TextArrow", 0.2f);
 	Renderer->ChangeAnimation("TextArrow");
+	//Renderer->SetImageScale({ 10.0f, 100.0f });
+
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(2.5f);
 
@@ -42,5 +44,5 @@ void TextArrow::Start()
 
 void TextArrow::Update(float _Delta)
 {
-
+	
 }
