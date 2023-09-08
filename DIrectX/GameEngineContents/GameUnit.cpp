@@ -58,6 +58,9 @@ void GameUnit::LevelEnd(GameEngineLevel* _NextLevel)
 void GameUnit::TeamSet(TeamType _Team)
 {
 	GameEngineRandom NewRandom;
+	static long long RandSeed = reinterpret_cast<long long>(this);
+	RandSeed++;
+	NewRandom.SetSeed(RandSeed);
 
 	if (TeamType::Blue == _Team)
 	{
