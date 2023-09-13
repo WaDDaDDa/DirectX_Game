@@ -130,12 +130,17 @@
     <ClInclude Include="ThirdParty\DirectXTex\inc\DirectXTex.h">
       <Filter>ThirdParty\inc</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineSampler.h" />
     <ClInclude Include="GameEngineCollision.h">
       <Filter>Collision</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineCollisionGroup.h">
       <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineBlend.h">
+      <Filter>Resources\RenderingSetting</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineSampler.h">
+      <Filter>Resources\Texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -218,12 +223,17 @@
     <ClCompile Include="GameEngineSpriteRenderer.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineSampler.cpp" />
     <ClCompile Include="GameEngineCollision.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineCollisionGroup.cpp">
       <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineBlend.cpp">
+      <Filter>Resources\RenderingSetting</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineSampler.cpp">
+      <Filter>Resources\Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -212,5 +212,7 @@ private:
 		LiveTime += _DeltaTime;
 	}
 
+	void AllRelease();
+
 };
 

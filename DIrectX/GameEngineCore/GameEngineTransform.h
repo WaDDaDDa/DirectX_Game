@@ -253,8 +253,6 @@ public:
 	{
 		Parent = &_Parent;
 		Parent->Childs.push_back(this);
-
-		// 부모가 셋팅되면 트랜스폼 업데이트를 한번 해줘야하는거 아닌가요?
 		TransformUpdate();
 	}
 
