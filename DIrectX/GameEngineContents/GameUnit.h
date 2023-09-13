@@ -8,7 +8,7 @@ enum class GameUnitState
     Idle,
     Move,
     BackMove,
-    Att,
+    Attack,
     Skill,
     Ult,
     Damage,
@@ -124,6 +124,7 @@ protected:
     {
         return State;
     }
+
     void ChangeState(GameUnitState _State);
     void StateUpdate(float _Delta);
 
@@ -146,6 +147,9 @@ protected:
     virtual void SearchMoveStart();
     void SearchMoveUpdate(float _Delta);
 
+    virtual void AttackStart();
+    virtual void AttackUpdate(float _Delta);
+
     GameUnitState State = GameUnitState::Max;
     GameUnitDir Dir = GameUnitDir::Right;
 
@@ -160,10 +164,18 @@ protected:
 private:
     std::shared_ptr<GameEngineSpriteRenderer> SpwanRenderer;
     std::shared_ptr<GameEngineCollision> BodyCol;
+    std::shared_ptr<GameEngineCollision> AttackRangeCol;
 
-    float4 BodyColScale = { -100.0f,100.0f };
+    float4 BodyColScale = { 50.0f, 0.0f };
+    float4 AttackRange = { 40.0f, 0.0f };
 
     float4 MoveDir;
+
+    TeamType MyTeam = TeamType::Blue;
+    float UnitSpeed = 100.0f;
+
+
+    float4 SearchMoveTarget = { 0.0f , 0.0f };
 
 };
 

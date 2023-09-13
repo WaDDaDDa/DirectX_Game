@@ -13,11 +13,13 @@ enum class ContentsOrder
 	Text,
 };
 
-enum class ColOrder
+enum class CollisionOrder
 {
 	RedTeamBody,
 	BlueTeamBody,
 	UnitBody,
+	RedTeamAttackRange,
+	BlueTeamAttackRange,
 	UnitAttack,
 	UnitTarget,
 };

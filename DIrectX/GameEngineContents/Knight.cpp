@@ -38,6 +38,7 @@ void Knight::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
 		MainSpriteRenderer->CreateAnimation("Knight_Idle", "KnightAni", 0.2f, 0, 4);
 		MainSpriteRenderer->CreateAnimation("Knight_Move", "KnightAni", 0.2f, 5, 13);
+		MainSpriteRenderer->CreateAnimation("Knight_Attack", "KnightAni", 0.2f, 14, 19, false);
 		MainSpriteRenderer->ChangeAnimation("Knight_Idle");
 		MainSpriteRenderer->AutoSpriteSizeOn();
 		MainSpriteRenderer->SetAutoScaleRatio(1.3f);
@@ -72,4 +73,18 @@ void Knight::SearchMoveStart()
 {
 	GameUnit::SearchMoveStart();
 	MainSpriteRenderer->ChangeAnimation("Knight_Move");
+}
+
+void Knight::AttackStart()
+{
+	MainSpriteRenderer->ChangeAnimation("Knight_Attack");
+}
+
+void Knight::AttackUpdate(float _Delta)
+{
+	if (MainSpriteRenderer->IsCurAnimationEnd())
+	{
+		ChangeState(GameUnitState::SearchMove);
+		return;
+	}
 }

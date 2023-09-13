@@ -2,9 +2,12 @@
 #include "BattleLevel.h"
 
 #include "GameUnit.h"
-#include "Knight.h"
 #include "BattleField.h"
 #include "Bird.h"
+
+// GameUnit
+#include "Knight.h"
+#include "Swordman.h"
 
 BattleLevel::BattleLevel()
 {
@@ -79,8 +82,8 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 
 	// ºí·çÆÀ À¯´Ö (¿ÞÂÊ)
-	BlueTeam.push_back(CreateActor<Knight>()->GetPointer());
-	BlueTeam.push_back(CreateActor<Knight>()->GetPointer());
+	BlueTeam.push_back(CreateActor<Swordman>()->GetPointer());
+	BlueTeam.push_back(CreateActor<Swordman>()->GetPointer());
 
 	
 	// ÆÀ¼³Á¤

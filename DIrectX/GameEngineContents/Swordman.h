@@ -1,16 +1,16 @@
 #pragma once
 #include "GameUnit.h"
 
-class Knight : public GameUnit
+class Swordman : public GameUnit
 {
 public:
-    Knight();
-    ~Knight();
+    Swordman();
+    ~Swordman();
 
-    Knight(const Knight& _Other) = delete;
-    Knight(Knight&& _Other) noexcept = delete;
-    Knight& operator=(const Knight& _Other) = delete;
-    Knight& operator=(Knight&& _Other) noexcept = delete;
+    Swordman(const Swordman& _Other) = delete;
+    Swordman(Swordman&& _Other) noexcept = delete;
+    Swordman& operator=(const Swordman& _Other) = delete;
+    Swordman& operator=(Swordman&& _Other) noexcept = delete;
 
 protected:
     void Start() override;

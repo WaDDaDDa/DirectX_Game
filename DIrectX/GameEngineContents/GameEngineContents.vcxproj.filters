@@ -38,6 +38,9 @@
     <ClCompile Include="Bird.cpp">
       <Filter>Global</Filter>
     </ClCompile>
+    <ClCompile Include="Swordman.cpp">
+      <Filter>GameUnit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -79,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="Bird.h">
       <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Swordman.h">
+      <Filter>GameUnit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

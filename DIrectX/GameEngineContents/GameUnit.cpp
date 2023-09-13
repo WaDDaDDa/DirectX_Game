@@ -2,6 +2,7 @@
 #include "GameUnit.h"
 
 
+
 GameUnit::GameUnit()
 {
 
@@ -55,6 +56,7 @@ void GameUnit::LevelEnd(GameEngineLevel* _NextLevel)
 
 }
 
+// 팀정보 셋팅.  공격범위 같은것들도 셋팅됨.
 void GameUnit::TeamSet(TeamType _Team)
 {
 	GameEngineRandom NewRandom;
@@ -64,20 +66,33 @@ void GameUnit::TeamSet(TeamType _Team)
 
 	if (TeamType::Blue == _Team)
 	{
-		BodyCol = CreateComponent<GameEngineCollision>(ColOrder::BlueTeamBody);
+		// 바디 충돌체
+		BodyCol = CreateComponent<GameEngineCollision>(CollisionOrder::BlueTeamBody);
 		BodyCol->Transform.SetLocalScale(BodyColScale);
+		// 공격 범위 충돌체
+		AttackRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::BlueTeamAttackRange);
+		AttackRangeCol->Transform.SetLocalScale(AttackRange);
 
 		float4 StartPos = NewRandom.RandomVectorBox2D(-250.0f, -280.0f, 100.0f, -100.0f);
 		Transform.AddLocalPosition(StartPos);
+		
+		MyTeam = TeamType::Blue;
 	}
 	else if (TeamType::Red == _Team)
 	{
-		BodyCol = CreateComponent<GameEngineCollision>(ColOrder::RedTeamBody);
+		// 바디 충돌체
+		BodyCol = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamBody);
 		BodyCol->Transform.SetLocalScale(BodyColScale);
+
+		// 공격 범위 충돌체
+		AttackRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamAttackRange);
+		AttackRangeCol->Transform.SetLocalScale(AttackRange);
 
 		//ChangeDir(GameUnitDir::Left);
 		float4 StartPos = NewRandom.RandomVectorBox2D(250.0f, 280.0f, 100.0f, -100.0f);
 		Transform.AddLocalPosition(StartPos);
+
+		MyTeam = TeamType::Red;
 	}
 }
 
@@ -102,7 +117,8 @@ void GameUnit::StateUpdate(float _Delta)
 		return BackMoveUpdate(_Delta);
 	case GameUnitState::SearchMove:
 		return SearchMoveUpdate(_Delta);
-	case GameUnitState::Att:
+	case GameUnitState::Attack:
+		return AttackUpdate(_Delta);
 	case GameUnitState::Skill:
 	case GameUnitState::Ult:
 	case GameUnitState::Damage:
@@ -134,7 +150,8 @@ void GameUnit::ChangeState(GameUnitState _State)
 		case GameUnitState::SearchMove:
 			SearchMoveStart();
 			break;
-		case GameUnitState::Att:
+		case GameUnitState::Attack:
+			AttackStart();
 			break;
 		case GameUnitState::Skill:
 			break;
@@ -186,6 +203,7 @@ void GameUnit::IdleUpdate(float _Delta)
 	}
 }
 
+// 어그로 유닛에게 다가가는 움직임.
 void GameUnit::MoveStart()
 {
 	AggroSetting();
@@ -198,6 +216,8 @@ void GameUnit::MoveStart()
 	MoveDir.Normalize();
 }
 
+// 어그로 유닛에게 다가가는 움직임.
+// 넘어갈 수 있는 State 종류 ( Idle, Attack, BackMove,  )
 void GameUnit::MoveUpdate(float _Delta)
 {
 	ChangeDir();
@@ -207,9 +227,29 @@ void GameUnit::MoveUpdate(float _Delta)
 		return;
 	}
 
-	Transform.AddLocalPosition((MoveDir * 50.0f * _Delta));
+	// 공격 범위에 적군 body가 들어오면. 공격.
+	if (TeamType::Blue == MyTeam)
+	{
+		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody))
+		{
+			ChangeState(GameUnitState::Attack);
+			return;
+		}
+	}
+	else if (TeamType::Red == MyTeam)
+	{
+		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody))
+		{
+			ChangeState(GameUnitState::Attack);
+			return;
+		}
+	}
+
+
+	Transform.AddLocalPosition((MoveDir * UnitSpeed * _Delta));
 }
 
+// 어그로유닛에게서 멀어지는 움직임.
 void GameUnit::BackMoveStart()
 {
 	AggroSetting();
@@ -222,6 +262,7 @@ void GameUnit::BackMoveStart()
 	MoveDir.Normalize();
 }
 
+// 어그로유닛에게서 멀어지는 움직임.
 void GameUnit::BackMoveUpdate(float _Delta)
 {
 	ChangeDir();
@@ -235,6 +276,7 @@ void GameUnit::BackMoveUpdate(float _Delta)
 	Transform.AddLocalPosition((MoveDir * 50.0f * _Delta));
 }
 
+// 맵의 랜덤한 위치를 탐색해서 이동하는 움직임. 유닛 방향에따라 다름.
 void GameUnit::SearchMoveStart()
 {
 	GameEngineRandom Rand;
@@ -246,15 +288,13 @@ void GameUnit::SearchMoveStart()
 	//Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 
 	TargetPos = Rand.RandomVectorBox2D(-340.0f, 340.0f, -250.0f, 110.0f);
-	TargetPos += { HalfWindowScale.X, -HalfWindowScale.Y, -500.0f };
+	TargetPos += { HalfWindowScale.X, -HalfWindowScale.Y };
 
 	// 적위치 - 내위치
 	float4 EnemyPos = AggroUnit->Transform.GetWorldPosition();
 	float4 MyPos = Transform.GetWorldPosition();
 
-	MoveDir = TargetPos - MyPos;
-
-	MoveDir.Normalize();
+	
 
 	if (Dir == GameUnitDir::Right)
 	{
@@ -262,17 +302,35 @@ void GameUnit::SearchMoveStart()
 	}
 }
 
+// 맵의 랜덤한 위치를 탐색해서 이동하는 움직임. 유닛 방향에따라 다름.
 void GameUnit::SearchMoveUpdate(float _Delta)
 {
+	ChangeDir();
+
 	if (GetLiveTime() >= 5.0f)
 	{
 		ChangeState(GameUnitState::Idle);
 		return;
 	}
 
+	float4 MyPos = Transform.GetWorldPosition();
+
+	MoveDir = TargetPos - MyPos;
+
+	MoveDir.Normalize();
+
 	Transform.AddLocalPosition((MoveDir * 100.0f * _Delta));
 }
 
+void GameUnit::AttackStart()
+{
+
+}
+
+void GameUnit::AttackUpdate(float _Delta)
+{
+
+}
 
 void GameUnit::MaxStart()
 {
