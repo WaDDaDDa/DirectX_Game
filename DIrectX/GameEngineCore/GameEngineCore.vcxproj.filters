@@ -4,9 +4,6 @@
     <Filter Include="Object">
       <UniqueIdentifier>{2ea7ea36-112f-47ff-b95f-bcc3edb25afc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PreCompile">
-      <UniqueIdentifier>{02009b2e-f1dd-43f3-bb03-8d8d3c3ce1de}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\TransForm">
       <UniqueIdentifier>{e9e87f48-18c0-468c-8e97-19145f58e3a3}</UniqueIdentifier>
     </Filter>
@@ -48,6 +45,12 @@
     </Filter>
     <Filter Include="Collision">
       <UniqueIdentifier>{92c51415-1e22-4bf7-8c00-a0704dfbb00b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PreCompile">
+      <UniqueIdentifier>{02009b2e-f1dd-43f3-bb03-8d8d3c3ce1de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Contents">
+      <UniqueIdentifier>{6e85ea32-cbb5-4280-b524-f39ddecd81de}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +145,9 @@
     <ClInclude Include="GameEngineSampler.h">
       <Filter>Resources\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineTileMap.h">
+      <Filter>Rendering\Contents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -234,6 +240,9 @@
     </ClCompile>
     <ClCompile Include="GameEngineSampler.cpp">
       <Filter>Resources\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineTileMap.cpp">
+      <Filter>Rendering\Contents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

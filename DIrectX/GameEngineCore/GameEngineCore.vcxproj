@@ -206,6 +206,7 @@
     <ClInclude Include="GameEngineSprite.h" />
     <ClInclude Include="GameEngineSpriteRenderer.h" />
     <ClInclude Include="GameEngineTexture.h" />
+    <ClInclude Include="GameEngineTileMap.h" />
     <ClInclude Include="GameEngineTransform.h">
       <SubType>
       </SubType>
@@ -261,6 +262,7 @@
     <ClCompile Include="GameEngineSprite.cpp" />
     <ClCompile Include="GameEngineSpriteRenderer.cpp" />
     <ClCompile Include="GameEngineTexture.cpp" />
+    <ClCompile Include="GameEngineTileMap.cpp" />
     <ClCompile Include="GameEngineTransform.cpp">
       <SubType>
       </SubType>
