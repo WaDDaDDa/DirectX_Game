@@ -42,6 +42,7 @@ void Knight::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer->ChangeAnimation("Knight_Idle");
 		MainSpriteRenderer->AutoSpriteSizeOn();
 		MainSpriteRenderer->SetAutoScaleRatio(1.3f);
+		MainSpriteRenderer->SetPivotType(PivotType::Bottom);
 	}
 
 	GameUnit::LevelStart(_PrevLevel);
@@ -77,6 +78,7 @@ void Knight::SearchMoveStart()
 
 void Knight::AttackStart()
 {
+	GameUnit::AttackStart();
 	MainSpriteRenderer->ChangeAnimation("Knight_Attack");
 }
 
@@ -84,7 +86,7 @@ void Knight::AttackUpdate(float _Delta)
 {
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
-		ChangeState(GameUnitState::SearchMove);
+		ChangeState(GameUnitState::Move);
 		return;
 	}
 }

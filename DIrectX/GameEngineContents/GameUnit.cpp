@@ -39,8 +39,8 @@ void GameUnit::Start()
 		}
 
 		{	// 콜리젼
-			//BodyCol = CreateComponent<GameEngineCollision>(ColOrder::UnitBody);
-			//BodyCol->Transform.SetLocalScale(BodyColScale);
+			PushCol = CreateComponent<GameEngineCollision>(CollisionOrder::UnitBody);
+			PushCol->Transform.SetLocalScale(PushColScale);
 		}
 	}
 }
@@ -100,6 +100,10 @@ void GameUnit::TeamSet(TeamType _Team)
 void GameUnit::Update(float _Delta)
 {
 	StateUpdate(_Delta);
+
+	AttackValue += _Delta;
+	SkillValue += _Delta;
+	UltValue += _Delta;
 }
 
 
@@ -117,6 +121,8 @@ void GameUnit::StateUpdate(float _Delta)
 		return BackMoveUpdate(_Delta);
 	case GameUnitState::SearchMove:
 		return SearchMoveUpdate(_Delta);
+	case GameUnitState::CollMove:
+		return CollMoveUpdate(_Delta);
 	case GameUnitState::Attack:
 		return AttackUpdate(_Delta);
 	case GameUnitState::Skill:
@@ -149,6 +155,9 @@ void GameUnit::ChangeState(GameUnitState _State)
 			break;
 		case GameUnitState::SearchMove:
 			SearchMoveStart();
+			break;
+		case GameUnitState::CollMove:
+			CollMoveStart();
 			break;
 		case GameUnitState::Attack:
 			AttackStart();
@@ -195,7 +204,7 @@ void GameUnit::IdleStart()
 
 void GameUnit::IdleUpdate(float _Delta)
 {
-
+	// 적이 있다면으로 조건 변경.
 	if (GetLiveTime() >= 1.0f)
 	{
 		ChangeState(GameUnitState::Move);
@@ -230,7 +239,7 @@ void GameUnit::MoveUpdate(float _Delta)
 	// 공격 범위에 적군 body가 들어오면. 공격.
 	if (TeamType::Blue == MyTeam)
 	{
-		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody))
+		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackDelay <= AttackValue)
 		{
 			ChangeState(GameUnitState::Attack);
 			return;
@@ -238,11 +247,18 @@ void GameUnit::MoveUpdate(float _Delta)
 	}
 	else if (TeamType::Red == MyTeam)
 	{
-		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody))
+		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackDelay <= AttackValue)
 		{
 			ChangeState(GameUnitState::Attack);
 			return;
 		}
+	}
+
+	// 바디겹치면 멀어지는 움직임.
+	if (PushCol->Collision(CollisionOrder::UnitBody))
+	{
+		ChangeState(GameUnitState::CollMove);
+		return;
 	}
 
 
@@ -258,7 +274,7 @@ void GameUnit::BackMoveStart()
 	float4 EnemyPos = AggroUnit->Transform.GetWorldPosition();
 	float4 MyPos = Transform.GetWorldPosition();
 
-	float4 MoveDir = -(EnemyPos - MyPos);
+	MoveDir = -(EnemyPos - MyPos);
 	MoveDir.Normalize();
 }
 
@@ -294,12 +310,6 @@ void GameUnit::SearchMoveStart()
 	float4 EnemyPos = AggroUnit->Transform.GetWorldPosition();
 	float4 MyPos = Transform.GetWorldPosition();
 
-	
-
-	if (Dir == GameUnitDir::Right)
-	{
-	//	TargetPos.X
-	}
 }
 
 // 맵의 랜덤한 위치를 탐색해서 이동하는 움직임. 유닛 방향에따라 다름.
@@ -322,9 +332,39 @@ void GameUnit::SearchMoveUpdate(float _Delta)
 	Transform.AddLocalPosition((MoveDir * 100.0f * _Delta));
 }
 
-void GameUnit::AttackStart()
+// 유닛들이 겹쳤을때 겹친것을 벗어나기 위한 움직임.
+void GameUnit::CollMoveStart()
 {
 
+	PushCol->Collision(CollisionOrder::UnitBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
+	{
+		for (size_t i = 0; i < _Collision.size(); i++)
+		{
+			float4 EnemyPos = _Collision[i]->Transform.GetWorldPosition();
+			float4 MyPos = this->Transform.GetWorldPosition();
+			MoveDir = -(EnemyPos - MyPos);
+			MoveDir.Normalize();
+			return;
+		}
+	});
+
+}
+
+// 맵의 랜덤한 위치를 탐색해서 이동하는 움직임. 유닛 방향에따라 다름.
+void GameUnit::CollMoveUpdate(float _Delta)
+{
+	if (GetLiveTime() >= 0.2f)
+	{
+		ChangeState(GameUnitState::Move);
+		return;
+	}
+
+	Transform.AddLocalPosition((MoveDir * 50.0f * _Delta));
+}
+
+void GameUnit::AttackStart()
+{
+	AttackValue = 0.0f;
 }
 
 void GameUnit::AttackUpdate(float _Delta)

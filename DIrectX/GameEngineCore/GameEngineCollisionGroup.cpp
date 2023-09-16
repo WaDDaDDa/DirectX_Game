@@ -163,8 +163,9 @@ bool GameEngineCollisionGroup::CollisionEvent(std::shared_ptr<GameEngineCollisio
 			{
 				_Event.Exit(_Collision.get(), Collsion.get());
 				//Other->Others.erase(Other);
-				_Collision->Others.erase(Collsion);
 			}
+
+			_Collision->Others.erase(Collsion);
 		}
 	}
 
@@ -182,8 +183,9 @@ bool GameEngineCollisionGroup::CollisionEvent(std::shared_ptr<GameEngineCollisio
 				{
 					_Event.Enter(_Collision.get(), Other.get());
 					//Other->Others.insert(Other);
-					_Collision->Others.insert(Other);
 				}
+				
+				_Collision->Others.insert(Other);
 			}
 			else  // 나랑 충돌을 처음한게 아니고 충돌했다.  ==> 충돌중이다.
 			{

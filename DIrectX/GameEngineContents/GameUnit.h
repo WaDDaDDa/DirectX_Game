@@ -8,12 +8,13 @@ enum class GameUnitState
     Idle,
     Move,
     BackMove,
+    SearchMove,
+    CollMove,
     Attack,
     Skill,
     Ult,
     Damage,
     Die,
-    SearchMove,
     Max,
 };
 
@@ -147,6 +148,9 @@ protected:
     virtual void SearchMoveStart();
     void SearchMoveUpdate(float _Delta);
 
+    virtual void CollMoveStart();
+    void CollMoveUpdate(float _Delta);
+
     virtual void AttackStart();
     virtual void AttackUpdate(float _Delta);
 
@@ -165,14 +169,25 @@ private:
     std::shared_ptr<GameEngineSpriteRenderer> SpwanRenderer;
     std::shared_ptr<GameEngineCollision> BodyCol;
     std::shared_ptr<GameEngineCollision> AttackRangeCol;
+    // 바디보다 작은 유닛겹쳤을때 밀어내기 위한 콜리전
+    std::shared_ptr<GameEngineCollision> PushCol;
+
 
     float4 BodyColScale = { 50.0f, 0.0f };
-    float4 AttackRange = { 40.0f, 0.0f };
+    float4 PushColScale = { 20.0f, 0.0f };
 
     float4 MoveDir;
 
     TeamType MyTeam = TeamType::Blue;
+    float4 AttackRange = { 55.0f, 0.0f };
     float UnitSpeed = 100.0f;
+
+    float AttackDelay = 3.0f;
+    float AttackValue = 0.0f;
+    float SkillCooltime = 10.0f;
+    float SkillValue = 0.0f;
+    float UltCooltime = 30.0f;
+    float UltValue = 0.0f;
 
 
     float4 SearchMoveTarget = { 0.0f , 0.0f };

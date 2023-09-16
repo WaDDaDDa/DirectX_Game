@@ -77,6 +77,7 @@ void Swordman::SearchMoveStart()
 
 void Swordman::AttackStart()
 {
+	GameUnit::AttackStart();
 	MainSpriteRenderer->ChangeAnimation("Swordman_Attack");
 }
 
