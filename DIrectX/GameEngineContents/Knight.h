@@ -53,6 +53,8 @@ protected:
     void SkillStart() override;
     void SkillUpdate(float _Delta) override;
 
+    void DieStart() override;
+
 private:
     float4 KnightAttackRange = { 55.0f, 55.0f };
     float4 KnightSkillRange = { 55.0f, 55.0f };

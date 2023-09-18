@@ -118,7 +118,10 @@ public:
     // 충돌이벤트
     EventParameter Event;
 
-    float UnitHP = 100.0f;
+    void DamageHP()
+    {
+        UnitHP -= 500.0f;
+    }
 
 protected:
     void Start() override;
@@ -166,6 +169,9 @@ protected:
     virtual void Skill2Start() {}
     virtual void Skill2Update(float _Delta) {}
 
+    virtual void DieStart();
+    void DieUpdate(float _Delta);
+
     GameUnitState State = GameUnitState::Max;
     GameUnitDir Dir = GameUnitDir::Right;
 
@@ -182,6 +188,7 @@ protected:
     float4 SkillRange = { 55.0f, 0.0f };
     float4 UltRange = { 55.0f, 0.0f };
     float UnitSpeed = 100.0f;
+    float UnitHP = 100.0f;
     float UnitDef = 5.0f;
 
     float PushDelay = 0.3f;
@@ -200,8 +207,8 @@ private:
     std::shared_ptr<GameEngineCollision> AttackRangeCol;
     // 공격할때 플레이어 유닛 하나만을 단일 타겟팅 하고싶은데..
     // 그렇다면 공격할때마다 콜리젼 위치를 공격범위에 닿은 유닛의 위치에 Set해서
-    // 그위치에 충돌체를 작게 생성시키면 단일 타겟팅 느낌이 나지 않을까?
-    std::shared_ptr<GameEngineCollision> AttackCol;
+    // 그위치에 충돌체를 작게 생성시키면 단일 타겟팅 느낌이 나지 
+    // std::shared_ptr<GameEngineCollision> AttackCol;
     // 바디보다 작은 유닛겹쳤을때 밀어내기 위한 콜리전
     std::shared_ptr<GameEngineCollision> PushCol;
 

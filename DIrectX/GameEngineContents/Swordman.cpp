@@ -30,6 +30,8 @@ void Swordman::Start()
 		}
 	}
 
+	SetUnitStatus();
+
 }
 
 void Swordman::LevelStart(GameEngineLevel* _PrevLevel)
@@ -41,6 +43,7 @@ void Swordman::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer->CreateAnimation("Swordman_Attack", "SwordmanAni", 0.2f, 14, 17, false);
 		MainSpriteRenderer->CreateAnimation("Swordman_Skill", "SwordmanAni", 0.2f, 18, 20, false);
 		MainSpriteRenderer->CreateAnimation("Swordman_Skill2", "SwordmanAni", 0.1f, 21, 26, false);
+		MainSpriteRenderer->CreateAnimation("Swordman_Die", "SwordmanAni", 0.1f, 27, 34, false);
 		
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
 		SkillEffectRenderer->CreateAnimation("SwordmanSkillEffect", "SwordmanEffect", 0.1f, 8, 13, false);
@@ -178,4 +181,10 @@ void Swordman::Skill2Update(float _Delta)
 			break;
 		}
 	}
+}
+
+void Swordman::DieStart()
+{
+	GameUnit::DieStart();
+	MainSpriteRenderer->ChangeAnimation("Swordman_Die");
 }

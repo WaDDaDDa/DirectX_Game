@@ -41,6 +41,7 @@ void Knight::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer->CreateAnimation("Knight_Move", "KnightAni", 0.2f, 5, 13);
 		MainSpriteRenderer->CreateAnimation("Knight_Attack", "KnightAni", 0.2f, 14, 19, false);
 		MainSpriteRenderer->CreateAnimation("Knight_Skill", "KnightAni", 0.1f, 30, 36, false);
+		MainSpriteRenderer->CreateAnimation("Knight_Die", "KnightAni", 0.1f, 22, 29, false);
 
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
 		SkillEffectRenderer->CreateAnimation("KnightSkillEffect", "KnightEffect", 0.1f, 1, 5, false);
@@ -168,4 +169,10 @@ void Knight::SkillUpdate(float _Delta)
 			break;
 		}
 	}
+}
+
+void Knight::DieStart()
+{
+	GameUnit::DieStart();
+	MainSpriteRenderer->ChangeAnimation("Knight_Die");
 }

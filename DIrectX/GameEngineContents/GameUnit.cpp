@@ -88,8 +88,6 @@ void GameUnit::TeamSet(TeamType _Team)
 		// 공격 범위 충돌체
 		AttackRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::BlueTeamAttackRange);
 		AttackRangeCol->Transform.SetLocalScale(AttackRange);
-		AttackCol = CreateComponent<GameEngineCollision>(CollisionOrder::BlueTeamAttack);
-		AttackCol->Transform.SetLocalScale({ 5.0f,5.0f });
 
 		float4 StartPos = NewRandom.RandomVectorBox2D(-220.0f, -280.0f, 80.0f, -150.0f);
 		Transform.AddLocalPosition(StartPos);
@@ -105,9 +103,6 @@ void GameUnit::TeamSet(TeamType _Team)
 		// 공격 범위 충돌체
 		AttackRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamAttackRange);
 		AttackRangeCol->Transform.SetLocalScale(AttackRange);
-		AttackCol = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamAttack);
-		AttackCol->Transform.SetLocalScale({5.0f,5.0f});
-
 
 		//ChangeDir(GameUnitDir::Left);
 		float4 StartPos = NewRandom.RandomVectorBox2D(220.0f, 280.0f, 80.0f, -150.0f);
@@ -134,6 +129,12 @@ void GameUnit::Update(float _Delta)
 	else if (TeamType::Red == MyTeam)
 	{
 		BodyCol->CollisionEvent(CollisionOrder::BlueTeamAttack, Event);
+	}
+
+	if (UnitHP <= 0.0f)
+	{
+		ChangeState(GameUnitState::Die);
+		return;
 	}
 }
 
@@ -162,6 +163,8 @@ void GameUnit::StateUpdate(float _Delta)
 		return Skill2Update(_Delta);
 	case GameUnitState::Ult:
 	case GameUnitState::Damage:
+	case GameUnitState::Die:
+		return DieUpdate(_Delta);
 	case GameUnitState::Max:
 		return MaxUpdate(_Delta);
 	default:
@@ -206,6 +209,9 @@ void GameUnit::ChangeState(GameUnitState _State)
 			break;
 		case GameUnitState::Damage:
 			break;
+		case GameUnitState::Die:
+			DieStart();
+			break;
 		case GameUnitState::Max:
 			MaxStart();
 			break;
@@ -223,7 +229,6 @@ void GameUnit::SpwanStart()
 {
 	SpwanRenderer->On();
 	SpwanRenderer->ChangeAnimation("SpwanEffect");
-	AttackCol->Off();
 }
 
 void GameUnit::SpwanUpdate(float _Delta)
@@ -477,7 +482,6 @@ void GameUnit::CollMoveUpdate(float _Delta)
 void GameUnit::AttackStart()
 {
 	AttackValue = 0.0f;
-	AttackCol->On();
 
 	if (TeamType::Blue == MyTeam)
 	{
@@ -485,21 +489,19 @@ void GameUnit::AttackStart()
 			{
 				for (size_t i = 0; i < _Collision.size(); i++)
 				{
-					float4 EnemyPos = _Collision[i]->Transform.GetWorldPosition();
-					AttackCol->Transform.SetWorldPosition(EnemyPos);
-					float4 P33wo = AttackCol->Transform.GetWorldPosition();
+					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP();
 					return;
 				}
 			});
 	}
 	else if (TeamType::Red == MyTeam)
 	{
+
 		AttackRangeCol->Collision(CollisionOrder::BlueTeamBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
 			{
 				for (size_t i = 0; i < _Collision.size(); i++)
 				{
-					float4 EnemyPos = _Collision[i]->Transform.GetWorldPosition();
-					AttackCol->Transform.SetLocalPosition(EnemyPos);
+					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP();
 					return;
 				}
 			});
@@ -521,6 +523,18 @@ void GameUnit::SkillStart()
 void GameUnit::SkillUpdate(float _Delta)
 {
 
+}
+
+void GameUnit::DieStart()
+{
+}
+
+void GameUnit::DieUpdate(float _Delta)
+{
+	if (MainSpriteRenderer->IsCurAnimationEnd())
+	{
+		Death();
+	}
 }
 
 void GameUnit::MaxStart()
