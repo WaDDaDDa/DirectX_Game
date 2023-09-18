@@ -12,6 +12,7 @@ enum class GameUnitState
     CollMove,
     Attack,
     Skill,
+    Skill2,
     Ult,
     Damage,
     Die,
@@ -114,6 +115,11 @@ public:
     // 스폰위치.  바라보는 방향. 콜리젼 종류. 
     void TeamSet(TeamType _Team);
 
+    // 충돌이벤트
+    EventParameter Event;
+
+    float UnitHP = 100.0f;
+
 protected:
     void Start() override;
     void Update(float _Delta) override;
@@ -154,6 +160,12 @@ protected:
     virtual void AttackStart();
     virtual void AttackUpdate(float _Delta);
 
+    virtual void SkillStart();
+    virtual void SkillUpdate(float _Delta);
+
+    virtual void Skill2Start() {}
+    virtual void Skill2Update(float _Delta) {}
+
     GameUnitState State = GameUnitState::Max;
     GameUnitDir Dir = GameUnitDir::Right;
 
@@ -165,10 +177,31 @@ protected:
 
     float4 TargetPos = float4::ZERO;
 
+    // Status
+    float4 AttackRange = { 55.0f, 0.0f };
+    float4 SkillRange = { 55.0f, 0.0f };
+    float4 UltRange = { 55.0f, 0.0f };
+    float UnitSpeed = 100.0f;
+    float UnitDef = 5.0f;
+
+    float PushDelay = 0.3f;
+    float PushValue = 0.0f;
+
+    float AttackDelay = 3.0f;
+    float AttackValue = 0.0f;
+    float SkillCooltime = 10.0f;
+    float SkillValue = 0.0f;
+    float UltCooltime = 30.0f;
+    float UltValue = 0.0f;
+
 private:
     std::shared_ptr<GameEngineSpriteRenderer> SpwanRenderer;
     std::shared_ptr<GameEngineCollision> BodyCol;
     std::shared_ptr<GameEngineCollision> AttackRangeCol;
+    // 공격할때 플레이어 유닛 하나만을 단일 타겟팅 하고싶은데..
+    // 그렇다면 공격할때마다 콜리젼 위치를 공격범위에 닿은 유닛의 위치에 Set해서
+    // 그위치에 충돌체를 작게 생성시키면 단일 타겟팅 느낌이 나지 않을까?
+    std::shared_ptr<GameEngineCollision> AttackCol;
     // 바디보다 작은 유닛겹쳤을때 밀어내기 위한 콜리전
     std::shared_ptr<GameEngineCollision> PushCol;
 
@@ -177,17 +210,10 @@ private:
     float4 PushColScale = { 20.0f, 0.0f };
 
     float4 MoveDir;
-
+    // 궁극기 사용 스킬사용 조건이 다 다르다면 Idle상태에서만 스킬을 사용하게 하고
+    // Idle을 오버라이드 하는 방법을 시도해보자.
     TeamType MyTeam = TeamType::Blue;
-    float4 AttackRange = { 55.0f, 0.0f };
-    float UnitSpeed = 100.0f;
 
-    float AttackDelay = 3.0f;
-    float AttackValue = 0.0f;
-    float SkillCooltime = 10.0f;
-    float SkillValue = 0.0f;
-    float UltCooltime = 30.0f;
-    float UltValue = 0.0f;
 
 
     float4 SearchMoveTarget = { 0.0f , 0.0f };

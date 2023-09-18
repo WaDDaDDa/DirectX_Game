@@ -208,6 +208,10 @@ public:
 		TransformUpdate();
 	}
 
+	void SetWorldPosition(const float4& _Value)
+	{
+		TransData.WorldMatrix.ArrVector[3] = _Value;
+	}
 
 	// Get
 	float4 GetWorldPosition()

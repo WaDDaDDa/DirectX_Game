@@ -78,20 +78,12 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	
 	// ·¹µåÆÀ À¯´Ö (¿À¸¥ÂÊ)
 	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
-	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
-	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
-	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
-	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
-	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
+	RedTeam.push_back(CreateActor<Swordman>()->GetPointer());
 
 
 	// ºí·çÆÀ À¯´Ö (¿ÞÂÊ)
 	BlueTeam.push_back(CreateActor<Swordman>()->GetPointer());
-	BlueTeam.push_back(CreateActor<Swordman>()->GetPointer());
-	BlueTeam.push_back(CreateActor<Swordman>()->GetPointer());
-	BlueTeam.push_back(CreateActor<Swordman>()->GetPointer());
-	BlueTeam.push_back(CreateActor<Swordman>()->GetPointer());
-	BlueTeam.push_back(CreateActor<Swordman>()->GetPointer());
+	BlueTeam.push_back(CreateActor<Knight>()->GetPointer());
 
 	
 	// ÆÀ¼³Á¤
@@ -115,4 +107,5 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 void BattleLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
+
 }

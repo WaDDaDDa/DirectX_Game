@@ -42,6 +42,22 @@ void GameUnit::Start()
 			PushCol = CreateComponent<GameEngineCollision>(CollisionOrder::UnitBody);
 			PushCol->Transform.SetLocalScale(PushColScale);
 		}
+
+		// 이벤트 셋팅
+		Event.Enter = [](GameEngineCollision* _this, GameEngineCollision* _Col)
+			{
+				int a = 0;
+			};
+
+		Event.Stay = [](GameEngineCollision* _this, GameEngineCollision* _Col)
+			{
+				int a = 0;
+			};
+
+		Event.Exit = [](GameEngineCollision* _this, GameEngineCollision* _Col)
+			{
+				int a = 0;
+			};
 	}
 }
 
@@ -72,8 +88,10 @@ void GameUnit::TeamSet(TeamType _Team)
 		// 공격 범위 충돌체
 		AttackRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::BlueTeamAttackRange);
 		AttackRangeCol->Transform.SetLocalScale(AttackRange);
+		AttackCol = CreateComponent<GameEngineCollision>(CollisionOrder::BlueTeamAttack);
+		AttackCol->Transform.SetLocalScale({ 5.0f,5.0f });
 
-		float4 StartPos = NewRandom.RandomVectorBox2D(-250.0f, -280.0f, 100.0f, -100.0f);
+		float4 StartPos = NewRandom.RandomVectorBox2D(-220.0f, -280.0f, 80.0f, -150.0f);
 		Transform.AddLocalPosition(StartPos);
 		
 		MyTeam = TeamType::Blue;
@@ -87,9 +105,12 @@ void GameUnit::TeamSet(TeamType _Team)
 		// 공격 범위 충돌체
 		AttackRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamAttackRange);
 		AttackRangeCol->Transform.SetLocalScale(AttackRange);
+		AttackCol = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamAttack);
+		AttackCol->Transform.SetLocalScale({5.0f,5.0f});
+
 
 		//ChangeDir(GameUnitDir::Left);
-		float4 StartPos = NewRandom.RandomVectorBox2D(250.0f, 280.0f, 100.0f, -100.0f);
+		float4 StartPos = NewRandom.RandomVectorBox2D(220.0f, 280.0f, 80.0f, -150.0f);
 		Transform.AddLocalPosition(StartPos);
 
 		MyTeam = TeamType::Red;
@@ -101,9 +122,19 @@ void GameUnit::Update(float _Delta)
 {
 	StateUpdate(_Delta);
 
+	PushValue += _Delta;
 	AttackValue += _Delta;
 	SkillValue += _Delta;
 	UltValue += _Delta;
+
+	if (TeamType::Blue == MyTeam)
+	{
+		BodyCol->CollisionEvent(CollisionOrder::RedTeamAttack, Event);
+	}
+	else if (TeamType::Red == MyTeam)
+	{
+		BodyCol->CollisionEvent(CollisionOrder::BlueTeamAttack, Event);
+	}
 }
 
 
@@ -126,6 +157,9 @@ void GameUnit::StateUpdate(float _Delta)
 	case GameUnitState::Attack:
 		return AttackUpdate(_Delta);
 	case GameUnitState::Skill:
+		return SkillUpdate(_Delta);
+	case GameUnitState::Skill2:
+		return Skill2Update(_Delta);
 	case GameUnitState::Ult:
 	case GameUnitState::Damage:
 	case GameUnitState::Max:
@@ -163,6 +197,10 @@ void GameUnit::ChangeState(GameUnitState _State)
 			AttackStart();
 			break;
 		case GameUnitState::Skill:
+			SkillStart();
+			break;
+		case GameUnitState::Skill2:
+			Skill2Start();
 			break;
 		case GameUnitState::Ult:
 			break;
@@ -185,6 +223,7 @@ void GameUnit::SpwanStart()
 {
 	SpwanRenderer->On();
 	SpwanRenderer->ChangeAnimation("SpwanEffect");
+	AttackCol->Off();
 }
 
 void GameUnit::SpwanUpdate(float _Delta)
@@ -205,8 +244,9 @@ void GameUnit::IdleStart()
 void GameUnit::IdleUpdate(float _Delta)
 {
 	// 적이 있다면으로 조건 변경.
-	if (GetLiveTime() >= 1.0f)
+	if (GetLiveTime() >= 0.5f)
 	{
+
 		ChangeState(GameUnitState::Move);
 		return;
 	}
@@ -230,11 +270,73 @@ void GameUnit::MoveStart()
 void GameUnit::MoveUpdate(float _Delta)
 {
 	ChangeDir();
-	if (GetLiveTime() >= 3.0f)
+
+	if (GetLiveTime() >= 2.0f)
 	{
 		ChangeState(GameUnitState::Idle);
 		return;
 	}
+
+	// 공격 범위에 적군 body가 들어오면. 공격.
+	if (TeamType::Blue == MyTeam)
+	{
+		// 스킬사용
+		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && SkillCooltime <= SkillValue)
+		{
+			ChangeState(GameUnitState::Skill);
+			return;
+		}
+
+		// 공격
+		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackDelay <= AttackValue)
+		{
+			ChangeState(GameUnitState::Attack);
+			return;
+		}
+	}
+	else if (TeamType::Red == MyTeam)
+	{
+		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && SkillCooltime <= SkillValue)
+		{
+			ChangeState(GameUnitState::Skill);
+			return;
+		}
+
+		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackDelay <= AttackValue)
+		{
+			ChangeState(GameUnitState::Attack);
+			return;
+		}
+	}
+
+	// 바디겹치면 멀어지는 움직임.
+	if (PushCol->Collision(CollisionOrder::UnitBody) && PushDelay <= PushValue)
+	{
+		ChangeState(GameUnitState::CollMove);
+		return;
+	}
+
+
+	Transform.AddLocalPosition((MoveDir * UnitSpeed * _Delta));
+}
+
+// 어그로유닛에게서 멀어지는 움직임.
+void GameUnit::BackMoveStart()
+{
+	//AggroSetting();
+
+	// 적위치 - 내위치
+	float4 EnemyPos = AggroUnit->Transform.GetWorldPosition();
+	float4 MyPos = Transform.GetWorldPosition();
+
+	MoveDir = -(EnemyPos - MyPos);
+	MoveDir.Normalize();
+}
+
+// 어그로유닛에게서 멀어지는 움직임.
+void GameUnit::BackMoveUpdate(float _Delta)
+{
+	ChangeDir();
 
 	// 공격 범위에 적군 body가 들어오면. 공격.
 	if (TeamType::Blue == MyTeam)
@@ -254,42 +356,13 @@ void GameUnit::MoveUpdate(float _Delta)
 		}
 	}
 
-	// 바디겹치면 멀어지는 움직임.
-	if (PushCol->Collision(CollisionOrder::UnitBody))
-	{
-		ChangeState(GameUnitState::CollMove);
-		return;
-	}
-
-
-	Transform.AddLocalPosition((MoveDir * UnitSpeed * _Delta));
-}
-
-// 어그로유닛에게서 멀어지는 움직임.
-void GameUnit::BackMoveStart()
-{
-	AggroSetting();
-
-	// 적위치 - 내위치
-	float4 EnemyPos = AggroUnit->Transform.GetWorldPosition();
-	float4 MyPos = Transform.GetWorldPosition();
-
-	MoveDir = -(EnemyPos - MyPos);
-	MoveDir.Normalize();
-}
-
-// 어그로유닛에게서 멀어지는 움직임.
-void GameUnit::BackMoveUpdate(float _Delta)
-{
-	ChangeDir();
-
-	if (GetLiveTime() >= 4.0f)
+	if (GetLiveTime() >= 1.0f)
 	{
 		ChangeState(GameUnitState::Idle);
 		return;
 	}
 
-	Transform.AddLocalPosition((MoveDir * 50.0f * _Delta));
+	Transform.AddLocalPosition((MoveDir * UnitSpeed * _Delta));
 }
 
 // 맵의 랜덤한 위치를 탐색해서 이동하는 움직임. 유닛 방향에따라 다름.
@@ -317,7 +390,25 @@ void GameUnit::SearchMoveUpdate(float _Delta)
 {
 	ChangeDir();
 
-	if (GetLiveTime() >= 5.0f)
+	// 공격 범위에 적군 body가 들어오면. 공격.
+	if (TeamType::Blue == MyTeam)
+	{
+		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackDelay <= AttackValue)
+		{
+			ChangeState(GameUnitState::Attack);
+			return;
+		}
+	}
+	else if (TeamType::Red == MyTeam)
+	{
+		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackDelay <= AttackValue)
+		{
+			ChangeState(GameUnitState::Attack);
+			return;
+		}
+	}
+
+	if (GetLiveTime() >= 1.0f)
 	{
 		ChangeState(GameUnitState::Idle);
 		return;
@@ -329,13 +420,12 @@ void GameUnit::SearchMoveUpdate(float _Delta)
 
 	MoveDir.Normalize();
 
-	Transform.AddLocalPosition((MoveDir * 100.0f * _Delta));
+	Transform.AddLocalPosition((MoveDir * UnitSpeed * _Delta));
 }
 
 // 유닛들이 겹쳤을때 겹친것을 벗어나기 위한 움직임.
 void GameUnit::CollMoveStart()
 {
-
 	PushCol->Collision(CollisionOrder::UnitBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
 	{
 		for (size_t i = 0; i < _Collision.size(); i++)
@@ -355,19 +445,80 @@ void GameUnit::CollMoveUpdate(float _Delta)
 {
 	if (GetLiveTime() >= 0.2f)
 	{
-		ChangeState(GameUnitState::Move);
-		return;
+		PushValue = 0.0f;
+		GameEngineRandom NewRand;
+		int MoveRand = NewRand.RandomInt(0, 5);
+		static long long RandSeed = reinterpret_cast<long long>(this);
+		RandSeed++;
+		NewRand.SetSeed(RandSeed);
+
+		switch (MoveRand)
+		{
+		case 0:
+			ChangeState(GameUnitState::Move);
+			return;
+		case 1:
+		case 2:
+		case 3:
+			ChangeState(GameUnitState::SearchMove);
+			return;
+		case 4:
+		case 5:
+			ChangeState(GameUnitState::BackMove);
+			return;
+		default:
+			break;
+		}
 	}
 
-	Transform.AddLocalPosition((MoveDir * 50.0f * _Delta));
+	Transform.AddLocalPosition((MoveDir * UnitSpeed * _Delta));
 }
 
 void GameUnit::AttackStart()
 {
 	AttackValue = 0.0f;
+	AttackCol->On();
+
+	if (TeamType::Blue == MyTeam)
+	{
+		AttackRangeCol->Collision(CollisionOrder::RedTeamBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
+			{
+				for (size_t i = 0; i < _Collision.size(); i++)
+				{
+					float4 EnemyPos = _Collision[i]->Transform.GetWorldPosition();
+					AttackCol->Transform.SetWorldPosition(EnemyPos);
+					float4 P33wo = AttackCol->Transform.GetWorldPosition();
+					return;
+				}
+			});
+	}
+	else if (TeamType::Red == MyTeam)
+	{
+		AttackRangeCol->Collision(CollisionOrder::BlueTeamBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
+			{
+				for (size_t i = 0; i < _Collision.size(); i++)
+				{
+					float4 EnemyPos = _Collision[i]->Transform.GetWorldPosition();
+					AttackCol->Transform.SetLocalPosition(EnemyPos);
+					return;
+				}
+			});
+	}
+
 }
 
 void GameUnit::AttackUpdate(float _Delta)
+{
+
+}
+
+void GameUnit::SkillStart()
+{
+	AttackValue = 0.0f;
+	SkillValue = 0.0f;
+}
+
+void GameUnit::SkillUpdate(float _Delta)
 {
 
 }

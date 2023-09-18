@@ -20,6 +20,8 @@ enum class CollisionOrder
 	UnitBody,
 	RedTeamAttackRange,
 	BlueTeamAttackRange,
+	RedTeamAttack,
+	BlueTeamAttack,
 	UnitAttack,
 	UnitTarget,
 };
