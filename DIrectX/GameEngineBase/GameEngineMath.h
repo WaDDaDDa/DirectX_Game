@@ -337,7 +337,10 @@ public:
 		return POINT{ iX(), iY() };
 	}
 
-
+	std::string ToString(std::string_view _Next = "")
+	{
+		return "X : " + std::to_string(X) + " Y : " + std::to_string(Y) + " Z : " + std::to_string(Z) + _Next.data();
+	}
 
 public:
 	inline float Angle2DDeg()
@@ -648,6 +651,13 @@ public:
 		DirectX::XMMatrixDecompose(&_Scale.DirectXVector, &_RotQuaternion.DirectXVector, &_Pos.DirectXVector, DirectXMatrix);
 	}
 
+	// 역함수 리턴
+	float4x4 InverseReturn() const
+	{
+		float4x4 Result;
+		Result.DirectXMatrix = DirectX::XMMatrixInverse(nullptr, DirectXMatrix);
+		return Result;
+	}
 
 	void RotationXDeg(const float _Value)
 	{

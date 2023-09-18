@@ -131,7 +131,7 @@ void GameEngineSpriteRenderer::Render(GameEngineCamera* _Camera, float _Delta)
 
 	GameEngineRenderer::ResSetting();
 
-	std::shared_ptr<GameEngineConstantBuffer> Buffer = GameEngineConstantBuffer::CreateAndFind(sizeof(float4), "SpriteData", ShaderType::Vertex);
+	std::shared_ptr<GameEngineConstantBuffer> Buffer = GameEngineConstantBuffer::CreateAndFind(sizeof(float4), "SpriteData");
 
 	if (nullptr != Buffer)
 	{
@@ -358,6 +358,9 @@ void GameEngineSpriteRenderer::SetPivotType(PivotType _Type)
 		break;
 	case PivotType::Left:
 		Pivot = { 0.5f, 0.0f };
+		break;
+	case PivotType::LeftTop:
+		Pivot = { 0.5f, -0.5f };
 		break;
 	default:
 		break;
