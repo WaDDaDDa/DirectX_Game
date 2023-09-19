@@ -14,12 +14,14 @@ public:
 
     void SetUnitStatus()
     {
+        UnitName = "Knight";
         AttackRange = KnightAttackRange;
         SkillRange = KnightSkillRange;
         UltRange = KnightUltRange;
 
         UnitSpeed = KnightSpeed;
         UnitHP = KnightHp;
+        UnitMaxHP = KnightHp;
         UnitDef = KnightDef;
 
         AttackDelay = KnightAttackDeley;
@@ -49,6 +51,9 @@ protected:
     void AttackStart() override;
     void AttackUpdate(float _Delta) override;
 
+    void Attack2Start() override;
+    void Attack2Update(float _Delta) override;
+
     void SkillStart() override;
     void SkillUpdate(float _Delta) override;
 
@@ -63,7 +68,7 @@ private:
     float KnightHp = 1000.0f;
     float KnightDef = 20.0f;
     float KnightAttackDeley = 3.0f;
-    float KnightSkillCooltime = 10.0f;
+    float KnightSkillCooltime = 6.0f;
     float KnightUltCooltime = 30.0f;
 };
 

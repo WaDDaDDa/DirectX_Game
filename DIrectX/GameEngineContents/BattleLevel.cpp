@@ -6,6 +6,7 @@
 #include "Bird.h"
 
 // GameUnit
+#include "GameUnitUI.h"
 #include "Knight.h"
 #include "Swordman.h"
 
@@ -80,14 +81,14 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
 	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
 	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
-	RedTeam.push_back(CreateActor<Swordman>()->GetPointer());
+
 
 
 	// ºí·çÆÀ À¯´Ö (¿ÞÂÊ)
 	BlueTeam.push_back(CreateActor<Swordman>()->GetPointer());
 	BlueTeam.push_back(CreateActor<Swordman>()->GetPointer());
-	BlueTeam.push_back(CreateActor<Knight>()->GetPointer());
 	BlueTeam.push_back(CreateActor<Swordman>()->GetPointer());
+
 
 
 	
@@ -107,7 +108,6 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	}
 
 	CreateActor<Bird>();
-
 }
 
 void BattleLevel::LevelEnd(GameEngineLevel* _NextLevel)

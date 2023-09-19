@@ -14,12 +14,14 @@ public:
 
     void SetUnitStatus()
     {
+        UnitName = "Swordman";
         AttackRange = SwordmanAttackRange;
         SkillRange = SwordmanSkillRange;
         UltRange = SwordmanUltRange;
 
         UnitSpeed = SwordmanSpeed;
         UnitHP = SwordmanHp;
+        UnitMaxHP = SwordmanHp;
         UnitDef = SwordmanDef;
 
         AttackDelay = SwordmanAttackDeley;
@@ -49,6 +51,9 @@ protected:
     void AttackStart() override;
     void AttackUpdate(float _Delta) override;
 
+    void Attack2Start() override;
+    void Attack2Update(float _Delta) override;
+
     void SkillStart() override;
     void SkillUpdate(float _Delta) override;
 
@@ -66,7 +71,7 @@ private:
     float SwordmanHp = 500.0f;
     float SwordmanDef = 10.0f;
     float SwordmanAttackDeley = 2.5f;
-    float SwordmanSkillCooltime = 11.0f;
+    float SwordmanSkillCooltime = 8.0f;
     float SwordmanUltCooltime = 35.0f;
 };
 

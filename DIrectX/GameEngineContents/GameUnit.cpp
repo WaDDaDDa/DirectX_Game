@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "GameUnit.h"
 
-
+#include "GameUnitUI.h"
 
 GameUnit::GameUnit()
 {
@@ -19,6 +19,7 @@ void GameUnit::Start()
 	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 
 	{
+
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExistsChild("GameEngineResources");
 		Dir.MoveChild("ContentsResources\\GameUnit\\Unit_Effect\\");
@@ -65,6 +66,8 @@ void GameUnit::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	AggroUnit = EnemyGroup[0];
 	ChangeState(GameUnitState::Spwan);
+	// HPUI 생성
+	GetLevel()->CreateActor<GameUnitUI>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
 }
 
 void GameUnit::LevelEnd(GameEngineLevel* _NextLevel)
@@ -168,6 +171,8 @@ void GameUnit::StateUpdate(float _Delta)
 		return CollMoveUpdate(_Delta);
 	case GameUnitState::Attack:
 		return AttackUpdate(_Delta);
+	case GameUnitState::Attack2:
+		return Attack2Update(_Delta);
 	case GameUnitState::Skill:
 		return SkillUpdate(_Delta);
 	case GameUnitState::Skill2:
@@ -209,6 +214,9 @@ void GameUnit::ChangeState(GameUnitState _State)
 			break;
 		case GameUnitState::Attack:
 			AttackStart();
+			break;
+		case GameUnitState::Attack2:
+			Attack2Start();
 			break;
 		case GameUnitState::Skill:
 			SkillStart();
@@ -490,7 +498,19 @@ void GameUnit::CollMoveUpdate(float _Delta)
 	Transform.AddLocalPosition((MoveDir * UnitSpeed * _Delta));
 }
 
+// 공격시전
 void GameUnit::AttackStart()
+{
+
+}
+
+void GameUnit::AttackUpdate(float _Delta)
+{
+
+}
+
+// 공격 대미지
+void GameUnit::Attack2Start()
 {
 	AttackValue = 0.0f;
 
@@ -520,7 +540,7 @@ void GameUnit::AttackStart()
 
 }
 
-void GameUnit::AttackUpdate(float _Delta)
+void GameUnit::Attack2Update(float _Delta)
 {
 
 }

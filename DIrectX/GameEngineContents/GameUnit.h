@@ -11,6 +11,7 @@ enum class GameUnitState
     SearchMove,
     CollMove,
     Attack,
+    Attack2,
     Skill,
     Skill2,
     Ult,
@@ -131,9 +132,34 @@ public:
     // 충돌이벤트
     EventParameter Event;
 
+    float GetHP()
+    {
+        return UnitHP;
+    }
+
+    float GetHPRate()
+    {
+        return UnitHP / UnitMaxHP;
+    }
+
     void DamageHP()
     {
         UnitHP -= 200.0f;
+    }
+
+    float GetSkillCooltime()
+    {
+        return SkillCooltime;
+    }
+
+    GameUnitState GetState()
+    {
+        return State;
+    }
+
+    std::string GetUnitName()
+    {
+        return UnitName.data();
     }
 
 protected:
@@ -142,11 +168,6 @@ protected:
 
     void LevelStart(GameEngineLevel* _PrevLevel) override;
     void LevelEnd(GameEngineLevel* _NextLevel) override;
-
-    GameUnitState GetState()
-    {
-        return State;
-    }
 
     void ChangeState(GameUnitState _State);
     void StateUpdate(float _Delta);
@@ -176,6 +197,9 @@ protected:
     virtual void AttackStart();
     virtual void AttackUpdate(float _Delta);
 
+    virtual void Attack2Start();
+    virtual void Attack2Update(float _Delta);
+
     virtual void SkillStart();
     virtual void SkillUpdate(float _Delta);
 
@@ -198,11 +222,13 @@ protected:
     float4 TargetPos = float4::ZERO;
 
     // Status
+    std::string_view UnitName = "";
     float4 AttackRange = { 55.0f, 0.0f };
     float4 SkillRange = { 55.0f, 0.0f };
     float4 UltRange = { 55.0f, 0.0f };
     float UnitSpeed = 100.0f;
     float UnitHP = 100.0f;
+    float UnitMaxHP = 100.0f;
     float UnitDef = 5.0f;
 
     float PushDelay = 0.3f;

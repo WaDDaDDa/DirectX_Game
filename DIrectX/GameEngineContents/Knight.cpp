@@ -27,7 +27,24 @@ void Knight::Start()
 			GameEngineDirectory& Dir = Directorys[i];
 
 			GameEngineSprite::CreateFolder(Dir.GetStringPath());
+
 		}
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("GameEngineResources");
+		Dir.MoveChild("ContentsResources\\GameUnit\\Knight\\");
+
+		std::vector<GameEngineFile> Files = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Files.size(); i++)
+		{
+			GameEngineFile& File = Files[i];
+			GameEngineTexture::Load(File.GetStringPath());
+		}
+
+		GameEngineSprite::CreateSingle("knight_ult.png");
 	}
 
 	SetUnitStatus();
@@ -39,7 +56,8 @@ void Knight::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
 		MainSpriteRenderer->CreateAnimation("Knight_Idle", "KnightAni", 0.2f, 0, 4);
 		MainSpriteRenderer->CreateAnimation("Knight_Move", "KnightAni", 0.2f, 5, 13);
-		MainSpriteRenderer->CreateAnimation("Knight_Attack", "KnightAni", 0.2f, 14, 19, false);
+		MainSpriteRenderer->CreateAnimation("Knight_Attack", "KnightAni", 0.2f, 14, 15, false);
+		MainSpriteRenderer->CreateAnimation("Knight_Attack2", "KnightAni", 0.2f, 16, 19, false);
 		MainSpriteRenderer->CreateAnimation("Knight_Skill", "KnightAni", 0.1f, 30, 36, false);
 		MainSpriteRenderer->CreateAnimation("Knight_Die", "KnightAni", 0.1f, 22, 29, false);
 
@@ -101,6 +119,21 @@ void Knight::AttackStart()
 }
 
 void Knight::AttackUpdate(float _Delta)
+{
+	if (MainSpriteRenderer->IsCurAnimationEnd())
+	{
+		ChangeState(GameUnitState::Attack2);
+		return;
+	}
+}
+
+void Knight::Attack2Start()
+{
+	GameUnit::Attack2Start();
+	MainSpriteRenderer->ChangeAnimation("Knight_Attack2");
+}
+
+void Knight::Attack2Update(float _Delta)
 {
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{

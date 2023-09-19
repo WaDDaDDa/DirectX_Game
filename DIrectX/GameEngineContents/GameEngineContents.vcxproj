@@ -177,6 +177,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GameUnitUI.cpp" />
     <ClCompile Include="IntroCut.cpp">
       <SubType>
       </SubType>
@@ -220,6 +221,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GameUnitUI.h" />
     <ClInclude Include="IntroCut.h">
       <SubType>
       </SubType>

@@ -7,6 +7,7 @@ enum class ContentsOrder
 	Water,
 	Map,
 	BackEffect,
+	HPLayer1,
 	Unit,
 	FrontEffect,
 	UI,

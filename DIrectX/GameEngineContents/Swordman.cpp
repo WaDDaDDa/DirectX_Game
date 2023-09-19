@@ -30,6 +30,22 @@ void Swordman::Start()
 		}
 	}
 
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("GameEngineResources");
+		Dir.MoveChild("ContentsResources\\GameUnit\\Swordman\\");
+
+		std::vector<GameEngineFile> Files = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Files.size(); i++)
+		{
+			GameEngineFile& File = Files[i];
+			GameEngineTexture::Load(File.GetStringPath());
+		}
+
+		GameEngineSprite::CreateSingle("swordman_ult.png");
+	}
+
 	SetUnitStatus();
 
 }
@@ -40,7 +56,8 @@ void Swordman::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
 		MainSpriteRenderer->CreateAnimation("Swordman_Idle", "SwordmanAni", 0.2f, 0, 4);
 		MainSpriteRenderer->CreateAnimation("Swordman_Move", "SwordmanAni", 0.2f, 5, 13);
-		MainSpriteRenderer->CreateAnimation("Swordman_Attack", "SwordmanAni", 0.2f, 14, 17, false);
+		MainSpriteRenderer->CreateAnimation("Swordman_Attack", "SwordmanAni", 0.2f, 14, 15, false);
+		MainSpriteRenderer->CreateAnimation("Swordman_Attack2", "SwordmanAni", 0.2f, 16, 17, false);
 		MainSpriteRenderer->CreateAnimation("Swordman_Skill", "SwordmanAni", 0.2f, 18, 20, false);
 		MainSpriteRenderer->CreateAnimation("Swordman_Skill2", "SwordmanAni", 0.1f, 21, 26, false);
 		MainSpriteRenderer->CreateAnimation("Swordman_Die", "SwordmanAni", 0.1f, 27, 34, false);
@@ -101,6 +118,22 @@ void Swordman::AttackStart()
 }
 
 void Swordman::AttackUpdate(float _Delta)
+{
+	if (MainSpriteRenderer->IsCurAnimationEnd())
+	{
+		ChangeState(GameUnitState::Attack2);
+		return;
+	}
+}
+
+
+void Swordman::Attack2Start()
+{
+	GameUnit::Attack2Start();
+	MainSpriteRenderer->ChangeAnimation("Swordman_Attack2");
+}
+
+void Swordman::Attack2Update(float _Delta)
 {
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{

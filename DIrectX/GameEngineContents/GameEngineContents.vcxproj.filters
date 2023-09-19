@@ -41,6 +41,9 @@
     <ClCompile Include="Swordman.cpp">
       <Filter>GameUnit</Filter>
     </ClCompile>
+    <ClCompile Include="GameUnitUI.cpp">
+      <Filter>GameUnit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -84,6 +87,9 @@
       <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="Swordman.h">
+      <Filter>GameUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="GameUnitUI.h">
       <Filter>GameUnit</Filter>
     </ClInclude>
   </ItemGroup>

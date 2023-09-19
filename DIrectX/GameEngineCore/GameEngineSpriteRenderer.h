@@ -167,6 +167,11 @@ public:
 	void SetImageScale(const float4& _Scale);
 	void AddImageScale(const float4& _Scale);
 
+	float4 GetImageScale()
+	{
+		return ImageTransform.GetLocalScale();
+	}
+
 	std::shared_ptr<GameEngineSprite> GetSprite()
 	{
 		return Sprite;
