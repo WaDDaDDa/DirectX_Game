@@ -122,6 +122,17 @@ void GameUnit::Update(float _Delta)
 	SkillValue += _Delta;
 	UltValue += _Delta;
 
+	if (true == AllEnemyDieCheck() && ImDie == false)
+	{
+		ChangeState(GameUnitState::Idle);
+		return;
+	}
+
+	if (AggroUnit->GetState() == GameUnitState::Die)
+	{
+		NextAggro();
+	}
+
 	if (TeamType::Blue == MyTeam)
 	{
 		BodyCol->CollisionEvent(CollisionOrder::RedTeamAttack, Event);
@@ -527,13 +538,18 @@ void GameUnit::SkillUpdate(float _Delta)
 
 void GameUnit::DieStart()
 {
+	BodyCol->Off();
+	AttackRangeCol->Off();
+	SkillEffectRenderer->Off();
+	PushCol->Off();
+	ImDie = true;
 }
 
 void GameUnit::DieUpdate(float _Delta)
 {
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
-		Death();
+		
 	}
 }
 

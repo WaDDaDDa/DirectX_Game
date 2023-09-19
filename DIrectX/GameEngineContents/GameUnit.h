@@ -85,6 +85,19 @@ public:
         }
     }
 
+    bool AllEnemyDieCheck()
+    {
+        for (size_t i = 0; i < EnemyGroup.size(); i++)
+        {
+            if (EnemyGroup[i]->GetState() != GameUnitState::Die)
+            {
+                
+                return false;
+            }
+        }
+        return true;
+    }
+
     GameUnitDir GetDir()
     {
         return Dir;
@@ -120,7 +133,7 @@ public:
 
     void DamageHP()
     {
-        UnitHP -= 500.0f;
+        UnitHP -= 200.0f;
     }
 
 protected:
@@ -176,6 +189,7 @@ protected:
     GameUnitDir Dir = GameUnitDir::Right;
 
     std::shared_ptr<class GameEngineSpriteRenderer> MainSpriteRenderer;
+    std::shared_ptr<class GameEngineSpriteRenderer> SkillEffectRenderer;
 
     std::vector<GameUnit*> EnemyGroup;
 
@@ -200,6 +214,8 @@ protected:
     float SkillValue = 0.0f;
     float UltCooltime = 30.0f;
     float UltValue = 0.0f;
+
+    bool ImDie = false;
 
 private:
     std::shared_ptr<GameEngineSpriteRenderer> SpwanRenderer;

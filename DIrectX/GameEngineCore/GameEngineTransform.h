@@ -208,7 +208,8 @@ public:
 		TransformUpdate();
 	}
 
-	// Get´Ü¤·
+	// Get
+	float4 GetWorldPosition()
 	{
 		return TransData.WorldMatrix.ArrVector[3];
 	}

@@ -29,7 +29,6 @@ public:
         UltCooltime = KnightUltCooltime;
     }
 
-    std::shared_ptr<class GameEngineSpriteRenderer> SkillEffectRenderer;
 
 protected:
     void Start() override;
