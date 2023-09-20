@@ -162,6 +162,8 @@ public:
         return UnitName.data();
     }
 
+    TeamType MyTeam = TeamType::Blue;
+
 protected:
     void Start() override;
     void Update(float _Delta) override;
@@ -261,7 +263,6 @@ private:
     float4 MoveDir;
     // 궁극기 사용 스킬사용 조건이 다 다르다면 Idle상태에서만 스킬을 사용하게 하고
     // Idle을 오버라이드 하는 방법을 시도해보자.
-    TeamType MyTeam = TeamType::Blue;
 
 
 

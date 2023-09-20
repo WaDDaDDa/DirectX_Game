@@ -85,6 +85,7 @@ void Swordman::LevelEnd(GameEngineLevel* _NextLevel)
 void Swordman::SpwanStart()
 {
 	GameUnit::SpwanStart();
+	MainSpriteRenderer->ChangeAnimation("Swordman_Idle");
 }
 
 void Swordman::IdleStart()
@@ -219,5 +220,6 @@ void Swordman::Skill2Update(float _Delta)
 void Swordman::DieStart()
 {
 	GameUnit::DieStart();
+	SkillEffectRenderer->ChangeAnimation("SwordmanSkillBlack");
 	MainSpriteRenderer->ChangeAnimation("Swordman_Die");
 }

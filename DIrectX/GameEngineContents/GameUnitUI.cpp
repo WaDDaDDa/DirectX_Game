@@ -46,8 +46,16 @@ void GameUnitUI::LevelStart(GameEngineLevel* _PrevLevel)
 
 	// hp
 	Renderer3 = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::HPLayer1);
-	Renderer3->CreateAnimation("GameUnitHPLayer2", "UnitHPBar", 0.1f, 3, 3, false);
-	Renderer3->ChangeAnimation("GameUnitHPLayer2");
+	Renderer3->CreateAnimation("GameUnitHPLayer2Red", "UnitHPBar", 0.1f, 3, 3, false);
+	Renderer3->CreateAnimation("GameUnitHPLayer2Blue", "UnitHPBar", 0.1f, 4, 4, false);
+	if (Unit->MyTeam == TeamType::Red)
+	{
+		Renderer3->ChangeAnimation("GameUnitHPLayer2Red");
+	}
+	else if (Unit->MyTeam == TeamType::Blue)
+	{
+		Renderer3->ChangeAnimation("GameUnitHPLayer2Blue");
+	}
 	Renderer3->SetImageScale({ 48.5f,3.0f });
 	Renderer3->SetPivotType(PivotType::Left);
 	Renderer3->Transform.AddLocalPosition({ -24.0f, -25.0f });
@@ -77,8 +85,6 @@ void GameUnitUI::LevelStart(GameEngineLevel* _PrevLevel)
 
 void GameUnitUI::Update(float _Delta)
 {
-	float Speed = 100.0f;
-
 	Transform.SetWorldPosition(Unit->Transform.GetWorldPosition());
 
 	{// mp 회복 부분
@@ -113,5 +119,10 @@ void GameUnitUI::Update(float _Delta)
 	if (Unit->GetState() == GameUnitState::Die)
 	{
 		AllRendererOff();
+	}
+
+	if (Unit->GetState() == GameUnitState::Spwan)
+	{
+		AllRendererOn();
 	}
 }

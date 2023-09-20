@@ -15,9 +15,6 @@ GameUnit::~GameUnit()
 
 void GameUnit::Start()
 {
-	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
-	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
-
 	{
 
 		GameEngineDirectory Dir;
@@ -92,9 +89,6 @@ void GameUnit::TeamSet(TeamType _Team)
 		AttackRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::BlueTeamAttackRange);
 		AttackRangeCol->Transform.SetLocalScale(AttackRange);
 
-		float4 StartPos = NewRandom.RandomVectorBox2D(-220.0f, -280.0f, 80.0f, -150.0f);
-		Transform.AddLocalPosition(StartPos);
-		
 		MyTeam = TeamType::Blue;
 	}
 	else if (TeamType::Red == _Team)
@@ -106,10 +100,6 @@ void GameUnit::TeamSet(TeamType _Team)
 		// 공격 범위 충돌체
 		AttackRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamAttackRange);
 		AttackRangeCol->Transform.SetLocalScale(AttackRange);
-
-		//ChangeDir(GameUnitDir::Left);
-		float4 StartPos = NewRandom.RandomVectorBox2D(220.0f, 280.0f, 80.0f, -150.0f);
-		Transform.AddLocalPosition(StartPos);
 
 		MyTeam = TeamType::Red;
 	}
@@ -246,6 +236,26 @@ void GameUnit::ChangeState(GameUnitState _State)
 
 void GameUnit::SpwanStart()
 {
+	GameEngineRandom NewRandom;
+	static long long RandSeed = reinterpret_cast<long long>(this);
+	RandSeed++;
+	NewRandom.SetSeed(RandSeed);
+
+	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
+	HalfWindowScale.Y = -HalfWindowScale.Y;
+	//Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
+
+	if (TeamType::Blue == MyTeam)
+	{
+		float4 StartPos = NewRandom.RandomVectorBox2D(-220.0f, -280.0f, 80.0f, -150.0f);
+		Transform.SetWorldPosition(StartPos + HalfWindowScale);
+	}
+	else if (TeamType::Red == MyTeam)
+	{
+		float4 StartPos = NewRandom.RandomVectorBox2D(220.0f, 280.0f, 80.0f, -150.0f);
+		Transform.SetWorldPosition(StartPos + HalfWindowScale);
+	}
+	UnitHP = UnitMaxHP;
 	SpwanRenderer->On();
 	SpwanRenderer->ChangeAnimation("SpwanEffect");
 }
@@ -558,10 +568,10 @@ void GameUnit::SkillUpdate(float _Delta)
 
 void GameUnit::DieStart()
 {
-	BodyCol->Off();
-	AttackRangeCol->Off();
-	SkillEffectRenderer->Off();
-	PushCol->Off();
+	//BodyCol->Off();
+	//AttackRangeCol->Off();
+	//SkillEffectRenderer->Off();
+	//PushCol->Off();
 	ImDie = true;
 }
 
@@ -569,7 +579,8 @@ void GameUnit::DieUpdate(float _Delta)
 {
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
-		
+		ChangeState(GameUnitState::Spwan);
+		return;
 	}
 }
 
