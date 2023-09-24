@@ -318,7 +318,7 @@ public:
 		DirectXVector = DirectX::XMVector3Normalize(DirectXVector);
 	}
 
-	inline float4 NormalizeReturn()
+	inline float4 NormalizeReturn() const
 	{
 		float4 Result = *this;
 		Result.Normalize();

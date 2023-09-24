@@ -184,6 +184,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="GameEngineCoreObject.h" />
+    <ClInclude Include="GameEngineDebugCore.h" />
     <ClInclude Include="GameEngineDevice.h" />
     <ClInclude Include="GameEngineDirectBuffer.h" />
     <ClInclude Include="GameEngineIndexBuffer.h" />
@@ -192,6 +193,8 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GameEngineMaterial.h" />
+    <ClInclude Include="GameEngineMesh.h" />
     <ClInclude Include="GameEngineObject.h" />
     <ClInclude Include="GameEnginePixelShader.h" />
     <ClInclude Include="GameEngineRasterizer.h" />
@@ -240,6 +243,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEngineCoreObject.cpp" />
+    <ClCompile Include="GameEngineDebugCore.cpp" />
     <ClCompile Include="GameEngineDevice.cpp" />
     <ClCompile Include="GameEngineDevice_Resources.cpp" />
     <ClCompile Include="GameEngineDirectBuffer.cpp" />
@@ -249,6 +253,8 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GameEngineMaterial.cpp" />
+    <ClCompile Include="GameEngineMesh.cpp" />
     <ClCompile Include="GameEngineObject.cpp" />
     <ClCompile Include="GameEnginePixelShader.cpp" />
     <ClCompile Include="GameEngineRasterizer.cpp" />

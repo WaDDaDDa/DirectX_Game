@@ -82,11 +82,26 @@ void GameEngineSpriteRenderer::Start()
 {
 	GameEngineRenderer::Start();
 
-	DataTransform = &ImageTransform;
+	// DataTransform = &ImageTransform;
 
 	ImageTransform.SetParent(Transform);
 
-	Sampler = GameEngineSampler::Find("LINEAR");
+	SetMesh("Rect");
+	SetMaterial("2DTexture");
+
+	const TransformData& Data = ImageTransform.GetConstTransformDataRef();
+	ShaderResHelper.ConstantBufferLink("TransformData", Data);
+
+	ShaderResHelper.ConstantBufferLink("SpriteData", CurSprite.SpritePivot);
+	ShaderResHelper.SetTexture("DiffuseTex", "NSet.Png");
+
+	//std::shared_ptr<GameEngineConstantBuffer> Buffer = GameEngineConstantBuffer::CreateAndFind(sizeof(float4), "SpriteData");
+	//if (nullptr != Buffer)
+	//{
+	//	Buffer->ChangeData(CurSprite.SpritePivot);
+	//	Buffer->Setting(1);
+	//}
+	// CurSprite.Texture->PSSetting(0);
 }
 
 void GameEngineSpriteRenderer::Update(float _Delta)
@@ -129,30 +144,10 @@ void GameEngineSpriteRenderer::Render(GameEngineCamera* _Camera, float _Delta)
 	ImageTransform.TransformUpdate();
 	ImageTransform.CalculationViewAndProjection(Transform.GetConstTransformDataRef());
 
-	GameEngineRenderer::ResSetting();
+	ShaderResHelper.SetTexture("DiffuseTex", CurSprite.Texture);
 
-	std::shared_ptr<GameEngineConstantBuffer> Buffer = GameEngineConstantBuffer::CreateAndFind(sizeof(float4), "SpriteData");
+	GameEngineRenderer::Render(_Camera, _Delta);
 
-	if (nullptr != Buffer)
-	{
-		Buffer->ChangeData(CurSprite.SpritePivot);
-		Buffer->Setting(1);
-	}
-
-
-	CurSprite.Texture->PSSetting(0);
-
-	// std::shared_ptr<GameEngineSampler> Sampler = GameEngineSampler::Find("EngineBaseSampler");
-	if (nullptr == Sampler)
-	{
-		MsgBoxAssert("존재하지 않는 텍스처를 사용하려고 했습니다.");
-	}
-	Sampler->PSSetting(0);
-
-
-	// 내꺼 쪼금더 넣고 
-
-	GameEngineRenderer::Draw();
 }
 
 void GameEngineSpriteRenderer::SetSprite(std::string_view _Name, unsigned int index /*= 0*/)
@@ -266,21 +261,6 @@ void GameEngineSpriteRenderer::AutoSpriteSizeOn()
 void GameEngineSpriteRenderer::AutoSpriteSizeOff()
 {
 	IsImageSize = false;
-}
-
-void GameEngineSpriteRenderer::SetSamplerState(SamplerOption _Option)
-{
-	switch (_Option)
-	{
-	case SamplerOption::LINEAR:
-		Sampler = GameEngineSampler::Find("LINEAR");
-		break;
-	case SamplerOption::POINT:
-		Sampler = GameEngineSampler::Find("POINT");
-		break;
-	default:
-		break;
-	}
 }
 
 void GameEngineSpriteRenderer::SetFrameEvent(std::string_view _AnimationName, int _Frame, std::function<void(GameEngineSpriteRenderer*)> _Function)

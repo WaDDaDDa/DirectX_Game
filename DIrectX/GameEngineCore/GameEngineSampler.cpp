@@ -1,11 +1,13 @@
 #include "PreCompile.h"
 #include "GameEngineSampler.h"
 
-GameEngineSampler::GameEngineSampler() 
+std::map<D3D11_FILTER, std::map<D3D11_TEXTURE_ADDRESS_MODE, std::shared_ptr<GameEngineSampler>>> GameEngineSampler::OptionSamplers;
+
+GameEngineSampler::GameEngineSampler()
 {
 }
 
-GameEngineSampler::~GameEngineSampler() 
+GameEngineSampler::~GameEngineSampler()
 {
 	if (nullptr != State)
 	{
