@@ -217,9 +217,9 @@ void Swordman::Skill2Update(float _Delta)
 	}
 }
 
-void Swordman::DieStart()
+void Swordman::DiePrevStart()
 {
-	GameUnit::DieStart();
+	GameUnit::DiePrevStart();
 	SkillEffectRenderer->ChangeAnimation("SwordmanSkillBlack");
 	MainSpriteRenderer->ChangeAnimation("Swordman_Die");
 }

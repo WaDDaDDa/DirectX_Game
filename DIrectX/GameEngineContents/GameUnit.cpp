@@ -32,6 +32,7 @@ void GameUnit::Start()
 		{
 			SpwanRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
 			SpwanRenderer->CreateAnimation("SpwanEffect", "SpwanEffect", 0.1f, 0, 10, false);
+			SpwanRenderer->CreateAnimation("SpwanEffectBlack", "SpwanEffect", 0.1f, 22, 22, false);
 			// SpwanRenderer->ChangeAnimation("SpwanEffect");
 			SpwanRenderer->AutoSpriteSizeOn();
 		}
@@ -121,7 +122,7 @@ void GameUnit::Update(float _Delta)
 		return;
 	}
 
-	if (AggroUnit->GetState() == GameUnitState::Die)
+	if (AggroUnit->GetState() == GameUnitState::Die || AggroUnit->GetState() == GameUnitState::DiePrev)
 	{
 		NextAggro();
 	}
@@ -135,9 +136,9 @@ void GameUnit::Update(float _Delta)
 		BodyCol->CollisionEvent(CollisionOrder::BlueTeamAttack, Event);
 	}
 
-	if (UnitHP <= 0.0f)
+	if (UnitHP <= 0.0f && ImDie == false)
 	{
-		ChangeState(GameUnitState::Die);
+		ChangeState(GameUnitState::DiePrev);
 		return;
 	}
 }
@@ -169,6 +170,8 @@ void GameUnit::StateUpdate(float _Delta)
 		return Skill2Update(_Delta);
 	case GameUnitState::Ult:
 	case GameUnitState::Damage:
+	case GameUnitState::DiePrev:
+		return DiePrevUpdate(_Delta);
 	case GameUnitState::Die:
 		return DieUpdate(_Delta);
 	case GameUnitState::Max:
@@ -218,6 +221,9 @@ void GameUnit::ChangeState(GameUnitState _State)
 			break;
 		case GameUnitState::Damage:
 			break;
+		case GameUnitState::DiePrev:
+			DiePrevStart();
+			break;
 		case GameUnitState::Die:
 			DieStart();
 			break;
@@ -256,6 +262,7 @@ void GameUnit::SpwanStart()
 		Transform.SetWorldPosition(StartPos + HalfWindowScale);
 	}
 	UnitHP = UnitMaxHP;
+	AllCollisionOn();
 	SpwanRenderer->On();
 	SpwanRenderer->ChangeAnimation("SpwanEffect");
 }
@@ -265,6 +272,7 @@ void GameUnit::SpwanUpdate(float _Delta)
 	if (true == SpwanRenderer->IsCurAnimationEnd())
 	{
 		SpwanRenderer->Off();
+		SpwanRenderer->ChangeAnimation("SpwanEffectBlack");
 		ChangeState(GameUnitState::Idle);
 		return;
 	}
@@ -530,7 +538,8 @@ void GameUnit::Attack2Start()
 			{
 				for (size_t i = 0; i < _Collision.size(); i++)
 				{
-					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP();
+					// 공격대미지 공식
+					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt);
 					return;
 				}
 			});
@@ -542,7 +551,8 @@ void GameUnit::Attack2Start()
 			{
 				for (size_t i = 0; i < _Collision.size(); i++)
 				{
-					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP();
+					// 공격대미지 공식
+					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt);
 					return;
 				}
 			});
@@ -566,19 +576,34 @@ void GameUnit::SkillUpdate(float _Delta)
 
 }
 
+void GameUnit::DiePrevStart()
+{
+	ImDie = true;
+	AllCollisionOff();
+}
+
+void GameUnit::DiePrevUpdate(float _Delta)
+{
+	if (MainSpriteRenderer->IsCurAnimationEnd())
+	{
+		ChangeState(GameUnitState::Die);
+		return;
+	}
+}
+
 void GameUnit::DieStart()
 {
-	//BodyCol->Off();
-	//AttackRangeCol->Off();
-	//SkillEffectRenderer->Off();
-	//PushCol->Off();
-	ImDie = true;
+
 }
 
 void GameUnit::DieUpdate(float _Delta)
 {
-	if (MainSpriteRenderer->IsCurAnimationEnd())
+	RespawnTime += _Delta;
+
+	if (RespawnTime >= 5.0f)
 	{
+		RespawnTime = 0.0f;
+		ImDie = false;
 		ChangeState(GameUnitState::Spwan);
 		return;
 	}

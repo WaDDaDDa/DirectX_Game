@@ -22,6 +22,7 @@ public:
         UnitSpeed = SwordmanSpeed;
         UnitHP = SwordmanHp;
         UnitMaxHP = SwordmanHp;
+        UnitAtt = SwordmanAtt;
         UnitDef = SwordmanDef;
 
         AttackDelay = SwordmanAttackDeley;
@@ -60,7 +61,7 @@ protected:
     void Skill2Start() override;
     void Skill2Update(float _Delta) override;
 
-    void DieStart() override;
+    void DiePrevStart() override;
 
 private:
     float4 SwordmanAttackRange = { 55.0f, 55.0f };
@@ -69,6 +70,7 @@ private:
 
     float SwordmanSpeed = 100.0f;
     float SwordmanHp = 500.0f;
+    float SwordmanAtt = 200.0f;
     float SwordmanDef = 10.0f;
     float SwordmanAttackDeley = 2.5f;
     float SwordmanSkillCooltime = 8.0f;

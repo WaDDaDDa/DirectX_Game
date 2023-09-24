@@ -22,6 +22,7 @@ public:
         UnitSpeed = KnightSpeed;
         UnitHP = KnightHp;
         UnitMaxHP = KnightHp;
+        UnitAtt = KnightAtt;
         UnitDef = KnightDef;
 
         AttackDelay = KnightAttackDeley;
@@ -57,7 +58,7 @@ protected:
     void SkillStart() override;
     void SkillUpdate(float _Delta) override;
 
-    void DieStart() override;
+    void DiePrevStart() override;
 
 private:
     float4 KnightAttackRange = { 55.0f, 55.0f };
@@ -66,6 +67,7 @@ private:
 
     float KnightSpeed = 80.0f;
     float KnightHp = 1000.0f;
+    float KnightAtt = 150.0f;
     float KnightDef = 20.0f;
     float KnightAttackDeley = 3.0f;
     float KnightSkillCooltime = 6.0f;

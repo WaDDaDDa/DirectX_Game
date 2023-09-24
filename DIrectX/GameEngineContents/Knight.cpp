@@ -205,9 +205,9 @@ void Knight::SkillUpdate(float _Delta)
 	}
 }
 
-void Knight::DieStart()
+void Knight::DiePrevStart()
 {
-	GameUnit::DieStart();
+	GameUnit::DiePrevStart();
 	SkillEffectRenderer->ChangeAnimation("KnightSkillBlack");
 	MainSpriteRenderer->ChangeAnimation("Knight_Die");
 }

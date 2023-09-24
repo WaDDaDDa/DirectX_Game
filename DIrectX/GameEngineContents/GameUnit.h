@@ -16,6 +16,7 @@ enum class GameUnitState
     Skill2,
     Ult,
     Damage,
+    DiePrev,
     Die,
     Max,
 };
@@ -142,9 +143,15 @@ public:
         return UnitHP / UnitMaxHP;
     }
 
-    void DamageHP()
+    void DamageHP(float _Value)
     {
-        UnitHP -= 200.0f;
+        // 들어온 공격력에 유닛의 방어력을 반영해서 계산시킨다.
+        float Result = _Value - UnitDef;
+        if (Result <= 0.0f)
+        {
+            return;
+        }
+        UnitHP -= _Value - UnitDef;
     }
 
     float GetSkillCooltime()
@@ -160,6 +167,20 @@ public:
     std::string GetUnitName()
     {
         return UnitName.data();
+    }
+
+    void AllCollisionOff()
+    {
+        BodyCol->Off();
+        AttackRangeCol->Off();
+        PushCol->Off();
+    }
+
+    void AllCollisionOn()
+    {
+        BodyCol->On();
+        AttackRangeCol->On();
+        PushCol->On();
     }
 
     TeamType MyTeam = TeamType::Blue;
@@ -208,6 +229,9 @@ protected:
     virtual void Skill2Start() {}
     virtual void Skill2Update(float _Delta) {}
 
+    virtual void DiePrevStart();
+    void DiePrevUpdate(float _Delta);
+
     virtual void DieStart();
     void DieUpdate(float _Delta);
 
@@ -232,6 +256,7 @@ protected:
     float UnitHP = 100.0f;
     float UnitMaxHP = 100.0f;
     float UnitDef = 5.0f;
+    float UnitAtt = 10.0f;
 
     float PushDelay = 0.3f;
     float PushValue = 0.0f;
@@ -247,6 +272,7 @@ protected:
 
 private:
     std::shared_ptr<GameEngineSpriteRenderer> SpwanRenderer;
+    float RespawnTime = 0.0f;
     std::shared_ptr<GameEngineCollision> BodyCol;
     std::shared_ptr<GameEngineCollision> AttackRangeCol;
     // 공격할때 플레이어 유닛 하나만을 단일 타겟팅 하고싶은데..
