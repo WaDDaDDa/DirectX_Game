@@ -92,7 +92,7 @@ void GameUnit::TeamSet(TeamType _Team)
 		// 스킬 범위 충돌체
 		SkillRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::BlueTeamSkillRange);
 		SkillRangeCol->Transform.SetLocalScale(SkillRange);
-		// 스킬 범위 충돌체
+		// 궁극기 범위 충돌체
 		UltRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::BlueTeamUltRange);
 		UltRangeCol->Transform.SetLocalScale(UltRange);
 
@@ -110,7 +110,7 @@ void GameUnit::TeamSet(TeamType _Team)
 		// 스킬 범위 충돌체
 		SkillRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamSkillRange);
 		SkillRangeCol->Transform.SetLocalScale(SkillRange);
-		// 스킬 범위 충돌체
+		// 궁극기 범위 충돌체
 		UltRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamUltRange);
 		UltRangeCol->Transform.SetLocalScale(UltRange);
 
@@ -330,7 +330,7 @@ void GameUnit::MoveStart()
 // 넘어갈 수 있는 State 종류 ( Idle, Attack, BackMove,  )
 void GameUnit::MoveUpdate(float _Delta)
 {
-	ChangeDir();
+	ChangeMoveDir();
 
 	// 공격 범위에 적군 body가 들어오면. 공격.
 	if (TeamType::Blue == MyTeam)
@@ -411,7 +411,7 @@ void GameUnit::BackMoveStart()
 // 어그로유닛에게서 멀어지는 움직임.
 void GameUnit::BackMoveUpdate(float _Delta)
 {
-	ChangeDir();
+	ChangeMoveDir();
 
 	// 공격 범위에 적군 body가 들어오면. 공격.
 	if (TeamType::Blue == MyTeam)
@@ -491,7 +491,7 @@ void GameUnit::SearchMoveStart()
 // 맵의 랜덤한 위치를 탐색해서 이동하는 움직임. 유닛 방향에따라 다름.
 void GameUnit::SearchMoveUpdate(float _Delta)
 {
-	ChangeDir();
+	ChangeMoveDir();
 
 	// 공격 범위에 적군 body가 들어오면. 공격.
 	if (TeamType::Blue == MyTeam)
@@ -574,6 +574,8 @@ void GameUnit::CollMoveStart()
 // 맵의 랜덤한 위치를 탐색해서 이동하는 움직임. 유닛 방향에따라 다름.
 void GameUnit::CollMoveUpdate(float _Delta)
 {
+	ChangeMoveDir();
+
 	if (GetLiveTime() >= 0.2f)
 	{
 		PushValue = 0.0f;

@@ -62,6 +62,12 @@ protected:
     void Skill2Start() override;
     void Skill2Update(float _Delta) override;
 
+    void UltStart() override;
+    void UltUpdate(float _Delta) override;
+
+    void Ult2Start() override;
+    void Ult2Update(float _Delta) override;
+
     void DiePrevStart() override;
 
 private:
@@ -70,13 +76,13 @@ private:
     float4 SwordmanUltRange = { 55.0f, 0.0f };
 
     float SwordmanSpeed = 100.0f;
-    float SwordmanHp = 500.0f;
-    float SwordmanAtt = 200.0f;
-    float SwordmanDef = 10.0f;
-    float SwordmanAbsoluteDef = 10.0f;
+    float SwordmanHp = 130.0f;
+    float SwordmanAtt = 15.0f;
+    float SwordmanDef = 30.0f;
+    float SwordmanAbsoluteDef = 30.0f;
     float SwordmanAttackSpeed = 1.25f;
     float SwordmanSkillCooltime = 3.8f;
-    float SwordmanUltCooltime = 35.0f;
+    float SwordmanUltCooltime = 30.0f;
 
 
     float SkillTick = 3.0f;

@@ -125,7 +125,18 @@ public:
         {
             ChangeDir(GameUnitDir::Right);
         }
+    }
 
+    void ChangeMoveDir()
+    {
+        if (MoveDir.X < 0.0f)
+        {
+            ChangeDir(GameUnitDir::Left);
+        }
+        else if (MoveDir.X > 0.0f)
+        {
+            ChangeDir(GameUnitDir::Right);
+        }
     }
 
     void ChangeDir(GameUnitDir _Dir)
@@ -156,12 +167,12 @@ public:
     void DamageHP(float _Value)
     {
         // 들어온 공격력에 유닛의 방어력을 반영해서 계산시킨다.
-        float Result = _Value - UnitDef;
+        float Result = _Value - (UnitDef * 0.4f);
         if (Result <= 0.0f)
         {
             return;
         }
-        UnitHP -= _Value - UnitDef;
+        UnitHP -= Result;
     }
 
     void HealHP(float _Value)

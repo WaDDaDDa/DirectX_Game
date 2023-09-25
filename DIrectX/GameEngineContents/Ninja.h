@@ -67,17 +67,17 @@ protected:
     void DiePrevStart() override;
 
 private:
-    float4 NinjaAttackRange = { 37.0f, 0.0f };
-    float4 NinjaSkillRange = { 200.0f, 0.0f };
+    float4 NinjaAttackRange = { 40.0f, 0.0f };
+    float4 NinjaSkillRange = { 600.0f, 0.0f };
     float4 NinjaUltRange = { 200.0f, 0.0f };
 
     float NinjaSpeed = 80.0f;
-    float NinjaHp = 1000.0f;
-    float NinjaAtt = 150.0f;
-    float NinjaDef = 20.0f;
-    float NinjaAbsoluteDef = 20.0f;
-    float NinjaAttackSpeed = 1.7f;
-    float NinjaSkillCooltime = 4.2f;
+    float NinjaHp = 120.0f;
+    float NinjaAtt = 25.0f;
+    float NinjaDef = 10.0f;
+    float NinjaAbsoluteDef = 10.0f;
+    float NinjaAttackSpeed = 1.1f;
+    float NinjaSkillCooltime = 3.0f;
     float NinjaUltCooltime = 5.0f;
 
     float SkillTick = 1.0f;

@@ -22,7 +22,7 @@ void GameUnitUI::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	// ±Ã±Ø±â ¿Â Å×µÎ¸®
 	Renderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::HPLayer1);
-	Renderer->CreateAnimation("GameUnitUltOn", "UnitHPBar", 0.1, 8, 8, false);
+	Renderer->CreateAnimation("GameUnitUltOn", "UnitHPBar", 0.1f, 8, 8, false);
 	Renderer->ChangeAnimation("GameUnitUltOn");
 	Renderer->SetImageScale({ 18.0f,18.0f });
 	Renderer->SetPivotType(PivotType::Left);

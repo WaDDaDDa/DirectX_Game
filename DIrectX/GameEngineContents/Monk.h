@@ -65,17 +65,17 @@ protected:
     void DiePrevStart() override;
 
 private:
-    float4 MonkAttackRange = { 37.0f, 0.0f };
+    float4 MonkAttackRange = { 35.0f, 0.0f };
     float4 MonkSkillRange = { 200.0f, 0.0f };
-    float4 MonkUltRange = { 200.0f, 0.0f };
+    float4 MonkUltRange = { 300.0f, 0.0f };
 
     float MonkSpeed = 80.0f;
-    float MonkHp = 1000.0f;
-    float MonkAtt = 150.0f;
-    float MonkDef = 20.0f;
-    float MonkAbsoluteDef = 20.0f;
-    float MonkAttackSpeed = 1.7f;
-    float MonkSkillCooltime = 4.2f;
+    float MonkHp = 210.0f;
+    float MonkAtt = 20.0f;
+    float MonkDef = 40.0f;
+    float MonkAbsoluteDef = 40.0f;
+    float MonkAttackSpeed = 1.4f;
+    float MonkSkillCooltime = 5.4f;
     float MonkUltCooltime = 5.0f;
 };
 

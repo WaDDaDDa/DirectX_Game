@@ -60,6 +60,8 @@ void Swordman::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer->CreateAnimation("Swordman_Attack2", "SwordmanAni", 0.2f, 16, 17, false);
 		MainSpriteRenderer->CreateAnimation("Swordman_Skill", "SwordmanAni", 0.2f, 18, 20, false);
 		MainSpriteRenderer->CreateAnimation("Swordman_Skill2", "SwordmanAni", 0.1f, 21, 26, false);
+		MainSpriteRenderer->CreateAnimation("Swordman_Ult", "SwordmanAni", 0.1f, 36, 39, false);
+		MainSpriteRenderer->CreateAnimation("Swordman_Ult2", "SwordmanAni", 0.1f, 40, 43, false);
 		MainSpriteRenderer->CreateAnimation("Swordman_Die", "SwordmanAni", 0.1f, 27, 34, false);
 		
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
@@ -257,6 +259,43 @@ void Swordman::Skill2Update(float _Delta)
 				});
 		}
 	}
+
+}
+
+void Swordman::UltStart()
+{
+	MainSpriteRenderer->ChangeAnimation("Swordman_Ult");
+}
+
+void Swordman::UltUpdate(float _Delta)
+{
+	if (MainSpriteRenderer->IsCurAnimationEnd())
+	{
+		ChangeState(GameUnitState::Ult2);
+		return;
+	}
+}
+
+void Swordman::Ult2Start()
+{
+	float4 Target = AggroUnit->Transform.GetWorldPosition().NormalizeReturn();
+	//Transform.SetWorldPosition(AggroUnit->Transform.GetWorldPosition());
+	Transform.SetWorldPosition(Target * 400.0f);
+
+	if (AggroUnit->GetDir() == GameUnitDir::Left)
+	{
+		Transform.AddWorldPosition({ 30.0f,0.0f });
+	}
+	else if (AggroUnit->GetDir() == GameUnitDir::Right)
+	{
+		Transform.AddWorldPosition({ -30.0f,0.0f });
+	}
+
+	MainSpriteRenderer->ChangeAnimation("Swordman_Ult2");
+}
+
+void Swordman::Ult2Update(float _Delta)
+{
 
 }
 

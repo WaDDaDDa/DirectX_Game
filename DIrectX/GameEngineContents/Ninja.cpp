@@ -188,13 +188,14 @@ void Ninja::Skill2Start()
 {
 	GameUnit::SkillStart();
 	Transform.SetWorldPosition(AggroUnit->Transform.GetWorldPosition());
+
 	if (AggroUnit->GetDir() == GameUnitDir::Left)
 	{
-		Transform.AddWorldPosition({40.0f,0.0f});
+		Transform.AddWorldPosition({ 30.0f,0.0f});
 	}
 	else if (AggroUnit->GetDir() == GameUnitDir::Right)
 	{
-		Transform.AddWorldPosition({ -40.0f,0.0f });
+		Transform.AddWorldPosition({ -30.0f,0.0f });
 	}
 	MainSpriteRenderer->ChangeAnimation("Ninja_Skill2");
 	SkillTick = 1.0f;
