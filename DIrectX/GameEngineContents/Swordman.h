@@ -77,5 +77,9 @@ private:
     float SwordmanAttackSpeed = 1.25f;
     float SwordmanSkillCooltime = 3.8f;
     float SwordmanUltCooltime = 35.0f;
+
+
+    float SkillTick = 3.0f;
+    float SkillDamageDeley = 0.1f;
 };
 

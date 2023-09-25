@@ -212,6 +212,18 @@ public:
     std::vector<GameUnit*> TeamGroup;
 
 protected:
+    std::shared_ptr<GameEngineSpriteRenderer> SpwanRenderer;
+    std::shared_ptr<GameEngineCollision> BodyCol;
+    std::shared_ptr<GameEngineCollision> AttackRangeCol;
+    std::shared_ptr<GameEngineCollision> SkillRangeCol;
+    std::shared_ptr<GameEngineCollision> UltRangeCol;
+    // 공격할때 플레이어 유닛 하나만을 단일 타겟팅 하고싶은데..
+    // 그렇다면 공격할때마다 콜리젼 위치를 공격범위에 닿은 유닛의 위치에 Set해서
+    // 그위치에 충돌체를 작게 생성시키면 단일 타겟팅 느낌이 나지 
+    // std::shared_ptr<GameEngineCollision> AttackCol;
+    // 바디보다 작은 유닛겹쳤을때 밀어내기 위한 콜리전
+    std::shared_ptr<GameEngineCollision> PushCol;
+
     void Start() override;
     void Update(float _Delta) override;
 
@@ -305,18 +317,8 @@ protected:
     bool UseUlt = false;
 
 private:
-    std::shared_ptr<GameEngineSpriteRenderer> SpwanRenderer;
     float RespawnTime = 0.0f;
-    std::shared_ptr<GameEngineCollision> BodyCol;
-    std::shared_ptr<GameEngineCollision> AttackRangeCol;
-    std::shared_ptr<GameEngineCollision> SkillRangeCol;
-    std::shared_ptr<GameEngineCollision> UltRangeCol;
-    // 공격할때 플레이어 유닛 하나만을 단일 타겟팅 하고싶은데..
-    // 그렇다면 공격할때마다 콜리젼 위치를 공격범위에 닿은 유닛의 위치에 Set해서
-    // 그위치에 충돌체를 작게 생성시키면 단일 타겟팅 느낌이 나지 
-    // std::shared_ptr<GameEngineCollision> AttackCol;
-    // 바디보다 작은 유닛겹쳤을때 밀어내기 위한 콜리전
-    std::shared_ptr<GameEngineCollision> PushCol;
+
 
 
     float4 BodyColScale = { 50.0f, 0.0f };

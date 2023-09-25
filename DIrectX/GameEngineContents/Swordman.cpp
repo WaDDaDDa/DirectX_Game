@@ -183,6 +183,8 @@ void Swordman::Skill2Start()
 {
 	MainSpriteRenderer->ChangeAnimation("Swordman_Skill2");
 	SkillEffectRenderer->ChangeAnimation("SwordmanSkillEffect");
+	SkillDamageDeley = 0.1f;
+	SkillTick = 3.0f;
 }
 
 void Swordman::Skill2Update(float _Delta)
@@ -215,6 +217,47 @@ void Swordman::Skill2Update(float _Delta)
 			break;
 		}
 	}
+
+	SkillDamageDeley -= _Delta;
+
+	if (SkillTick <= 0.0f)
+	{
+		return;
+	}
+
+	if (SkillDamageDeley <= 0.0f)
+	{
+		if (TeamType::Blue == MyTeam)
+		{
+			SkillRangeCol->Collision(CollisionOrder::RedTeamBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
+				{
+					for (size_t i = 0; i < _Collision.size(); i++)
+					{
+						// 공격대미지 공식
+						reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 0.5f);
+						SkillTick -= 1.0f;
+						SkillDamageDeley = 0.1f;
+						return;
+					}
+				});
+		}
+		else if (TeamType::Red == MyTeam)
+		{
+
+			SkillRangeCol->Collision(CollisionOrder::BlueTeamBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
+				{
+					for (size_t i = 0; i < _Collision.size(); i++)
+					{
+						// 공격대미지 공식
+						reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 0.5f);
+						SkillTick -= 1.0f;
+						SkillDamageDeley = 0.1f;
+						return;
+					}
+				});
+		}
+	}
+
 }
 
 void Swordman::DiePrevStart()
