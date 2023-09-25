@@ -164,6 +164,18 @@ public:
         UnitHP -= _Value - UnitDef;
     }
 
+    void HealHP(float _Value)
+    {
+        float Result = UnitHP + _Value;
+
+        if (Result >= UnitMaxHP)
+        {
+            Result = UnitMaxHP;
+        }
+
+        UnitHP = Result;
+    }
+
     void AddDef(float _Value)
     {
         UnitDef += _Value;

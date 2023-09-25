@@ -47,6 +47,12 @@
     <ClCompile Include="KnightUltEffect.cpp">
       <Filter>GameUnit</Filter>
     </ClCompile>
+    <ClCompile Include="Monk.cpp">
+      <Filter>GameUnit</Filter>
+    </ClCompile>
+    <ClCompile Include="Ninja.cpp">
+      <Filter>GameUnit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -96,6 +102,12 @@
       <Filter>GameUnit</Filter>
     </ClInclude>
     <ClInclude Include="KnightUltEffect.h">
+      <Filter>GameUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="Monk.h">
+      <Filter>GameUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="Ninja.h">
       <Filter>GameUnit</Filter>
     </ClInclude>
   </ItemGroup>
