@@ -25,6 +25,7 @@ public:
 
 	const void* CPUDataPtr = nullptr;
 	UINT DataSize = -1;
+
 	void Setting() override;
 	void Reset() override;
 };
@@ -69,9 +70,9 @@ public:
 	GameEngineShaderResHelper& operator=(GameEngineShaderResHelper&& _Other) noexcept = delete;
 
 	// 쉐이더의 컴파일된 코드 결과물
-	void ShaderResCheck(std::string _FunctionName, GameEngineShader* _Shader, ID3DBlob* _CompileCode);
+	void ShaderResCheck(std::string _FunctionName, class GameEngineShader* _Shader, ID3DBlob* _CompileCode);
 
-	void ShaderResCopy(GameEngineShader* _Shader);
+	void ShaderResCopy(class GameEngineShader* _Shader);
 
 	void AllShaderResourcesSetting();
 
@@ -111,12 +112,13 @@ public:
 
 	void SetSampler(std::string_view _Name, std::shared_ptr<GameEngineSampler> _TextureSampler);
 
+	void ResClear();
 
 protected:
 
 private:
 	// std::shared_ptr로 만들고 
-
+	// 그걸 기억을 해놔야하기 때문에.
 	std::multimap<std::string, GameEngineConstantBufferSetter> ConstantBufferSetters;
 	std::multimap<std::string, GameEngineTextureSetter> TextureSetters;
 	std::multimap<std::string, GameEngineSamplerSetter> SamplerSetters;

@@ -21,6 +21,7 @@ void GameEngineConstantBufferSetter::Setting()
 		MsgBoxAssert("처리할수 없는 쉐이더 세팅 유형입니다.");
 		break;
 	}
+
 }
 
 void GameEngineConstantBufferSetter::Reset()
@@ -44,6 +45,7 @@ void GameEngineTextureSetter::Setting()
 		MsgBoxAssert("처리할수 없는 쉐이더 세팅 유형입니다.");
 		break;
 	}
+
 }
 
 void GameEngineTextureSetter::Reset()
@@ -67,6 +69,7 @@ void GameEngineSamplerSetter::Setting()
 		MsgBoxAssert("처리할수 없는 쉐이더 세팅 유형입니다.");
 		break;
 	}
+
 }
 
 void GameEngineSamplerSetter::Reset()
@@ -201,8 +204,8 @@ void GameEngineShaderResHelper::ShaderResCheck(std::string _FunctionName, GameEn
 		{
 			//std::shared_ptr<GameEngineSampler> Res
 			//	= GameEngineSampler::Find("EngineBaseSampler");
-			// 이녀석은 세팅 해주지 않으면 터진다.
 
+			// 이녀석은 세팅 해주지 않으면 터진다.
 			_FunctionName;
 			GameEngineSamplerSetter NewSetter;
 			NewSetter.ParentShader = _Shader;
@@ -220,7 +223,6 @@ void GameEngineShaderResHelper::ShaderResCheck(std::string _FunctionName, GameEn
 
 
 }
-
 
 void GameEngineShaderResHelper::ShaderResCopy(GameEngineShader* _Shader)
 {
@@ -241,6 +243,19 @@ void GameEngineShaderResHelper::ShaderResCopy(GameEngineShader* _Shader)
 	for (std::pair<const std::string, GameEngineSamplerSetter>& Pair : OtherSamplerSetters)
 	{
 		SamplerSetters.insert(std::make_pair(Pair.first, Pair.second));
+	}
+
+	// 기본 샘플러로 세팅해줘야할 녀석들이 있는지 확인한다.
+	for (std::pair<const std::string, GameEngineTextureSetter>& Pair : OtherTextureSetters)
+	{
+		std::string SamplerName = Pair.first + "SAMPLER";
+
+		if (true == IsSampler(SamplerName))
+		{
+			std::shared_ptr<GameEngineSampler> Sampler = Pair.second.Res->GetBaseSampler();
+
+			SetSampler(SamplerName, Sampler);
+		}
 	}
 }
 
@@ -283,7 +298,6 @@ void GameEngineShaderResHelper::AllShaderResourcesSetting()
 
 void GameEngineShaderResHelper::SetConstantBufferLink(std::string_view _Name, const void* _Data, size_t _Size)
 {
-
 	if (false == IsConstantBuffer(_Name))
 	{
 		MsgBoxAssert(std::string(_Name) + "존재하지 않는 상수버퍼에 링크를 걸려고 했습니다.");
@@ -310,6 +324,7 @@ void GameEngineShaderResHelper::SetConstantBufferLink(std::string_view _Name, co
 	}
 
 }
+
 
 void GameEngineShaderResHelper::SetTexture(std::string_view _Name, std::string_view _TextureName)
 {
@@ -377,4 +392,11 @@ void GameEngineShaderResHelper::SetSampler(std::string_view _Name, std::shared_p
 
 		Setter.Res = _TextureSampler;
 	}
+}
+
+void GameEngineShaderResHelper::ResClear()
+{
+	ConstantBufferSetters.clear();
+	TextureSetters.clear();
+	SamplerSetters.clear();
 }

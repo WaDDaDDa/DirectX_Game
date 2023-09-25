@@ -4,13 +4,6 @@
 #include <list>
 #include <memory>
 
-enum EPROJECTIONTYPE
-{
-	Perspective,
-	Orthographic,
-};
-
-
 // Ό³Έν :
 class GameEngineCamera : public GameEngineActor
 {

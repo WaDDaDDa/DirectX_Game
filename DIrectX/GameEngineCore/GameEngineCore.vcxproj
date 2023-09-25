@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="EngineEnum.h" />
     <ClInclude Include="GameEngineActor.h">
       <SubType>
       </SubType>
@@ -215,6 +216,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GameEngineUIRenderer.h" />
     <ClInclude Include="GameEngineVertex.h" />
     <ClInclude Include="GameEngineVertexBuffer.h" />
     <ClInclude Include="GameEngineVertexShader.h" />
@@ -275,6 +277,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GameEngineUIRenderer.cpp" />
     <ClCompile Include="GameEngineVertex.cpp" />
     <ClCompile Include="GameEngineVertexBuffer.cpp" />
     <ClCompile Include="GameEngineVertexShader.cpp" />

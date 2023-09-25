@@ -154,6 +154,8 @@
     <ClInclude Include="GameEngineMaterial.h" />
     <ClInclude Include="GameEngineMesh.h" />
     <ClInclude Include="GameEngineDebugCore.h" />
+    <ClInclude Include="EngineEnum.h" />
+    <ClInclude Include="GameEngineUIRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -256,6 +258,7 @@
     <ClCompile Include="GameEngineMaterial.cpp" />
     <ClCompile Include="GameEngineMesh.cpp" />
     <ClCompile Include="GameEngineDebugCore.cpp" />
+    <ClCompile Include="GameEngineUIRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ThirdParty\DirectXTex\inc\DirectXTex.inl">
