@@ -171,7 +171,16 @@ void Knight::SkillStart()
 	GameUnit::SkillStart();
 	MainSpriteRenderer->ChangeAnimation("Knight_Skill");
 	SkillEffectRenderer->ChangeAnimation("KnightSkillEffect");
-	// 어그로를 자신에게 끌고 자신의 방어력을 증가시킨다.
+	// 어그로를 자신에게 끈다
+
+	for (size_t i = 0; i < EnemyGroup.size(); i++)
+	{
+		if (EnemyGroup[i]->GetState() != GameUnitState::Die)
+		{
+			// 전사 방어력 만큼 방어력 상승.
+			EnemyGroup[i]->AggroSetting(this);
+		}
+	}
 
 }
 

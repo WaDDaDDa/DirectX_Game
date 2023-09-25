@@ -56,6 +56,11 @@ public:
         TeamGroup = _UnitGroup;
     }
 
+    void AggroSetting(GameUnit* _Unit)
+    {
+        AggroUnit = _Unit;
+    }
+
     void AggroSetting()
     {
         size_t EnemyNum = 0;
