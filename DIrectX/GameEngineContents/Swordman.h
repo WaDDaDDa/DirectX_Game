@@ -25,7 +25,7 @@ public:
         UnitAtt = SwordmanAtt;
         UnitDef = SwordmanDef;
 
-        AttackDelay = SwordmanAttackDeley;
+        AttackDelay = SwordmanAttackSpeed;
 
         SkillCooltime = SwordmanSkillCooltime;
 
@@ -72,8 +72,8 @@ private:
     float SwordmanHp = 500.0f;
     float SwordmanAtt = 200.0f;
     float SwordmanDef = 10.0f;
-    float SwordmanAttackDeley = 2.5f;
-    float SwordmanSkillCooltime = 8.0f;
+    float SwordmanAttackSpeed = 1.25f;
+    float SwordmanSkillCooltime = 3.8f;
     float SwordmanUltCooltime = 35.0f;
 };
 

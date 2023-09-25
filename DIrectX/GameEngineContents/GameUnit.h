@@ -93,7 +93,6 @@ public:
         {
             if (EnemyGroup[i]->GetState() != GameUnitState::Die)
             {
-                
                 return false;
             }
         }

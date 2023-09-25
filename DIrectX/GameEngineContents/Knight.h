@@ -25,7 +25,7 @@ public:
         UnitAtt = KnightAtt;
         UnitDef = KnightDef;
 
-        AttackDelay = KnightAttackDeley;
+        AttackDelay = KnightAttackSpeed;
 
         SkillCooltime = KnightSkillCooltime;
 
@@ -69,8 +69,8 @@ private:
     float KnightHp = 1000.0f;
     float KnightAtt = 150.0f;
     float KnightDef = 20.0f;
-    float KnightAttackDeley = 3.0f;
-    float KnightSkillCooltime = 6.0f;
+    float KnightAttackSpeed = 1.7f;
+    float KnightSkillCooltime = 4.2f;
     float KnightUltCooltime = 30.0f;
 };
 
