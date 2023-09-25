@@ -15,6 +15,7 @@ enum class GameUnitState
     Skill,
     Skill2,
     Ult,
+    Ult2,
     Damage,
     DiePrev,
     Die,
@@ -45,9 +46,14 @@ public:
     }
 
     // 적유닛에게 내가 적이다 라고 하는것.
-    void EnemySetting(const std::vector<GameUnit*>& _UnitGroup)
+    void EnemyUnitSetting(const std::vector<GameUnit*>& _UnitGroup)
     {
         EnemyGroup = _UnitGroup;
+    }
+
+    void TeamUnitSetting(const std::vector<GameUnit*>& _UnitGroup)
+    {
+        TeamGroup = _UnitGroup;
     }
 
     void AggroSetting()
@@ -153,6 +159,16 @@ public:
         UnitHP -= _Value - UnitDef;
     }
 
+    void AddDef(float _Value)
+    {
+        UnitDef += _Value;
+    }
+
+    void DefAbsolute()
+    {
+        UnitDef = UnitAbsoluteDef;
+    }
+
     float GetSkillCooltime()
     {
         return SkillCooltime;
@@ -172,6 +188,8 @@ public:
     {
         BodyCol->Off();
         AttackRangeCol->Off();
+        SkillRangeCol->Off();
+        UltRangeCol->Off();
         PushCol->Off();
     }
 
@@ -179,10 +197,14 @@ public:
     {
         BodyCol->On();
         AttackRangeCol->On();
+        SkillRangeCol->On();
+        UltRangeCol->On();
         PushCol->On();
     }
 
     TeamType MyTeam = TeamType::Blue;
+    std::vector<GameUnit*> EnemyGroup;
+    std::vector<GameUnit*> TeamGroup;
 
 protected:
     void Start() override;
@@ -228,6 +250,12 @@ protected:
     virtual void Skill2Start() {}
     virtual void Skill2Update(float _Delta) {}
 
+    virtual void UltStart();
+    virtual void UltUpdate(float _Delta);
+
+    virtual void Ult2Start();
+    virtual void Ult2Update(float _Delta);
+
     virtual void DiePrevStart();
     void DiePrevUpdate(float _Delta);
 
@@ -240,7 +268,7 @@ protected:
     std::shared_ptr<class GameEngineSpriteRenderer> MainSpriteRenderer;
     std::shared_ptr<class GameEngineSpriteRenderer> SkillEffectRenderer;
 
-    std::vector<GameUnit*> EnemyGroup;
+
 
     GameUnit* AggroUnit = nullptr;
 
@@ -249,12 +277,13 @@ protected:
     // Status
     std::string_view UnitName = "";
     float4 AttackRange = { 55.0f, 0.0f };
-    float4 SkillRange = { 55.0f, 0.0f };
-    float4 UltRange = { 55.0f, 0.0f };
+    float4 SkillRange = { 70.0f, 0.0f };
+    float4 UltRange = { 100.0f, 0.0f };
     float UnitSpeed = 100.0f;
     float UnitHP = 100.0f;
     float UnitMaxHP = 100.0f;
     float UnitDef = 5.0f;
+    float UnitAbsoluteDef = 5.0f;
     float UnitAtt = 10.0f;
 
     float PushDelay = 0.3f;
@@ -268,12 +297,15 @@ protected:
     float UltValue = 0.0f;
 
     bool ImDie = false;
+    bool UseUlt = false;
 
 private:
     std::shared_ptr<GameEngineSpriteRenderer> SpwanRenderer;
     float RespawnTime = 0.0f;
     std::shared_ptr<GameEngineCollision> BodyCol;
     std::shared_ptr<GameEngineCollision> AttackRangeCol;
+    std::shared_ptr<GameEngineCollision> SkillRangeCol;
+    std::shared_ptr<GameEngineCollision> UltRangeCol;
     // 공격할때 플레이어 유닛 하나만을 단일 타겟팅 하고싶은데..
     // 그렇다면 공격할때마다 콜리젼 위치를 공격범위에 닿은 유닛의 위치에 Set해서
     // 그위치에 충돌체를 작게 생성시키면 단일 타겟팅 느낌이 나지 

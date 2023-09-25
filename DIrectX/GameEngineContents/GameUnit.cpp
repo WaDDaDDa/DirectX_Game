@@ -89,6 +89,12 @@ void GameUnit::TeamSet(TeamType _Team)
 		// 공격 범위 충돌체
 		AttackRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::BlueTeamAttackRange);
 		AttackRangeCol->Transform.SetLocalScale(AttackRange);
+		// 스킬 범위 충돌체
+		SkillRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::BlueTeamSkillRange);
+		SkillRangeCol->Transform.SetLocalScale(SkillRange);
+		// 스킬 범위 충돌체
+		UltRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::BlueTeamUltRange);
+		UltRangeCol->Transform.SetLocalScale(UltRange);
 
 		MyTeam = TeamType::Blue;
 	}
@@ -101,6 +107,12 @@ void GameUnit::TeamSet(TeamType _Team)
 		// 공격 범위 충돌체
 		AttackRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamAttackRange);
 		AttackRangeCol->Transform.SetLocalScale(AttackRange);
+		// 스킬 범위 충돌체
+		SkillRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamSkillRange);
+		SkillRangeCol->Transform.SetLocalScale(SkillRange);
+		// 스킬 범위 충돌체
+		UltRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamUltRange);
+		UltRangeCol->Transform.SetLocalScale(UltRange);
 
 		MyTeam = TeamType::Red;
 	}
@@ -169,6 +181,9 @@ void GameUnit::StateUpdate(float _Delta)
 	case GameUnitState::Skill2:
 		return Skill2Update(_Delta);
 	case GameUnitState::Ult:
+		return UltUpdate(_Delta);
+	case GameUnitState::Ult2:
+		return Ult2Update(_Delta);
 	case GameUnitState::Damage:
 	case GameUnitState::DiePrev:
 		return DiePrevUpdate(_Delta);
@@ -218,6 +233,10 @@ void GameUnit::ChangeState(GameUnitState _State)
 			Skill2Start();
 			break;
 		case GameUnitState::Ult:
+			UltStart();
+			break;
+		case GameUnitState::Ult2:
+			Ult2Start();
 			break;
 		case GameUnitState::Damage:
 			break;
@@ -313,17 +332,18 @@ void GameUnit::MoveUpdate(float _Delta)
 {
 	ChangeDir();
 
-	if (GetLiveTime() >= 2.0f)
-	{
-		ChangeState(GameUnitState::Idle);
-		return;
-	}
-
 	// 공격 범위에 적군 body가 들어오면. 공격.
 	if (TeamType::Blue == MyTeam)
 	{
+		// 궁극기 사용
+		if (UltRangeCol->Collision(CollisionOrder::RedTeamBody) && UltCooltime <= UltValue && false == UseUlt)
+		{
+			ChangeState(GameUnitState::Ult);
+			return;
+		}
+
 		// 스킬사용
-		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && SkillCooltime <= SkillValue)
+		if (SkillRangeCol->Collision(CollisionOrder::RedTeamBody) && SkillCooltime <= SkillValue)
 		{
 			ChangeState(GameUnitState::Skill);
 			return;
@@ -338,17 +358,30 @@ void GameUnit::MoveUpdate(float _Delta)
 	}
 	else if (TeamType::Red == MyTeam)
 	{
-		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && SkillCooltime <= SkillValue)
+		// 궁극
+		if (UltRangeCol->Collision(CollisionOrder::BlueTeamBody) && UltCooltime <= UltValue && false == UseUlt)
+		{
+			ChangeState(GameUnitState::Ult);
+			return;
+		}
+		//스킬
+		if (SkillRangeCol->Collision(CollisionOrder::BlueTeamBody) && SkillCooltime <= SkillValue)
 		{
 			ChangeState(GameUnitState::Skill);
 			return;
 		}
-
+		// 공격
 		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackDelay <= AttackValue)
 		{
 			ChangeState(GameUnitState::Attack);
 			return;
 		}
+	}
+
+	if (GetLiveTime() >= 2.0f)
+	{
+		ChangeState(GameUnitState::Idle);
+		return;
 	}
 
 	// 바디겹치면 멀어지는 움직임.
@@ -383,6 +416,21 @@ void GameUnit::BackMoveUpdate(float _Delta)
 	// 공격 범위에 적군 body가 들어오면. 공격.
 	if (TeamType::Blue == MyTeam)
 	{
+		// 궁극기 사용
+		if (UltRangeCol->Collision(CollisionOrder::RedTeamBody) && UltCooltime <= UltValue && false == UseUlt)
+		{
+			ChangeState(GameUnitState::Ult);
+			return;
+		}
+
+		// 스킬사용
+		if (SkillRangeCol->Collision(CollisionOrder::RedTeamBody) && SkillCooltime <= SkillValue)
+		{
+			ChangeState(GameUnitState::Skill);
+			return;
+		}
+
+		// 공격
 		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackDelay <= AttackValue)
 		{
 			ChangeState(GameUnitState::Attack);
@@ -391,6 +439,19 @@ void GameUnit::BackMoveUpdate(float _Delta)
 	}
 	else if (TeamType::Red == MyTeam)
 	{
+		// 궁극
+		if (UltRangeCol->Collision(CollisionOrder::BlueTeamBody) && UltCooltime <= UltValue && false == UseUlt)
+		{
+			ChangeState(GameUnitState::Ult);
+			return;
+		}
+		//스킬
+		if (SkillRangeCol->Collision(CollisionOrder::BlueTeamBody) && SkillCooltime <= SkillValue)
+		{
+			ChangeState(GameUnitState::Skill);
+			return;
+		}
+		// 공격
 		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackDelay <= AttackValue)
 		{
 			ChangeState(GameUnitState::Attack);
@@ -435,6 +496,21 @@ void GameUnit::SearchMoveUpdate(float _Delta)
 	// 공격 범위에 적군 body가 들어오면. 공격.
 	if (TeamType::Blue == MyTeam)
 	{
+		// 궁극기 사용
+		if (UltRangeCol->Collision(CollisionOrder::RedTeamBody) && UltCooltime <= UltValue && false == UseUlt)
+		{
+			ChangeState(GameUnitState::Ult);
+			return;
+		}
+
+		// 스킬사용
+		if (SkillRangeCol->Collision(CollisionOrder::RedTeamBody) && SkillCooltime <= SkillValue)
+		{
+			ChangeState(GameUnitState::Skill);
+			return;
+		}
+
+		// 공격
 		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackDelay <= AttackValue)
 		{
 			ChangeState(GameUnitState::Attack);
@@ -443,6 +519,19 @@ void GameUnit::SearchMoveUpdate(float _Delta)
 	}
 	else if (TeamType::Red == MyTeam)
 	{
+		// 궁극
+		if (UltRangeCol->Collision(CollisionOrder::BlueTeamBody) && UltCooltime <= UltValue && false == UseUlt)
+		{
+			ChangeState(GameUnitState::Ult);
+			return;
+		}
+		//스킬
+		if (SkillRangeCol->Collision(CollisionOrder::BlueTeamBody) && SkillCooltime <= SkillValue)
+		{
+			ChangeState(GameUnitState::Skill);
+			return;
+		}
+		// 공격
 		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackDelay <= AttackValue)
 		{
 			ChangeState(GameUnitState::Attack);
@@ -489,7 +578,7 @@ void GameUnit::CollMoveUpdate(float _Delta)
 	{
 		PushValue = 0.0f;
 		GameEngineRandom NewRand;
-		int MoveRand = NewRand.RandomInt(0, 5);
+		int MoveRand = NewRand.RandomInt(0, 3);
 		static long long RandSeed = reinterpret_cast<long long>(this);
 		RandSeed++;
 		NewRand.SetSeed(RandSeed);
@@ -565,6 +654,7 @@ void GameUnit::Attack2Update(float _Delta)
 
 }
 
+// 스킬 시전
 void GameUnit::SkillStart()
 {
 	AttackValue = 0.0f;
@@ -572,6 +662,27 @@ void GameUnit::SkillStart()
 }
 
 void GameUnit::SkillUpdate(float _Delta)
+{
+
+}
+
+// 궁극기 시전
+void GameUnit::UltStart()
+{
+	UseUlt = true;
+}
+
+void GameUnit::UltUpdate(float _Delta)
+{
+
+}
+
+void GameUnit::Ult2Start()
+{
+
+}
+
+void GameUnit::Ult2Update(float _Delta)
 {
 
 }

@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "Knight.h"
+#include "KnightUltEffect.h"
 
 
 Knight::Knight()
@@ -59,6 +60,7 @@ void Knight::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer->CreateAnimation("Knight_Attack", "KnightAni", 0.2f, 14, 15, false);
 		MainSpriteRenderer->CreateAnimation("Knight_Attack2", "KnightAni", 0.2f, 16, 19, false);
 		MainSpriteRenderer->CreateAnimation("Knight_Skill", "KnightAni", 0.1f, 30, 36, false);
+		MainSpriteRenderer->CreateAnimation("Knight_Ult", "KnightAni", 0.1f, 37, 43, false);
 		MainSpriteRenderer->CreateAnimation("Knight_Die", "KnightAni", 0.1f, 22, 29, false);
 
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
@@ -205,9 +207,42 @@ void Knight::SkillUpdate(float _Delta)
 	}
 }
 
+void Knight::UltStart()
+{
+	GameUnit::UltStart();
+	MainSpriteRenderer->ChangeAnimation("Knight_Ult");
+
+	for (size_t i = 0; i < TeamGroup.size(); i++)
+	{
+		if (TeamGroup[i]->GetState() != GameUnitState::Die)
+		{
+			// 전사 방어력 만큼 방어력 상승.
+			TeamGroup[i]->AddDef(UnitDef);
+			GetLevel()->CreateActor<KnightUltEffect>()->SetUnit(TeamGroup[i]->GetDynamic_Cast_This<GameUnit>());
+		}
+	}
+	//CreateUltEffect();
+	// 어그로를 자신에게 끌고 자신의 방어력을 증가시킨다.
+}
+
+void Knight::UltUpdate(float _Delta)
+{
+	//UltEffectRenderer->Transform.AddWorldRotation({ 0.0f, 360.0f * _Delta  });
+	if (MainSpriteRenderer->IsCurAnimationEnd())
+	{
+		ChangeState(GameUnitState::Idle);
+		return;
+	}
+}
+
 void Knight::DiePrevStart()
 {
 	GameUnit::DiePrevStart();
 	SkillEffectRenderer->ChangeAnimation("KnightSkillBlack");
 	MainSpriteRenderer->ChangeAnimation("Knight_Die");
+}
+
+void Knight::CreateUltEffect()
+{
+	GetLevel()->CreateActor<KnightUltEffect>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
 }

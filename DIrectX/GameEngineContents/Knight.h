@@ -24,6 +24,7 @@ public:
         UnitMaxHP = KnightHp;
         UnitAtt = KnightAtt;
         UnitDef = KnightDef;
+        UnitAbsoluteDef = KnightAbsoluteDef;
 
         AttackDelay = KnightAttackSpeed;
 
@@ -31,6 +32,8 @@ public:
 
         UltCooltime = KnightUltCooltime;
     }
+
+    void CreateUltEffect();
 
 
 protected:
@@ -58,19 +61,23 @@ protected:
     void SkillStart() override;
     void SkillUpdate(float _Delta) override;
 
+    void UltStart() override;
+    void UltUpdate(float _Delta) override;
+
     void DiePrevStart() override;
 
 private:
-    float4 KnightAttackRange = { 55.0f, 55.0f };
-    float4 KnightSkillRange = { 55.0f, 55.0f };
-    float4 KnightUltRange = { 55.0f, 55.0f };
+    float4 KnightAttackRange = { 37.0f, 0.0f };
+    float4 KnightSkillRange = { 200.0f, 0.0f };
+    float4 KnightUltRange = { 200.0f, 0.0f };
 
     float KnightSpeed = 80.0f;
     float KnightHp = 1000.0f;
     float KnightAtt = 150.0f;
     float KnightDef = 20.0f;
+    float KnightAbsoluteDef = 20.0f;
     float KnightAttackSpeed = 1.7f;
     float KnightSkillCooltime = 4.2f;
-    float KnightUltCooltime = 30.0f;
+    float KnightUltCooltime = 5.0f;
 };
 

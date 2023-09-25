@@ -80,7 +80,7 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	// ·¹µåÆÀ À¯´Ö (¿À¸¥ÂÊ)
 	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
 	RedTeam.push_back(CreateActor<Swordman>()->GetPointer());
-	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
+	RedTeam.push_back(CreateActor<Swordman>()->GetPointer());
 
 
 
@@ -97,14 +97,16 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	// ÆÀ¼³Á¤
 	for (size_t i = 0; i < RedTeam.size(); i++)
 	{
-		RedTeam[static_cast<int>(i)]->EnemySetting(BlueTeam);
+		RedTeam[static_cast<int>(i)]->EnemyUnitSetting(BlueTeam);
+		RedTeam[static_cast<int>(i)]->TeamUnitSetting(RedTeam);
 
 		RedTeam[static_cast<int>(i)]->TeamSet(TeamType::Red);
 	}
 
 	for (size_t i = 0; i < BlueTeam.size(); i++)
 	{
-		BlueTeam[static_cast<int>(i)]->EnemySetting(RedTeam);
+		BlueTeam[static_cast<int>(i)]->EnemyUnitSetting(RedTeam);
+		BlueTeam[static_cast<int>(i)]->TeamUnitSetting(BlueTeam);
 
 		BlueTeam[static_cast<int>(i)]->TeamSet(TeamType::Blue);
 	}
