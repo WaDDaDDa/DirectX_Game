@@ -80,6 +80,6 @@ private:
     float KnightAbsoluteDef = 60.0f;
     float KnightAttackSpeed = 1.7f;
     float KnightSkillCooltime = 4.2f;
-    float KnightUltCooltime = 25.0f;
+    float KnightUltCooltime = 20.0f;
 };
 

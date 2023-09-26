@@ -80,7 +80,7 @@ private:
     float NinjaAbsoluteDef = 10.0f;
     float NinjaAttackSpeed = 1.1f;
     float NinjaSkillCooltime = 3.0f;
-    float NinjaUltCooltime = 5.0f;
+    float NinjaUltCooltime = 10.0f;
 
     float SkillTick = 1.0f;
     float SkillDamageDeley = 0.1f;
