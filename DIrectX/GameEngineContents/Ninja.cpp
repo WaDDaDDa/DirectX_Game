@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Ninja.h"
-
+#include "NinjaUlt.h"
+#include "GameUnitUI.h"
 
 Ninja::Ninja()
 {
@@ -60,7 +61,7 @@ void Ninja::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer->CreateAnimation("Ninja_Attack2", "NinjaAni", 0.2f, 15, 17, false);
 		MainSpriteRenderer->CreateAnimation("Ninja_Skill", "NinjaAni", 0.05f, 28, 35, false);
 		MainSpriteRenderer->CreateAnimation("Ninja_Skill2", "NinjaAni", 0.1f, 36, 38, false);
-		MainSpriteRenderer->CreateAnimation("Ninja_Ult", "NinjaAni", 0.1f, 37, 43, false);
+		MainSpriteRenderer->CreateAnimation("Ninja_Ult", "NinjaAni", 0.2f, 44, 49, false);
 		MainSpriteRenderer->CreateAnimation("Ninja_Die", "NinjaAni", 0.1f, 18, 27, false);
 
 		MainSpriteRenderer->FindAnimation("Ninja_Skill2")->Inter[2] = 0.2;
@@ -68,6 +69,7 @@ void Ninja::LevelStart(GameEngineLevel* _PrevLevel)
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
 		SkillEffectRenderer->CreateAnimation("NinjaSkillEffect", "NinjaEffect", 0.05f, 7, 13, false);
 		SkillEffectRenderer->CreateAnimation("NinjaSkillBlack", "NinjaEffect", 0.1f, 0, 0, false);
+		SkillEffectRenderer->CreateAnimation("NinjaUltEffect", "NinjaEffect", 0.2f, 22, 27, false);
 		SkillEffectRenderer->ChangeAnimation("NinjaSkillBlack");
 		SkillEffectRenderer->AutoSpriteSizeOn();
 		SkillEffectRenderer->SetAutoScaleRatio(1.3f);
@@ -272,16 +274,44 @@ void Ninja::UltStart()
 {
 	GameUnit::UltStart();
 	MainSpriteRenderer->ChangeAnimation("Ninja_Ult");
+	SkillEffectRenderer->ChangeAnimation("NinjaUltEffect");
 
-	//CreateUltEffect();
-	// 어그로를 자신에게 끌고 자신의 방어력을 증가시킨다.
+	GameUnit* NinNin = GetLevel()->CreateActor<NinjaUlt>()->GetPointer();
+	NinNin->EnemyUnitSetting(EnemyGroup);
+	NinNin->TeamUnitSetting(TeamGroup);
+
+	if (TeamType::Blue == MyTeam)
+	{
+		NinNin->TeamSet(TeamType::Blue);
+	}
+	else if (TeamType::Red == MyTeam)
+	{
+		NinNin->TeamSet(TeamType::Red);
+	}
+
+	NinNin->AggroSetting(AggroUnit);
+	if (GameUnitDir::Left == Dir)
+	{
+		float4 PosValue = { 30.0f };
+		NinNin->Transform.SetWorldPosition(Transform.GetWorldPosition() + PosValue);
+	}
+	else if (GameUnitDir::Right == Dir)
+	{
+		float4 PosValue = { -30.0f };
+		NinNin->Transform.SetWorldPosition(Transform.GetWorldPosition() + PosValue);
+	}
+	// ChangeState(GameUnitState::Spwan);
+	// HPUI 생성
+	GetLevel()->CreateActor<GameUnitUI>()->SetUnit(NinNin->GetDynamic_Cast_This<GameUnit>());
 }
 
 void Ninja::UltUpdate(float _Delta)
 {
-	//UltEffectRenderer->Transform.AddWorldRotation({ 0.0f, 360.0f * _Delta  });
+	//UltEffectRenderer->Transform.AddWorldRotation({ 0.0f, 360.0f * _Delta  });	if (MainSpriteRenderer->IsCurAnimationEnd())
+
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
+		SkillEffectRenderer->ChangeAnimation("NinjaSkillBlack");
 		ChangeState(GameUnitState::Idle);
 		return;
 	}

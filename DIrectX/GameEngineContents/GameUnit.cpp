@@ -41,8 +41,6 @@ void GameUnit::Start()
 			PushCol = CreateComponent<GameEngineCollision>(CollisionOrder::UnitBody);
 			PushCol->Transform.SetLocalScale(PushColScale);
 		}
-
-
 	}
 }
 
@@ -747,8 +745,6 @@ void GameUnit::DieStart()
 
 void GameUnit::DieUpdate(float _Delta)
 {
-	BodyCol;
-
 	RespawnTime += _Delta;
 
 	if (RespawnTime >= 5.0f)

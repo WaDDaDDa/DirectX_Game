@@ -15,7 +15,10 @@ public:
     void SetUnit(std::shared_ptr<class GameUnit> _Unit)
     {
         Unit = _Unit;
+        InitUniUI();
     }
+
+    void InitUniUI();
 
     void AllRendererOff()
     {

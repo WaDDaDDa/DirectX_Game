@@ -197,6 +197,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Ninja.cpp" />
+    <ClCompile Include="NinjaUlt.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayLevel.cpp" />
     <ClCompile Include="PreCompile.cpp">
@@ -248,6 +252,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Ninja.h" />
+    <ClInclude Include="NinjaUlt.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayLevel.h" />
     <ClInclude Include="PreCompile.h" />

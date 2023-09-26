@@ -18,7 +18,7 @@ void GameUnitUI::Start()
 
 }
 
-void GameUnitUI::LevelStart(GameEngineLevel* _PrevLevel)
+void GameUnitUI::InitUniUI()
 {
 	// ±Ã±Ø±â ¿Â Å×µÎ¸®
 	Renderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::HPLayer1);
@@ -81,6 +81,12 @@ void GameUnitUI::LevelStart(GameEngineLevel* _PrevLevel)
 	Renderer7->SetSprite(Unit->GetUnitName() += "_ult.png");
 	Renderer7->SetImageScale({ 12.0f,12.0f });
 	Renderer7->Transform.AddLocalPosition({ -31.5f, -30.0f });
+}
+
+
+void GameUnitUI::LevelStart(GameEngineLevel* _PrevLevel)
+{
+	// InitUniUI();
 }
 
 void GameUnitUI::Update(float _Delta)
