@@ -3,6 +3,7 @@
 #include "GameEngineLevel.h"
 #include "GameEngineRenderer.h"
 #include "GameEngineCore.h"
+#include "GameEngineRenderTarget.h"
 
 GameEngineCamera::GameEngineCamera()
 {
@@ -80,6 +81,8 @@ void GameEngineCamera::Render(float _DeltaTime)
 	{
 		return;
 	}
+
+	GameEngineCore::GetBackBufferRenderTarget()->Setting();
 
 	for (std::pair<const int, std::list<std::shared_ptr<class GameEngineRenderer>>>& RendererPair : Renderers)
 	{

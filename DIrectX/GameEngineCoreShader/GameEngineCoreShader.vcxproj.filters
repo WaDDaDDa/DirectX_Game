@@ -10,6 +10,7 @@
     <FxCompile Include="TextureShader.fx" />
     <FxCompile Include="Transform.fx" />
     <FxCompile Include="RenderBase.fx" />
+    <FxCompile Include="DebugColorShader.fx" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ShaderRule.txt">

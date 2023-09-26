@@ -6,8 +6,59 @@
 // Update 이녀석이 업데이트될때
 // Release 이녀석이 지워질때
 
+class GameEngineObjectBase
+{
+public:
+	int GetOrder()
+	{
+		return Order;
+	}
+
+	template<typename EnumType>
+	void SetOrder(EnumType _Order)
+	{
+		SetOrder(static_cast<int>(_Order));
+	}
+
+	virtual void SetOrder(int _Order)
+	{
+		Order = _Order;
+	}
+
+
+	virtual void On()
+	{
+		IsUpdateValue = true;
+	}
+
+	virtual void Off()
+	{
+		IsUpdateValue = false;
+	}
+
+	void Death()
+	{
+		this->IsDeathValue = true;
+	}
+
+	virtual bool IsUpdate()
+	{
+		return true == IsUpdateValue && false == IsDeathValue;
+	}
+
+	virtual bool IsDeath()
+	{
+		return IsDeathValue;
+	}
+
+protected:
+	int Order = 0;
+	bool IsUpdateValue = true; // 이걸 false로 만들면 됩니다.
+	bool IsDeathValue = false; // 아예 메모리에서 날려버리고 싶어.
+};
+
 // 설명 :
-class GameEngineObject : public std::enable_shared_from_this<GameEngineObject>
+class GameEngineObject : public GameEngineObjectBase, public std::enable_shared_from_this<GameEngineObject>
 {
 	friend class GameEngineLevel;
 	friend class GameEngineCore;
@@ -31,46 +82,6 @@ public:
 	virtual void LevelStart(class GameEngineLevel* _NextLevel) {}
 	virtual void LevelEnd(class GameEngineLevel* _NextLevel) {}
 
-	virtual void On()
-	{
-		IsUpdateValue = true;
-	}
-
-	virtual void Off()
-	{
-		IsUpdateValue = false;
-	}
-
-	void Death()
-	{
-		this->IsDeathValue = true;
-	}
-
-	virtual bool IsUpdate()
-	{
-		return Parent == nullptr ? true == IsUpdateValue && false == IsDeathValue : Parent->IsUpdate() && true == IsUpdateValue && false == IsDeath();
-	}
-
-	virtual bool IsDeath()
-	{
-		return Parent == nullptr ? IsDeathValue : Parent->IsDeath() || IsDeathValue;
-	}
-
-	int GetOrder()
-	{
-		return Order;
-	}
-
-	template<typename EnumType>
-	void SetOrder(EnumType _Order)
-	{
-		SetOrder(static_cast<int>(_Order));
-	}
-
-	virtual void SetOrder(int _Order)
-	{
-		Order = _Order;
-	}
 
 	float GetLiveTime()
 	{
@@ -94,11 +105,10 @@ public:
 
 	void AllLevelStart(class GameEngineLevel* _PrevLevel);
 	void AllLevelEnd(class GameEngineLevel* _NextLevel);
-
 	virtual void AllReleaseCheck();
 	virtual void AllUpdate(float _Delta);
 
-		// 지금 당장은 그냥 처음 만들어질때만.
+	// 지금 당장은 그냥 처음 만들어질때만.
 	template<typename ChildType>
 	std::shared_ptr<GameEngineObject> CreateChild(int _Order)
 	{
@@ -108,6 +118,7 @@ public:
 		NewChild->Start();
 		return NewChild;
 	}
+
 
 	void SetParent(GameEngineObject* _Parent, int _Order)
 	{
@@ -121,7 +132,6 @@ public:
 	{
 		Parent = _Parent.get();
 		Transform.SetParent(_Parent->Transform);
-		// Parent->Transform.SetParent(_Parent->Transform);
 	}
 
 	GameEngineObject* GetParentObject()
@@ -144,7 +154,7 @@ public:
 
 		if (nullptr == CameraPtr)
 		{
-			//MsgBoxAssert("다이나믹 캐스트에 실패했습니다. 가상함수 테이블 부모가 누구인지 확인해보세요. 혹은 부모 생성자에서는 사용이 불가능한 함수입니다.");
+			// MsgBoxAssert("다이나믹 캐스트에 실패했습니다. 가상함수 테이블 부모가 누구인지 확인해보세요. 혹은 부모 생성자에서는 사용이 불가능한 함수입니다.");
 			return nullptr;
 		}
 
@@ -163,6 +173,7 @@ public:
 		std::list<std::shared_ptr<class GameEngineObject>>& Group = Childs[_GroupIndex];
 		return Group;
 	}
+
 
 	template<typename ObjectType, typename EnumType>
 	std::list<std::shared_ptr<ObjectType>> GetObjectGroupConvert(EnumType _GroupIndex)
@@ -194,8 +205,20 @@ public:
 		return Result;
 	}
 
+	bool IsUpdate() override
+	{
+		return Parent == nullptr ? true == IsUpdateValue && false == IsDeathValue : Parent->IsUpdate() && true == IsUpdateValue && false == IsDeath();
+	}
+
+	bool IsDeath() override
+	{
+		return Parent == nullptr ? IsDeathValue : Parent->IsDeath() || IsDeathValue;
+	}
+
+
 protected:
 	GameEngineObject* Parent = nullptr;
+
 	// 오더링을 위해서
 	std::map<int, std::list<std::shared_ptr<class GameEngineObject>>> Childs;
 
@@ -203,9 +226,6 @@ private:
 
 	std::string Name;
 	float LiveTime = 0.0f;
-	int Order = 0;
-	bool IsUpdateValue = true; // 이걸 false로 만들면 됩니다.
-	bool IsDeathValue = false; // 아예 메모리에서 날려버리고 싶어.
 
 	void AddLiveTime(float _DeltaTime)
 	{
@@ -213,6 +233,5 @@ private:
 	}
 
 	void AllRelease();
-
 };
 

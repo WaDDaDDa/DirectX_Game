@@ -167,6 +167,13 @@ void GameEngineDevice::ResourcesInit()
 		std::shared_ptr<GameEngineRasterizer> Rasterizer = GameEngineRasterizer::Create("EngineRasterizer", Desc);
 	}
 
+	{
+		D3D11_RASTERIZER_DESC Desc = {};
+		Desc.FillMode = D3D11_FILL_MODE::D3D11_FILL_WIREFRAME;
+		Desc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
+		// Desc.DepthClipEnable = TRUE;
+		std::shared_ptr<GameEngineRasterizer> Rasterizer = GameEngineRasterizer::Create("EngineWireRasterizer", Desc);
+	}
 
 	{
 		D3D11_BLEND_DESC Desc = {};
@@ -272,6 +279,13 @@ void GameEngineDevice::ResourcesInit()
 		Mat->SetPixelShader("TextureShader_PS");
 	}
 
+
+	{
+		std::shared_ptr<GameEngineMaterial> Mat = GameEngineMaterial::Create("2DTextureWire");
+		Mat->SetVertexShader("DebugColor_VS");
+		Mat->SetPixelShader("DebugColor_PS");
+		Mat->SetRasterizer("EngineWireRasterizer");
+	}
 
 	// 엔진수준에서 지원해주는 가장 기초적인 리소스들은 여기에서 만들어질 겁니다.
 	// 기본 매쉬
