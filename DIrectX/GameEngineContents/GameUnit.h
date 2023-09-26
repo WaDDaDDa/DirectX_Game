@@ -167,7 +167,8 @@ public:
     void DamageHP(float _Value)
     {
         // 들어온 공격력에 유닛의 방어력을 반영해서 계산시킨다.
-        float Result = _Value - (UnitDef * 0.4f);
+        //float Result = _Value - (UnitDef * 0.4f);
+        float Result = _Value * (100.0f - UnitDef) / 100.0f;
         if (Result <= 0.0f)
         {
             return;

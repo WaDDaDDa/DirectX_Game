@@ -179,7 +179,7 @@ void Monk::SkillStart()
 	{
 		for (size_t i = 0; i < EnemyGroup.size(); i++)
 		{
-			if (TeamGroup[i]->GetState() != GameUnitState::Die)
+			if (TeamGroup[i]->GetState() != GameUnitState::Die || TeamGroup[i]->GetState() != GameUnitState::DiePrev)
 			{
 				if (CurHpRate >= TeamGroup[i]->GetHPRate())
 				{
