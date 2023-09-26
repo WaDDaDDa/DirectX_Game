@@ -17,6 +17,7 @@ public:
         UnitName = "Monk";
         AttackRange = MonkAttackRange;
         SkillRange = MonkSkillRange;
+        SkillColRange = MonkSkillColRange;
         UltRange = MonkUltRange;
 
         UnitSpeed = MonkSpeed;
@@ -67,11 +68,12 @@ protected:
 private:
     float4 MonkAttackRange = { 35.0f, 0.0f };
     float4 MonkSkillRange = { 200.0f, 0.0f };
+    float4 MonkSkillColRange = { 200.0f, 0.0f };
     float4 MonkUltRange = { 300.0f, 0.0f };
 
     float MonkSpeed = 80.0f;
     float MonkHp = 210.0f;
-    float MonkAtt = 20.0f;
+    float MonkAtt = 40.0f;
     float MonkDef = 40.0f;
     float MonkAbsoluteDef = 40.0f;
     float MonkAttackSpeed = 1.4f;

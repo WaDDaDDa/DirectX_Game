@@ -42,21 +42,7 @@ void GameUnit::Start()
 			PushCol->Transform.SetLocalScale(PushColScale);
 		}
 
-		// ÀÌº¥Æ® ¼ÂÆÃ
-		Event.Enter = [](GameEngineCollision* _this, GameEngineCollision* _Col)
-			{
-				int a = 0;
-			};
 
-		Event.Stay = [](GameEngineCollision* _this, GameEngineCollision* _Col)
-			{
-				int a = 0;
-			};
-
-		Event.Exit = [](GameEngineCollision* _this, GameEngineCollision* _Col)
-			{
-				int a = 0;
-			};
 	}
 }
 
@@ -92,6 +78,9 @@ void GameUnit::TeamSet(TeamType _Team)
 		// ½ºÅ³ ¹üÀ§ Ãæµ¹Ã¼
 		SkillRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::BlueTeamSkillRange);
 		SkillRangeCol->Transform.SetLocalScale(SkillRange);
+		// ½ºÅ³ Ãæµ¹Ã¼
+		SkillCol = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamSkillRange);
+		SkillCol->Transform.SetLocalScale(SkillColRange);
 		// ±Ã±Ø±â ¹üÀ§ Ãæµ¹Ã¼
 		UltRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::BlueTeamUltRange);
 		UltRangeCol->Transform.SetLocalScale(UltRange);
@@ -110,6 +99,9 @@ void GameUnit::TeamSet(TeamType _Team)
 		// ½ºÅ³ ¹üÀ§ Ãæµ¹Ã¼
 		SkillRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamSkillRange);
 		SkillRangeCol->Transform.SetLocalScale(SkillRange);
+		// ½ºÅ³ Ãæµ¹Ã¼
+		SkillCol = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamSkillRange);
+		SkillCol->Transform.SetLocalScale(SkillColRange);
 		// ±Ã±Ø±â ¹üÀ§ Ãæµ¹Ã¼
 		UltRangeCol = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamUltRange);
 		UltRangeCol->Transform.SetLocalScale(UltRange);
@@ -118,9 +110,54 @@ void GameUnit::TeamSet(TeamType _Team)
 	}
 }
 
+bool GameUnit::SkillCheck()
+{
+	if (TeamType::Blue == MyTeam)
+	{
+		// ½ºÅ³»ç¿ë
+		if (SkillRangeCol->Collision(CollisionOrder::RedTeamBody) && SkillCooltime <= SkillValue)
+		{
+			return true;
+		}
+	}
+	else if (TeamType::Red == MyTeam)
+	{
+		//½ºÅ³
+		if (SkillRangeCol->Collision(CollisionOrder::BlueTeamBody) && SkillCooltime <= SkillValue)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool GameUnit::UltCheck()
+{
+	if (TeamType::Blue == MyTeam)
+	{
+		// ±Ã±Ø±â »ç¿ë
+		if (UltRangeCol->Collision(CollisionOrder::RedTeamBody) && UltCooltime <= UltValue && false == UseUlt)
+		{
+			return true;
+		}
+	}
+	else if (TeamType::Red == MyTeam)
+	{
+		// ±Ã±Ø
+		if (UltRangeCol->Collision(CollisionOrder::BlueTeamBody) && UltCooltime <= UltValue && false == UseUlt)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 
 void GameUnit::Update(float _Delta)
 {
+	DieCheck();
 	StateUpdate(_Delta);
 
 	PushValue += _Delta;
@@ -139,14 +176,15 @@ void GameUnit::Update(float _Delta)
 		NextAggro();
 	}
 
-	if (TeamType::Blue == MyTeam)
-	{
-		BodyCol->CollisionEvent(CollisionOrder::RedTeamAttack, Event);
-	}
-	else if (TeamType::Red == MyTeam)
-	{
-		BodyCol->CollisionEvent(CollisionOrder::BlueTeamAttack, Event);
-	}
+	// ÀÌº¥Æ® »ý¼º
+	//if (TeamType::Blue == MyTeam)
+	//{
+	//	BodyCol->CollisionEvent(CollisionOrder::RedTeamAttack, Event);
+	//}
+	//else if (TeamType::Red == MyTeam)
+	//{
+	//	BodyCol->CollisionEvent(CollisionOrder::BlueTeamAttack, Event);
+	//}
 
 	if (UnitHP <= 0.0f && ImDie == false)
 	{
@@ -281,7 +319,6 @@ void GameUnit::SpwanStart()
 		Transform.SetWorldPosition(StartPos + HalfWindowScale);
 	}
 	UnitHP = UnitMaxHP;
-	AllCollisionOn();
 	SpwanRenderer->On();
 	SpwanRenderer->ChangeAnimation("SpwanEffect");
 }
@@ -336,14 +373,14 @@ void GameUnit::MoveUpdate(float _Delta)
 	if (TeamType::Blue == MyTeam)
 	{
 		// ±Ã±Ø±â »ç¿ë
-		if (UltRangeCol->Collision(CollisionOrder::RedTeamBody) && UltCooltime <= UltValue && false == UseUlt)
+		if (UltCheck())
 		{
 			ChangeState(GameUnitState::Ult);
 			return;
 		}
 
 		// ½ºÅ³»ç¿ë
-		if (SkillRangeCol->Collision(CollisionOrder::RedTeamBody) && SkillCooltime <= SkillValue)
+		if (SkillCheck())
 		{
 			ChangeState(GameUnitState::Skill);
 			return;
@@ -359,13 +396,13 @@ void GameUnit::MoveUpdate(float _Delta)
 	else if (TeamType::Red == MyTeam)
 	{
 		// ±Ã±Ø
-		if (UltRangeCol->Collision(CollisionOrder::BlueTeamBody) && UltCooltime <= UltValue && false == UseUlt)
+		if (UltCheck())
 		{
 			ChangeState(GameUnitState::Ult);
 			return;
 		}
 		//½ºÅ³
-		if (SkillRangeCol->Collision(CollisionOrder::BlueTeamBody) && SkillCooltime <= SkillValue)
+		if (SkillCheck())
 		{
 			ChangeState(GameUnitState::Skill);
 			return;
@@ -417,14 +454,14 @@ void GameUnit::BackMoveUpdate(float _Delta)
 	if (TeamType::Blue == MyTeam)
 	{
 		// ±Ã±Ø±â »ç¿ë
-		if (UltRangeCol->Collision(CollisionOrder::RedTeamBody) && UltCooltime <= UltValue && false == UseUlt)
+		if (UltCheck())
 		{
 			ChangeState(GameUnitState::Ult);
 			return;
 		}
 
 		// ½ºÅ³»ç¿ë
-		if (SkillRangeCol->Collision(CollisionOrder::RedTeamBody) && SkillCooltime <= SkillValue)
+		if (SkillCheck())
 		{
 			ChangeState(GameUnitState::Skill);
 			return;
@@ -440,13 +477,13 @@ void GameUnit::BackMoveUpdate(float _Delta)
 	else if (TeamType::Red == MyTeam)
 	{
 		// ±Ã±Ø
-		if (UltRangeCol->Collision(CollisionOrder::BlueTeamBody) && UltCooltime <= UltValue && false == UseUlt)
+		if (UltCheck())
 		{
 			ChangeState(GameUnitState::Ult);
 			return;
 		}
 		//½ºÅ³
-		if (SkillRangeCol->Collision(CollisionOrder::BlueTeamBody) && SkillCooltime <= SkillValue)
+		if (SkillCheck())
 		{
 			ChangeState(GameUnitState::Skill);
 			return;
@@ -497,14 +534,14 @@ void GameUnit::SearchMoveUpdate(float _Delta)
 	if (TeamType::Blue == MyTeam)
 	{
 		// ±Ã±Ø±â »ç¿ë
-		if (UltRangeCol->Collision(CollisionOrder::RedTeamBody) && UltCooltime <= UltValue && false == UseUlt)
+		if (UltCheck())
 		{
 			ChangeState(GameUnitState::Ult);
 			return;
 		}
 
 		// ½ºÅ³»ç¿ë
-		if (SkillRangeCol->Collision(CollisionOrder::RedTeamBody) && SkillCooltime <= SkillValue)
+		if (SkillCheck())
 		{
 			ChangeState(GameUnitState::Skill);
 			return;
@@ -520,13 +557,13 @@ void GameUnit::SearchMoveUpdate(float _Delta)
 	else if (TeamType::Red == MyTeam)
 	{
 		// ±Ã±Ø
-		if (UltRangeCol->Collision(CollisionOrder::BlueTeamBody) && UltCooltime <= UltValue && false == UseUlt)
+		if (UltCheck())
 		{
 			ChangeState(GameUnitState::Ult);
 			return;
 		}
 		//½ºÅ³
-		if (SkillRangeCol->Collision(CollisionOrder::BlueTeamBody) && SkillCooltime <= SkillValue)
+		if (SkillCheck())
 		{
 			ChangeState(GameUnitState::Skill);
 			return;
@@ -692,7 +729,6 @@ void GameUnit::Ult2Update(float _Delta)
 void GameUnit::DiePrevStart()
 {
 	ImDie = true;
-	AllCollisionOff();
 }
 
 void GameUnit::DiePrevUpdate(float _Delta)
@@ -711,6 +747,8 @@ void GameUnit::DieStart()
 
 void GameUnit::DieUpdate(float _Delta)
 {
+	BodyCol;
+
 	RespawnTime += _Delta;
 
 	if (RespawnTime >= 5.0f)

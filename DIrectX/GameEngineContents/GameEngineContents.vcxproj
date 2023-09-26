@@ -206,6 +206,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Swordman.cpp" />
+    <ClCompile Include="SwordmanUltEffect.cpp" />
     <ClCompile Include="TextArrow.cpp">
       <SubType>
       </SubType>
@@ -251,6 +252,7 @@
     <ClInclude Include="PlayLevel.h" />
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="Swordman.h" />
+    <ClInclude Include="SwordmanUltEffect.h" />
     <ClInclude Include="TextArrow.h">
       <SubType>
       </SubType>

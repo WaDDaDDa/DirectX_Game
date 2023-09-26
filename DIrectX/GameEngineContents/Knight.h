@@ -17,6 +17,7 @@ public:
         UnitName = "Knight";
         AttackRange = KnightAttackRange;
         SkillRange = KnightSkillRange;
+        SkillColRange = KnightSkillColRange;
         UltRange = KnightUltRange;
 
         UnitSpeed = KnightSpeed;
@@ -69,15 +70,16 @@ protected:
 private:
     float4 KnightAttackRange = { 37.0f, 0.0f };
     float4 KnightSkillRange = { 200.0f, 0.0f };
+    float4 KnightSkillColRange = { 200.0f, 0.0f };
     float4 KnightUltRange = { 200.0f, 0.0f };
 
     float KnightSpeed = 80.0f;
     float KnightHp = 200.0f;
-    float KnightAtt = 21.0f;
+    float KnightAtt = 42.0f;
     float KnightDef = 60.0f;
     float KnightAbsoluteDef = 60.0f;
     float KnightAttackSpeed = 1.7f;
     float KnightSkillCooltime = 4.2f;
-    float KnightUltCooltime = 5.0f;
+    float KnightUltCooltime = 25.0f;
 };
 

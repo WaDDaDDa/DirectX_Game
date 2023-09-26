@@ -374,7 +374,6 @@ public:
 		return Result.X;
 	}
 
-
 	float4 VectorRotationToDegXReturn(const float _Deg)
 	{
 		return VectorRotationToDegX(*this, _Deg);

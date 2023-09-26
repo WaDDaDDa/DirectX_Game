@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "Swordman.h"
-
+#include "SwordmanUltEffect.h"
 
 Swordman::Swordman()
 {
@@ -46,6 +46,41 @@ void Swordman::Start()
 		GameEngineSprite::CreateSingle("swordman_ult.png");
 	}
 
+	// 이벤트 셋팅
+	Event.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
+		{
+			if (TeamType::Blue == MyTeam)
+			{
+				// 궁극기 사용
+				if (UltRangeCol->Collision(CollisionOrder::RedTeamBody) && UltCooltime <= UltValue && false == UseUlt)
+				{
+					AggroUnit = reinterpret_cast<GameUnit*>(_Col->GetActor());
+					SwordUlt = true;
+					return;
+				}
+			}
+			else if (TeamType::Red == MyTeam)
+			{
+				// 궁극
+				if (UltRangeCol->Collision(CollisionOrder::BlueTeamBody) && UltCooltime <= UltValue && false == UseUlt)
+				{
+					AggroUnit = reinterpret_cast<GameUnit*>(_Col->GetActor());
+					SwordUlt = true;
+					return;
+				}
+			}
+		};
+
+	Event.Stay = [](GameEngineCollision* _this, GameEngineCollision* _Col)
+		{
+			return false;
+		};
+
+	Event.Exit = [](GameEngineCollision* _this, GameEngineCollision* _Col)
+		{
+			return false;
+		};
+
 	SetUnitStatus();
 
 }
@@ -58,7 +93,7 @@ void Swordman::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer->CreateAnimation("Swordman_Move", "SwordmanAni", 0.2f, 5, 13);
 		MainSpriteRenderer->CreateAnimation("Swordman_Attack", "SwordmanAni", 0.2f, 14, 15, false);
 		MainSpriteRenderer->CreateAnimation("Swordman_Attack2", "SwordmanAni", 0.2f, 16, 17, false);
-		MainSpriteRenderer->CreateAnimation("Swordman_Skill", "SwordmanAni", 0.2f, 18, 20, false);
+		MainSpriteRenderer->CreateAnimation("Swordman_Skill", "SwordmanAni", 0.1f, 18, 20, false);
 		MainSpriteRenderer->CreateAnimation("Swordman_Skill2", "SwordmanAni", 0.1f, 21, 26, false);
 		MainSpriteRenderer->CreateAnimation("Swordman_Ult", "SwordmanAni", 0.1f, 36, 39, false);
 		MainSpriteRenderer->CreateAnimation("Swordman_Ult2", "SwordmanAni", 0.1f, 40, 43, false);
@@ -87,12 +122,14 @@ void Swordman::LevelEnd(GameEngineLevel* _NextLevel)
 void Swordman::SpwanStart()
 {
 	GameUnit::SpwanStart();
+	SkillEffectRenderer->ChangeAnimation("SwordmanSkillBlack");
 	MainSpriteRenderer->ChangeAnimation("Swordman_Idle");
 }
 
 void Swordman::IdleStart()
 {
 	GameUnit::IdleStart();
+	SkillEffectRenderer->ChangeAnimation("SwordmanSkillBlack");
 	MainSpriteRenderer->ChangeAnimation("Swordman_Idle");
 }
 
@@ -231,12 +268,12 @@ void Swordman::Skill2Update(float _Delta)
 	{
 		if (TeamType::Blue == MyTeam)
 		{
-			SkillRangeCol->Collision(CollisionOrder::RedTeamBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
+			SkillCol->Collision(CollisionOrder::RedTeamBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
 				{
 					for (size_t i = 0; i < _Collision.size(); i++)
 					{
 						// 공격대미지 공식
-						reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 0.5f);
+						reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 0.7f);
 						SkillTick -= 1.0f;
 						SkillDamageDeley = 0.1f;
 						return;
@@ -246,12 +283,12 @@ void Swordman::Skill2Update(float _Delta)
 		else if (TeamType::Red == MyTeam)
 		{
 
-			SkillRangeCol->Collision(CollisionOrder::BlueTeamBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
+			SkillCol->Collision(CollisionOrder::BlueTeamBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
 				{
 					for (size_t i = 0; i < _Collision.size(); i++)
 					{
 						// 공격대미지 공식
-						reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 0.5f);
+						reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 0.7f);
 						SkillTick -= 1.0f;
 						SkillDamageDeley = 0.1f;
 						return;
@@ -264,6 +301,8 @@ void Swordman::Skill2Update(float _Delta)
 
 void Swordman::UltStart()
 {
+	GameUnit::UltStart();
+	SwordUlt = false;
 	MainSpriteRenderer->ChangeAnimation("Swordman_Ult");
 }
 
@@ -278,9 +317,9 @@ void Swordman::UltUpdate(float _Delta)
 
 void Swordman::Ult2Start()
 {
-	float4 Target = AggroUnit->Transform.GetWorldPosition().NormalizeReturn();
-	//Transform.SetWorldPosition(AggroUnit->Transform.GetWorldPosition());
-	Transform.SetWorldPosition(Target * 400.0f);
+	GetLevel()->CreateActor<SwordmanUltEffect>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
+
+	Transform.SetWorldPosition(AggroUnit->Transform.GetWorldPosition());
 
 	if (AggroUnit->GetDir() == GameUnitDir::Left)
 	{
@@ -296,7 +335,11 @@ void Swordman::Ult2Start()
 
 void Swordman::Ult2Update(float _Delta)
 {
-
+	if (MainSpriteRenderer->IsCurAnimationEnd())
+	{
+		ChangeState(GameUnitState::Idle);
+		return;
+	}
 }
 
 void Swordman::DiePrevStart()
@@ -304,4 +347,19 @@ void Swordman::DiePrevStart()
 	GameUnit::DiePrevStart();
 	SkillEffectRenderer->ChangeAnimation("SwordmanSkillBlack");
 	MainSpriteRenderer->ChangeAnimation("Swordman_Die");
+}
+
+bool Swordman::UltCheck()
+{
+	//이벤트 사용.
+	if (TeamType::Blue == MyTeam)
+	{
+		UltRangeCol->CollisionEvent(CollisionOrder::RedTeamBody, Event);
+	}
+	else if (TeamType::Red == MyTeam)
+	{
+		UltRangeCol->CollisionEvent(CollisionOrder::BlueTeamBody, Event);
+	}
+
+	return SwordUlt;
 }

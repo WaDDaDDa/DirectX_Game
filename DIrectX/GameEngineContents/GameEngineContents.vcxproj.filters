@@ -53,6 +53,9 @@
     <ClCompile Include="Ninja.cpp">
       <Filter>GameUnit</Filter>
     </ClCompile>
+    <ClCompile Include="SwordmanUltEffect.cpp">
+      <Filter>GameUnit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -108,6 +111,9 @@
       <Filter>GameUnit</Filter>
     </ClInclude>
     <ClInclude Include="Ninja.h">
+      <Filter>GameUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordmanUltEffect.h">
       <Filter>GameUnit</Filter>
     </ClInclude>
   </ItemGroup>

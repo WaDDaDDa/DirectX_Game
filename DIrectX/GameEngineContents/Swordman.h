@@ -17,6 +17,7 @@ public:
         UnitName = "Swordman";
         AttackRange = SwordmanAttackRange;
         SkillRange = SwordmanSkillRange;
+        SkillColRange = SwordmanSkillColRange;
         UltRange = SwordmanUltRange;
 
         UnitSpeed = SwordmanSpeed;
@@ -40,6 +41,8 @@ protected:
 
     void LevelStart(GameEngineLevel* _PrevLevel) override;
     void LevelEnd(GameEngineLevel* _NextLevel) override;
+
+    bool UltCheck() override;
 
     void SpwanStart() override;
 
@@ -73,19 +76,22 @@ protected:
 private:
     float4 SwordmanAttackRange = { 45.0f, 0.0f };
     float4 SwordmanSkillRange = { 45.0f, 0.0f };
-    float4 SwordmanUltRange = { 55.0f, 0.0f };
+    float4 SwordmanSkillColRange = { 60.0f, 0.0f };
+    float4 SwordmanUltRange = { 700.0f, 0.0f };
 
     float SwordmanSpeed = 100.0f;
     float SwordmanHp = 130.0f;
-    float SwordmanAtt = 15.0f;
+    float SwordmanAtt = 30.0f;
     float SwordmanDef = 30.0f;
     float SwordmanAbsoluteDef = 30.0f;
     float SwordmanAttackSpeed = 1.25f;
     float SwordmanSkillCooltime = 3.8f;
-    float SwordmanUltCooltime = 30.0f;
+    float SwordmanUltCooltime = 0.0f;
 
 
     float SkillTick = 3.0f;
     float SkillDamageDeley = 0.1f;
+
+    bool SwordUlt = false;
 };
 

@@ -154,6 +154,11 @@ public:
     // 충돌이벤트
     EventParameter Event;
 
+    float GetUnitAttack()
+    {
+        return UnitAtt;
+    }
+
     float GetHP()
     {
         return UnitHP;
@@ -168,7 +173,8 @@ public:
     {
         // 들어온 공격력에 유닛의 방어력을 반영해서 계산시킨다.
         //float Result = _Value - (UnitDef * 0.4f);
-        float Result = _Value * (100.0f - UnitDef) / 100.0f;
+        float DefRate = (UnitDef / (100.0f + UnitDef));
+        float Result = _Value - _Value * DefRate;
         if (Result <= 0.0f)
         {
             return;
@@ -218,6 +224,7 @@ public:
         BodyCol->Off();
         AttackRangeCol->Off();
         SkillRangeCol->Off();
+        SkillCol->Off();
         UltRangeCol->Off();
         PushCol->Off();
     }
@@ -227,8 +234,26 @@ public:
         BodyCol->On();
         AttackRangeCol->On();
         SkillRangeCol->On();
+        SkillCol->On();
         UltRangeCol->On();
         PushCol->On();
+    }
+
+    void DieCheck()
+    {
+        if (true == ImDie)
+        {
+            AllCollisionOff();
+        }
+        else if (false == ImDie)
+        {
+            AllCollisionOn();
+        }
+    }
+
+    GameUnit* GetAggroUnit()
+    {
+        return AggroUnit;
     }
 
     TeamType MyTeam = TeamType::Blue;
@@ -240,6 +265,7 @@ protected:
     std::shared_ptr<GameEngineCollision> BodyCol;
     std::shared_ptr<GameEngineCollision> AttackRangeCol;
     std::shared_ptr<GameEngineCollision> SkillRangeCol;
+    std::shared_ptr<GameEngineCollision> SkillCol;
     std::shared_ptr<GameEngineCollision> UltRangeCol;
     // 공격할때 플레이어 유닛 하나만을 단일 타겟팅 하고싶은데..
     // 그렇다면 공격할때마다 콜리젼 위치를 공격범위에 닿은 유닛의 위치에 Set해서
@@ -256,6 +282,9 @@ protected:
 
     void ChangeState(GameUnitState _State);
     void StateUpdate(float _Delta);
+
+    virtual bool SkillCheck();
+    virtual bool UltCheck();
 
     // State
     void MaxStart();
@@ -309,8 +338,6 @@ protected:
     std::shared_ptr<class GameEngineSpriteRenderer> MainSpriteRenderer;
     std::shared_ptr<class GameEngineSpriteRenderer> SkillEffectRenderer;
 
-
-
     GameUnit* AggroUnit = nullptr;
 
     float4 TargetPos = float4::ZERO;
@@ -319,6 +346,7 @@ protected:
     std::string_view UnitName = "";
     float4 AttackRange = { 55.0f, 0.0f };
     float4 SkillRange = { 70.0f, 0.0f };
+    float4 SkillColRange = { 70.0f, 0.0f };
     float4 UltRange = { 100.0f, 0.0f };
     float UnitSpeed = 100.0f;
     float UnitHP = 100.0f;

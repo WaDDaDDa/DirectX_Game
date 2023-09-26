@@ -88,12 +88,14 @@ void Knight::LevelEnd(GameEngineLevel* _NextLevel)
 void Knight::SpwanStart()
 {
 	GameUnit::SpwanStart();
+	SkillEffectRenderer->ChangeAnimation("KnightSkillBlack");
 	MainSpriteRenderer->ChangeAnimation("Knight_Idle");
 }
 
 void Knight::IdleStart()
 {
 	GameUnit::IdleStart();
+	SkillEffectRenderer->ChangeAnimation("KnightSkillBlack");
 	MainSpriteRenderer->ChangeAnimation("Knight_Idle");
 }
 

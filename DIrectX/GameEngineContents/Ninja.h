@@ -17,6 +17,7 @@ public:
         UnitName = "Ninja";
         AttackRange = NinjaAttackRange;
         SkillRange = NinjaSkillRange;
+        SkillColRange = NinjaSkillColRange;
         UltRange = NinjaUltRange;
 
         UnitSpeed = NinjaSpeed;
@@ -69,11 +70,12 @@ protected:
 private:
     float4 NinjaAttackRange = { 40.0f, 0.0f };
     float4 NinjaSkillRange = { 600.0f, 0.0f };
+    float4 NinjaSkillColRange = { 600.0f, 0.0f };
     float4 NinjaUltRange = { 200.0f, 0.0f };
 
     float NinjaSpeed = 80.0f;
     float NinjaHp = 120.0f;
-    float NinjaAtt = 25.0f;
+    float NinjaAtt = 50.0f;
     float NinjaDef = 10.0f;
     float NinjaAbsoluteDef = 10.0f;
     float NinjaAttackSpeed = 1.1f;
