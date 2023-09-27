@@ -177,32 +177,18 @@ void Swordman::Attack2Update(float _Delta)
 {
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
+		//이벤트 사용.
+		if (TeamType::Blue == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::RedTeamBody, MoveEvent))
+		{
+			return;
+		}
+		else if (TeamType::Red == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::BlueTeamBody, MoveEvent))
+		{
+			return;
+		}
+
 		ChangeState(GameUnitState::Move);
 		return;
-
-		GameEngineRandom NewRand;
-		int MoveRand = NewRand.RandomInt(0, 5);
-		static long long RandSeed = reinterpret_cast<long long>(this);
-		RandSeed++;
-		NewRand.SetSeed(RandSeed);
-
-		switch (MoveRand)
-		{
-		case 0:
-			ChangeState(GameUnitState::Move);
-			return;
-		case 1:
-		case 2:
-		case 3:
-			ChangeState(GameUnitState::SearchMove);
-			return;
-		case 4:
-		case 5:
-			ChangeState(GameUnitState::BackMove);
-			return;
-		default:
-			break;
-		}
 	}
 }
 
@@ -234,32 +220,18 @@ void Swordman::Skill2Update(float _Delta)
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
 		SkillEffectRenderer->ChangeAnimation("SwordmanSkillBlack");
+		//이벤트 사용.
+		if (TeamType::Blue == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::RedTeamBody, MoveEvent))
+		{
+			return;
+		}
+		else if (TeamType::Red == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::BlueTeamBody, MoveEvent))
+		{
+			return;
+		}
+
 		ChangeState(GameUnitState::Move);
 		return;
-
-		GameEngineRandom NewRand;
-		int MoveRand = NewRand.RandomInt(0, 5);
-		static long long RandSeed = reinterpret_cast<long long>(this);
-		RandSeed++;
-		NewRand.SetSeed(RandSeed);
-
-		switch (MoveRand)
-		{
-		case 0:
-			ChangeState(GameUnitState::Move);
-			return;
-		case 1:
-		case 2:
-		case 3:
-			ChangeState(GameUnitState::SearchMove);
-			return;
-		case 4:
-		case 5:
-			ChangeState(GameUnitState::BackMove);
-			return;
-		default:
-			break;
-		}
 	}
 
 	SkillDamageDeley -= _Delta;
@@ -342,7 +314,17 @@ void Swordman::Ult2Update(float _Delta)
 {
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
-		ChangeState(GameUnitState::Idle);
+		//이벤트 사용.
+		if (TeamType::Blue == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::RedTeamBody, MoveEvent))
+		{
+			return;
+		}
+		else if (TeamType::Red == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::BlueTeamBody, MoveEvent))
+		{
+			return;
+		}
+
+		ChangeState(GameUnitState::Move);
 		return;
 	}
 }

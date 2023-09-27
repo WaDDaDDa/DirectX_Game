@@ -42,11 +42,31 @@ void GameUnit::Start()
 			PushCol->Transform.SetLocalScale(PushColScale);
 		}
 	}
+
+	// 이벤트 셋팅
+	MoveEvent.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
+		{
+			AggroSetting(_Col->GetActor()->GetDynamic_Cast_This<GameUnit>()->GetPointer());
+			ChangeState(GameUnitState::Move);
+			return;
+		};
+
+	MoveEvent.Stay = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
+		{
+			ChangeState(GameUnitState::BackMove);
+			return;
+		};
+
+	MoveEvent.Exit = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
+		{
+			ChangeState(GameUnitState::Idle);
+			return;
+		};
 }
 
 void GameUnit::LevelStart(GameEngineLevel* _PrevLevel)
 {
-	AggroUnit = EnemyGroup[0];
+	AggroSetting(EnemyGroup[0]);
 	ChangeState(GameUnitState::Spwan);
 	// HPUI 생성
 	GetLevel()->CreateActor<GameUnitUI>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
@@ -173,16 +193,6 @@ void GameUnit::Update(float _Delta)
 	{
 		NextAggro();
 	}
-
-	// 이벤트 생성
-	//if (TeamType::Blue == MyTeam)
-	//{
-	//	BodyCol->CollisionEvent(CollisionOrder::RedTeamAttack, Event);
-	//}
-	//else if (TeamType::Red == MyTeam)
-	//{
-	//	BodyCol->CollisionEvent(CollisionOrder::BlueTeamAttack, Event);
-	//}
 
 	if (UnitHP <= 0.0f && ImDie == false)
 	{
@@ -340,10 +350,65 @@ void GameUnit::IdleStart()
 void GameUnit::IdleUpdate(float _Delta)
 {
 	// 적이 있다면으로 조건 변경.
-	if (GetLiveTime() >= 0.5f)
+	if (GetLiveTime() >= 0.2f)
 	{
 
 		ChangeState(GameUnitState::Move);
+		return;
+	}
+
+	if (TeamType::Blue == MyTeam)
+	{
+		// 궁극기 사용
+		if (UltCheck())
+		{
+			ChangeState(GameUnitState::Ult);
+			return;
+		}
+
+		// 스킬사용
+		if (SkillCheck())
+		{
+			ChangeState(GameUnitState::Skill);
+			return;
+		}
+
+		// 공격
+		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackSpeed <= AttackValue)
+		{
+			ChangeState(GameUnitState::Attack);
+			return;
+		}
+	}
+	else if (TeamType::Red == MyTeam)
+	{
+		// 궁극
+		if (UltCheck())
+		{
+			ChangeState(GameUnitState::Ult);
+			return;
+		}
+		//스킬
+		if (SkillCheck())
+		{
+			ChangeState(GameUnitState::Skill);
+			return;
+		}
+		// 공격
+		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackSpeed <= AttackValue)
+		{
+			ChangeState(GameUnitState::Attack);
+			return;
+		}
+	}
+	
+	//이벤트 사용.
+	if (TeamType::Blue == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::RedTeamBody, MoveEvent))
+	{
+		return;
+	}
+	else if (TeamType::Red == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::BlueTeamBody, MoveEvent))
+	{
 		return;
 	}
 }
@@ -366,7 +431,6 @@ void GameUnit::MoveStart()
 void GameUnit::MoveUpdate(float _Delta)
 {
 	ChangeMoveDir();
-
 	// 공격 범위에 적군 body가 들어오면. 공격.
 	if (TeamType::Blue == MyTeam)
 	{
@@ -425,7 +489,6 @@ void GameUnit::MoveUpdate(float _Delta)
 		ChangeState(GameUnitState::CollMove);
 		return;
 	}
-
 
 	Transform.AddLocalPosition((MoveDir * UnitSpeed * _Delta));
 }
@@ -494,9 +557,19 @@ void GameUnit::BackMoveUpdate(float _Delta)
 		}
 	}
 
-	if (GetLiveTime() >= 1.0f)
+	if (GetLiveTime() >= 0.5f)
 	{
-		ChangeState(GameUnitState::Idle);
+		ChangeState(GameUnitState::Move);
+		return;
+	}
+
+	//이벤트 사용.
+	if (TeamType::Blue == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::RedTeamBody, MoveEvent))
+	{
+		return;
+	}
+	else if (TeamType::Red == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::BlueTeamBody, MoveEvent))
+	{
 		return;
 	}
 
@@ -614,32 +687,8 @@ void GameUnit::CollMoveUpdate(float _Delta)
 	if (GetLiveTime() >= 0.2f)
 	{
 		PushValue = 0.0f;
-		ChangeState(GameUnitState::Move);
+		ChangeState(GameUnitState::Idle);
 		return;
-
-		GameEngineRandom NewRand;
-		int MoveRand = NewRand.RandomInt(0, 3);
-		static long long RandSeed = reinterpret_cast<long long>(this);
-		RandSeed++;
-		NewRand.SetSeed(RandSeed);
-
-		switch (MoveRand)
-		{
-		case 0:
-			ChangeState(GameUnitState::Move);
-			return;
-		case 1:
-		case 2:
-		case 3:
-			ChangeState(GameUnitState::SearchMove);
-			return;
-		case 4:
-		case 5:
-			ChangeState(GameUnitState::BackMove);
-			return;
-		default:
-			break;
-		}
 	}
 
 	Transform.AddLocalPosition((MoveDir * UnitSpeed * _Delta));

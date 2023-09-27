@@ -153,6 +153,7 @@ public:
 
     // 충돌이벤트
     EventParameter Event;
+    EventParameter MoveEvent;
 
     float GetUnitAttack()
     {
@@ -377,6 +378,7 @@ private:
     float4 PushColScale = { 20.0f, 0.0f };
 
     float4 MoveDir;
+    bool BackMoveBool = false;
     // 궁극기 사용 스킬사용 조건이 다 다르다면 Idle상태에서만 스킬을 사용하게 하고
     // Idle을 오버라이드 하는 방법을 시도해보자.
 

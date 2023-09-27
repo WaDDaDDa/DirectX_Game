@@ -53,6 +53,12 @@ void KnightUltEffect::Update(float _Delta)
 		Death();
 	}
 
+	if (GameUnitState::DiePrev == Unit->GetState() || GameUnitState::Die == Unit->GetState())
+	{
+		Unit->DefAbsolute();
+		Death();
+	}
+
 	if (true == Renderer->IsCurAnimation("KnightUltEffect"))
 	{
 		if (Renderer->IsCurAnimationEnd())

@@ -145,33 +145,18 @@ void Ninja::Attack2Update(float _Delta)
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
 
+		//이벤트 사용.
+		if (TeamType::Blue == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::RedTeamBody, MoveEvent))
+		{
+			return;
+		}
+		else if (TeamType::Red == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::BlueTeamBody, MoveEvent))
+		{
+			return;
+		}
+
 		ChangeState(GameUnitState::Move);
 		return;
-
-
-		GameEngineRandom NewRand;
-		int MoveRand = NewRand.RandomInt(0, 5);
-		static long long RandSeed = reinterpret_cast<long long>(this);
-		RandSeed++;
-		NewRand.SetSeed(RandSeed);
-
-		switch (MoveRand)
-		{
-		case 0:
-			ChangeState(GameUnitState::Move);
-			return;
-		case 1:
-		case 2:
-		case 3:
-			ChangeState(GameUnitState::SearchMove);
-			return;
-		case 4:
-		case 5:
-			ChangeState(GameUnitState::BackMove);
-			return;
-		default:
-			break;
-		}
 	}
 }
 
@@ -205,7 +190,7 @@ void Ninja::Skill2Start()
 		Transform.AddWorldPosition({ -30.0f,0.0f });
 	}
 	MainSpriteRenderer->ChangeAnimation("Ninja_Skill2");
-	SkillTick = 1.0f;
+	SkillTick = 1;
 }
 
 void Ninja::Skill2Update(float _Delta)
@@ -214,35 +199,21 @@ void Ninja::Skill2Update(float _Delta)
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
 		SkillEffectRenderer->ChangeAnimation("NinjaSkillBlack");
+		//이벤트 사용.
+		if (TeamType::Blue == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::RedTeamBody, MoveEvent))
+		{
+			return;
+		}
+		else if (TeamType::Red == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::BlueTeamBody, MoveEvent))
+		{
+			return;
+		}
+
 		ChangeState(GameUnitState::Move);
 		return;
-
-		GameEngineRandom NewRand;
-		int MoveRand = NewRand.RandomInt(0, 5);
-		static long long RandSeed = reinterpret_cast<long long>(this);
-		RandSeed++;
-		NewRand.SetSeed(RandSeed);
-
-		switch (MoveRand)
-		{
-		case 0:
-			ChangeState(GameUnitState::Move);
-			return;
-		case 1:
-		case 2:
-		case 3:
-			ChangeState(GameUnitState::SearchMove);
-			return;
-		case 4:
-		case 5:
-			ChangeState(GameUnitState::BackMove);
-			return;
-		default:
-			break;
-		}
 	}
 
-	if (SkillTick <= 0.0f)
+	if (SkillTick <= 0)
 	{
 		return;
 	}
@@ -256,7 +227,7 @@ void Ninja::Skill2Update(float _Delta)
 				{
 					// 공격대미지 공식
 					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 1.3f);
-					SkillTick -= 1.0f;
+					SkillTick -= 1;
 					return;
 				}
 			});
@@ -270,7 +241,7 @@ void Ninja::Skill2Update(float _Delta)
 				{
 					// 공격대미지 공식
 					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 1.3f);
-					SkillTick -= 1.0f;
+					SkillTick -= 1;
 					return;
 				}
 			});
@@ -319,7 +290,18 @@ void Ninja::UltUpdate(float _Delta)
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
 		SkillEffectRenderer->ChangeAnimation("NinjaSkillBlack");
-		ChangeState(GameUnitState::Idle);
+
+		//이벤트 사용.
+		if (TeamType::Blue == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::RedTeamBody, MoveEvent))
+		{
+			return;
+		}
+		else if (TeamType::Red == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::BlueTeamBody, MoveEvent))
+		{
+			return;
+		}
+
+		ChangeState(GameUnitState::Move);
 		return;
 	}
 }

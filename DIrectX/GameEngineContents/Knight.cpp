@@ -142,32 +142,17 @@ void Knight::Attack2Update(float _Delta)
 {
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
-		ChangeState(GameUnitState::Move);
-		return;
-
-		GameEngineRandom NewRand;
-		int MoveRand = NewRand.RandomInt(0, 5);
-		static long long RandSeed = reinterpret_cast<long long>(this);
-		RandSeed++;
-		NewRand.SetSeed(RandSeed);
-
-		switch (MoveRand)
+		//이벤트 사용.
+		if (TeamType::Blue == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::RedTeamBody, MoveEvent))
 		{
-		case 0:
-			ChangeState(GameUnitState::Move);
 			return;
-		case 1:
-		case 2:
-		case 3:
-			ChangeState(GameUnitState::SearchMove);
-			return;
-		case 4:
-		case 5:
-			ChangeState(GameUnitState::BackMove);
-			return;
-		default:
-			break;
 		}
+		else if (TeamType::Red == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::BlueTeamBody, MoveEvent))
+		{
+			return;
+		}
+		ChangeState(GameUnitState::Idle);
+		return;
 	}
 }
 
@@ -196,32 +181,18 @@ void Knight::SkillUpdate(float _Delta)
 	{
 		SkillEffectRenderer->ChangeAnimation("KnightSkillBlack");
 
-		ChangeState(GameUnitState::Move);
-		return;
-
-		GameEngineRandom NewRand;
-		int MoveRand = NewRand.RandomInt(0, 5);
-		static long long RandSeed = reinterpret_cast<long long>(this);
-		RandSeed++;
-		NewRand.SetSeed(RandSeed);
-
-		switch (MoveRand)
+		//이벤트 사용.
+		if (TeamType::Blue == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::RedTeamBody, MoveEvent))
 		{
-		case 0:
-			ChangeState(GameUnitState::Move);
 			return;
-		case 1:
-		case 2:
-		case 3:
-			ChangeState(GameUnitState::SearchMove);
-			return;
-		case 4:
-		case 5:
-			ChangeState(GameUnitState::BackMove);
-			return;
-		default:
-			break;
 		}
+		else if (TeamType::Red == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::BlueTeamBody, MoveEvent))
+		{
+			return;
+		}
+
+		ChangeState(GameUnitState::Idle);
+		return;
 	}
 }
 
@@ -245,9 +216,18 @@ void Knight::UltStart()
 
 void Knight::UltUpdate(float _Delta)
 {
-	//UltEffectRenderer->Transform.AddWorldRotation({ 0.0f, 360.0f * _Delta  });
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
+		//이벤트 사용.
+		if (TeamType::Blue == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::RedTeamBody, MoveEvent))
+		{
+			return;
+		}
+		else if (TeamType::Red == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::BlueTeamBody, MoveEvent))
+		{
+			return;
+		}
+
 		ChangeState(GameUnitState::Idle);
 		return;
 	}
