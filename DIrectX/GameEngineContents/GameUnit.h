@@ -260,6 +260,7 @@ public:
     TeamType MyTeam = TeamType::Blue;
     std::vector<GameUnit*> EnemyGroup;
     std::vector<GameUnit*> TeamGroup;
+    bool ImDie = false;
 
 protected:
     std::shared_ptr<GameEngineSpriteRenderer> SpwanRenderer;
@@ -366,7 +367,6 @@ protected:
     float UltCooltime = 30.0f;
     float UltValue = 0.0f;
 
-    bool ImDie = false;
     bool UseUlt = false;
 
 private:

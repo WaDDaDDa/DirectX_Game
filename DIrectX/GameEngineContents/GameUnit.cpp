@@ -336,8 +336,6 @@ void GameUnit::SpwanUpdate(float _Delta)
 {
 	if (true == SpwanRenderer->IsCurAnimationEnd())
 	{
-		SpwanRenderer->Off();
-		SpwanRenderer->ChangeAnimation("SpwanEffectBlack");
 		ChangeState(GameUnitState::Idle);
 		return;
 	}
@@ -345,6 +343,8 @@ void GameUnit::SpwanUpdate(float _Delta)
 
 void GameUnit::IdleStart()
 {
+	SpwanRenderer->Off();
+	SpwanRenderer->ChangeAnimation("SpwanEffectBlack");
 	ChangeDir();
 }
 
@@ -781,6 +781,8 @@ void GameUnit::Ult2Update(float _Delta)
 void GameUnit::DiePrevStart()
 {
 	ImDie = true;
+	SpwanRenderer->Off();
+	SpwanRenderer->ChangeAnimation("SpwanEffectBlack");
 }
 
 void GameUnit::DiePrevUpdate(float _Delta)

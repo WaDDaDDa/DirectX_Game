@@ -122,12 +122,11 @@ void GameUnitUI::Update(float _Delta)
 		//Renderer3->SetImageScale({ 48.5f,3.0f });
 	}
 
-	if (Unit->GetState() == GameUnitState::Die)
+	if (true == Unit->ImDie)
 	{
 		AllRendererOff();
 	}
-
-	if (Unit->GetState() == GameUnitState::Spwan)
+	else if (false == Unit->ImDie)
 	{
 		AllRendererOn();
 	}
