@@ -20,6 +20,9 @@ void Bird::Start()
 	Renderer->ChangeAnimation("Bird");
 	Renderer->AutoSpriteSizeOn();
 
+	BodyCol = CreateComponent<GameEngineCollision>(CollisionOrder::TestType);
+	BodyCol->Transform.SetLocalScale(BodyColScale);
+
 }
 
 void Bird::Update(float _Delta)
@@ -27,6 +30,21 @@ void Bird::Update(float _Delta)
 	float Speed = 100.0f;
 
 	float4 WPos = Transform.GetWorldPosition();
+
+	if (true == BodyCol->Collision(CollisionOrder::UnitBody))
+	{
+		int a = 0;
+	}
+
+	if (GameEngineInput::IsPress('2'))
+	{
+		BodyCol->Off();
+	}
+
+	if (GameEngineInput::IsPress('3'))
+	{
+		BodyCol->On();
+	}
 
 	if (GameEngineInput::IsPress('A'))
 	{

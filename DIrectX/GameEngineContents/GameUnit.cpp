@@ -326,6 +326,7 @@ void GameUnit::SpwanStart()
 		float4 StartPos = NewRandom.RandomVectorBox2D(220.0f, 280.0f, 80.0f, -150.0f);
 		Transform.SetWorldPosition(StartPos + HalfWindowScale);
 	}
+	ImDie = false;
 	UnitHP = UnitMaxHP;
 	SpwanRenderer->On();
 	SpwanRenderer->ChangeAnimation("SpwanEffect");
@@ -374,7 +375,8 @@ void GameUnit::IdleUpdate(float _Delta)
 		}
 
 		// АјАн
-		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackSpeed <= AttackValue)
+		bool Check = AttackRangeCol->Collision(CollisionOrder::RedTeamBody);
+		if (true == Check && AttackSpeed <= AttackValue)
 		{
 			ChangeState(GameUnitState::Attack);
 			return;
@@ -802,7 +804,6 @@ void GameUnit::DieUpdate(float _Delta)
 	if (RespawnTime >= 5.0f)
 	{
 		RespawnTime = 0.0f;
-		ImDie = false;
 		ChangeState(GameUnitState::Spwan);
 		return;
 	}

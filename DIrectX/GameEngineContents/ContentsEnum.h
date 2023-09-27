@@ -29,6 +29,7 @@ enum class CollisionOrder
 	BlueTeamAttack,
 	UnitAttack,
 	UnitTarget,
+	TestType,
 };
 
 enum class TeamType

@@ -54,7 +54,7 @@ protected:
 private:
     std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
     std::shared_ptr<class GameEngineCollision> Col;
-    float4 Scale = { 310.0f , 14.0f };
+    float4 Scale = { 310.0f , 40.0f };
 
     class EventParameter Event;
 
