@@ -57,8 +57,8 @@ void Ninja::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
 		MainSpriteRenderer->CreateAnimation("Ninja_Idle", "NinjaAni", 0.2f, 0, 4);
 		MainSpriteRenderer->CreateAnimation("Ninja_Move", "NinjaAni", 0.2f, 5, 12);
-		MainSpriteRenderer->CreateAnimation("Ninja_Attack", "NinjaAni", 0.2f, 13, 14, false);
-		MainSpriteRenderer->CreateAnimation("Ninja_Attack2", "NinjaAni", 0.2f, 15, 17, false);
+		MainSpriteRenderer->CreateAnimation("Ninja_Attack", "NinjaAni", 0.1f, 13, 14, false);
+		MainSpriteRenderer->CreateAnimation("Ninja_Attack2", "NinjaAni", 0.1f, 15, 17, false);
 		MainSpriteRenderer->CreateAnimation("Ninja_Skill", "NinjaAni", 0.05f, 28, 35, false);
 		MainSpriteRenderer->CreateAnimation("Ninja_Skill2", "NinjaAni", 0.1f, 36, 38, false);
 		MainSpriteRenderer->CreateAnimation("Ninja_Ult", "NinjaAni", 0.2f, 44, 49, false);
@@ -144,6 +144,11 @@ void Ninja::Attack2Update(float _Delta)
 {
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
+
+		ChangeState(GameUnitState::Move);
+		return;
+
+
 		GameEngineRandom NewRand;
 		int MoveRand = NewRand.RandomInt(0, 5);
 		static long long RandSeed = reinterpret_cast<long long>(this);
@@ -209,6 +214,8 @@ void Ninja::Skill2Update(float _Delta)
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
 		SkillEffectRenderer->ChangeAnimation("NinjaSkillBlack");
+		ChangeState(GameUnitState::Move);
+		return;
 
 		GameEngineRandom NewRand;
 		int MoveRand = NewRand.RandomInt(0, 5);
@@ -248,7 +255,7 @@ void Ninja::Skill2Update(float _Delta)
 				for (size_t i = 0; i < _Collision.size(); i++)
 				{
 					// 공격대미지 공식
-					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 1.5f);
+					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 1.3f);
 					SkillTick -= 1.0f;
 					return;
 				}
@@ -262,7 +269,7 @@ void Ninja::Skill2Update(float _Delta)
 				for (size_t i = 0; i < _Collision.size(); i++)
 				{
 					// 공격대미지 공식
-					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 1.5f);
+					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 1.3f);
 					SkillTick -= 1.0f;
 					return;
 				}

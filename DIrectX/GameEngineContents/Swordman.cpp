@@ -177,6 +177,9 @@ void Swordman::Attack2Update(float _Delta)
 {
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
+		ChangeState(GameUnitState::Move);
+		return;
+
 		GameEngineRandom NewRand;
 		int MoveRand = NewRand.RandomInt(0, 5);
 		static long long RandSeed = reinterpret_cast<long long>(this);
@@ -231,6 +234,8 @@ void Swordman::Skill2Update(float _Delta)
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
 		SkillEffectRenderer->ChangeAnimation("SwordmanSkillBlack");
+		ChangeState(GameUnitState::Move);
+		return;
 
 		GameEngineRandom NewRand;
 		int MoveRand = NewRand.RandomInt(0, 5);

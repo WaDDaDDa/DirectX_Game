@@ -27,7 +27,7 @@ public:
         UnitDef = NinjaDef;
         UnitAbsoluteDef = NinjaAbsoluteDef;
 
-        AttackDelay = NinjaAttackSpeed;
+        AttackSpeed = NinjaAttackSpeed;
 
         SkillCooltime = NinjaSkillCooltime;
 
@@ -75,7 +75,7 @@ private:
 
     float NinjaSpeed = 80.0f;
     float NinjaHp = 120.0f;
-    float NinjaAtt = 50.0f;
+    float NinjaAtt = 40.0f;
     float NinjaDef = 10.0f;
     float NinjaAbsoluteDef = 10.0f;
     float NinjaAttackSpeed = 1.1f;

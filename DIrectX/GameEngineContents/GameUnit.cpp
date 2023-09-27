@@ -385,7 +385,7 @@ void GameUnit::MoveUpdate(float _Delta)
 		}
 
 		// 공격
-		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackDelay <= AttackValue)
+		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackSpeed <= AttackValue)
 		{
 			ChangeState(GameUnitState::Attack);
 			return;
@@ -406,7 +406,7 @@ void GameUnit::MoveUpdate(float _Delta)
 			return;
 		}
 		// 공격
-		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackDelay <= AttackValue)
+		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackSpeed <= AttackValue)
 		{
 			ChangeState(GameUnitState::Attack);
 			return;
@@ -466,7 +466,7 @@ void GameUnit::BackMoveUpdate(float _Delta)
 		}
 
 		// 공격
-		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackDelay <= AttackValue)
+		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackSpeed <= AttackValue)
 		{
 			ChangeState(GameUnitState::Attack);
 			return;
@@ -487,7 +487,7 @@ void GameUnit::BackMoveUpdate(float _Delta)
 			return;
 		}
 		// 공격
-		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackDelay <= AttackValue)
+		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackSpeed <= AttackValue)
 		{
 			ChangeState(GameUnitState::Attack);
 			return;
@@ -546,7 +546,7 @@ void GameUnit::SearchMoveUpdate(float _Delta)
 		}
 
 		// 공격
-		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackDelay <= AttackValue)
+		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackSpeed <= AttackValue)
 		{
 			ChangeState(GameUnitState::Attack);
 			return;
@@ -567,7 +567,7 @@ void GameUnit::SearchMoveUpdate(float _Delta)
 			return;
 		}
 		// 공격
-		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackDelay <= AttackValue)
+		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackSpeed <= AttackValue)
 		{
 			ChangeState(GameUnitState::Attack);
 			return;
@@ -614,6 +614,9 @@ void GameUnit::CollMoveUpdate(float _Delta)
 	if (GetLiveTime() >= 0.2f)
 	{
 		PushValue = 0.0f;
+		ChangeState(GameUnitState::Move);
+		return;
+
 		GameEngineRandom NewRand;
 		int MoveRand = NewRand.RandomInt(0, 3);
 		static long long RandSeed = reinterpret_cast<long long>(this);

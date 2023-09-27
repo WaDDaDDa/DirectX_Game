@@ -142,6 +142,9 @@ void Knight::Attack2Update(float _Delta)
 {
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
+		ChangeState(GameUnitState::Move);
+		return;
+
 		GameEngineRandom NewRand;
 		int MoveRand = NewRand.RandomInt(0, 5);
 		static long long RandSeed = reinterpret_cast<long long>(this);
@@ -171,6 +174,7 @@ void Knight::Attack2Update(float _Delta)
 void Knight::SkillStart()
 {
 	GameUnit::SkillStart();
+	AttackValue = 1.0f;
 	MainSpriteRenderer->ChangeAnimation("Knight_Skill");
 	SkillEffectRenderer->ChangeAnimation("KnightSkillEffect");
 	// 어그로를 자신에게 끈다
@@ -191,6 +195,9 @@ void Knight::SkillUpdate(float _Delta)
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
 		SkillEffectRenderer->ChangeAnimation("KnightSkillBlack");
+
+		ChangeState(GameUnitState::Move);
+		return;
 
 		GameEngineRandom NewRand;
 		int MoveRand = NewRand.RandomInt(0, 5);

@@ -27,7 +27,7 @@ public:
         UnitDef = MonkDef;
         UnitAbsoluteDef = MonkAbsoluteDef;
 
-        AttackDelay = MonkAttackSpeed;
+        AttackSpeed = MonkAttackSpeed;
 
         SkillCooltime = MonkSkillCooltime;
 

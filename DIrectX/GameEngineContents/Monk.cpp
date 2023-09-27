@@ -139,6 +139,9 @@ void Monk::Attack2Update(float _Delta)
 {
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
+		ChangeState(GameUnitState::Move);
+		return;
+
 		GameEngineRandom NewRand;
 		int MoveRand = NewRand.RandomInt(0, 5);
 		static long long RandSeed = reinterpret_cast<long long>(this);
@@ -200,6 +203,9 @@ void Monk::SkillUpdate(float _Delta)
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
 		SkillEffectRenderer->ChangeAnimation("MonkSkillBlack");
+
+		ChangeState(GameUnitState::Move);
+		return;
 
 		GameEngineRandom NewRand;
 		int MoveRand = NewRand.RandomInt(0, 5);

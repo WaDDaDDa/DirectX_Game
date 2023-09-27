@@ -355,10 +355,10 @@ protected:
     float UnitAbsoluteDef = 5.0f;
     float UnitAtt = 10.0f;
 
-    float PushDelay = 0.3f;
+    float PushDelay = 0.5f;
     float PushValue = 0.0f;
 
-    float AttackDelay = 3.0f;
+    float AttackSpeed = 3.0f;
     float AttackValue = 0.0f;
     float SkillCooltime = 10.0f;
     float SkillValue = 0.0f;

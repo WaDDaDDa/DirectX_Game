@@ -27,7 +27,7 @@ public:
         UnitDef = SwordmanDef;
         UnitAbsoluteDef = SwordmanAbsoluteDef;
 
-        AttackDelay = SwordmanAttackSpeed;
+        AttackSpeed = SwordmanAttackSpeed;
 
         SkillCooltime = SwordmanSkillCooltime;
 

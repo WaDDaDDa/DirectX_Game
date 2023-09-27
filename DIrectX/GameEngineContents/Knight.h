@@ -27,7 +27,7 @@ public:
         UnitDef = KnightDef;
         UnitAbsoluteDef = KnightAbsoluteDef;
 
-        AttackDelay = KnightAttackSpeed;
+        AttackSpeed = KnightAttackSpeed;
 
         SkillCooltime = KnightSkillCooltime;
 
