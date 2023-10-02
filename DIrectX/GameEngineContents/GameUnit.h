@@ -98,6 +98,24 @@ public:
         }
     }
 
+    size_t AggroUnitNum = 0;
+
+    void NextAggroChange()
+    {
+        AggroUnitNum++;
+        if (AggroUnitNum >= EnemyGroup.size())
+        {
+            AggroUnitNum = 0;
+        }
+
+        AggroUnit = EnemyGroup[AggroUnitNum];
+
+        if (AggroUnit->GetState() == GameUnitState::Die || AggroUnit->GetState() == GameUnitState::DiePrev)
+        {
+            NextAggro();
+        }
+    }
+
     bool AllEnemyDieCheck()
     {
         for (size_t i = 0; i < EnemyGroup.size(); i++)
@@ -343,6 +361,7 @@ protected:
     GameUnit* AggroUnit = nullptr;
 
     float4 TargetPos = float4::ZERO;
+    float4 MoveDir;
 
     // Status
     std::string_view UnitName = "";
@@ -377,7 +396,6 @@ private:
     float4 BodyColScale = { 50.0f, 50.0f };
     float4 PushColScale = { 20.0f, 0.0f };
 
-    float4 MoveDir;
     bool BackMoveBool = false;
     // 궁극기 사용 스킬사용 조건이 다 다르다면 Idle상태에서만 스킬을 사용하게 하고
     // Idle을 오버라이드 하는 방법을 시도해보자.

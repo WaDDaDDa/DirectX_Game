@@ -46,7 +46,7 @@ void GameUnit::Start()
 	// 이벤트 셋팅
 	MoveEvent.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
 		{
-			AggroSetting(_Col->GetActor()->GetDynamic_Cast_This<GameUnit>()->GetPointer());
+			//AggroSetting(_Col->GetActor()->GetDynamic_Cast_This<GameUnit>()->GetPointer());
 			ChangeState(GameUnitState::Move);
 			return;
 		};
@@ -135,14 +135,31 @@ bool GameUnit::SkillCheck()
 		// 스킬사용
 		if (SkillRangeCol->Collision(CollisionOrder::RedTeamBody) && SkillCooltime <= SkillValue)
 		{
+			SkillRangeCol->Collision(CollisionOrder::RedTeamBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
+				{
+					for (size_t i = 0; i < _Collision.size(); i++)
+					{
+						AggroSetting(reinterpret_cast<GameUnit*>(_Collision[i]->GetActor()));
+					}
+				});
+
 			return true;
 		}
+
 	}
 	else if (TeamType::Red == MyTeam)
 	{
 		//스킬
 		if (SkillRangeCol->Collision(CollisionOrder::BlueTeamBody) && SkillCooltime <= SkillValue)
 		{
+			SkillRangeCol->Collision(CollisionOrder::BlueTeamBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
+				{
+					for (size_t i = 0; i < _Collision.size(); i++)
+					{
+						AggroSetting(reinterpret_cast<GameUnit*>(_Collision[i]->GetActor()));
+					}
+				});
+
 			return true;
 		}
 	}

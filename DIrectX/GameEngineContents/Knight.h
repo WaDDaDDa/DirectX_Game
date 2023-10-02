@@ -73,7 +73,7 @@ private:
     float4 KnightSkillColRange = { 200.0f, 0.0f };
     float4 KnightUltRange = { 200.0f, 0.0f };
 
-    float KnightSpeed = 80.0f;
+    float KnightSpeed = 100.0f;
     float KnightHp = 200.0f;
     float KnightAtt = 42.0f;
     float KnightDef = 60.0f;

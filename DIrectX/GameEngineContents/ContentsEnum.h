@@ -9,6 +9,7 @@ enum class ContentsOrder
 	BackEffect,
 	HPLayer1,
 	Unit,
+	Projectile,  // ≈ıªÁ√º
 	FrontEffect,
 	UI,
 	Text,

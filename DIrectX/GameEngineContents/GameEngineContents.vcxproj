@@ -163,6 +163,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Archer.cpp" />
+    <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="BattleField.cpp">
       <SubType>
       </SubType>
@@ -217,6 +219,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Archer.h" />
+    <ClInclude Include="Arrow.h" />
     <ClInclude Include="BattleField.h">
       <SubType>
       </SubType>

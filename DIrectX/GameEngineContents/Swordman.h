@@ -79,7 +79,7 @@ private:
     float4 SwordmanSkillColRange = { 60.0f, 0.0f };
     float4 SwordmanUltRange = { 700.0f, 0.0f };
 
-    float SwordmanSpeed = 100.0f;
+    float SwordmanSpeed = 120.0f;
     float SwordmanHp = 130.0f;
     float SwordmanAtt = 30.0f;
     float SwordmanDef = 30.0f;

@@ -59,6 +59,12 @@
     <ClCompile Include="NinjaUlt.cpp">
       <Filter>GameUnit</Filter>
     </ClCompile>
+    <ClCompile Include="Archer.cpp">
+      <Filter>GameUnit</Filter>
+    </ClCompile>
+    <ClCompile Include="Arrow.cpp">
+      <Filter>GameUnit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -120,6 +126,12 @@
       <Filter>GameUnit</Filter>
     </ClInclude>
     <ClInclude Include="NinjaUlt.h">
+      <Filter>GameUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="Archer.h">
+      <Filter>GameUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="Arrow.h">
       <Filter>GameUnit</Filter>
     </ClInclude>
   </ItemGroup>

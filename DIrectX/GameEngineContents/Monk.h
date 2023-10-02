@@ -71,7 +71,7 @@ private:
     float4 MonkSkillColRange = { 200.0f, 0.0f };
     float4 MonkUltRange = { 300.0f, 0.0f };
 
-    float MonkSpeed = 80.0f;
+    float MonkSpeed = 100.0f;
     float MonkHp = 210.0f;
     float MonkAtt = 40.0f;
     float MonkDef = 40.0f;

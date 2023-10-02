@@ -1,0 +1,69 @@
+#pragma once
+#include <GameEngineCore/GameEngineActor.h>
+#include "GameUnit.h"
+
+class Arrow : public GameEngineActor
+{
+public:
+    Arrow();
+    ~Arrow();
+
+    Arrow(const Arrow& _Other) = delete;
+    Arrow(Arrow&& _Other) noexcept = delete;
+    Arrow& operator=(const Arrow& _Other) = delete;
+    Arrow& operator=(Arrow&& _Other) noexcept = delete;
+
+    void SetUnit(std::shared_ptr<class GameUnit> _Unit)
+    {
+        Unit = _Unit;
+        if (TeamType::Blue == Unit->MyTeam)
+        {
+            Col = CreateComponent<GameEngineCollision>(CollisionOrder::BlueTeamAttack);
+            Col->SetCollisionType(ColType::AABBBOX2D);
+            Col->Transform.SetLocalScale(Scale);
+            //Col->Transform.AddLocalPosition((Scale * 1.3f).hX());
+        }
+        else if (TeamType::Red == Unit->MyTeam)
+        {
+            Col = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamAttack);
+            Col->SetCollisionType(ColType::AABBBOX2D);
+            Col->Transform.SetLocalScale(Scale);
+            //Col->Transform.AddLocalPosition((Scale * 1.3f).hX());
+        }
+
+        Transform.SetWorldPosition(Unit->Transform.GetWorldPosition());
+        Dir = Unit->GetAggroUnit()->Transform.GetWorldPosition() - Transform.GetWorldPosition();
+        Dir.Normalize();
+        float4 Rot = Dir.Angle2DDeg();
+        float AggroY = Unit->GetAggroUnit()->Transform.GetWorldPosition().Y;
+        float MyY = Transform.GetWorldPosition().Y;
+        if (MyY <= AggroY)
+        {
+            Transform.SetWorldRotation({ 0.0f,0.0f, Rot.X });
+        }
+        else if (MyY > AggroY)
+        {
+            Transform.SetWorldRotation({ 0.0f,0.0f, -Rot.X });
+        }
+    }
+
+protected:
+    void Start();
+    void Update(float _Delta);
+
+private:
+    std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
+    std::shared_ptr<GameEngineCollision> Col;
+    float4 Scale = { 1.0f, 1.0f };
+    float LifeTime = 5.0f;
+    float Speed = 800.0f;
+    bool AttackOn = false;
+    class EventParameter Event;
+    float4 Dir = float4::ZERO;
+    float4 Pos = float4::ZERO;
+
+    std::shared_ptr<class GameUnit> Unit;
+    GameUnit* EnemyUnit = nullptr;
+
+};
+
