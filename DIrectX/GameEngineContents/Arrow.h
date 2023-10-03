@@ -19,14 +19,12 @@ public:
         if (TeamType::Blue == Unit->MyTeam)
         {
             Col = CreateComponent<GameEngineCollision>(CollisionOrder::BlueTeamAttack);
-            Col->SetCollisionType(ColType::AABBBOX2D);
             Col->Transform.SetLocalScale(Scale);
             //Col->Transform.AddLocalPosition((Scale * 1.3f).hX());
         }
         else if (TeamType::Red == Unit->MyTeam)
         {
             Col = CreateComponent<GameEngineCollision>(CollisionOrder::RedTeamAttack);
-            Col->SetCollisionType(ColType::AABBBOX2D);
             Col->Transform.SetLocalScale(Scale);
             //Col->Transform.AddLocalPosition((Scale * 1.3f).hX());
         }

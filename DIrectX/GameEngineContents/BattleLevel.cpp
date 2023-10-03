@@ -12,6 +12,7 @@
 #include "Monk.h"
 #include "Ninja.h"
 #include "Archer.h"
+#include "Pyromancer.h"
 
 
 BattleLevel::BattleLevel()
@@ -86,7 +87,8 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	// ·¹µåÆÀ À¯´Ö (¿À¸¥ÂÊ)
 	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
 	RedTeam.push_back(CreateActor<Monk>()->GetPointer());
-	RedTeam.push_back(CreateActor<Ninja>()->GetPointer());
+	//RedTeam.push_back(CreateActor<Ninja>()->GetPointer());
+	RedTeam.push_back(CreateActor<Pyromancer>()->GetPointer());
 
 
 

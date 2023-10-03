@@ -1,22 +1,23 @@
 #include "PreCompile.h"
-#include "Arrow.h"
+#include "FlameAttack.h"
 
 
-Arrow::Arrow()
+FlameAttack::FlameAttack()
 {
 
 }
 
-Arrow::~Arrow()
+FlameAttack::~FlameAttack()
 {
 
 }
 
-void Arrow::Start()
+void FlameAttack::Start()
 {
 	Renderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Projectile);
 
-	Renderer->SetSprite("Arrow.png");
+	Renderer->CreateAnimation("FlameAttackEffect", "PyromancerEffect", 0.1f , 29, 37, false);
+	Renderer->ChangeAnimation("FlameAttackEffect");
 	Renderer->AutoSpriteSizeOn();
 
 	// 이벤트 셋팅
@@ -31,12 +32,7 @@ void Arrow::Start()
 					{
 						for (size_t i = 0; i < _Collision.size(); i++)
 						{
-							AttackOn = true;
-							LifeTime = 2.0f;
 							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att);
-							EnemyUnit = reinterpret_cast<GameUnit*>(_Collision[i]->GetActor());
-							Pos = Transform.GetWorldPosition() - EnemyUnit->Transform.GetWorldPosition();
-							Col->Off();
 						}
 					});
 			}
@@ -46,13 +42,7 @@ void Arrow::Start()
 					{
 						for (size_t i = 0; i < _Collision.size(); i++)
 						{
-							AttackOn = true;
-							LifeTime = 2.0f;
 							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att);
-							EnemyUnit = reinterpret_cast<GameUnit*>(_Collision[i]->GetActor());
-							Pos = Transform.GetWorldPosition() - EnemyUnit->Transform.GetWorldPosition();
-
-							Col->Off();
 						}
 					});
 			}
@@ -70,30 +60,13 @@ void Arrow::Start()
 
 }
 
-void Arrow::Update(float _Delta)
+void FlameAttack::Update(float _Delta)
 {
-	LifeTime -= _Delta;
-
-
-	if (0.0f >= LifeTime)
+	if (true == Renderer->IsCurAnimationEnd())
 	{
 		Death();
-		return;
 	}
 
-	if (true == AttackOn && 0.0f >= LifeTime )
-	{
-		Death();
-		return;
-	}
-
-	if (true == AttackOn)
-	{
-		Transform.SetLocalPosition(EnemyUnit->Transform.GetWorldPosition() + Pos);
-		return;
-	}
-
-	Transform.AddLocalPosition(Dir * Speed * _Delta);
 	//이벤트 사용.
 	if (TeamType::Blue == Unit->MyTeam)
 	{

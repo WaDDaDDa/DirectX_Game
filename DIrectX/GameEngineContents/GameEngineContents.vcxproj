@@ -175,6 +175,7 @@
     </ClCompile>
     <ClCompile Include="Bird.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
+    <ClCompile Include="FlameAttack.cpp" />
     <ClCompile Include="GameUnit.cpp">
       <SubType>
       </SubType>
@@ -211,6 +212,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Pyromancer.cpp" />
     <ClCompile Include="Swordman.cpp" />
     <ClCompile Include="SwordmanUltEffect.cpp" />
     <ClCompile Include="TextArrow.cpp">
@@ -232,6 +234,7 @@
     <ClInclude Include="Bird.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsEnum.h" />
+    <ClInclude Include="FlameAttack.h" />
     <ClInclude Include="GameUnit.h">
       <SubType>
       </SubType>
@@ -263,6 +266,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayLevel.h" />
     <ClInclude Include="PreCompile.h" />
+    <ClInclude Include="Pyromancer.h" />
     <ClInclude Include="Swordman.h" />
     <ClInclude Include="SwordmanUltEffect.h" />
     <ClInclude Include="TextArrow.h">
