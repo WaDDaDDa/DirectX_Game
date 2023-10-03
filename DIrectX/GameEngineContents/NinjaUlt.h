@@ -16,6 +16,7 @@ protected:
     void Start() override;
 
     //void SpwanStart() override;
+    void SpwanStart() override;
 
     void Update(float _Delta) override;
 

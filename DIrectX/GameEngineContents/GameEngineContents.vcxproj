@@ -175,6 +175,8 @@
     </ClCompile>
     <ClCompile Include="Bird.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
+    <ClCompile Include="FireSpirit.cpp" />
+    <ClCompile Include="FireSpiritAttack.cpp" />
     <ClCompile Include="FlameAttack.cpp" />
     <ClCompile Include="GameUnit.cpp">
       <SubType>
@@ -234,6 +236,8 @@
     <ClInclude Include="Bird.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsEnum.h" />
+    <ClInclude Include="FireSpirit.h" />
+    <ClInclude Include="FireSpiritAttack.h" />
     <ClInclude Include="FlameAttack.h" />
     <ClInclude Include="GameUnit.h">
       <SubType>

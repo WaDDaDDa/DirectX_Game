@@ -165,6 +165,7 @@ public:
             Dir = _Dir;
         }
     }
+
     // 팀마다 달라야 하는것,
     // 스폰위치.  바라보는 방향. 콜리젼 종류. 
     void TeamSet(TeamType _Team);

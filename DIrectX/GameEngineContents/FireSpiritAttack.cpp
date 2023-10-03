@@ -1,32 +1,33 @@
 #include "PreCompile.h"
-#include "Arrow.h"
+#include "FireSpiritAttack.h"
 
 
-Arrow::Arrow()
+FireSpiritAttack::FireSpiritAttack()
 {
 
 }
 
-Arrow::~Arrow()
+FireSpiritAttack::~FireSpiritAttack()
 {
 
 }
 
-void Arrow::Start()
+void FireSpiritAttack::Start()
 {
 	Renderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Projectile);
 
-	Renderer->SetSprite("Arrow.png");
+	Renderer->CreateAnimation("FireSpiritAttack", "FireSpiritEffect", 0.2f, 12, 14, true);
+	Renderer->CreateAnimation("FireSpiritAttack2", "FireSpiritEffect", 0.2f, 15, 17, false);
+	Renderer->ChangeAnimation("FireSpiritAttack");
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(1.3f);
-
 
 	// 이벤트 셋팅
 	Event.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
 		{
 			// 궁극기 대미지
-			float Att = Unit->GetUnitAttack();
-			Att *= 1.0f;
+			float Att = Unit->Att;
+			Att *= 0.5f;
 			if (TeamType::Blue == Unit->MyTeam)
 			{
 				Col->Collision(CollisionOrder::RedTeamBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
@@ -35,6 +36,7 @@ void Arrow::Start()
 						{
 							AttackOn = true;
 							LifeTime = 2.0f;
+							Renderer->ChangeAnimation("FireSpiritAttack2");
 							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att);
 							EnemyUnit = reinterpret_cast<GameUnit*>(_Collision[i]->GetActor());
 							Pos = Transform.GetWorldPosition() - EnemyUnit->Transform.GetWorldPosition();
@@ -50,6 +52,7 @@ void Arrow::Start()
 						{
 							AttackOn = true;
 							LifeTime = 2.0f;
+							Renderer->ChangeAnimation("FireSpiritAttack2");
 							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att);
 							EnemyUnit = reinterpret_cast<GameUnit*>(_Collision[i]->GetActor());
 							Pos = Transform.GetWorldPosition() - EnemyUnit->Transform.GetWorldPosition();
@@ -72,7 +75,7 @@ void Arrow::Start()
 
 }
 
-void Arrow::Update(float _Delta)
+void FireSpiritAttack::Update(float _Delta)
 {
 	LifeTime -= _Delta;
 
@@ -83,7 +86,7 @@ void Arrow::Update(float _Delta)
 		return;
 	}
 
-	if (true == AttackOn && 0.0f >= LifeTime )
+	if (true == AttackOn && true == Renderer->IsCurAnimationEnd())
 	{
 		Death();
 		return;

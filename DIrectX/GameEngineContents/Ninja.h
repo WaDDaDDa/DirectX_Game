@@ -41,7 +41,7 @@ protected:
     void LevelStart(GameEngineLevel* _PrevLevel) override;
     void LevelEnd(GameEngineLevel* _NextLevel) override;
 
-    void SpwanStart() override;
+    virtual void SpwanStart() override;
 
     void IdleStart() override;
 

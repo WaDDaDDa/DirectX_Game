@@ -51,9 +51,17 @@ void NinjaUlt::Start()
 
 void NinjaUlt::Update(float _Delta)
 {
-	UnitHP -= 5.0f * _Delta;
+	UnitHP -= 10.0f * _Delta;
 	GameUnit::Update(_Delta);
 }
+
+void NinjaUlt::SpwanStart()
+{
+	Ninja::SpwanStart();
+	MainSpriteRenderer->ChangeAnimation("Ninja_Ult");
+
+}
+
 
 void NinjaUlt::DieStart()
 {

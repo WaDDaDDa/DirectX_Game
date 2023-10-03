@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Pyromancer.h"
 #include "FlameAttack.h"
+#include "FireSpirit.h"
 
 Pyromancer::Pyromancer()
 {
@@ -65,14 +66,11 @@ void Pyromancer::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer->CreateAnimation("Pyromancer_Die", "PyromancerAni", 0.1f, 17, 25, false);
 		
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
-		SkillEffectRenderer->CreateAnimation("PyromancerAttackEffect", "PyromancerEffect", 0.2f, 7, 8, false);
-		SkillEffectRenderer->CreateAnimation("PyromancerSkillEffect", "PyromancerEffect", 0.1f, 14, 15, false);
-		SkillEffectRenderer->CreateAnimation("PyromancerUltEffect", "PyromancerEffect", 0.2f, 17, 25, false);
-		SkillEffectRenderer->CreateAnimation("PyromancerSkillBlack", "PyromancerEffect", 0.1f, 26, 26, false);
+		SkillEffectRenderer->CreateAnimation("PyromancerUltEffect", "PyromancerEffect", 0.2f, 38, 44, false);
+		SkillEffectRenderer->CreateAnimation("PyromancerSkillBlack", "PyromancerEffect", 0.1f, 30, 30, false);
 		SkillEffectRenderer->ChangeAnimation("PyromancerSkillBlack");
 		SkillEffectRenderer->AutoSpriteSizeOn();
 		SkillEffectRenderer->SetAutoScaleRatio(1.3f);
-		SkillEffectRenderer->Transform.AddLocalPosition({ 30.0f, 4.0f});
 
 		MainSpriteRenderer->ChangeAnimation("Pyromancer_Idle");
 		MainSpriteRenderer->AutoSpriteSizeOn();
@@ -149,7 +147,6 @@ void Pyromancer::Attack2Start()
 	AttackValue = 0.0f;
 
 	GetLevel()->CreateActor<FlameAttack>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
-	SkillEffectRenderer->ChangeAnimation("PyromancerAttackEffect");
 	MainSpriteRenderer->ChangeAnimation("Pyromancer_Attack2");
 }
 
@@ -194,20 +191,13 @@ void Pyromancer::SkillUpdate(float _Delta)
 		return;
 	}
 
-	Transform.AddLocalPosition((MoveDir * UnitSpeed * 2.0f * _Delta));
-
 }
 
 void Pyromancer::Skill2Start()
 {
 	MainSpriteRenderer->ChangeAnimation("Pyromancer_Skill2");
-	SkillEffectRenderer->ChangeAnimation("PyromancerSkillEffect");
 
-	float4 EnemyPos = AggroUnit->Transform.GetWorldPosition();
-	float4 MyPos = Transform.GetWorldPosition();
-
-	MoveDir = -(EnemyPos - MyPos);
-	MoveDir.Normalize();
+	GetLevel()->CreateActor<FireSpirit>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
 
 }
 

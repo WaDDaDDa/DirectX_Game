@@ -200,6 +200,12 @@ void GameUnit::Update(float _Delta)
 	SkillValue += _Delta;
 	UltValue += _Delta;
 
+	if (UnitHP <= 0.0f && ImDie == false)
+	{
+		ChangeState(GameUnitState::DiePrev);
+		return;
+	}
+
 	if (true == AllEnemyDieCheck() && ImDie == false)
 	{
 		ChangeState(GameUnitState::Idle);
@@ -211,11 +217,7 @@ void GameUnit::Update(float _Delta)
 		NextAggro();
 	}
 
-	if (UnitHP <= 0.0f && ImDie == false)
-	{
-		ChangeState(GameUnitState::DiePrev);
-		return;
-	}
+
 }
 
 

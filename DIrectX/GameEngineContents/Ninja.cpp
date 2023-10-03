@@ -257,6 +257,7 @@ void Ninja::UltStart()
 	GameUnit* NinNin = GetLevel()->CreateActor<NinjaUlt>()->GetPointer();
 	NinNin->EnemyUnitSetting(EnemyGroup);
 	NinNin->TeamUnitSetting(TeamGroup);
+	NinNin->ChangeDir(Dir);
 
 	if (TeamType::Blue == MyTeam)
 	{
