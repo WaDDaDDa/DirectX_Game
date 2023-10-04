@@ -81,14 +81,14 @@ private:
 
     float ArcherSpeed = 60.0f;
     float ArcherHp = 100.0f;
-    float ArcherAtt = 82.0f;
+    float ArcherAtt = 65.0f;
     float ArcherDef = 5.0f;
     float ArcherAbsoluteDef = 30.0f;
     float ArcherAttackSpeed = 1.5f;
     float ArcherSkillCooltime = 3.0f;
     float ArcherUltCooltime = 10.0f;
 
-    float ArcherUltInter = 0.05f;
+    float ArcherUltInter = 0.1f;
 
 };
 

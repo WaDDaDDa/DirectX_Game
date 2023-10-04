@@ -178,6 +178,8 @@
     <ClCompile Include="FireSpirit.cpp" />
     <ClCompile Include="FireSpiritAttack.cpp" />
     <ClCompile Include="FlameAttack.cpp" />
+    <ClCompile Include="FlameEffect.cpp" />
+    <ClCompile Include="FlameUlt.cpp" />
     <ClCompile Include="GameUnit.cpp">
       <SubType>
       </SubType>
@@ -239,6 +241,8 @@
     <ClInclude Include="FireSpirit.h" />
     <ClInclude Include="FireSpiritAttack.h" />
     <ClInclude Include="FlameAttack.h" />
+    <ClInclude Include="FlameEffect.h" />
+    <ClInclude Include="FlameUlt.h" />
     <ClInclude Include="GameUnit.h">
       <SubType>
       </SubType>

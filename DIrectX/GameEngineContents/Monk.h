@@ -73,7 +73,7 @@ private:
 
     float MonkSpeed = 100.0f;
     float MonkHp = 210.0f;
-    float MonkAtt = 40.0f;
+    float MonkAtt = 32.0f;
     float MonkDef = 40.0f;
     float MonkAbsoluteDef = 40.0f;
     float MonkAttackSpeed = 1.4f;

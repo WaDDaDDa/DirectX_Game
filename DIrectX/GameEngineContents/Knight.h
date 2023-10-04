@@ -75,7 +75,7 @@ private:
 
     float KnightSpeed = 100.0f;
     float KnightHp = 200.0f;
-    float KnightAtt = 42.0f;
+    float KnightAtt = 33.0f;
     float KnightDef = 60.0f;
     float KnightAbsoluteDef = 60.0f;
     float KnightAttackSpeed = 1.7f;

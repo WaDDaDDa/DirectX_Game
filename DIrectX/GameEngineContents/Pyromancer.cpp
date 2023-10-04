@@ -2,6 +2,7 @@
 #include "Pyromancer.h"
 #include "FlameAttack.h"
 #include "FireSpirit.h"
+#include "FlameUlt.h"
 
 Pyromancer::Pyromancer()
 {
@@ -249,7 +250,7 @@ void Pyromancer::Ult2Start()
 {
 	//GetLevel()->CreateActor<PyromancerUltEffect>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
 	MainSpriteRenderer->ChangeAnimation("Pyromancer_Ult2");
-	GetLevel()->CreateActor<FlameAttack>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
+	GetLevel()->CreateActor<FlameUlt>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
 }
 
 void Pyromancer::Ult2Update(float _Delta)

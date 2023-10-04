@@ -81,7 +81,7 @@ private:
 
     float SwordmanSpeed = 120.0f;
     float SwordmanHp = 130.0f;
-    float SwordmanAtt = 30.0f;
+    float SwordmanAtt = 24.0f;
     float SwordmanDef = 30.0f;
     float SwordmanAbsoluteDef = 30.0f;
     float SwordmanAttackSpeed = 1.25f;

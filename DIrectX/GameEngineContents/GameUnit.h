@@ -365,6 +365,7 @@ protected:
     float4 MoveDir;
 
     // Status
+    // 공격력은 공식에서 *2  - 20% 후 버림
     std::string_view UnitName = "";
     float4 AttackRange = { 55.0f, 0.0f };
     float4 SkillRange = { 70.0f, 0.0f };

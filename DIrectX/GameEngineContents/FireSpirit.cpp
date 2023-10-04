@@ -17,7 +17,7 @@ void FireSpirit::Start()
 {
 
 	Renderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
-	Renderer->CreateAnimation("FireSpirit_Spwan", "FireSpiritAni", 0.1f, 4, 6, false);
+	Renderer->CreateAnimation("FireSpirit_Spwan", "FireSpiritAni", 0.1f, 0, 6, false);
 	Renderer->CreateAnimation("FireSpirit_Idle", "FireSpiritAni", 0.2f, 7, 9, true);
 	Renderer->CreateAnimation("FireSpirit_Attack1", "FireSpiritAni", 0.2f, 10, 11, false);
 	Renderer->CreateAnimation("FireSpirit_Attack2", "FireSpiritAni", 0.2f, 12, 13, false);
@@ -25,6 +25,12 @@ void FireSpirit::Start()
 	Renderer->ChangeAnimation("FireSpirit_Spwan");
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(1.3f);
+
+	EffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
+	EffectRenderer->CreateAnimation("FireSpiritEffect_Spwan", "FireSpiritEffect", 0.1f, 0, 7, false);
+	EffectRenderer->ChangeAnimation("FireSpiritEffect_Spwan");
+	EffectRenderer->AutoSpriteSizeOn();
+	EffectRenderer->SetAutoScaleRatio(1.3f);
 
 	// 이벤트 셋팅
 	Event.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
@@ -78,13 +84,13 @@ void FireSpirit::Update(float _Delta)
 	AttackValue += _Delta;
 	LifeTime -= _Delta;
 
+	StateUpdate(_Delta);
+
 	if (0.0f >= LifeTime)
 	{
 		ChangeState(FireSpiritState::Die);
 		return;
 	}
-
-	StateUpdate(_Delta);
 
 }
 
@@ -184,6 +190,7 @@ void FireSpirit::Attack1Start()
 {
 	Renderer->ChangeAnimation("FireSpirit_Attack1");
 	AttCount = 1;
+	AttackValue = 0.0f;
 }
 
 void FireSpirit::Attack1Update(float _Delta)

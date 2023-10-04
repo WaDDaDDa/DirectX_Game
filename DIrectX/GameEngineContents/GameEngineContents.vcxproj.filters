@@ -77,6 +77,12 @@
     <ClCompile Include="FireSpiritAttack.cpp">
       <Filter>GameUnit</Filter>
     </ClCompile>
+    <ClCompile Include="FlameUlt.cpp">
+      <Filter>GameUnit</Filter>
+    </ClCompile>
+    <ClCompile Include="FlameEffect.cpp">
+      <Filter>GameUnit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -156,6 +162,12 @@
       <Filter>GameUnit</Filter>
     </ClInclude>
     <ClInclude Include="FireSpiritAttack.h">
+      <Filter>GameUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="FlameUlt.h">
+      <Filter>GameUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="FlameEffect.h">
       <Filter>GameUnit</Filter>
     </ClInclude>
   </ItemGroup>
