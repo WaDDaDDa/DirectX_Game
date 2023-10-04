@@ -29,59 +29,59 @@
     <ClCompile Include="GameUnit.cpp">
       <Filter>GameUnit</Filter>
     </ClCompile>
-    <ClCompile Include="Knight.cpp">
-      <Filter>GameUnit</Filter>
-    </ClCompile>
     <ClCompile Include="BattleField.cpp">
       <Filter>BackGround</Filter>
     </ClCompile>
     <ClCompile Include="Bird.cpp">
       <Filter>Global</Filter>
     </ClCompile>
-    <ClCompile Include="Swordman.cpp">
-      <Filter>GameUnit</Filter>
-    </ClCompile>
     <ClCompile Include="GameUnitUI.cpp">
       <Filter>GameUnit</Filter>
     </ClCompile>
-    <ClCompile Include="KnightUltEffect.cpp">
-      <Filter>GameUnit</Filter>
-    </ClCompile>
-    <ClCompile Include="Monk.cpp">
-      <Filter>GameUnit</Filter>
-    </ClCompile>
-    <ClCompile Include="Ninja.cpp">
-      <Filter>GameUnit</Filter>
-    </ClCompile>
-    <ClCompile Include="SwordmanUltEffect.cpp">
-      <Filter>GameUnit</Filter>
-    </ClCompile>
-    <ClCompile Include="NinjaUlt.cpp">
-      <Filter>GameUnit</Filter>
-    </ClCompile>
     <ClCompile Include="Archer.cpp">
-      <Filter>GameUnit</Filter>
+      <Filter>GameUnit\Archer</Filter>
     </ClCompile>
     <ClCompile Include="Arrow.cpp">
-      <Filter>GameUnit</Filter>
+      <Filter>GameUnit\Archer</Filter>
+    </ClCompile>
+    <ClCompile Include="Knight.cpp">
+      <Filter>GameUnit\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightUltEffect.cpp">
+      <Filter>GameUnit\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="Monk.cpp">
+      <Filter>GameUnit\Monk</Filter>
+    </ClCompile>
+    <ClCompile Include="Ninja.cpp">
+      <Filter>GameUnit\Ninja</Filter>
+    </ClCompile>
+    <ClCompile Include="NinjaUlt.cpp">
+      <Filter>GameUnit\Ninja</Filter>
     </ClCompile>
     <ClCompile Include="Pyromancer.cpp">
-      <Filter>GameUnit</Filter>
-    </ClCompile>
-    <ClCompile Include="FlameAttack.cpp">
-      <Filter>GameUnit</Filter>
+      <Filter>GameUnit\Pyromancer</Filter>
     </ClCompile>
     <ClCompile Include="FireSpirit.cpp">
-      <Filter>GameUnit</Filter>
+      <Filter>GameUnit\Pyromancer</Filter>
     </ClCompile>
     <ClCompile Include="FireSpiritAttack.cpp">
-      <Filter>GameUnit</Filter>
+      <Filter>GameUnit\Pyromancer</Filter>
     </ClCompile>
-    <ClCompile Include="FlameUlt.cpp">
-      <Filter>GameUnit</Filter>
+    <ClCompile Include="FlameAttack.cpp">
+      <Filter>GameUnit\Pyromancer</Filter>
     </ClCompile>
     <ClCompile Include="FlameEffect.cpp">
-      <Filter>GameUnit</Filter>
+      <Filter>GameUnit\Pyromancer</Filter>
+    </ClCompile>
+    <ClCompile Include="FlameUlt.cpp">
+      <Filter>GameUnit\Pyromancer</Filter>
+    </ClCompile>
+    <ClCompile Include="Swordman.cpp">
+      <Filter>GameUnit\Swordman</Filter>
+    </ClCompile>
+    <ClCompile Include="SwordmanUltEffect.cpp">
+      <Filter>GameUnit\Swordman</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,59 +116,59 @@
     <ClInclude Include="GameUnit.h">
       <Filter>GameUnit</Filter>
     </ClInclude>
-    <ClInclude Include="Knight.h">
-      <Filter>GameUnit</Filter>
-    </ClInclude>
     <ClInclude Include="BattleField.h">
       <Filter>BackGround</Filter>
     </ClInclude>
     <ClInclude Include="Bird.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="Swordman.h">
-      <Filter>GameUnit</Filter>
-    </ClInclude>
     <ClInclude Include="GameUnitUI.h">
       <Filter>GameUnit</Filter>
     </ClInclude>
-    <ClInclude Include="KnightUltEffect.h">
-      <Filter>GameUnit</Filter>
-    </ClInclude>
-    <ClInclude Include="Monk.h">
-      <Filter>GameUnit</Filter>
-    </ClInclude>
-    <ClInclude Include="Ninja.h">
-      <Filter>GameUnit</Filter>
-    </ClInclude>
-    <ClInclude Include="SwordmanUltEffect.h">
-      <Filter>GameUnit</Filter>
-    </ClInclude>
-    <ClInclude Include="NinjaUlt.h">
-      <Filter>GameUnit</Filter>
-    </ClInclude>
     <ClInclude Include="Archer.h">
-      <Filter>GameUnit</Filter>
+      <Filter>GameUnit\Archer</Filter>
     </ClInclude>
     <ClInclude Include="Arrow.h">
-      <Filter>GameUnit</Filter>
+      <Filter>GameUnit\Archer</Filter>
+    </ClInclude>
+    <ClInclude Include="Knight.h">
+      <Filter>GameUnit\Knight</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightUltEffect.h">
+      <Filter>GameUnit\Knight</Filter>
+    </ClInclude>
+    <ClInclude Include="Monk.h">
+      <Filter>GameUnit\Monk</Filter>
+    </ClInclude>
+    <ClInclude Include="Ninja.h">
+      <Filter>GameUnit\Ninja</Filter>
+    </ClInclude>
+    <ClInclude Include="NinjaUlt.h">
+      <Filter>GameUnit\Ninja</Filter>
     </ClInclude>
     <ClInclude Include="Pyromancer.h">
-      <Filter>GameUnit</Filter>
-    </ClInclude>
-    <ClInclude Include="FlameAttack.h">
-      <Filter>GameUnit</Filter>
+      <Filter>GameUnit\Pyromancer</Filter>
     </ClInclude>
     <ClInclude Include="FireSpirit.h">
-      <Filter>GameUnit</Filter>
+      <Filter>GameUnit\Pyromancer</Filter>
     </ClInclude>
     <ClInclude Include="FireSpiritAttack.h">
-      <Filter>GameUnit</Filter>
+      <Filter>GameUnit\Pyromancer</Filter>
     </ClInclude>
-    <ClInclude Include="FlameUlt.h">
-      <Filter>GameUnit</Filter>
+    <ClInclude Include="FlameAttack.h">
+      <Filter>GameUnit\Pyromancer</Filter>
     </ClInclude>
     <ClInclude Include="FlameEffect.h">
-      <Filter>GameUnit</Filter>
+      <Filter>GameUnit\Pyromancer</Filter>
+    </ClInclude>
+    <ClInclude Include="FlameUlt.h">
+      <Filter>GameUnit\Pyromancer</Filter>
+    </ClInclude>
+    <ClInclude Include="Swordman.h">
+      <Filter>GameUnit\Swordman</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordmanUltEffect.h">
+      <Filter>GameUnit\Swordman</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +192,24 @@
     </Filter>
     <Filter Include="BackGround">
       <UniqueIdentifier>{bb44e4dc-a31b-49c2-a2ba-70deb0ba262d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameUnit\Archer">
+      <UniqueIdentifier>{63b530f8-4de9-432b-a19c-502dc330611e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameUnit\Knight">
+      <UniqueIdentifier>{8fc25bf9-28c8-42ea-8f8b-f3bc87e8d0c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameUnit\Monk">
+      <UniqueIdentifier>{02faa4f2-92f1-47e8-ba8b-c2250dbdfe56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameUnit\Ninja">
+      <UniqueIdentifier>{c4f92db0-9792-4ad1-aeeb-24745b8ba60a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameUnit\Pyromancer">
+      <UniqueIdentifier>{0e64bb35-4c7d-43d3-96e0-2ee559af7b07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameUnit\Swordman">
+      <UniqueIdentifier>{f4a74836-747c-49fd-b462-99e97e0ae990}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

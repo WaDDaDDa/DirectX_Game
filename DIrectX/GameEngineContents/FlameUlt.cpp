@@ -25,7 +25,7 @@ void FlameUlt::Start()
 	Event.Stay = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
 		{
 			Att = Unit->GetUnitAttack();
-			Att *= 0.5f;
+			Att *= 0.3f;
 
 			if (TeamType::Blue == Unit->MyTeam)
 			{
@@ -35,7 +35,7 @@ void FlameUlt::Start()
 						{
 							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att);
 						}
-						AttInter = 0.5f;
+						AttInter = 0.2f;
 					});
 			}
 			else if (TeamType::Red == Unit->MyTeam)
@@ -46,7 +46,7 @@ void FlameUlt::Start()
 						{
 							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att);
 						}
-						AttInter = 0.5f;
+						AttInter = 0.2f;
 
 					});
 			}
