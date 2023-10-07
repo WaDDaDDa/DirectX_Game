@@ -226,7 +226,8 @@ void Ninja::Skill2Update(float _Delta)
 				for (size_t i = 0; i < _Collision.size(); i++)
 				{
 					// 공격대미지 공식
-					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 1.3f);
+					AggroUnit = reinterpret_cast<GameUnit*>(_Collision[i]->GetActor());
+					AggroUnit->DamageHP(UnitAtt * 1.3f);
 					SkillTick -= 1;
 					return;
 				}
@@ -240,7 +241,8 @@ void Ninja::Skill2Update(float _Delta)
 				for (size_t i = 0; i < _Collision.size(); i++)
 				{
 					// 공격대미지 공식
-					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 1.3f);
+					AggroUnit = reinterpret_cast<GameUnit*>(_Collision[i]->GetActor());
+					AggroUnit->DamageHP(UnitAtt * 1.3f);
 					SkillTick -= 1;
 					return;
 				}

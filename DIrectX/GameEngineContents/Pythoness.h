@@ -86,7 +86,7 @@ private:
 
     float PythonessSpeed = 60.0f;
     float PythonessHp = 65.0f;
-    float PythonessAtt = 35.0f;
+    float PythonessAtt = 25.0f;
     float PythonessDef = 3.0f;
     float PythonessAbsoluteDef = 30.0f;
     float PythonessAttackSpeed = 1.1f;

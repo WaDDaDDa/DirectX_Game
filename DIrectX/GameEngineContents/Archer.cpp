@@ -57,18 +57,18 @@ void Archer::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
 		MainSpriteRenderer->CreateAnimation("Archer_Idle", "ArcherAni", 0.2f, 0, 4);
 		MainSpriteRenderer->CreateAnimation("Archer_Move", "ArcherAni", 0.2f, 5, 12);
-		MainSpriteRenderer->CreateAnimation("Archer_Attack", "ArcherAni", 0.2f, 13, 17, false);
-		MainSpriteRenderer->CreateAnimation("Archer_Attack2", "ArcherAni", 0.2f, 18, 19, false);
+		MainSpriteRenderer->CreateAnimation("Archer_Attack", "ArcherAni", 0.1f, 13, 17, false);
+		MainSpriteRenderer->CreateAnimation("Archer_Attack2", "ArcherAni", 0.1f, 18, 19, false);
 		MainSpriteRenderer->CreateAnimation("Archer_Skill", "ArcherAni", 0.1f, 30, 35, false);
 		MainSpriteRenderer->CreateAnimation("Archer_Skill2", "ArcherAni", 0.1f, 36, 37, false);
-		MainSpriteRenderer->CreateAnimation("Archer_Ult", "ArcherAni", 0.2f, 38, 42, false);
-		MainSpriteRenderer->CreateAnimation("Archer_Ult2", "ArcherAni", 0.2f, 43, 46, false);
+		MainSpriteRenderer->CreateAnimation("Archer_Ult", "ArcherAni", 0.1f, 38, 42, false);
+		MainSpriteRenderer->CreateAnimation("Archer_Ult2", "ArcherAni", 0.1f, 43, 46, false);
 		MainSpriteRenderer->CreateAnimation("Archer_Die", "ArcherAni", 0.1f, 20, 29, false);
 		
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
-		SkillEffectRenderer->CreateAnimation("ArcherAttackEffect", "ArcherEffect", 0.2f, 7, 8, false);
+		SkillEffectRenderer->CreateAnimation("ArcherAttackEffect", "ArcherEffect", 0.1f, 7, 8, false);
 		SkillEffectRenderer->CreateAnimation("ArcherSkillEffect", "ArcherEffect", 0.1f, 14, 15, false);
-		SkillEffectRenderer->CreateAnimation("ArcherUltEffect", "ArcherEffect", 0.2f, 17, 25, false);
+		SkillEffectRenderer->CreateAnimation("ArcherUltEffect", "ArcherEffect", 0.1f, 17, 25, false);
 		SkillEffectRenderer->CreateAnimation("ArcherSkillBlack", "ArcherEffect", 0.1f, 26, 26, false);
 		SkillEffectRenderer->ChangeAnimation("ArcherSkillBlack");
 		SkillEffectRenderer->AutoSpriteSizeOn();
@@ -287,7 +287,7 @@ void Archer::Ult2Update(float _Delta)
 			return;
 		}
 
-		ChangeState(GameUnitState::Move);
+		ChangeState(GameUnitState::Idle);
 		return;
 	}
 }

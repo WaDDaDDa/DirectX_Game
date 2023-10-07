@@ -81,7 +81,7 @@ private:
 
     float PyromancerSpeed = 60.0f;
     float PyromancerHp = 80.0f;
-    float PyromancerAtt = 72.0f;
+    float PyromancerAtt = 40.0f;
     float PyromancerDef = 3.0f;
     float PyromancerAbsoluteDef = 30.0f;
     float PyromancerAttackSpeed = 2.0f;

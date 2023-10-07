@@ -305,7 +305,7 @@ void Pythoness::Ult2Update(float _Delta)
 			return;
 		}
 
-		ChangeState(GameUnitState::Move);
+		ChangeState(GameUnitState::Idle);
 		return;
 	}
 }
