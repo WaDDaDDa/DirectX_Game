@@ -83,6 +83,15 @@
     <ClCompile Include="SwordmanUltEffect.cpp">
       <Filter>GameUnit\Swordman</Filter>
     </ClCompile>
+    <ClCompile Include="Pythoness.cpp">
+      <Filter>GameUnit\Pythoness</Filter>
+    </ClCompile>
+    <ClCompile Include="PythonessAttack.cpp">
+      <Filter>GameUnit\Pythoness</Filter>
+    </ClCompile>
+    <ClCompile Include="PythonessHeal.cpp">
+      <Filter>GameUnit\Pythoness</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -170,6 +179,15 @@
     <ClInclude Include="SwordmanUltEffect.h">
       <Filter>GameUnit\Swordman</Filter>
     </ClInclude>
+    <ClInclude Include="Pythoness.h">
+      <Filter>GameUnit\Pythoness</Filter>
+    </ClInclude>
+    <ClInclude Include="PythonessAttack.h">
+      <Filter>GameUnit\Pythoness</Filter>
+    </ClInclude>
+    <ClInclude Include="PythonessHeal.h">
+      <Filter>GameUnit\Pythoness</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -210,6 +228,9 @@
     </Filter>
     <Filter Include="GameUnit\Swordman">
       <UniqueIdentifier>{f4a74836-747c-49fd-b462-99e97e0ae990}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameUnit\Pythoness">
+      <UniqueIdentifier>{bece7119-d457-47fa-830b-50815fc6571d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

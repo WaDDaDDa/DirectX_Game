@@ -217,6 +217,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Pyromancer.cpp" />
+    <ClCompile Include="Pythoness.cpp" />
+    <ClCompile Include="PythonessAttack.cpp" />
+    <ClCompile Include="PythonessHeal.cpp" />
     <ClCompile Include="Swordman.cpp" />
     <ClCompile Include="SwordmanUltEffect.cpp" />
     <ClCompile Include="TextArrow.cpp">
@@ -275,6 +278,9 @@
     <ClInclude Include="PlayLevel.h" />
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="Pyromancer.h" />
+    <ClInclude Include="Pythoness.h" />
+    <ClInclude Include="PythonessAttack.h" />
+    <ClInclude Include="PythonessHeal.h" />
     <ClInclude Include="Swordman.h" />
     <ClInclude Include="SwordmanUltEffect.h" />
     <ClInclude Include="TextArrow.h">
