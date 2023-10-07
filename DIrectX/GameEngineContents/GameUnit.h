@@ -281,6 +281,8 @@ public:
     std::vector<GameUnit*> TeamGroup;
     bool ImDie = false;
 
+    bool HealTarget = false;
+
 protected:
     std::shared_ptr<GameEngineSpriteRenderer> SpwanRenderer;
     std::shared_ptr<GameEngineCollision> BodyCol;

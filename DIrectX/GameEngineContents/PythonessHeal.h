@@ -46,6 +46,8 @@ public:
             }
         }
 
+        Unit->TeamGroup[TeamNum]->HealTarget = true;
+
         Dir = Unit->TeamGroup[TeamNum]->Transform.GetWorldPosition() - Transform.GetWorldPosition();
         Dir.Normalize();
         float4 Rot = Dir.Angle2DDeg();

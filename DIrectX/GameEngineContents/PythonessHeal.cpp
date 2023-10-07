@@ -17,7 +17,7 @@ void PythonessHeal::Start()
 	Renderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Projectile);
 
 	Renderer->CreateAnimation("PythonessHeal", "PythonessAni", 0.2f, 25, 28, true);
-	Renderer->CreateAnimation("PythonessHeal2", "PythonessAni", 0.05f, 39, 49, false);
+	Renderer->CreateAnimation("PythonessHeal2", "PythonessAni", 0.1f, 39, 49, false);
 	Renderer->ChangeAnimation("PythonessHeal");
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(1.3f);
@@ -35,13 +35,19 @@ void PythonessHeal::Start()
 					{
 						for (size_t i = 0; i < _Collision.size(); i++)
 						{
-							AttackOn = true;
-							LifeTime = 2.0f;
-							Renderer->ChangeAnimation("PythonessHeal2");
-							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->HealHP(Att);
 							EnemyUnit = reinterpret_cast<GameUnit*>(_Collision[i]->GetActor());
-							Pos = Transform.GetWorldPosition() - EnemyUnit->Transform.GetWorldPosition();
-							Col->Off();
+
+							if (true == EnemyUnit->HealTarget)
+							{
+								AttackOn = true;
+								LifeTime = 2.0f;
+								Renderer->ChangeAnimation("PythonessHeal2");
+								reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->HealHP(Att);
+								Pos = Transform.GetWorldPosition() - EnemyUnit->Transform.GetWorldPosition();
+								Col->Off();
+								EnemyUnit->HealTarget = false;
+							}
+
 						}
 					});
 			}
@@ -51,14 +57,19 @@ void PythonessHeal::Start()
 					{
 						for (size_t i = 0; i < _Collision.size(); i++)
 						{
-							AttackOn = true;
-							LifeTime = 2.0f;
-							Renderer->ChangeAnimation("PythonessHeal2");
-							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->HealHP(Att);
 							EnemyUnit = reinterpret_cast<GameUnit*>(_Collision[i]->GetActor());
-							Pos = Transform.GetWorldPosition() - EnemyUnit->Transform.GetWorldPosition();
 
-							Col->Off();
+							if (true == EnemyUnit->HealTarget)
+							{
+								AttackOn = true;
+								LifeTime = 2.0f;
+								Renderer->ChangeAnimation("PythonessHeal2");
+								reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->HealHP(Att);
+								Pos = Transform.GetWorldPosition() - EnemyUnit->Transform.GetWorldPosition();
+								Col->Off();
+								EnemyUnit->HealTarget = false;
+							}
+							
 						}
 					});
 			}
