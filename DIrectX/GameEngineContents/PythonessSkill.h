@@ -2,16 +2,16 @@
 #include <GameEngineCore/GameEngineActor.h>
 #include "GameUnit.h"
 
-class PythonessHeal : public GameEngineActor
+class PythonessSkill : public GameEngineActor
 {
 public:
-    PythonessHeal();
-    ~PythonessHeal();
+    PythonessSkill();
+    ~PythonessSkill();
 
-    PythonessHeal(const PythonessHeal& _Other) = delete;
-    PythonessHeal(PythonessHeal&& _Other) noexcept = delete;
-    PythonessHeal& operator=(const PythonessHeal& _Other) = delete;
-    PythonessHeal& operator=(PythonessHeal&& _Other) noexcept = delete;
+    PythonessSkill(const PythonessSkill& _Other) = delete;
+    PythonessSkill(PythonessSkill&& _Other) noexcept = delete;
+    PythonessSkill& operator=(const PythonessSkill& _Other) = delete;
+    PythonessSkill& operator=(PythonessSkill&& _Other) noexcept = delete;
 
     void SetUnit(std::shared_ptr<class GameUnit> _Unit)
     {

@@ -1,24 +1,24 @@
 #include "PreCompile.h"
-#include "PythonessHeal.h"
+#include "PythonessSkill.h"
+#include "PythonessSkillBomb.h"
 
 
-PythonessHeal::PythonessHeal()
+PythonessSkill::PythonessSkill()
 {
 
 }
 
-PythonessHeal::~PythonessHeal()
+PythonessSkill::~PythonessSkill()
 {
 
 }
 
-void PythonessHeal::Start()
+void PythonessSkill::Start()
 {
 	Renderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Projectile);
 
-	Renderer->CreateAnimation("PythonessHeal", "PythonessAni", 0.2f, 25, 28, true);
-	Renderer->CreateAnimation("PythonessHeal2", "PythonessAni", 0.1f, 39, 49, false);
-	Renderer->ChangeAnimation("PythonessHeal");
+	Renderer->CreateAnimation("PythonessSkill", "PythonessAni", 0.2f, 29, 32, true);
+	Renderer->ChangeAnimation("PythonessSkill");
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(1.3f);
 
@@ -28,7 +28,7 @@ void PythonessHeal::Start()
 		{
 			// ±Ã±Ø±â ´ë¹ÌÁö
 			float Att = Unit->GetUnitAttack();
-			Att *= 1.0f;
+			Att *= 0.5f;
 			if (TeamType::Blue == Unit->MyTeam)
 			{
 				Col->Collision(CollisionOrder::BlueTeamBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
@@ -41,11 +41,14 @@ void PythonessHeal::Start()
 							{
 								AttackOn = true;
 								LifeTime = 2.0f;
-								Renderer->ChangeAnimation("PythonessHeal2");
+								//Renderer->ChangeAnimation("PythonessSkill2");
 								reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->HealHP(Att);
 								Pos = Transform.GetWorldPosition() - HealUnit->Transform.GetWorldPosition();
 								Col->Off();
 								HealUnit->HealTarget = false;
+								GetLevel()->CreateActor<PythonessSkillBomb>()->SetUnit(_Collision[i]->GetActor()->GetDynamic_Cast_This<GameUnit>(), Att);
+
+								Death();
 							}
 
 						}
@@ -63,11 +66,13 @@ void PythonessHeal::Start()
 							{
 								AttackOn = true;
 								LifeTime = 2.0f;
-								Renderer->ChangeAnimation("PythonessHeal2");
+								//Renderer->ChangeAnimation("PythonessSkill2");
 								reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->HealHP(Att);
 								Pos = Transform.GetWorldPosition() - HealUnit->Transform.GetWorldPosition();
 								Col->Off();
 								HealUnit->HealTarget = false;
+								GetLevel()->CreateActor<PythonessSkillBomb>()->SetUnit(_Collision[i]->GetActor()->GetDynamic_Cast_This<GameUnit>(), Att);
+								Death();
 							}
 							
 						}
@@ -87,7 +92,7 @@ void PythonessHeal::Start()
 
 }
 
-void PythonessHeal::Update(float _Delta)
+void PythonessSkill::Update(float _Delta)
 {
 	LifeTime -= _Delta;
 
@@ -104,12 +109,12 @@ void PythonessHeal::Update(float _Delta)
 		return;
 	}
 
-	if (true == AttackOn)
-	{
-		Transform.SetLocalPosition(HealUnit->Transform.GetWorldPosition());
-		Transform.SetWorldRotation(float4::ZERO);
-		return;
-	}
+	//if (true == AttackOn)
+	//{
+	//	Transform.SetLocalPosition(HealUnit->Transform.GetWorldPosition());
+	//	Transform.SetWorldRotation(float4::ZERO);
+	//	return;
+	//}
 
 	Transform.AddLocalPosition(Dir * Speed * _Delta);
 

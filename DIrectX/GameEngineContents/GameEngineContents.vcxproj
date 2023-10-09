@@ -220,6 +220,8 @@
     <ClCompile Include="Pythoness.cpp" />
     <ClCompile Include="PythonessAttack.cpp" />
     <ClCompile Include="PythonessHeal.cpp" />
+    <ClCompile Include="PythonessSkill.cpp" />
+    <ClCompile Include="PythonessSkillBomb.cpp" />
     <ClCompile Include="Swordman.cpp" />
     <ClCompile Include="SwordmanUltEffect.cpp" />
     <ClCompile Include="TextArrow.cpp">
@@ -281,6 +283,8 @@
     <ClInclude Include="Pythoness.h" />
     <ClInclude Include="PythonessAttack.h" />
     <ClInclude Include="PythonessHeal.h" />
+    <ClInclude Include="PythonessSkill.h" />
+    <ClInclude Include="PythonessSkillBomb.h" />
     <ClInclude Include="Swordman.h" />
     <ClInclude Include="SwordmanUltEffect.h" />
     <ClInclude Include="TextArrow.h">

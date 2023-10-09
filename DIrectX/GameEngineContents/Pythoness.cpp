@@ -2,6 +2,7 @@
 #include "Pythoness.h"
 #include "PythonessAttack.h"
 #include "PythonessHeal.h"
+#include "PythonessSkill.h"
 
 Pythoness::Pythoness()
 {
@@ -208,6 +209,7 @@ void Pythoness::SkillStart()
 {
 	GameUnit::SkillStart();
 	MainSpriteRenderer->ChangeAnimation("Pythoness_Skill");
+	SkillEffectRenderer->ChangeAnimation("PythonessSkill1Effect");
 
 	float4 EnemyPos = AggroUnit->Transform.GetWorldPosition();
 	float4 MyPos = Transform.GetWorldPosition();
@@ -231,8 +233,9 @@ void Pythoness::SkillUpdate(float _Delta)
 void Pythoness::Skill2Start()
 {
 	MainSpriteRenderer->ChangeAnimation("Pythoness_Skill2");
+	SkillEffectRenderer->ChangeAnimation("PythonessSkill2Effect");
 
-	//GetLevel()->CreateActor<FireSpirit>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
+	GetLevel()->CreateActor<PythonessSkill>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
 
 }
 

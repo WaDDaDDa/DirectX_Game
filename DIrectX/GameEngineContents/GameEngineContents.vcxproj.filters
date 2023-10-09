@@ -92,6 +92,12 @@
     <ClCompile Include="PythonessHeal.cpp">
       <Filter>GameUnit\Pythoness</Filter>
     </ClCompile>
+    <ClCompile Include="PythonessSkill.cpp">
+      <Filter>GameUnit\Pythoness</Filter>
+    </ClCompile>
+    <ClCompile Include="PythonessSkillBomb.cpp">
+      <Filter>GameUnit\Pythoness</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -186,6 +192,12 @@
       <Filter>GameUnit\Pythoness</Filter>
     </ClInclude>
     <ClInclude Include="PythonessHeal.h">
+      <Filter>GameUnit\Pythoness</Filter>
+    </ClInclude>
+    <ClInclude Include="PythonessSkill.h">
+      <Filter>GameUnit\Pythoness</Filter>
+    </ClInclude>
+    <ClInclude Include="PythonessSkillBomb.h">
       <Filter>GameUnit\Pythoness</Filter>
     </ClInclude>
   </ItemGroup>
