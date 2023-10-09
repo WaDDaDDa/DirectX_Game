@@ -91,8 +91,7 @@ private:
     float PythonessAbsoluteDef = 30.0f;
     float PythonessAttackSpeed = 1.1f;
     float PythonessSkillCooltime = 6.5f;
-    float PythonessUltCooltime = 20.0f;
-
+    float PythonessUltCooltime = 2.0f;
     float PythonessUltInter = 0.05f;
 
     // true¸é °ø°Ý  false¸é Èú

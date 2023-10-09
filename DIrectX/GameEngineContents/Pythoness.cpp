@@ -3,6 +3,7 @@
 #include "PythonessAttack.h"
 #include "PythonessHeal.h"
 #include "PythonessSkill.h"
+#include "PythonessUlt.h"
 
 Pythoness::Pythoness()
 {
@@ -285,11 +286,10 @@ void Pythoness::UltUpdate(float _Delta)
 
 void Pythoness::Ult2Start()
 {
-	//GetLevel()->CreateActor<PythonessUltEffect>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
 	MainSpriteRenderer->ChangeAnimation("Pythoness_Ult2");
 	SkillEffectRenderer->ChangeAnimation("PythonessUlt2Effect");
 
-	//GetLevel()->CreateActor<FlameUlt>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
+	GetLevel()->CreateActor<PythonessUlt>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
 }
 
 void Pythoness::Ult2Update(float _Delta)
