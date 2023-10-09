@@ -101,6 +101,9 @@
     <ClCompile Include="PythonessUlt.cpp">
       <Filter>GameUnit\Pythoness</Filter>
     </ClCompile>
+    <ClCompile Include="Priest.cpp">
+      <Filter>GameUnit\Priest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -206,6 +209,9 @@
     <ClInclude Include="PythonessUlt.h">
       <Filter>GameUnit\Pythoness</Filter>
     </ClInclude>
+    <ClInclude Include="Priest.h">
+      <Filter>GameUnit\Priest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -249,6 +255,9 @@
     </Filter>
     <Filter Include="GameUnit\Pythoness">
       <UniqueIdentifier>{bece7119-d457-47fa-830b-50815fc6571d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameUnit\Priest">
+      <UniqueIdentifier>{c7a50339-09df-4b9a-94cb-da79b1d6cbf7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

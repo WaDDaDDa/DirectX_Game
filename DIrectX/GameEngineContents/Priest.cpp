@@ -1,25 +1,25 @@
 #include "PreCompile.h"
-#include "Monk.h"
+#include "Priest.h"
 
 
-Monk::Monk()
+Priest::Priest()
 {
 
 }
 
-Monk::~Monk()
+Priest::~Priest()
 {
 
 }
 
-void Monk::Start()
+void Priest::Start()
 {
 	GameUnit::Start();
 
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExistsChild("GameEngineResources");
-		Dir.MoveChild("ContentsResources\\GameUnit\\Monk\\");
+		Dir.MoveChild("ContentsResources\\GameUnit\\Priest\\");
 		std::vector<GameEngineDirectory> Directorys = Dir.GetAllDirectory();
 
 		for (size_t i = 0; i < Directorys.size(); i++)
@@ -34,7 +34,7 @@ void Monk::Start()
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExistsChild("GameEngineResources");
-		Dir.MoveChild("ContentsResources\\GameUnit\\Monk\\");
+		Dir.MoveChild("ContentsResources\\GameUnit\\Priest\\");
 
 		std::vector<GameEngineFile> Files = Dir.GetAllFile();
 
@@ -44,34 +44,35 @@ void Monk::Start()
 			GameEngineTexture::Load(File.GetStringPath());
 		}
 
-		GameEngineSprite::CreateSingle("Monk_ult.png");
+		GameEngineSprite::CreateSingle("Priest_ult.png");
 	}
 
 	SetUnitStatus();
 }
 
-void Monk::LevelStart(GameEngineLevel* _PrevLevel)
+void Priest::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	{
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
-		MainSpriteRenderer->CreateAnimation("Monk_Idle", "MonkAni", 0.2f, 0, 4);
-		MainSpriteRenderer->CreateAnimation("Monk_Move", "MonkAni", 0.2f, 5, 12);
-		MainSpriteRenderer->CreateAnimation("Monk_Attack", "MonkAni", 0.2f, 13, 15, false);
-		MainSpriteRenderer->CreateAnimation("Monk_Attack2", "MonkAni", 0.2f, 16, 18, false);
-		MainSpriteRenderer->CreateAnimation("Monk_Skill", "MonkAni", 0.1f, 34, 43, false);
-		MainSpriteRenderer->CreateAnimation("Monk_Ult", "MonkAni", 0.1f, 44, 53, false);
-		MainSpriteRenderer->CreateAnimation("Monk_Die", "MonkAni", 0.1f, 19, 33, false);
+		MainSpriteRenderer->CreateAnimation("Priest_Idle", "PriestAni", 0.2f, 0, 4);
+		MainSpriteRenderer->CreateAnimation("Priest_Move", "PriestAni", 0.2f, 5, 12);
+		MainSpriteRenderer->CreateAnimation("Priest_Attack", "PriestAni", 0.1f, 13, 17, false);
+		MainSpriteRenderer->CreateAnimation("Priest_Attack2", "PriestAni", 0.1f, 18, 22, false);
+		MainSpriteRenderer->CreateAnimation("Priest_Skill", "PriestAni", 0.1f, 33, 41, false);
+		MainSpriteRenderer->CreateAnimation("Priest_Ult", "PriestAni", 0.1f, 42, 45, false);
+		MainSpriteRenderer->CreateAnimation("Priest_Ult2", "PriestAni", 0.1f, 46, 51, false);
+		MainSpriteRenderer->CreateAnimation("Priest_Die", "PriestAni", 0.1f, 23, 32, false);
 
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
-		SkillEffectRenderer->CreateAnimation("MonkSkillEffect", "MonkEffect", 0.1f, 17, 26, false);
-		SkillEffectRenderer->CreateAnimation("MonkSkillBlack", "MonkEffect", 0.1f, 0, 0, false);
-		SkillEffectRenderer->ChangeAnimation("MonkSkillBlack");
+		SkillEffectRenderer->CreateAnimation("PriestSkillEffect", "PriestEffect", 0.1f, 2, 8, false);
+		SkillEffectRenderer->CreateAnimation("PriestSkillBlack", "PriestEffect", 0.1f, 0, 0, false);
+		SkillEffectRenderer->ChangeAnimation("PriestSkillBlack");
 		SkillEffectRenderer->AutoSpriteSizeOn();
 		SkillEffectRenderer->SetAutoScaleRatio(1.3f);
 		SkillEffectRenderer->Transform.AddLocalPosition({0, -20.0f});
 		SkillEffectRenderer->SetPivotType(PivotType::Bottom);
 
-		MainSpriteRenderer->ChangeAnimation("Monk_Idle");
+		MainSpriteRenderer->ChangeAnimation("Priest_Idle");
 		MainSpriteRenderer->AutoSpriteSizeOn();
 		MainSpriteRenderer->SetAutoScaleRatio(1.3f);
 	}
@@ -79,48 +80,71 @@ void Monk::LevelStart(GameEngineLevel* _PrevLevel)
 	GameUnit::LevelStart(_PrevLevel);
 }
 
-void Monk::LevelEnd(GameEngineLevel* _NextLevel)
+void Priest::LevelEnd(GameEngineLevel* _NextLevel)
 {
 
 }
 
-void Monk::SpwanStart()
+void Priest::SpwanStart()
 {
 	GameUnit::SpwanStart();
-	MainSpriteRenderer->ChangeAnimation("Monk_Idle");
+	MainSpriteRenderer->ChangeAnimation("Priest_Idle");
 }
 
-void Monk::IdleStart()
+void Priest::IdleStart()
 {
 	GameUnit::IdleStart();
-	MainSpriteRenderer->ChangeAnimation("Monk_Idle");
+	MainSpriteRenderer->ChangeAnimation("Priest_Idle");
 }
 
-void Monk::MoveStart()
+void Priest::MoveStart()
 {
 	GameUnit::MoveStart();
-	MainSpriteRenderer->ChangeAnimation("Monk_Move");
+	MainSpriteRenderer->ChangeAnimation("Priest_Move");
 }
 
-void Monk::BackMoveStart()
+void Priest::BackMoveStart()
 {
 	GameUnit::BackMoveStart();
-	MainSpriteRenderer->ChangeAnimation("Monk_Move");
+	MainSpriteRenderer->ChangeAnimation("Priest_Move");
 }
 
-void Monk::SearchMoveStart()
+void Priest::SearchMoveStart()
 {
 	GameUnit::SearchMoveStart();
-	MainSpriteRenderer->ChangeAnimation("Monk_Move");
+	MainSpriteRenderer->ChangeAnimation("Priest_Move");
 }
 
-void Monk::AttackStart()
+void Priest::AttackStart()
 {
-	GameUnit::AttackStart();
-	MainSpriteRenderer->ChangeAnimation("Monk_Attack");
+	AttackValue = 0.0f;
+
+	MainSpriteRenderer->ChangeAnimation("Priest_Attack");
+
+	float CurHpRate = 1.0f;
+	size_t TeamNum = 0;
+	float HealTick = 1.0f;
+	// 회복 한다.
+	while (HealTick > 0.0f)
+	{
+		for (size_t i = 0; i < EnemyGroup.size(); i++)
+		{
+			if (TeamGroup[i]->GetState() != GameUnitState::Die || TeamGroup[i]->GetState() != GameUnitState::DiePrev)
+			{
+				if (CurHpRate >= TeamGroup[i]->GetHPRate())
+				{
+					CurHpRate = TeamGroup[i]->GetHPRate();
+					TeamNum = i;
+				}
+			}
+		}
+
+		TeamGroup[TeamNum]->HealHP(UnitAtt);
+		HealTick -= 1.0f;
+	}
 }
 
-void Monk::AttackUpdate(float _Delta)
+void Priest::AttackUpdate(float _Delta)
 {
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
@@ -129,13 +153,13 @@ void Monk::AttackUpdate(float _Delta)
 	}
 }
 
-void Monk::Attack2Start()
+void Priest::Attack2Start()
 {
 	GameUnit::Attack2Start();
-	MainSpriteRenderer->ChangeAnimation("Monk_Attack2");
+	MainSpriteRenderer->ChangeAnimation("Priest_Attack2");
 }
 
-void Monk::Attack2Update(float _Delta)
+void Priest::Attack2Update(float _Delta)
 {
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
@@ -149,16 +173,16 @@ void Monk::Attack2Update(float _Delta)
 			return;
 		}
 
-		ChangeState(GameUnitState::Move);
+		ChangeState(GameUnitState::Idle);
 		return;
 	}
 }
 
-void Monk::SkillStart()
+void Priest::SkillStart()
 {
 	GameUnit::SkillStart();
-	MainSpriteRenderer->ChangeAnimation("Monk_Skill");
-	SkillEffectRenderer->ChangeAnimation("MonkSkillEffect");
+	MainSpriteRenderer->ChangeAnimation("Priest_Skill");
+	SkillEffectRenderer->ChangeAnimation("PriestSkillEffect");
 
 	float CurHpRate = 1.0f;
 	size_t TeamNum = 0;
@@ -184,11 +208,11 @@ void Monk::SkillStart()
 
 }
 
-void Monk::SkillUpdate(float _Delta)
+void Priest::SkillUpdate(float _Delta)
 {
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
-		SkillEffectRenderer->ChangeAnimation("MonkSkillBlack");
+		SkillEffectRenderer->ChangeAnimation("PriestSkillBlack");
 
 		//이벤트 사용.
 		if (TeamType::Blue == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::RedTeamBody, MoveEvent))
@@ -200,21 +224,21 @@ void Monk::SkillUpdate(float _Delta)
 			return;
 		}
 
-		ChangeState(GameUnitState::Move);
+		ChangeState(GameUnitState::Idle);
 		return;
 	}
 }
 
-void Monk::UltStart()
+void Priest::UltStart()
 {
 	GameUnit::UltStart();
-	MainSpriteRenderer->ChangeAnimation("Monk_Ult");
+	MainSpriteRenderer->ChangeAnimation("Priest_Ult");
 
 	//CreateUltEffect();
 	// 어그로를 자신에게 끌고 자신의 방어력을 증가시킨다.
 }
 
-void Monk::UltUpdate(float _Delta)
+void Priest::UltUpdate(float _Delta)
 {
 	//UltEffectRenderer->Transform.AddWorldRotation({ 0.0f, 360.0f * _Delta  });
 	if (MainSpriteRenderer->IsCurAnimationEnd())
@@ -229,14 +253,14 @@ void Monk::UltUpdate(float _Delta)
 			return;
 		}
 
-		ChangeState(GameUnitState::Move);
+		ChangeState(GameUnitState::Idle);
 		return;
 	}
 }
 
-void Monk::DiePrevStart()
+void Priest::DiePrevStart()
 {
 	GameUnit::DiePrevStart();
-	SkillEffectRenderer->ChangeAnimation("MonkSkillBlack");
-	MainSpriteRenderer->ChangeAnimation("Monk_Die");
+	SkillEffectRenderer->ChangeAnimation("PriestSkillBlack");
+	MainSpriteRenderer->ChangeAnimation("Priest_Die");
 }
