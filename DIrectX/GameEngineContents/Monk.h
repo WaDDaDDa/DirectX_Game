@@ -78,6 +78,6 @@ private:
     float MonkAbsoluteDef = 40.0f;
     float MonkAttackSpeed = 1.4f;
     float MonkSkillCooltime = 5.4f;
-    float MonkUltCooltime = 5.0f;
+    float MonkUltCooltime = 30.0f;
 };
 

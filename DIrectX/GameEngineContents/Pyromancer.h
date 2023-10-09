@@ -86,7 +86,7 @@ private:
     float PyromancerAbsoluteDef = 30.0f;
     float PyromancerAttackSpeed = 2.0f;
     float PyromancerSkillCooltime = 6.5f;
-    float PyromancerUltCooltime = 10.0f;
+    float PyromancerUltCooltime = 30.0f;
 
     float PyromancerUltInter = 0.05f;
 
