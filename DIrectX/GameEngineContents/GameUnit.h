@@ -291,6 +291,8 @@ public:
 
     bool HealTarget = false;
 
+    bool UseUlt = false;
+
 protected:
     std::shared_ptr<GameEngineSpriteRenderer> SpwanRenderer;
     std::shared_ptr<GameEngineCollision> BodyCol;
@@ -399,7 +401,6 @@ protected:
     float UltCooltime = 30.0f;
     float UltValue = 0.0f;
 
-    bool UseUlt = false;
 
 private:
     float RespawnTime = 0.0f;

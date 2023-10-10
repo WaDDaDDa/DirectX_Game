@@ -64,6 +64,7 @@ void Priest::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer->CreateAnimation("Priest_Die", "PriestAni", 0.1f, 23, 32, false);
 
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
+		SkillEffectRenderer->CreateAnimation("PriestAttackEffect", "PriestEffect", 0.1f, 2, 8, false);
 		SkillEffectRenderer->CreateAnimation("PriestSkillEffect", "PriestEffect", 0.1f, 2, 8, false);
 		SkillEffectRenderer->CreateAnimation("PriestSkillBlack", "PriestEffect", 0.1f, 0, 0, false);
 		SkillEffectRenderer->ChangeAnimation("PriestSkillBlack");
@@ -112,35 +113,42 @@ void Priest::SpwanStart()
 {
 	GameUnit::SpwanStart();
 	MainSpriteRenderer->ChangeAnimation("Priest_Idle");
+	SkillEffectRenderer->ChangeAnimation("PriestSkillBlack");
 }
 
 void Priest::IdleStart()
 {
 	GameUnit::IdleStart();
 	MainSpriteRenderer->ChangeAnimation("Priest_Idle");
+	SkillEffectRenderer->ChangeAnimation("PriestSkillBlack");
 }
 
 void Priest::MoveStart()
 {
 	GameUnit::MoveStart();
 	MainSpriteRenderer->ChangeAnimation("Priest_Move");
+	SkillEffectRenderer->ChangeAnimation("PriestSkillBlack");
 }
 
 void Priest::BackMoveStart()
 {
 	GameUnit::BackMoveStart();
 	MainSpriteRenderer->ChangeAnimation("Priest_Move");
+	SkillEffectRenderer->ChangeAnimation("PriestSkillBlack");
 }
 
 void Priest::SearchMoveStart()
 {
 	GameUnit::SearchMoveStart();
 	MainSpriteRenderer->ChangeAnimation("Priest_Move");
+	SkillEffectRenderer->ChangeAnimation("PriestSkillBlack");
 }
 
 void Priest::AttackStart()
 {
 	MainSpriteRenderer->ChangeAnimation("Priest_Attack");
+	SkillEffectRenderer->ChangeAnimation("PriestAttackEffect");
+
 }
 
 void Priest::AttackUpdate(float _Delta)

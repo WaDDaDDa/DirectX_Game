@@ -20,9 +20,10 @@ void GameUnitUI::Start()
 
 void GameUnitUI::InitUniUI()
 {
-	// ±Ã±Ø±â ¿Â Å×µÎ¸®
+	// ±Ã±Ø±â ¿Â/¿ÀÇÁ Å×µÎ¸®
 	Renderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::HPLayer1);
 	Renderer->CreateAnimation("GameUnitUltOn", "UnitHPBar", 0.1f, 8, 8, false);
+	Renderer->CreateAnimation("GameUnitUltOff", "UnitHPBar", 0.1f, 7, 7, false);
 	Renderer->ChangeAnimation("GameUnitUltOn");
 	Renderer->SetImageScale({ 18.0f,18.0f });
 	Renderer->SetPivotType(PivotType::Left);
@@ -129,5 +130,14 @@ void GameUnitUI::Update(float _Delta)
 	else if (false == Unit->ImDie)
 	{
 		AllRendererOn();
+	}
+
+	if (true == Unit->UseUlt)
+	{
+		Renderer->ChangeAnimation("GameUnitUltOff");
+	}
+	else if (false == Unit->UseUlt)
+	{
+		Renderer->ChangeAnimation("GameUnitUltOn");
 	}
 }

@@ -195,7 +195,7 @@ void Archer::SkillUpdate(float _Delta)
 		return;
 	}
 
-	Transform.AddLocalPosition((MoveDir * UnitSpeed * 2.0f * _Delta));
+	Transform.AddLocalPosition((MoveDir * UnitSpeed * 1.5f * _Delta));
 
 }
 

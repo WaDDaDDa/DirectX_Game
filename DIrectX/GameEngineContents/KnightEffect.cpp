@@ -54,7 +54,7 @@ void KnightEffect::Update(float _Delta)
 	{
 		if (Renderer->IsCurAnimationEnd())
 		{
-			Renderer->Transform.AddLocalPosition({ 0.0f, 30.0f });
+			Renderer->Transform.AddLocalPosition({ 0.0f, 35.0f });
 
 			Renderer->ChangeAnimation("KnightEffect2");
 		}
