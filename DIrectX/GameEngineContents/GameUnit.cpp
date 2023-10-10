@@ -542,6 +542,30 @@ void GameUnit::MoveUpdate(float _Delta)
 		return;
 	}
 
+	if (350.0f >= Transform.GetWorldPosition().X)
+	{
+		Transform.SetWorldPosition({ 351.0f, Transform.GetWorldPosition().Y });
+		MoveDir = -MoveDir;
+	}
+
+	if (950.0f <= Transform.GetWorldPosition().X)
+	{
+		Transform.SetWorldPosition({ 949.0f, Transform.GetWorldPosition().Y });
+		MoveDir = -MoveDir;
+	}
+
+	if (-250.0f <= Transform.GetWorldPosition().Y)
+	{
+		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, -251.0f });
+		MoveDir = -MoveDir;
+	}
+
+	if (-600.0f >= Transform.GetWorldPosition().Y)
+	{
+		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, -599.0f });
+		MoveDir = -MoveDir;
+	}
+
 	Transform.AddLocalPosition((MoveDir * UnitSpeed * _Delta));
 }
 
@@ -623,6 +647,30 @@ void GameUnit::BackMoveUpdate(float _Delta)
 	else if (TeamType::Red == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::BlueTeamBody, MoveEvent))
 	{
 		return;
+	}
+
+	if (350.0f >= Transform.GetWorldPosition().X)
+	{
+		Transform.SetWorldPosition({ 351.0f, Transform.GetWorldPosition().Y });
+		MoveDir = -MoveDir;
+	}
+
+	if (950.0f <= Transform.GetWorldPosition().X)
+	{
+		Transform.SetWorldPosition({ 949.0f, Transform.GetWorldPosition().Y });
+		MoveDir = -MoveDir;
+	}
+
+	if (-250.0f <= Transform.GetWorldPosition().Y)
+	{
+		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, -251.0f });
+		MoveDir = -MoveDir;
+	}
+
+	if (-600.0f >= Transform.GetWorldPosition().Y)
+	{
+		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, -599.0f });
+		MoveDir = -MoveDir;
 	}
 
 	Transform.AddLocalPosition((MoveDir * UnitSpeed * _Delta));
@@ -741,6 +789,30 @@ void GameUnit::CollMoveUpdate(float _Delta)
 		PushValue = 0.0f;
 		ChangeState(GameUnitState::Idle);
 		return;
+	}
+
+	if (350.0f >= Transform.GetWorldPosition().X)
+	{
+		Transform.SetWorldPosition({ 351.0f, Transform.GetWorldPosition().Y });
+		MoveDir = -MoveDir;
+	}
+
+	if (950.0f <= Transform.GetWorldPosition().X)
+	{
+		Transform.SetWorldPosition({ 949.0f, Transform.GetWorldPosition().Y });
+		MoveDir = -MoveDir;
+	}
+
+	if (-250.0f <= Transform.GetWorldPosition().Y)
+	{
+		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, -251.0f });
+		MoveDir = -MoveDir;
+	}
+
+	if (-600.0f >= Transform.GetWorldPosition().Y)
+	{
+		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, -599.0f });
+		MoveDir = -MoveDir;
 	}
 
 	Transform.AddLocalPosition((MoveDir * UnitSpeed * _Delta));
