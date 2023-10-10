@@ -189,14 +189,22 @@ public:
         return UnitHP / UnitMaxHP;
     }
 
+    bool Immune = false;
+
     void DamageHP(float _Value)
     {
+        if (true == Immune)
+        {
+            return;
+        }
+
         // 들어온 공격력에 유닛의 방어력을 반영해서 계산시킨다.
         //float Result = _Value - (UnitDef * 0.4f);
         float DefRate = (UnitDef / (100.0f + UnitDef));
         float Result = _Value - _Value * DefRate;
         if (Result <= 0.0f)
         {
+            UnitHP = 0.0f;
             return;
         }
         UnitHP -= Result;

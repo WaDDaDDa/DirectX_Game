@@ -199,6 +199,8 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Monk.cpp" />
+    <ClCompile Include="MonkShield.cpp" />
+    <ClCompile Include="MonkUlt.cpp" />
     <ClCompile Include="NewGame_UI.cpp">
       <SubType>
       </SubType>
@@ -269,6 +271,8 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Monk.h" />
+    <ClInclude Include="MonkShield.h" />
+    <ClInclude Include="MonkUlt.h" />
     <ClInclude Include="NewGame_UI.h">
       <SubType>
       </SubType>

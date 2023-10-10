@@ -78,7 +78,7 @@ private:
     float PriestDef = 3.0f;
     float PriestAbsoluteDef = 3.0f;
     float PriestAttackSpeed = 1.4f;
-    float PriestSkillCooltime = 5.4f;
+    float PriestSkillCooltime = 7.0f;
     float PriestUltCooltime = 30.0f;
 };
 

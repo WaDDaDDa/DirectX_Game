@@ -119,7 +119,7 @@ private:
     std::shared_ptr<class GameEngineSpriteRenderer> EffectRenderer;
     std::shared_ptr<GameEngineCollision> Col;
     float4 Scale = { 200.0f, 200.0f };
-    float AttackSpeed = 1.0f;
+    float AttackSpeed = 1.5f;
     float AttackValue = 0.0f;
 };
 

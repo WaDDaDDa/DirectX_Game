@@ -88,7 +88,7 @@ private:
     std::shared_ptr<GameEngineCollision> Col;
     float4 Scale = { 1.0f, 1.0f };
     float LifeTime = 5.0f;
-    float Speed = 800.0f;
+    float Speed = 900.0f;
     bool AttackOn = false;
     class EventParameter Event;
     float4 Dir = float4::ZERO;

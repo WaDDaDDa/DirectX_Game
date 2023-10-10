@@ -104,6 +104,12 @@
     <ClCompile Include="Priest.cpp">
       <Filter>GameUnit\Priest</Filter>
     </ClCompile>
+    <ClCompile Include="MonkUlt.cpp">
+      <Filter>GameUnit\Monk</Filter>
+    </ClCompile>
+    <ClCompile Include="MonkShield.cpp">
+      <Filter>GameUnit\Monk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -211,6 +217,12 @@
     </ClInclude>
     <ClInclude Include="Priest.h">
       <Filter>GameUnit\Priest</Filter>
+    </ClInclude>
+    <ClInclude Include="MonkUlt.h">
+      <Filter>GameUnit\Monk</Filter>
+    </ClInclude>
+    <ClInclude Include="MonkShield.h">
+      <Filter>GameUnit\Monk</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

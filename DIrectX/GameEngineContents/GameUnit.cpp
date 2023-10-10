@@ -476,6 +476,12 @@ void GameUnit::MoveStart()
 // 넘어갈 수 있는 State 종류 ( Idle, Attack, BackMove,  )
 void GameUnit::MoveUpdate(float _Delta)
 {
+	if (AggroUnit->GetState() == GameUnitState::Die || AggroUnit->GetState() == GameUnitState::DiePrev)
+	{
+		ChangeState(GameUnitState::Idle);
+		return;
+	}
+
 	ChangeMoveDir();
 	// 공격 범위에 적군 body가 들어오면. 공격.
 	if (TeamType::Blue == MyTeam)

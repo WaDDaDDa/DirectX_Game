@@ -87,11 +87,11 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	// À¯´Ö »ý¼º
 	
 	// ·¹µåÆÀ À¯´Ö (¿À¸¥ÂÊ)
-	//RedTeam.push_back(CreateActor<Knight>()->GetPointer());
-	//RedTeam.push_back(CreateActor<Monk>()->GetPointer());
+	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
+	RedTeam.push_back(CreateActor<Monk>()->GetPointer());
 	RedTeam.push_back(CreateActor<Pyromancer>()->GetPointer());
-	//RedTeam.push_back(CreateActor<Pythoness>()->GetPointer());
-	RedTeam.push_back(CreateActor<Archer>()->GetPointer());
+	RedTeam.push_back(CreateActor<Pythoness>()->GetPointer());
+	//RedTeam.push_back(CreateActor<Archer>()->GetPointer());
 
 
 
@@ -99,8 +99,8 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	// ºí·çÆÀ À¯´Ö (¿ÞÂÊ)
 	BlueTeam.push_back(CreateActor<Swordman>()->GetPointer());
 	BlueTeam.push_back(CreateActor<Priest>()->GetPointer());
-	//BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
-	//BlueTeam.push_back(CreateActor<Ninja>()->GetPointer());
+	BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
+	BlueTeam.push_back(CreateActor<Ninja>()->GetPointer());
 	//BlueTeam.push_back(CreateActor<Pythoness>()->GetPointer());
 
 

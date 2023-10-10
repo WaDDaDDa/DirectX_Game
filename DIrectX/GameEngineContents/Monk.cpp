@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "Monk.h"
-
+#include "MonkUlt.h"
 
 Monk::Monk()
 {
@@ -211,6 +211,7 @@ void Monk::UltStart()
 {
 	GameUnit::UltStart();
 	MainSpriteRenderer->ChangeAnimation("Monk_Ult");
+	GetLevel()->CreateActor<MonkUlt>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
 
 	//CreateUltEffect();
 	// 어그로를 자신에게 끌고 자신의 방어력을 증가시킨다.
