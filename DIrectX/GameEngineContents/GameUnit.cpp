@@ -458,7 +458,11 @@ void GameUnit::IdleUpdate(float _Delta)
 // 어그로 유닛에게 다가가는 움직임.
 void GameUnit::MoveStart()
 {
-	AggroSetting();
+	if (AggroUnit->GetState() == GameUnitState::Die || AggroUnit->GetState() == GameUnitState::DiePrev)
+	{
+		NextAggroChange();
+	}
+	//AggroSetting();
 
 	// 적위치 - 내위치
 	float4 EnemyPos = AggroUnit->Transform.GetWorldPosition();

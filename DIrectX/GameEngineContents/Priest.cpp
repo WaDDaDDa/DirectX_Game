@@ -85,6 +85,29 @@ void Priest::LevelEnd(GameEngineLevel* _NextLevel)
 
 }
 
+bool Priest::AttCheck()
+{
+	if (TeamType::Blue == MyTeam)
+	{
+		// ±Ã±Ø±â »ç¿ë
+		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackSpeed <= AttackValue)
+		{
+			return true;
+		}
+	}
+	else if (TeamType::Red == MyTeam)
+	{
+		// ±Ã±Ø
+		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackSpeed <= AttackValue)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
 void Priest::SpwanStart()
 {
 	GameUnit::SpwanStart();

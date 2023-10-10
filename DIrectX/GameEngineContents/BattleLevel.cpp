@@ -89,8 +89,8 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	// ·¹µåÆÀ À¯´Ö (¿À¸¥ÂÊ)
 	//RedTeam.push_back(CreateActor<Knight>()->GetPointer());
 	//RedTeam.push_back(CreateActor<Monk>()->GetPointer());
-	//RedTeam.push_back(CreateActor<Pyromancer>()->GetPointer());
-	RedTeam.push_back(CreateActor<Pythoness>()->GetPointer());
+	RedTeam.push_back(CreateActor<Pyromancer>()->GetPointer());
+	//RedTeam.push_back(CreateActor<Pythoness>()->GetPointer());
 	RedTeam.push_back(CreateActor<Archer>()->GetPointer());
 
 
