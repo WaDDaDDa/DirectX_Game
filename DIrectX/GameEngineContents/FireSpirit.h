@@ -114,9 +114,12 @@ protected:
 
     class EventParameter Event;
 
+    float RangeValue = 0.0f;
+
 private:
     std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
     std::shared_ptr<class GameEngineSpriteRenderer> EffectRenderer;
+    std::shared_ptr<class GameEngineSpriteRenderer> AttRangeRenderer;
     std::shared_ptr<GameEngineCollision> Col;
     float4 Scale = { 200.0f, 200.0f };
     float AttackSpeed = 1.5f;

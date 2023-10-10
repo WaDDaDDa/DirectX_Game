@@ -32,6 +32,11 @@ void FireSpirit::Start()
 	EffectRenderer->AutoSpriteSizeOn();
 	EffectRenderer->SetAutoScaleRatio(1.3f);
 
+	AttRangeRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
+	AttRangeRenderer->CreateAnimation("FireSpiritEffect_AttRange", "FireSpiritEffect", 0.1f, 32, 32, false);
+	AttRangeRenderer->ChangeAnimation("FireSpiritEffect_AttRange");
+	AttRangeRenderer->SetImageScale({0.0f, 0.0f});
+
 	// 이벤트 셋팅
 	Event.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
 		{
@@ -156,12 +161,25 @@ void FireSpirit::SpwanUpdate(float _Delta)
 		ChangeState(FireSpiritState::Idle);
 		return;
 	}
+
+	RangeValue += _Delta * 2.0f;
+
+	if (RangeValue >= 1.0f)
+	{
+		RangeValue = 1.0f;
+	}
+
+	{
+		float Test = std::lerp(0.0f, Scale.X, RangeValue);
+
+		AttRangeRenderer->SetImageScale({ Test , Test });
+
+	}
 }
 
 void FireSpirit::IdleStart()
 {
 	Renderer->ChangeAnimation("FireSpirit_Idle");
-
 }
 
 void FireSpirit::IdleUpdate(float _Delta)
@@ -234,7 +252,7 @@ void FireSpirit::Attack2Update(float _Delta)
 void FireSpirit::DieStart()
 {
 	Renderer->ChangeAnimation("FireSpirit_Die");
-
+	RangeValue = 0.0f;
 }
 
 void FireSpirit::DieUpdate(float _Delta)
@@ -243,6 +261,20 @@ void FireSpirit::DieUpdate(float _Delta)
 	{
 		Death();
 		return;
+	}
+
+	RangeValue += _Delta * 2.0f;
+
+	if (RangeValue >= 1.0f)
+	{
+		RangeValue = 1.0f;
+	}
+
+	{
+		float Test = std::lerp(Scale.X, 0.0f, RangeValue);
+
+		AttRangeRenderer->SetImageScale({ Test , Test });
+
 	}
 
 }
