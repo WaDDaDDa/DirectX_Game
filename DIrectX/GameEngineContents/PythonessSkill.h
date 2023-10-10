@@ -38,6 +38,11 @@ public:
         {
             if (Unit->TeamGroup[i]->GetState() != GameUnitState::Die || Unit->TeamGroup[i]->GetState() != GameUnitState::DiePrev)
             {
+                if (Unit->TeamGroup[i]->GetState() == GameUnitState::Die || Unit->TeamGroup[i]->GetState() == GameUnitState::DiePrev)
+                {
+                    continue;
+                }
+
                 if (CurHpRate >= Unit->TeamGroup[i]->GetHPRate())
                 {
                     CurHpRate = Unit->TeamGroup[i]->GetHPRate();

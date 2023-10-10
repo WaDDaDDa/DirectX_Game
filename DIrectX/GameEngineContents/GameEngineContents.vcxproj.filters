@@ -110,6 +110,9 @@
     <ClCompile Include="MonkShield.cpp">
       <Filter>GameUnit\Monk</Filter>
     </ClCompile>
+    <ClCompile Include="KnightEffect.cpp">
+      <Filter>GameUnit\Knight</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -223,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="MonkShield.h">
       <Filter>GameUnit\Monk</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightEffect.h">
+      <Filter>GameUnit\Knight</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

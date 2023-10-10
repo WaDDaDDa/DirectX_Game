@@ -194,6 +194,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Knight.cpp" />
+    <ClCompile Include="KnightEffect.cpp" />
     <ClCompile Include="KnightUltEffect.cpp">
       <SubType>
       </SubType>
@@ -266,6 +267,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Knight.h" />
+    <ClInclude Include="KnightEffect.h" />
     <ClInclude Include="KnightUltEffect.h">
       <SubType>
       </SubType>

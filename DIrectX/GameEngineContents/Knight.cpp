@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "Knight.h"
 #include "KnightUltEffect.h"
-
+#include "KnightEffect.h"
 
 Knight::Knight()
 {
@@ -166,10 +166,11 @@ void Knight::SkillStart()
 
 	for (size_t i = 0; i < EnemyGroup.size(); i++)
 	{
-		if (EnemyGroup[i]->GetState() != GameUnitState::Die)
+		if (EnemyGroup[i]->GetState() != GameUnitState::Die || EnemyGroup[i]->GetState() != GameUnitState::DiePrev)
 		{
 			// 전사 방어력 만큼 방어력 상승.
-			EnemyGroup[i]->AggroSetting(this);
+			GetLevel()->CreateActor<KnightEffect>()->SetUnit(EnemyGroup[i]->GetDynamic_Cast_This<GameUnit>(), GetDynamic_Cast_This<GameUnit>());
+
 		}
 	}
 
@@ -203,7 +204,7 @@ void Knight::UltStart()
 
 	for (size_t i = 0; i < TeamGroup.size(); i++)
 	{
-		if (TeamGroup[i]->GetState() != GameUnitState::Die)
+		if (TeamGroup[i]->GetState() != GameUnitState::Die || TeamGroup[i]->GetState() != GameUnitState::DiePrev)
 		{
 			// 전사 방어력 만큼 방어력 상승.
 			TeamGroup[i]->AddDef(UnitDef);
