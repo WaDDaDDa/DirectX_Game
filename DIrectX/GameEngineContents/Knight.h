@@ -68,7 +68,7 @@ protected:
     void DiePrevStart() override;
 
 private:
-    float4 KnightAttackRange = { 37.0f, 0.0f };
+    float4 KnightAttackRange = { 74.0f, 0.0f };
     float4 KnightSkillRange = { 200.0f, 0.0f };
     float4 KnightSkillColRange = { 200.0f, 0.0f };
     float4 KnightUltRange = { 200.0f, 0.0f };

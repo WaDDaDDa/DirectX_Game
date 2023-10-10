@@ -2,11 +2,11 @@
 #include "GameEngineCollisionGroup.h"
 #include "GameEngineCollision.h"
 
-GameEngineCollisionGroup::GameEngineCollisionGroup() 
+GameEngineCollisionGroup::GameEngineCollisionGroup()
 {
 }
 
-GameEngineCollisionGroup::~GameEngineCollisionGroup() 
+GameEngineCollisionGroup::~GameEngineCollisionGroup()
 {
 }
 
@@ -17,7 +17,7 @@ void GameEngineCollisionGroup::AllReleaseCheck()
 	std::list<std::shared_ptr<class GameEngineCollision>>::iterator StartIter = Collisions.begin();
 	std::list<std::shared_ptr<class GameEngineCollision>>::iterator EndIter = Collisions.end();
 
-	for ( ; StartIter != EndIter; )
+	for (; StartIter != EndIter; )
 	{
 		if (false == (*StartIter)->IsDeath())
 		{
@@ -38,9 +38,15 @@ bool GameEngineCollisionGroup::Collision(std::shared_ptr<GameEngineCollision> _C
 		return false;
 	}
 
+
 	for (std::shared_ptr<class GameEngineCollision> Collision : Collisions)
 	{
 		if (Collision == _Collision)
+		{
+			continue;
+		}
+
+		if (false == Collision->IsUpdate())
 		{
 			continue;
 		}
@@ -74,6 +80,11 @@ bool GameEngineCollisionGroup::Collision(std::shared_ptr<GameEngineCollision> _C
 			continue;
 		}
 
+		if (false == Collision->IsUpdate())
+		{
+			continue;
+		}
+
 		if (true == GameEngineTransform::Collision({ Data , Collision->Transform.ColData, _Collision->GetCollisionType(), Collision->GetCollisionType() }))
 		{
 			return true;
@@ -90,6 +101,7 @@ bool GameEngineCollisionGroup::Collision(std::shared_ptr<GameEngineCollision> _C
 		return false;
 	}
 
+
 	// static 지역변수로 만들면
 	// std::list Nodes delete를 한다.
 	// 쓰레드나 이런것에서 위험하지만
@@ -99,6 +111,11 @@ bool GameEngineCollisionGroup::Collision(std::shared_ptr<GameEngineCollision> _C
 	for (std::shared_ptr<class GameEngineCollision> Collision : Collisions)
 	{
 		if (Collision == _Collision)
+		{
+			continue;
+		}
+
+		if (false == Collision->IsUpdate())
 		{
 			continue;
 		}
@@ -142,6 +159,11 @@ bool GameEngineCollisionGroup::Collision(std::shared_ptr<GameEngineCollision> _C
 			continue;
 		}
 
+		if (false == Collision->IsUpdate())
+		{
+			continue;
+		}
+
 		if (true == GameEngineTransform::Collision({ Data , Collision->Transform.ColData, _Collision->GetCollisionType(), Collision->GetCollisionType() }))
 		{
 			ResultCollision.push_back(Collision);
@@ -174,6 +196,11 @@ bool GameEngineCollisionGroup::CollisionEvent(std::shared_ptr<GameEngineCollisio
 			continue;
 		}
 
+		if (false == Collision->IsUpdate())
+		{
+			continue;
+		}
+
 		if (true == GameEngineTransform::Collision({ _Collision->Transform.ColData , Collision->Transform.ColData, _Collision->GetCollisionType(), Collision->GetCollisionType() }))
 		{
 			ResultCollision.push_back(Collision);
@@ -181,13 +208,11 @@ bool GameEngineCollisionGroup::CollisionEvent(std::shared_ptr<GameEngineCollisio
 		}
 
 		// 애는 충돌을 나랑 안했네.
-		// 그런데 충돌을 했던적이 있네?   ===>  충돌중이다가 충돌벗어남.
 		if (true == _Collision->Others.contains(Collision))
 		{
 			if (_Event.Exit)
 			{
 				_Event.Exit(_Collision.get(), Collision.get());
-				//Other->Others.erase(Other);
 			}
 
 			_Collision->Others.erase(Collision);
@@ -201,18 +226,16 @@ bool GameEngineCollisionGroup::CollisionEvent(std::shared_ptr<GameEngineCollisio
 		for (size_t i = 0; i < ResultCollision.size(); i++)
 		{
 			std::shared_ptr<GameEngineCollision> Other = ResultCollision[i];
-			// 나랑 충돌을 처음했다. ===> 충돌 첫진입.
 			if (false == _Collision->Others.contains(Other))
 			{
 				if (_Event.Enter)
 				{
 					_Event.Enter(_Collision.get(), Other.get());
-					//Other->Others.insert(Other);
 				}
-				
+
 				_Collision->Others.insert(Other);
 			}
-			else  // 나랑 충돌을 처음한게 아니고 충돌했다.  ==> 충돌중이다.
+			else
 			{
 				if (_Event.Stay)
 				{

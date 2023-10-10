@@ -68,7 +68,7 @@ protected:
     void DiePrevStart() override;
 
 private:
-    float4 NinjaAttackRange = { 40.0f, 40.0f };
+    float4 NinjaAttackRange = { 80.0f, 40.0f };
     float4 NinjaSkillRange = { 600.0f, 600.0f };
     float4 NinjaSkillColRange = { 600.0f, 600.0f };
     float4 NinjaUltRange = { 200.0f, 200.0f };

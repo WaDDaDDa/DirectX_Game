@@ -61,14 +61,14 @@ void Archer::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer->CreateAnimation("Archer_Attack2", "ArcherAni", 0.1f, 18, 19, false);
 		MainSpriteRenderer->CreateAnimation("Archer_Skill", "ArcherAni", 0.1f, 30, 35, false);
 		MainSpriteRenderer->CreateAnimation("Archer_Skill2", "ArcherAni", 0.1f, 36, 37, false);
-		MainSpriteRenderer->CreateAnimation("Archer_Ult", "ArcherAni", 0.1f, 38, 42, false);
-		MainSpriteRenderer->CreateAnimation("Archer_Ult2", "ArcherAni", 0.1f, 43, 46, false);
+		MainSpriteRenderer->CreateAnimation("Archer_Ult", "ArcherAni", 0.2f, 38, 42, false);
+		MainSpriteRenderer->CreateAnimation("Archer_Ult2", "ArcherAni", 0.2f, 43, 46, false);
 		MainSpriteRenderer->CreateAnimation("Archer_Die", "ArcherAni", 0.1f, 20, 29, false);
 		
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
 		SkillEffectRenderer->CreateAnimation("ArcherAttackEffect", "ArcherEffect", 0.1f, 7, 8, false);
 		SkillEffectRenderer->CreateAnimation("ArcherSkillEffect", "ArcherEffect", 0.1f, 14, 15, false);
-		SkillEffectRenderer->CreateAnimation("ArcherUltEffect", "ArcherEffect", 0.1f, 17, 25, false);
+		SkillEffectRenderer->CreateAnimation("ArcherUltEffect", "ArcherEffect", 0.2f, 17, 25, false);
 		SkillEffectRenderer->CreateAnimation("ArcherSkillBlack", "ArcherEffect", 0.1f, 26, 26, false);
 		SkillEffectRenderer->ChangeAnimation("ArcherSkillBlack");
 		SkillEffectRenderer->AutoSpriteSizeOn();

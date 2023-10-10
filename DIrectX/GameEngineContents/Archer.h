@@ -75,8 +75,8 @@ protected:
 
 private:
     float4 ArcherAttackRange = { 250.0f, 0.0f };
-    float4 ArcherSkillRange = { 45.0f, 0.0f };
-    float4 ArcherSkillColRange = { 60.0f, 0.0f };
+    float4 ArcherSkillRange = { 100.0f, 0.0f };
+    float4 ArcherSkillColRange = { 100.0f, 0.0f };
     float4 ArcherUltRange = { 700.0f, 0.0f };
 
     float ArcherSpeed = 60.0f;

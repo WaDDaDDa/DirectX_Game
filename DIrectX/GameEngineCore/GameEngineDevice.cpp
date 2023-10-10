@@ -11,6 +11,7 @@
 
 GameEngineDevice::GameEngineDevice()
 {
+
 }
 
 GameEngineDevice::~GameEngineDevice()

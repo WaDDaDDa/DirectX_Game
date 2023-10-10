@@ -66,7 +66,7 @@ protected:
     void DiePrevStart() override;
 
 private:
-    float4 MonkAttackRange = { 35.0f, 0.0f };
+    float4 MonkAttackRange = { 70.0f, 0.0f };
     float4 MonkSkillRange = { 200.0f, 0.0f };
     float4 MonkSkillColRange = { 200.0f, 0.0f };
     float4 MonkUltRange = { 300.0f, 0.0f };
