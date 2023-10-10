@@ -57,8 +57,8 @@ void Knight::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
 		MainSpriteRenderer->CreateAnimation("Knight_Idle", "KnightAni", 0.2f, 0, 4);
 		MainSpriteRenderer->CreateAnimation("Knight_Move", "KnightAni", 0.2f, 5, 13);
-		MainSpriteRenderer->CreateAnimation("Knight_Attack", "KnightAni", 0.2f, 14, 15, false);
-		MainSpriteRenderer->CreateAnimation("Knight_Attack2", "KnightAni", 0.2f, 16, 19, false);
+		MainSpriteRenderer->CreateAnimation("Knight_Attack", "KnightAni", 0.1f, 14, 15, false);
+		MainSpriteRenderer->CreateAnimation("Knight_Attack2", "KnightAni", 0.1f, 16, 19, false);
 		MainSpriteRenderer->CreateAnimation("Knight_Skill", "KnightAni", 0.1f, 30, 36, false);
 		MainSpriteRenderer->CreateAnimation("Knight_Ult", "KnightAni", 0.1f, 37, 43, false);
 		MainSpriteRenderer->CreateAnimation("Knight_Die", "KnightAni", 0.1f, 22, 29, false);

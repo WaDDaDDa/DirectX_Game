@@ -75,7 +75,7 @@ protected:
 
 private:
     float4 SwordmanAttackRange = { 90.0f, 0.0f };
-    float4 SwordmanSkillRange = { 90.0f, 0.0f };
+    float4 SwordmanSkillRange = { 80.0f, 0.0f };
     float4 SwordmanSkillColRange = { 100.0f, 0.0f };
     float4 SwordmanUltRange = { 500.0f, 0.0f };
 

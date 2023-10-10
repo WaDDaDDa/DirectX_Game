@@ -37,13 +37,15 @@ public:
         // 회복 한다.
         for (size_t i = 0; i < Unit->EnemyGroup.size(); i++)
         {
-            if (Unit->TeamGroup[i]->GetState() != GameUnitState::Die || Unit->TeamGroup[i]->GetState() != GameUnitState::DiePrev)
+            if (Unit->TeamGroup[i]->GetState() == GameUnitState::Die || Unit->TeamGroup[i]->GetState() == GameUnitState::DiePrev)
             {
-                if (CurHpRate >= Unit->TeamGroup[i]->GetHPRate())
-                {
-                    CurHpRate = Unit->TeamGroup[i]->GetHPRate();
-                    TeamNum = i;
-                }
+                continue;
+            }
+
+            if (CurHpRate >= Unit->TeamGroup[i]->GetHPRate())
+            {
+                CurHpRate = Unit->TeamGroup[i]->GetHPRate();
+                TeamNum = i;
             }
         }
 
@@ -87,13 +89,15 @@ public:
         // 회복 한다.
         for (size_t i = 0; i < Unit->EnemyGroup.size(); i++)
         {
-            if (Unit->TeamGroup[i]->GetState() != GameUnitState::Die || Unit->TeamGroup[i]->GetState() != GameUnitState::DiePrev)
+            if (Unit->TeamGroup[i]->GetState() == GameUnitState::Die || Unit->TeamGroup[i]->GetState() == GameUnitState::DiePrev)
             {
-                if (CurHpRate >= Unit->TeamGroup[i]->GetHPRate())
-                {
-                    CurHpRate = Unit->TeamGroup[i]->GetHPRate();
-                    TeamNum = i;
-                }
+                continue;
+            }
+
+            if (CurHpRate >= Unit->TeamGroup[i]->GetHPRate())
+            {
+                CurHpRate = Unit->TeamGroup[i]->GetHPRate();
+                TeamNum = i;
             }
         }
 

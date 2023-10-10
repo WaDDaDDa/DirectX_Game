@@ -117,31 +117,7 @@ void Priest::SearchMoveStart()
 
 void Priest::AttackStart()
 {
-	AttackValue = 0.0f;
-
 	MainSpriteRenderer->ChangeAnimation("Priest_Attack");
-
-	float CurHpRate = 1.0f;
-	size_t TeamNum = 0;
-	float HealTick = 1.0f;
-	// 회복 한다.
-	while (HealTick > 0.0f)
-	{
-		for (size_t i = 0; i < EnemyGroup.size(); i++)
-		{
-			if (TeamGroup[i]->GetState() != GameUnitState::Die || TeamGroup[i]->GetState() != GameUnitState::DiePrev)
-			{
-				if (CurHpRate >= TeamGroup[i]->GetHPRate())
-				{
-					CurHpRate = TeamGroup[i]->GetHPRate();
-					TeamNum = i;
-				}
-			}
-		}
-
-		TeamGroup[TeamNum]->HealHP(UnitAtt);
-		HealTick -= 1.0f;
-	}
 }
 
 void Priest::AttackUpdate(float _Delta)
@@ -155,8 +131,34 @@ void Priest::AttackUpdate(float _Delta)
 
 void Priest::Attack2Start()
 {
-	GameUnit::Attack2Start();
 	MainSpriteRenderer->ChangeAnimation("Priest_Attack2");
+
+	AttackValue = 0.0f;
+
+	float CurHpRate = 1.0f;
+	size_t TeamNum = 0;
+	float HealTick = 1.0f;
+	// 회복 한다.
+	while (HealTick > 0.0f)
+	{
+		for (size_t i = 0; i < EnemyGroup.size(); i++)
+		{
+			if (TeamGroup[i]->GetState() == GameUnitState::Die || TeamGroup[i]->GetState() == GameUnitState::DiePrev)
+			{
+				continue;
+			}
+
+			if (CurHpRate >= TeamGroup[i]->GetHPRate())
+			{
+				CurHpRate = TeamGroup[i]->GetHPRate();
+				TeamNum = i;
+			}
+		}
+
+		TeamGroup[TeamNum]->HealHP(UnitAtt);
+		HealTick -= 1.0f;
+	}
+
 }
 
 void Priest::Attack2Update(float _Delta)

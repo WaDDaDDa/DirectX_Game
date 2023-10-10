@@ -73,7 +73,7 @@ private:
     float4 NinjaSkillColRange = { 600.0f, 600.0f };
     float4 NinjaUltRange = { 200.0f, 200.0f };
 
-    float NinjaSpeed = 160.0f;
+    float NinjaSpeed = 150.0f;
     float NinjaHp = 120.0f;
     float NinjaAtt = 32.0f;
     float NinjaDef = 10.0f;

@@ -45,7 +45,6 @@ void PythonessHeal::Start()
 								reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->HealHP(Att);
 								Pos = Transform.GetWorldPosition() - HealUnit->Transform.GetWorldPosition();
 								Col->Off();
-								HealUnit->HealTarget = false;
 							}
 
 						}
@@ -67,7 +66,6 @@ void PythonessHeal::Start()
 								reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->HealHP(Att);
 								Pos = Transform.GetWorldPosition() - HealUnit->Transform.GetWorldPosition();
 								Col->Off();
-								HealUnit->HealTarget = false;
 							}
 							
 						}
@@ -100,6 +98,8 @@ void PythonessHeal::Update(float _Delta)
 
 	if (true == AttackOn && true == Renderer->IsCurAnimationEnd())
 	{
+		HealUnit->HealTarget = false;
+
 		Death();
 		return;
 	}

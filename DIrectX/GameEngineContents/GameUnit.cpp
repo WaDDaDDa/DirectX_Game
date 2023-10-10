@@ -189,6 +189,28 @@ bool GameUnit::UltCheck()
 	return false;
 }
 
+bool GameUnit::AttCheck()
+{
+	if (TeamType::Blue == MyTeam)
+	{
+		// 궁극기 사용
+		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackSpeed <= AttackValue) 
+		{
+			return true;
+		}
+	}
+	else if (TeamType::Red == MyTeam)
+	{
+		// 궁극
+		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackSpeed <= AttackValue)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 
 void GameUnit::Update(float _Delta)
 {
@@ -394,8 +416,7 @@ void GameUnit::IdleUpdate(float _Delta)
 		}
 
 		// 공격
-		bool Check = AttackRangeCol->Collision(CollisionOrder::RedTeamBody);
-		if (true == Check && AttackSpeed <= AttackValue)
+		if (AttCheck())
 		{
 			ChangeState(GameUnitState::Attack);
 			return;
@@ -416,7 +437,7 @@ void GameUnit::IdleUpdate(float _Delta)
 			return;
 		}
 		// 공격
-		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackSpeed <= AttackValue)
+		if (AttCheck())
 		{
 			ChangeState(GameUnitState::Attack);
 			return;
@@ -470,7 +491,7 @@ void GameUnit::MoveUpdate(float _Delta)
 		}
 
 		// 공격
-		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackSpeed <= AttackValue)
+		if (AttCheck()) 
 		{
 			ChangeState(GameUnitState::Attack);
 			return;
@@ -491,7 +512,7 @@ void GameUnit::MoveUpdate(float _Delta)
 			return;
 		}
 		// 공격
-		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackSpeed <= AttackValue)
+		if (AttCheck()) 
 		{
 			ChangeState(GameUnitState::Attack);
 			return;
@@ -550,7 +571,7 @@ void GameUnit::BackMoveUpdate(float _Delta)
 		}
 
 		// 공격
-		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackSpeed <= AttackValue)
+		if (AttCheck()) 
 		{
 			ChangeState(GameUnitState::Attack);
 			return;
@@ -571,7 +592,7 @@ void GameUnit::BackMoveUpdate(float _Delta)
 			return;
 		}
 		// 공격
-		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackSpeed <= AttackValue)
+		if (AttCheck()) 
 		{
 			ChangeState(GameUnitState::Attack);
 			return;
@@ -640,7 +661,7 @@ void GameUnit::SearchMoveUpdate(float _Delta)
 		}
 
 		// 공격
-		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackSpeed <= AttackValue)
+		if (AttCheck()) 
 		{
 			ChangeState(GameUnitState::Attack);
 			return;
@@ -661,7 +682,7 @@ void GameUnit::SearchMoveUpdate(float _Delta)
 			return;
 		}
 		// 공격
-		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackSpeed <= AttackValue)
+		if (AttCheck()) 
 		{
 			ChangeState(GameUnitState::Attack);
 			return;

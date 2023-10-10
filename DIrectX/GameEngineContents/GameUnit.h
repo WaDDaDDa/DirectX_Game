@@ -306,6 +306,7 @@ protected:
     void ChangeState(GameUnitState _State);
     void StateUpdate(float _Delta);
 
+    virtual bool AttCheck();
     virtual bool SkillCheck();
     virtual bool UltCheck();
 

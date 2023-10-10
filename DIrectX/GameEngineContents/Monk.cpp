@@ -56,8 +56,8 @@ void Monk::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
 		MainSpriteRenderer->CreateAnimation("Monk_Idle", "MonkAni", 0.2f, 0, 4);
 		MainSpriteRenderer->CreateAnimation("Monk_Move", "MonkAni", 0.2f, 5, 12);
-		MainSpriteRenderer->CreateAnimation("Monk_Attack", "MonkAni", 0.2f, 13, 15, false);
-		MainSpriteRenderer->CreateAnimation("Monk_Attack2", "MonkAni", 0.2f, 16, 18, false);
+		MainSpriteRenderer->CreateAnimation("Monk_Attack", "MonkAni", 0.1f, 13, 15, false);
+		MainSpriteRenderer->CreateAnimation("Monk_Attack2", "MonkAni", 0.1f, 16, 18, false);
 		MainSpriteRenderer->CreateAnimation("Monk_Skill", "MonkAni", 0.1f, 34, 43, false);
 		MainSpriteRenderer->CreateAnimation("Monk_Ult", "MonkAni", 0.1f, 44, 53, false);
 		MainSpriteRenderer->CreateAnimation("Monk_Die", "MonkAni", 0.1f, 19, 33, false);
@@ -168,13 +168,15 @@ void Monk::SkillStart()
 	{
 		for (size_t i = 0; i < EnemyGroup.size(); i++)
 		{
-			if (TeamGroup[i]->GetState() != GameUnitState::Die || TeamGroup[i]->GetState() != GameUnitState::DiePrev)
+			if (TeamGroup[i]->GetState() == GameUnitState::Die || TeamGroup[i]->GetState() == GameUnitState::DiePrev)
 			{
-				if (CurHpRate >= TeamGroup[i]->GetHPRate())
-				{
-					CurHpRate = TeamGroup[i]->GetHPRate();
-					TeamNum = i;
-				}
+				continue;
+			}
+
+			if (CurHpRate >= TeamGroup[i]->GetHPRate())
+			{
+				CurHpRate = TeamGroup[i]->GetHPRate();
+				TeamNum = i;
 			}
 		}
 

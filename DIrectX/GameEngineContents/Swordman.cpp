@@ -91,8 +91,8 @@ void Swordman::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
 		MainSpriteRenderer->CreateAnimation("Swordman_Idle", "SwordmanAni", 0.2f, 0, 4);
 		MainSpriteRenderer->CreateAnimation("Swordman_Move", "SwordmanAni", 0.2f, 5, 13);
-		MainSpriteRenderer->CreateAnimation("Swordman_Attack", "SwordmanAni", 0.2f, 14, 15, false);
-		MainSpriteRenderer->CreateAnimation("Swordman_Attack2", "SwordmanAni", 0.2f, 16, 17, false);
+		MainSpriteRenderer->CreateAnimation("Swordman_Attack", "SwordmanAni", 0.1f, 14, 15, false);
+		MainSpriteRenderer->CreateAnimation("Swordman_Attack2", "SwordmanAni", 0.1f, 16, 17, false);
 		MainSpriteRenderer->CreateAnimation("Swordman_Skill", "SwordmanAni", 0.1f, 18, 20, false);
 		MainSpriteRenderer->CreateAnimation("Swordman_Skill2", "SwordmanAni", 0.1f, 21, 26, false);
 		MainSpriteRenderer->CreateAnimation("Swordman_Ult", "SwordmanAni", 0.1f, 36, 39, false);
