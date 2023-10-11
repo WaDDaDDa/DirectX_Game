@@ -29,7 +29,6 @@ void BattleField::LevelStart(GameEngineLevel* _PrevLevel)
 	BackGround->SetImageScale(WindowScale);
 	//BackGround->SetPivotType(PivotType::Bottom);
 
-
 	Water1 = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Water);
 	Water1->CreateAnimation("Waterfall", "Waterfall");
 	Water1->ChangeAnimation("Waterfall");

@@ -1,8 +1,6 @@
 #pragma once
 #include "GameEngineResources.h"
 #include "GameEngineSampler.h"
-
-// 파일로드를 위한 라이브러리 헤더 쓰기
 #include "..\\GameEngineCore\\ThirdParty\\DirectXTex\\inc\\DirectXTex.h"
 
 class GameEngineColor
@@ -80,7 +78,6 @@ public:
 		return DSV;
 	}
 
-	void CreateRenderTargetView();
 
 	inline float4 GetScale()
 	{
@@ -133,6 +130,5 @@ private:
 	void ResLoad(std::string_view _Path);
 	void ResCreate(const D3D11_TEXTURE2D_DESC& Desc);
 	void ResCreate(ID3D11Texture2D* _Res);
-
 };
 
