@@ -39,11 +39,11 @@ protected:
 
 private:
     std::shared_ptr<GameEngineCollision> Col;
-    float4 Scale = { 400.0f, 400.0f };
+    float4 Scale = { 500.0f, 500.0f };
     class EventParameter Event;
     float Att = 0.0f;
     float AttInter = 0.5f;
-    float LifeTime = 5.0f;
+    float LifeTime = 7.0f;
     float EffectInter = 1.0f;
     std::shared_ptr<class GameEngineSpriteRenderer> AttRangeRenderer;
     float RangeValue = 0.0f;

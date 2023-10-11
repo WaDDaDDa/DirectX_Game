@@ -89,8 +89,8 @@ void PriestUlt::Update(float _Delta)
 		NewRandom.SetSeed(RandSeed);
 
 		std::shared_ptr<PriestHealEffect> HealEffect = GetLevel()->CreateActor<PriestHealEffect>();
-		float RandX = NewRandom.RandomFloat(-150.0f, 150.0f);
-		float RandY = NewRandom.RandomFloat(-150.0f, 150.0f);
+		float RandX = NewRandom.RandomFloat(-200.0f, 200.0f);
+		float RandY = NewRandom.RandomFloat(-200.0f, 200.0f);
 		HealEffect->Transform.SetWorldPosition(Transform.GetWorldPosition());
 		HealEffect->Transform.AddLocalPosition({ RandX , RandY });
 		EffectInter = 0.05f;

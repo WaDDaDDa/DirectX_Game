@@ -73,7 +73,7 @@ private:
     float4 PriestAttackRange = { 260.0f, 0.0f };
     float4 PriestSkillRange = { 300.0f, 0.0f };
     float4 PriestSkillColRange = { 300.0f, 0.0f };
-    float4 PriestUltRange = { 400.0f, 0.0f };
+    float4 PriestUltRange = { 600.0f, 0.0f };
 
     float PriestSpeed = 60.0f;
     float PriestHp = 65.0f;
