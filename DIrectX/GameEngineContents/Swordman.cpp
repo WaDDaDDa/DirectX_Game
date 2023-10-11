@@ -122,6 +122,7 @@ void Swordman::LevelEnd(GameEngineLevel* _NextLevel)
 void Swordman::SpwanStart()
 {
 	GameUnit::SpwanStart();
+	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("SwordmanSkillBlack");
 	MainSpriteRenderer->ChangeAnimation("Swordman_Idle");
 }
@@ -129,6 +130,7 @@ void Swordman::SpwanStart()
 void Swordman::IdleStart()
 {
 	GameUnit::IdleStart();
+	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("SwordmanSkillBlack");
 	MainSpriteRenderer->ChangeAnimation("Swordman_Idle");
 }
@@ -136,24 +138,29 @@ void Swordman::IdleStart()
 void Swordman::MoveStart()
 {
 	GameUnit::MoveStart();
+	SkillEffectRenderer->Off();
+
 	MainSpriteRenderer->ChangeAnimation("Swordman_Move");
 }
 
 void Swordman::BackMoveStart()
 {
 	GameUnit::BackMoveStart();
+	SkillEffectRenderer->Off();
 	MainSpriteRenderer->ChangeAnimation("Swordman_Move");
 }
 
 void Swordman::SearchMoveStart()
 {
 	GameUnit::SearchMoveStart();
+	SkillEffectRenderer->Off();
 	MainSpriteRenderer->ChangeAnimation("Swordman_Move");
 }
 
 void Swordman::AttackStart()
 {
 	GameUnit::AttackStart();
+	SkillEffectRenderer->Off();
 	MainSpriteRenderer->ChangeAnimation("Swordman_Attack");
 }
 
@@ -170,6 +177,7 @@ void Swordman::AttackUpdate(float _Delta)
 void Swordman::Attack2Start()
 {
 	GameUnit::Attack2Start();
+	SkillEffectRenderer->Off();
 	MainSpriteRenderer->ChangeAnimation("Swordman_Attack2");
 }
 
@@ -195,6 +203,7 @@ void Swordman::Attack2Update(float _Delta)
 void Swordman::SkillStart()
 {
 	GameUnit::SkillStart();
+	SkillEffectRenderer->Off();
 	MainSpriteRenderer->ChangeAnimation("Swordman_Skill");
 }
 
@@ -210,6 +219,7 @@ void Swordman::SkillUpdate(float _Delta)
 void Swordman::Skill2Start()
 {
 	MainSpriteRenderer->ChangeAnimation("Swordman_Skill2");
+	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("SwordmanSkillEffect");
 	SkillDamageDeley = 0.1f;
 	SkillTick = 3.0f;
@@ -219,6 +229,7 @@ void Swordman::Skill2Update(float _Delta)
 {
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
+		SkillEffectRenderer->Off();
 		SkillEffectRenderer->ChangeAnimation("SwordmanSkillBlack");
 		//이벤트 사용.
 		if (TeamType::Blue == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::RedTeamBody, MoveEvent))
@@ -280,6 +291,7 @@ void Swordman::UltStart()
 {
 	GameUnit::UltStart();
 	SwordUlt = false;
+	SkillEffectRenderer->Off();
 	MainSpriteRenderer->ChangeAnimation("Swordman_Ult");
 }
 
@@ -307,6 +319,8 @@ void Swordman::Ult2Start()
 		Transform.AddWorldPosition({ -30.0f,0.0f });
 	}
 
+	SkillEffectRenderer->Off();
+
 	MainSpriteRenderer->ChangeAnimation("Swordman_Ult2");
 }
 
@@ -332,6 +346,8 @@ void Swordman::Ult2Update(float _Delta)
 void Swordman::DiePrevStart()
 {
 	GameUnit::DiePrevStart();
+	SkillEffectRenderer->Off();
+
 	SkillEffectRenderer->ChangeAnimation("SwordmanSkillBlack");
 	MainSpriteRenderer->ChangeAnimation("Swordman_Die");
 }

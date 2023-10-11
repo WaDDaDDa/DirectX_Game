@@ -29,6 +29,8 @@ BattleLevel::~BattleLevel()
 
 void BattleLevel::Start()
 {
+	GameEngineRenderTarget::IsDepth = false;
+
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	// 카메라의 위치를 화면의 왼쪽맨위에 0,0이 위치하도록 자리를 잡는다.
 	GetMainCamera()->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
