@@ -157,6 +157,7 @@
     <ClInclude Include="EngineEnum.h" />
     <ClInclude Include="GameEngineUIRenderer.h" />
     <ClInclude Include="GameEngineRenderUnit.h" />
+    <ClInclude Include="GameEngineDepthStencil.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -261,6 +262,7 @@
     <ClCompile Include="GameEngineDebugCore.cpp" />
     <ClCompile Include="GameEngineUIRenderer.cpp" />
     <ClCompile Include="GameEngineRenderUnit.cpp" />
+    <ClCompile Include="GameEngineDepthStencil.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ThirdParty\DirectXTex\inc\DirectXTex.inl">
