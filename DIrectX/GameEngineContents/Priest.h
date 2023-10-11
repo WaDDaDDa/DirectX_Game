@@ -64,6 +64,9 @@ protected:
     void UltStart() override;
     void UltUpdate(float _Delta) override;
 
+    void Ult2Start() override;
+    void Ult2Update(float _Delta) override;
+
     void DiePrevStart() override;
 
 private:

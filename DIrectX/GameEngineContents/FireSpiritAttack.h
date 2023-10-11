@@ -55,7 +55,7 @@ private:
     std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
     std::shared_ptr<GameEngineCollision> Col;
     float4 Scale = { 1.0f, 1.0f };
-    float LifeTime = 5.0f;
+    float LifeTime = 2.0f;
     float Speed = 500.0f;
     bool AttackOn = false;
     class EventParameter Event;

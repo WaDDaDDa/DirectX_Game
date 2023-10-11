@@ -220,6 +220,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Priest.cpp" />
+    <ClCompile Include="PriestHealEffect.cpp" />
+    <ClCompile Include="PriestUlt.cpp" />
     <ClCompile Include="Pyromancer.cpp" />
     <ClCompile Include="Pythoness.cpp" />
     <ClCompile Include="PythonessAttack.cpp" />
@@ -288,6 +290,8 @@
     <ClInclude Include="PlayLevel.h" />
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="Priest.h" />
+    <ClInclude Include="PriestHealEffect.h" />
+    <ClInclude Include="PriestUlt.h" />
     <ClInclude Include="Pyromancer.h" />
     <ClInclude Include="Pythoness.h" />
     <ClInclude Include="PythonessAttack.h" />

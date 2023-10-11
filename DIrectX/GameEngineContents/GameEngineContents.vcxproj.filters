@@ -113,6 +113,12 @@
     <ClCompile Include="KnightEffect.cpp">
       <Filter>GameUnit\Knight</Filter>
     </ClCompile>
+    <ClCompile Include="PriestUlt.cpp">
+      <Filter>GameUnit\Priest</Filter>
+    </ClCompile>
+    <ClCompile Include="PriestHealEffect.cpp">
+      <Filter>GameUnit\Priest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -229,6 +235,12 @@
     </ClInclude>
     <ClInclude Include="KnightEffect.h">
       <Filter>GameUnit\Knight</Filter>
+    </ClInclude>
+    <ClInclude Include="PriestUlt.h">
+      <Filter>GameUnit\Priest</Filter>
+    </ClInclude>
+    <ClInclude Include="PriestHealEffect.h">
+      <Filter>GameUnit\Priest</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

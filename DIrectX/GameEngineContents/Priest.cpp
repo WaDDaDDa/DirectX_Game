@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "Priest.h"
-
+#include "PriestUlt.h"
 
 Priest::Priest()
 {
@@ -66,6 +66,7 @@ void Priest::LevelStart(GameEngineLevel* _PrevLevel)
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
 		SkillEffectRenderer->CreateAnimation("PriestAttackEffect", "PriestEffect", 0.1f, 2, 8, false);
 		SkillEffectRenderer->CreateAnimation("PriestSkillEffect", "PriestEffect", 0.1f, 2, 8, false);
+		SkillEffectRenderer->CreateAnimation("PriestUltEffect", "PriestEffect", 0.1f, 22, 28, false);
 		SkillEffectRenderer->CreateAnimation("PriestSkillBlack", "PriestEffect", 0.1f, 0, 0, false);
 		SkillEffectRenderer->ChangeAnimation("PriestSkillBlack");
 		SkillEffectRenderer->AutoSpriteSizeOn();
@@ -266,12 +267,31 @@ void Priest::UltStart()
 {
 	GameUnit::UltStart();
 	MainSpriteRenderer->ChangeAnimation("Priest_Ult");
+}
+
+void Priest::UltUpdate(float _Delta)
+{
+	ChangeDir();
+
+	if (MainSpriteRenderer->IsCurAnimationEnd())
+	{
+		ChangeState(GameUnitState::Ult2);
+		return;
+	}
+}
+
+void Priest::Ult2Start()
+{
+	GameUnit::UltStart();
+	MainSpriteRenderer->ChangeAnimation("Priest_Ult2");
+	SkillEffectRenderer->ChangeAnimation("PriestUltEffect");
+	GetLevel()->CreateActor<PriestUlt>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
 
 	//CreateUltEffect();
 	// 어그로를 자신에게 끌고 자신의 방어력을 증가시킨다.
 }
 
-void Priest::UltUpdate(float _Delta)
+void Priest::Ult2Update(float _Delta)
 {
 	//UltEffectRenderer->Transform.AddWorldRotation({ 0.0f, 360.0f * _Delta  });
 	if (MainSpriteRenderer->IsCurAnimationEnd())
