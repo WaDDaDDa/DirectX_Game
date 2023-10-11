@@ -61,6 +61,8 @@ public:
         AggroUnit = _Unit;
     }
 
+    bool AggroCheck = false;
+
     void AggroSetting()
     {
         size_t EnemyNum = 0;

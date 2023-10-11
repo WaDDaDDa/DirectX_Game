@@ -46,7 +46,7 @@ void GameUnit::Start()
 	// ÀÌº¥Æ® ¼ÂÆÃ
 	MoveEvent.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
 		{
-			//AggroSetting(_Col->GetActor()->GetDynamic_Cast_This<GameUnit>()->GetPointer());
+			AggroSetting(_Col->GetActor()->GetDynamic_Cast_This<GameUnit>()->GetPointer());
 			ChangeState(GameUnitState::Move);
 			return;
 		};
@@ -191,24 +191,72 @@ bool GameUnit::UltCheck()
 
 bool GameUnit::AttCheck()
 {
+	AggroCheck = false;
+
 	if (TeamType::Blue == MyTeam)
 	{
-		// ±Ã±Ø±â »ç¿ë
-		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackSpeed <= AttackValue) 
+
+		// ½ºÅ³»ç¿ë
+		if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackSpeed <= AttackValue)
 		{
-			return true;
+			AttackRangeCol->Collision(CollisionOrder::RedTeamBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
+				{
+					for (size_t i = 0; i < _Collision.size(); i++)
+					{
+						if (AggroUnit == reinterpret_cast<GameUnit*>(_Collision[i]->GetActor()))
+						{
+							AggroCheck = true;
+						}
+					}
+				});
 		}
+
 	}
 	else if (TeamType::Red == MyTeam)
 	{
-		// ±Ã±Ø
+		//½ºÅ³
 		if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackSpeed <= AttackValue)
 		{
-			return true;
+			AttackRangeCol->Collision(CollisionOrder::BlueTeamBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
+				{
+					for (size_t i = 0; i < _Collision.size(); i++)
+					{
+						if (AggroUnit == reinterpret_cast<GameUnit*>(_Collision[i]->GetActor()))
+						{
+							AggroCheck = true;
+						}
+					}
+				});
 		}
 	}
 
+	if (true == AggroCheck)
+	{
+		return true;
+	}
+
 	return false;
+
+
+
+	//if (TeamType::Blue == MyTeam)
+	//{
+	//	// ±Ã±Ø±â »ç¿ë
+	//	if (AttackRangeCol->Collision(CollisionOrder::RedTeamBody) && AttackSpeed <= AttackValue) 
+	//	{
+	//		return true;
+	//	}
+	//}
+	//else if (TeamType::Red == MyTeam)
+	//{
+	//	// ±Ã±Ø
+	//	if (AttackRangeCol->Collision(CollisionOrder::BlueTeamBody) && AttackSpeed <= AttackValue)
+	//	{
+	//		return true;
+	//	}
+	//}
+
+	//return false;
 }
 
 
