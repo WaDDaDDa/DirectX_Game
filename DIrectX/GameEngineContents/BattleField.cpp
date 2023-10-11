@@ -22,7 +22,7 @@ void BattleField::LevelStart(GameEngineLevel* _PrevLevel)
 	float4 WindowScale = GameEngineCore::MainWindow.GetScale();
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
-	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
+	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y});
 
 	BackGround = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::BackGround);
 	BackGround->SetSprite("stadium_sky_bg.png");

@@ -97,8 +97,8 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 
 	// ºí·çÆÀ À¯´Ö (¿ÞÂÊ)
-	BlueTeam.push_back(CreateActor<Swordman>()->GetPointer());
-	//BlueTeam.push_back(CreateActor<Priest>()->GetPointer());
+	//BlueTeam.push_back(CreateActor<Swordman>()->GetPointer());
+	BlueTeam.push_back(CreateActor<Priest>()->GetPointer());
 	//BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
 	//BlueTeam.push_back(CreateActor<Ninja>()->GetPointer());
 	//BlueTeam.push_back(CreateActor<Pythoness>()->GetPointer());

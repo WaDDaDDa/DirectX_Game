@@ -15,6 +15,10 @@ FlameUlt::~FlameUlt()
 
 void FlameUlt::Start()
 {
+	AttRangeRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::BackEffect);
+	AttRangeRenderer->CreateAnimation("FlameUltEffect_AttRange", "PyromancerEffect", 0.1f, 45, 45, false);
+	AttRangeRenderer->ChangeAnimation("FlameUltEffect_AttRange");
+	AttRangeRenderer->SetImageScale({ 0.0f, 0.0f });
 
 	// 이벤트 셋팅
 	Event.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
@@ -63,15 +67,19 @@ void FlameUlt::Update(float _Delta)
 {
 	AttInter -= _Delta;
 	EffectInter -= _Delta;
-	//for (size_t i = 0; i < 20; i++)
-	//{
-	//	GameEngineRandom NewRandom;
-	//	float RandX = NewRandom.RandomFloat(-200.0f, 200.0f);
-	//	float RandY = NewRandom.RandomFloat(-200.0f, 200.0f);
-	//	std::shared_ptr<FlameEffect> Flame = GetLevel()->CreateActor<FlameEffect>();
-	//	Flame->Transform.SetWorldPosition(Transform.GetWorldPosition());
-	//	Flame->Transform.AddLocalPosition({ RandX , RandY});
-	//}
+	RangeValue += _Delta;
+
+	if (RangeValue >= 1.0f)
+	{
+		RangeValue = 1.0f;
+	}
+
+	{
+		float Test = std::lerp(0.0f, Scale.X, RangeValue);
+
+		AttRangeRenderer->SetImageScale({ Test , Test });
+
+	}
 
 	if (0.0f >= EffectInter)
 	{
@@ -82,8 +90,8 @@ void FlameUlt::Update(float _Delta)
 		NewRandom.SetSeed(RandSeed);
 
 		std::shared_ptr<FlameEffect> Flame = GetLevel()->CreateActor<FlameEffect>();
-		float RandX = NewRandom.RandomFloat(-200.0f, 200.0f);
-		float RandY = NewRandom.RandomFloat(-200.0f, 200.0f);
+		float RandX = NewRandom.RandomFloat(-150.0f, 150.0f);
+		float RandY = NewRandom.RandomFloat(-150.0f, 150.0f);
 		Flame->Transform.SetWorldPosition(Transform.GetWorldPosition());
 		Flame->Transform.AddLocalPosition({ RandX , RandY });
 		EffectInter = 0.05f;
@@ -92,6 +100,7 @@ void FlameUlt::Update(float _Delta)
 	if (LifeTime <= GetLiveTime())
 	{
 		Death();
+		return;
 	}
 
 	//이벤트 사용.

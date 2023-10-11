@@ -32,7 +32,7 @@ void FireSpirit::Start()
 	EffectRenderer->AutoSpriteSizeOn();
 	EffectRenderer->SetAutoScaleRatio(1.3f);
 
-	AttRangeRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
+	AttRangeRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::BackEffect);
 	AttRangeRenderer->CreateAnimation("FireSpiritEffect_AttRange", "FireSpiritEffect", 0.1f, 32, 32, false);
 	AttRangeRenderer->ChangeAnimation("FireSpiritEffect_AttRange");
 	AttRangeRenderer->SetImageScale({0.0f, 0.0f});
@@ -162,15 +162,15 @@ void FireSpirit::SpwanUpdate(float _Delta)
 		return;
 	}
 
-	RangeValue += _Delta * 2.0f;
+	RangeValue += _Delta;
 
-	if (RangeValue >= 1.0f)
+	if (RangeValue >= 0.7f)
 	{
-		RangeValue = 1.0f;
+		RangeValue = 0.7;
 	}
 
 	{
-		float Test = std::lerp(0.0f, Scale.X, RangeValue);
+		float Test = std::lerp(0.0f, Scale.X, RangeValue / 0.7f);
 
 		AttRangeRenderer->SetImageScale({ Test , Test });
 
@@ -263,15 +263,15 @@ void FireSpirit::DieUpdate(float _Delta)
 		return;
 	}
 
-	RangeValue += _Delta * 2.0f;
+	RangeValue += _Delta;
 
-	if (RangeValue >= 1.0f)
+	if (RangeValue >= 0.7f)
 	{
-		RangeValue = 1.0f;
+		RangeValue = 0.7f;
 	}
 
 	{
-		float Test = std::lerp(Scale.X, 0.0f, RangeValue);
+		float Test = std::lerp(Scale.X, 0.0f, RangeValue / 0.7f);
 
 		AttRangeRenderer->SetImageScale({ Test , Test });
 
