@@ -166,7 +166,7 @@ void FireSpirit::SpwanUpdate(float _Delta)
 
 	if (RangeValue >= 0.7f)
 	{
-		RangeValue = 0.7;
+		RangeValue = 0.7f;
 	}
 
 	{

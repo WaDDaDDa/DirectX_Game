@@ -2,6 +2,13 @@
 #include "GameUnit.h"
 
 #include "GameUnitUI.h"
+#include "PlayerCard.h"
+
+
+#define MAP_LEFT 320.0f
+#define MAP_RIGHT 950.0f
+#define MAP_UP -250.0f
+#define MAP_DOWN -620.0f
 
 GameUnit::GameUnit()
 {
@@ -70,6 +77,7 @@ void GameUnit::LevelStart(GameEngineLevel* _PrevLevel)
 	ChangeState(GameUnitState::Spwan);
 	// HPUI 积己
 	GetLevel()->CreateActor<GameUnitUI>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
+	GetLevel()->CreateActor<PlayerCard>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
 }
 
 void GameUnit::LevelEnd(GameEngineLevel* _NextLevel)
@@ -257,6 +265,37 @@ bool GameUnit::AttCheck()
 	//}
 
 	//return false;
+}
+
+void GameUnit::MapOverCheck()
+{
+	// 甘哭率 场
+	if (MAP_LEFT >= Transform.GetWorldPosition().X)
+	{
+		Transform.SetWorldPosition({ MAP_LEFT + 1.0f, Transform.GetWorldPosition().Y });
+		MoveDir = { -MoveDir.X, MoveDir.Y };
+	}
+
+	// 甘坷弗率 场
+	if (MAP_RIGHT <= Transform.GetWorldPosition().X)
+	{
+		Transform.SetWorldPosition({ MAP_RIGHT - 1.0f, Transform.GetWorldPosition().Y });
+		MoveDir = { -MoveDir.X, MoveDir.Y };
+	}
+
+	// 甘 困场
+	if (MAP_UP <= Transform.GetWorldPosition().Y)
+	{
+		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, MAP_UP - 1.0f });
+		MoveDir = { MoveDir.X, -MoveDir.Y };
+	}
+
+	// 甘 酒贰场
+	if (MAP_DOWN >= Transform.GetWorldPosition().Y)
+	{
+		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, MAP_DOWN + 1.0f });
+		MoveDir = { MoveDir.X, -MoveDir.Y };
+	}
 }
 
 
@@ -590,29 +629,7 @@ void GameUnit::MoveUpdate(float _Delta)
 		return;
 	}
 
-	if (350.0f >= Transform.GetWorldPosition().X)
-	{
-		Transform.SetWorldPosition({ 351.0f, Transform.GetWorldPosition().Y });
-		MoveDir = -MoveDir;
-	}
-
-	if (950.0f <= Transform.GetWorldPosition().X)
-	{
-		Transform.SetWorldPosition({ 949.0f, Transform.GetWorldPosition().Y });
-		MoveDir = -MoveDir;
-	}
-
-	if (-250.0f <= Transform.GetWorldPosition().Y)
-	{
-		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, -251.0f });
-		MoveDir = -MoveDir;
-	}
-
-	if (-600.0f >= Transform.GetWorldPosition().Y)
-	{
-		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, -599.0f });
-		MoveDir = -MoveDir;
-	}
+	MapOverCheck();
 
 	Transform.AddLocalPosition((MoveDir * UnitSpeed * _Delta));
 }
@@ -697,29 +714,7 @@ void GameUnit::BackMoveUpdate(float _Delta)
 		return;
 	}
 
-	if (350.0f >= Transform.GetWorldPosition().X)
-	{
-		Transform.SetWorldPosition({ 351.0f, Transform.GetWorldPosition().Y });
-		MoveDir = -MoveDir;
-	}
-
-	if (950.0f <= Transform.GetWorldPosition().X)
-	{
-		Transform.SetWorldPosition({ 949.0f, Transform.GetWorldPosition().Y });
-		MoveDir = -MoveDir;
-	}
-
-	if (-250.0f <= Transform.GetWorldPosition().Y)
-	{
-		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, -251.0f });
-		MoveDir = -MoveDir;
-	}
-
-	if (-600.0f >= Transform.GetWorldPosition().Y)
-	{
-		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, -599.0f });
-		MoveDir = -MoveDir;
-	}
+	MapOverCheck();
 
 	Transform.AddLocalPosition((MoveDir * UnitSpeed * _Delta));
 }
@@ -839,29 +834,7 @@ void GameUnit::CollMoveUpdate(float _Delta)
 		return;
 	}
 
-	if (350.0f >= Transform.GetWorldPosition().X)
-	{
-		Transform.SetWorldPosition({ 351.0f, Transform.GetWorldPosition().Y });
-		MoveDir = -MoveDir;
-	}
-
-	if (950.0f <= Transform.GetWorldPosition().X)
-	{
-		Transform.SetWorldPosition({ 949.0f, Transform.GetWorldPosition().Y });
-		MoveDir = -MoveDir;
-	}
-
-	if (-250.0f <= Transform.GetWorldPosition().Y)
-	{
-		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, -251.0f });
-		MoveDir = -MoveDir;
-	}
-
-	if (-600.0f >= Transform.GetWorldPosition().Y)
-	{
-		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, -599.0f });
-		MoveDir = -MoveDir;
-	}
+	MapOverCheck();
 
 	Transform.AddLocalPosition((MoveDir * UnitSpeed * _Delta));
 }

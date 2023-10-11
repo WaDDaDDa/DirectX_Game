@@ -195,29 +195,7 @@ void Archer::SkillUpdate(float _Delta)
 		return;
 	}
 
-	if (350.0f >= Transform.GetWorldPosition().X)
-	{
-		Transform.SetWorldPosition({ 351.0f, Transform.GetWorldPosition().Y });
-		MoveDir = -MoveDir;
-	}
-
-	if (950.0f <= Transform.GetWorldPosition().X)
-	{
-		Transform.SetWorldPosition({ 949.0f, Transform.GetWorldPosition().Y });
-		MoveDir = -MoveDir;
-	}
-
-	if (-250.0f <= Transform.GetWorldPosition().Y)
-	{
-		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, -251.0f });
-		MoveDir = -MoveDir;
-	}
-
-	if (-600.0f >= Transform.GetWorldPosition().Y)
-	{
-		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, -599.0f });
-		MoveDir = -MoveDir;
-	}
+	MapOverCheck();
 
 	Transform.AddLocalPosition((MoveDir * UnitSpeed * 1.5f * _Delta));
 

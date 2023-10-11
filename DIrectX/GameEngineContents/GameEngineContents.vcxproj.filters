@@ -119,6 +119,12 @@
     <ClCompile Include="PriestHealEffect.cpp">
       <Filter>GameUnit\Priest</Filter>
     </ClCompile>
+    <ClCompile Include="StadiumBoard.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCard.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -241,6 +247,12 @@
     </ClInclude>
     <ClInclude Include="PriestHealEffect.h">
       <Filter>GameUnit\Priest</Filter>
+    </ClInclude>
+    <ClInclude Include="StadiumBoard.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCard.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

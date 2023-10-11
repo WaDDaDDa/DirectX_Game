@@ -45,6 +45,9 @@ enum class PivotType
 	Bottom,
 	Left,
 	LeftTop,
+	Right,
+	RightTop,
+	Top,
 };
 
 struct SpriteRendererInfo

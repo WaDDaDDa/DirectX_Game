@@ -286,6 +286,8 @@ public:
         return AggroUnit;
     }
 
+    
+
     TeamType MyTeam = TeamType::Blue;
     std::vector<GameUnit*> EnemyGroup;
     std::vector<GameUnit*> TeamGroup;
@@ -321,6 +323,8 @@ protected:
     virtual bool AttCheck();
     virtual bool SkillCheck();
     virtual bool UltCheck();
+
+    void MapOverCheck();
 
     // State
     void MaxStart();

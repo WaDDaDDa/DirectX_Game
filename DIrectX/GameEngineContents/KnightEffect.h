@@ -28,7 +28,7 @@ private:
     std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
     std::shared_ptr<class GameUnit> Unit;
     std::shared_ptr<class GameUnit> AgrUnit;
-    float LifeTime = 3.0f;
+    float LifeTime = 2.0f;
 
 };
 

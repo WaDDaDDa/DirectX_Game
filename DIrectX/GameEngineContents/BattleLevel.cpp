@@ -5,6 +5,9 @@
 #include "BattleField.h"
 #include "Bird.h"
 
+// UI
+#include "StadiumBoard.h"
+
 // GameUnit
 #include "GameUnitUI.h"
 #include "Knight.h"
@@ -80,6 +83,7 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 		GameEngineSprite::CreateSingle("stadium.png");
 		GameEngineSprite::CreateSingle("stadium_sky_bg.png");
+		GameEngineSprite::CreateSingle("stadium_VS.png");
 	}
 
 	GameEngineRandom NewRandom;
@@ -127,6 +131,8 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	}
 
 	CreateActor<Bird>();
+	CreateActor<StadiumBoard>();
+	
 }
 
 void BattleLevel::LevelEnd(GameEngineLevel* _NextLevel)
