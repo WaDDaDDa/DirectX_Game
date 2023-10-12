@@ -289,6 +289,7 @@ public:
     
 
     TeamType MyTeam = TeamType::Blue;
+    bool PlayerTeam = false;
     std::vector<GameUnit*> EnemyGroup;
     std::vector<GameUnit*> TeamGroup;
     bool ImDie = false;
@@ -296,6 +297,11 @@ public:
     bool HealTarget = false;
 
     bool UseUlt = false;
+
+    int GetDieCount()
+    {
+        return DieCount;
+    }
 
 protected:
     std::shared_ptr<GameEngineSpriteRenderer> SpwanRenderer;
@@ -406,6 +412,8 @@ protected:
     float SkillValue = 0.0f;
     float UltCooltime = 30.0f;
     float UltValue = 0.0f;
+
+    int DieCount = 0;
 
 
 private:

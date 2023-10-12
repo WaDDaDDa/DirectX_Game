@@ -62,6 +62,12 @@ void NinjaUlt::SpwanStart()
 
 }
 
+void NinjaUlt::DiePrevStart()
+{
+	ImDie = true;
+	SpwanRenderer->Off();
+	SpwanRenderer->ChangeAnimation("SpwanEffectBlack");
+}
 
 void NinjaUlt::DieStart()
 {

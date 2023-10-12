@@ -924,6 +924,7 @@ void GameUnit::Ult2Update(float _Delta)
 void GameUnit::DiePrevStart()
 {
 	ImDie = true;
+	DieCount += 1;
 	SpwanRenderer->Off();
 	SpwanRenderer->ChangeAnimation("SpwanEffectBlack");
 }

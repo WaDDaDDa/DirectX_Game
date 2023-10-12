@@ -12,6 +12,23 @@ public:
     StadiumBoard& operator=(const StadiumBoard& _Other) = delete;
     StadiumBoard& operator=(StadiumBoard&& _Other) noexcept = delete;
 
+    void Setting(const std::vector<class GameUnit*>& _BlueTeam, const std::vector<class GameUnit*>& _RedTeam)
+    {
+        BlueTeam = _BlueTeam;
+        RedTeam = _RedTeam;
+    }
+
+    int BlueDieCount = 0;
+    int RedDieCount = 0;
+
+    int BlueKillCount = 0;
+    int RedKillCount = 0;
+
+    int BlueWinCount = 0;
+    int RedKWinCount = 0;
+
+    float GameTime = 10.0f;
+
 protected:
     void Start() override;
     void Update(float _Delta) override;
@@ -28,5 +45,8 @@ private:
 
     std::shared_ptr<class GameEngineSpriteRenderer> RedWin;
     std::shared_ptr<class GameEngineSpriteRenderer> RedWin2;
+
+    std::vector<class GameUnit*> RedTeam;
+    std::vector<class GameUnit*> BlueTeam;
 };
 

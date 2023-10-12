@@ -20,7 +20,10 @@ protected:
 
     void Update(float _Delta) override;
 
+    void DiePrevStart() override;
+
     void DieStart() override;
+
 private:
 
 };

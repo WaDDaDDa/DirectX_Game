@@ -111,17 +111,6 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	std::shared_ptr<BattleField> BF = CreateActor<BattleField>();
 
 	// À¯´Ö »ý¼º
-	
-	// ·¹µåÆÀ À¯´Ö (¿À¸¥ÂÊ)
-	RedTeam.push_back(CreateActor<Swordman>()->GetPointer());
-	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
-	RedTeam.push_back(CreateActor<Archer>()->GetPointer());
-	RedTeam.push_back(CreateActor<Pythoness>()->GetPointer());
-	//RedTeam.push_back(CreateActor<Archer>()->GetPointer());
-
-
-
-
 	// ºí·çÆÀ À¯´Ö (¿ÞÂÊ)
 	BlueTeam.push_back(CreateActor<Monk>()->GetPointer());
 	BlueTeam.push_back(CreateActor<Priest>()->GetPointer());
@@ -130,18 +119,15 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	//BlueTeam.push_back(CreateActor<Pythoness>()->GetPointer());
 
 
-
+		// ·¹µåÆÀ À¯´Ö (¿À¸¥ÂÊ)
+	RedTeam.push_back(CreateActor<Swordman>()->GetPointer());
+	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
+	RedTeam.push_back(CreateActor<Archer>()->GetPointer());
+	RedTeam.push_back(CreateActor<Pythoness>()->GetPointer());
+	//RedTeam.push_back(CreateActor<Archer>()->GetPointer());
 
 	
 	// ÆÀ¼³Á¤
-	for (size_t i = 0; i < RedTeam.size(); i++)
-	{
-		RedTeam[static_cast<int>(i)]->EnemyUnitSetting(BlueTeam);
-		RedTeam[static_cast<int>(i)]->TeamUnitSetting(RedTeam);
-
-		RedTeam[static_cast<int>(i)]->TeamSet(TeamType::Red);
-	}
-
 	for (size_t i = 0; i < BlueTeam.size(); i++)
 	{
 		BlueTeam[static_cast<int>(i)]->EnemyUnitSetting(RedTeam);
@@ -150,12 +136,37 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		BlueTeam[static_cast<int>(i)]->TeamSet(TeamType::Blue);
 	}
 
+	for (size_t i = 0; i < RedTeam.size(); i++)
+	{
+		RedTeam[static_cast<int>(i)]->EnemyUnitSetting(BlueTeam);
+		RedTeam[static_cast<int>(i)]->TeamUnitSetting(RedTeam);
+
+		RedTeam[static_cast<int>(i)]->TeamSet(TeamType::Red);
+	}
+
+
 	CreateActor<Bird>();
-	CreateActor<StadiumBoard>();
+
+	CreateActor<StadiumBoard>()->Setting(BlueTeam, RedTeam);
 	
 }
 
 void BattleLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
+	for (size_t i = 0; i < BlueTeam.size(); i++)
+	{
+		BlueTeam[static_cast<int>(i)]->Death();
 
+	}
+
+	for (size_t i = 0; i < RedTeam.size(); i++)
+	{
+		RedTeam[static_cast<int>(i)]->Death();
+
+	}
+
+	BlueTeam.clear();
+	RedTeam.clear();
+
+	int a = 0;
 }
