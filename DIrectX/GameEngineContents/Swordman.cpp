@@ -261,7 +261,7 @@ void Swordman::Skill2Update(float _Delta)
 					for (size_t i = 0; i < _Collision.size(); i++)
 					{
 						// 공격대미지 공식
-						reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 0.7f);
+						reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 0.9f);
 						SkillTick -= 1.0f;
 						SkillDamageDeley = 0.1f;
 						return;
@@ -276,7 +276,7 @@ void Swordman::Skill2Update(float _Delta)
 					for (size_t i = 0; i < _Collision.size(); i++)
 					{
 						// 공격대미지 공식
-						reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 0.7f);
+						reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 0.9f);
 						SkillTick -= 1.0f;
 						SkillDamageDeley = 0.1f;
 						return;
