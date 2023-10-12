@@ -20,13 +20,21 @@ public:
 
     void Init();
 
+    std::shared_ptr<class GameUnit> GetUnit()
+    {
+        return Unit;
+    }
+
+    void CreateStatus();
+
+
 protected:
     void Start() override;
     void Update(float _Delta) override;
 
     void LevelStart(GameEngineLevel* _PrevLevel) override;
     void LevelEnd(GameEngineLevel* _NextLevel) override;
-    float StartY = 280.0f;
+    float StartY = 200.0f;
     static float BlueYInter;
     static float RedYInter;
 

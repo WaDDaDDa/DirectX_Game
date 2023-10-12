@@ -125,6 +125,9 @@
     <ClCompile Include="PlayerCard.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerCard_Status.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -252,6 +255,9 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="PlayerCard.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCard_Status.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>

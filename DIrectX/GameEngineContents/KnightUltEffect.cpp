@@ -72,5 +72,9 @@ void KnightUltEffect::Update(float _Delta)
 	}
 
 	Transform.AddLocalRotation({ 0.0f, 360.0f * _Delta });
-
+	// 방패가같이돌지않게 고정시키면 order에의해 캐릭터 뒤로 이펙트가 가지않음
+	// 오더링이 해결되면 하는것으로.
+	//Renderer->Transform.SetWorldRotation({ 0.0f,0.0f });
+	//Renderer->SetOrder(ContentsOrder::BackEffect);
+	//Renderer2->Transform.SetWorldRotation({ 0.0f,0.0f });
 }

@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "PlayerCard.h"
 #include "GameUnit.h"
+#include "PlayerCard_Status.h"
 
 float PlayerCard::BlueYInter = 0.0f;
 float PlayerCard::RedYInter = 0.0f;
@@ -48,6 +49,11 @@ void PlayerCard::LevelStart(GameEngineLevel* _PrevLevel)
 
 }
 
+void PlayerCard::CreateStatus()
+{
+	GetLevel()->CreateActor<PlayerCard_Status>()->Setting(GetDynamic_Cast_This<PlayerCard>());
+}
+
 
 void PlayerCard::Init()
 {
@@ -58,18 +64,19 @@ void PlayerCard::Init()
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(2.0f);
 
-	// Status 틀
-	Renderer2 = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
-	Renderer2->CreateAnimation("PlayerCardBlueStatus", "PlayerCard", 0.1f, 0, 0, false);
-	Renderer2->CreateAnimation("PlayerCardRedStatus", "PlayerCard", 0.1f, 1, 1, false);
-	Renderer2->AutoSpriteSizeOn();
-	Renderer2->SetAutoScaleRatio(2.0f);
+	//// Status 틀
+	//Renderer2 = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	//Renderer2->CreateAnimation("PlayerCardBlueStatus", "PlayerCard", 0.1f, 0, 0, false);
+	//Renderer2->CreateAnimation("PlayerCardRedStatus", "PlayerCard", 0.1f, 1, 1, false);
+	//Renderer2->AutoSpriteSizeOn();
+	//Renderer2->SetAutoScaleRatio(2.0f);
 
 	// Unit이미지
-	UnitImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	UnitImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
 	UnitImage->SetSprite(Unit->GetUnitName() += "_Icon.png");
 	UnitImage->AutoSpriteSizeOn();
 	UnitImage->SetAutoScaleRatio(2.0f);
+	UnitImage->Transform.AddLocalPosition({ -45.0f,0.0f });
 
 
 	float4 WindowScale = GameEngineCore::MainWindow.GetScale();
@@ -78,33 +85,22 @@ void PlayerCard::Init()
 
 	if (TeamType::Blue == Unit->MyTeam)
 	{
-		Transform.SetLocalPosition({ -HalfWindowScale.X, StartY + BlueYInter });
+		Transform.SetLocalPosition({ -HalfWindowScale.X + 79.0f, StartY + BlueYInter });
 
 		Renderer->ChangeAnimation("PlayerCardBlue");
-		Renderer->SetPivotType(PivotType::LeftTop);
 
-		Renderer2->Transform.AddLocalPosition({ 158.0f });
-		Renderer2->ChangeAnimation("PlayerCardBlueStatus");
-		Renderer2->SetPivotType(PivotType::LeftTop);
-
-		UnitImage->Transform.AddLocalPosition({25.0f,-80.0f});
-
+		CreateStatus();
 
 		BlueYInter -= 160.0f;
 
 	}
 	else if (TeamType::Red == Unit->MyTeam)
 	{
-		Transform.SetLocalPosition({ HalfWindowScale.X , StartY + RedYInter });
+		Transform.SetLocalPosition({ HalfWindowScale.X - 79.0f , StartY + RedYInter });
 
 		Renderer->ChangeAnimation("PlayerCardRed");
-		Renderer->SetPivotType(PivotType::RightTop);
 
-		Renderer2->Transform.AddLocalPosition({ -158.0f });
-		Renderer2->ChangeAnimation("PlayerCardRedStatus");
-		Renderer2->SetPivotType(PivotType::RightTop);
-
-		UnitImage->Transform.AddLocalPosition({ -130.0f,-80.0f });
+		CreateStatus();
 
 		RedYInter -= 160.0f;
 
