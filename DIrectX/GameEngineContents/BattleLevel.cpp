@@ -84,6 +84,26 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		GameEngineSprite::CreateSingle("stadium.png");
 		GameEngineSprite::CreateSingle("stadium_sky_bg.png");
 		GameEngineSprite::CreateSingle("stadium_VS.png");
+		GameEngineSprite::CreateSingle("win_indicator_0.png");
+		GameEngineSprite::CreateSingle("win_indicator_1.png");
+	}
+
+	{
+		// 싱글 스프라이트 아이콘
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("GameEngineResources");
+		Dir.MoveChild("ContentsResources\\Icon");
+
+		std::vector<GameEngineFile> Files = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Files.size(); i++)
+		{
+			GameEngineFile& File = Files[i];
+			GameEngineTexture::Load(File.GetStringPath());
+		}
+
+		GameEngineSprite::CreateSingle("armor_icon.png");
+		GameEngineSprite::CreateSingle("attack_icon.png");
 	}
 
 	GameEngineRandom NewRandom;

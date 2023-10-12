@@ -64,19 +64,29 @@ void PlayerCard::Init()
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(2.0f);
 
-	//// Status 틀
-	//Renderer2 = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
-	//Renderer2->CreateAnimation("PlayerCardBlueStatus", "PlayerCard", 0.1f, 0, 0, false);
-	//Renderer2->CreateAnimation("PlayerCardRedStatus", "PlayerCard", 0.1f, 1, 1, false);
-	//Renderer2->AutoSpriteSizeOn();
-	//Renderer2->SetAutoScaleRatio(2.0f);
-
 	// Unit이미지
 	UnitImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
 	UnitImage->SetSprite(Unit->GetUnitName() += "_Icon.png");
 	UnitImage->AutoSpriteSizeOn();
 	UnitImage->SetAutoScaleRatio(2.0f);
-	UnitImage->Transform.AddLocalPosition({ -45.0f,0.0f });
+	UnitImage->Transform.AddLocalPosition(UnitImagePos);
+	UnitImage->SetPivotType(PivotType::Bottom);
+
+	// atticon
+	AttIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	AttIcon->SetSprite("attack_icon.png");
+	AttIcon->AutoSpriteSizeOn();
+	AttIcon->SetAutoScaleRatio(2.0f);
+	AttIcon->Transform.AddLocalPosition(AttIconPos);
+	AttIcon->SetPivotType(PivotType::Bottom);
+
+	// deficon
+	DefIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	DefIcon->SetSprite("armor_icon.png");
+	DefIcon->AutoSpriteSizeOn();
+	DefIcon->SetAutoScaleRatio(2.0f);
+	DefIcon->Transform.AddLocalPosition(DefIconPos);
+	DefIcon->SetPivotType(PivotType::Bottom);
 
 
 	float4 WindowScale = GameEngineCore::MainWindow.GetScale();

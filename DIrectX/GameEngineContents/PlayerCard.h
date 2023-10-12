@@ -41,9 +41,17 @@ protected:
 private:
     std::shared_ptr<class GameUnit> Unit;
     std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
-    std::shared_ptr<class GameEngineSpriteRenderer> Renderer2;
 
     std::shared_ptr<class GameEngineSpriteRenderer> UnitImage;
+    float4 UnitImagePos = { -49.0f, -8.0f };
+
+    std::shared_ptr<class GameEngineSpriteRenderer> AttIcon;
+    float4 AttIconPos = { -65.0f, -32.0f };
+
+    std::shared_ptr<class GameEngineSpriteRenderer> DefIcon;
+    float4 DefIconPos = { 10.0f, -32.0f };
+
+
 
 };
 

@@ -22,5 +22,11 @@ protected:
 private:
     std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
 
+    // 승패 초록불
+    std::shared_ptr<class GameEngineSpriteRenderer> BlueWin;
+    std::shared_ptr<class GameEngineSpriteRenderer> BlueWin2;
+
+    std::shared_ptr<class GameEngineSpriteRenderer> RedWin;
+    std::shared_ptr<class GameEngineSpriteRenderer> RedWin2;
 };
 

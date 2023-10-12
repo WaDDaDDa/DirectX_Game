@@ -212,8 +212,8 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerCard.cpp" />
     <ClCompile Include="PlayerCard_Status.cpp" />
+    <ClCompile Include="PlayerCard.cpp" />
     <ClCompile Include="PlayLevel.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -290,8 +290,8 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerCard.h" />
     <ClInclude Include="PlayerCard_Status.h" />
+    <ClInclude Include="PlayerCard.h" />
     <ClInclude Include="PlayLevel.h" />
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="Priest.h" />
