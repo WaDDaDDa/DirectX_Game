@@ -30,6 +30,11 @@ void MonkShield::LevelStart(GameEngineLevel* _PrevLevel)
 
 }
 
+void MonkShield::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
 void MonkShield::Update(float _Delta)
 {
 	Unit->Immune = true;

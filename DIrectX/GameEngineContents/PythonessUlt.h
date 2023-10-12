@@ -94,6 +94,7 @@ public:
 protected:
     void Start();
     void Update(float _Delta);
+    void LevelEnd(GameEngineLevel* _NextLevel) override;
 
     void ChangeState(PythonessUltState _State);
     void StateUpdate(float _Delta);

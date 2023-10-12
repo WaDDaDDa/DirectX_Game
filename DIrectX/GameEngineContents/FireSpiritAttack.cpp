@@ -75,6 +75,11 @@ void FireSpiritAttack::Start()
 
 }
 
+void FireSpiritAttack::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
 void FireSpiritAttack::Update(float _Delta)
 {
 	LifeTime -= _Delta;

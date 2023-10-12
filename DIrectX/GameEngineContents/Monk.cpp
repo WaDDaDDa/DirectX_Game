@@ -79,11 +79,6 @@ void Monk::LevelStart(GameEngineLevel* _PrevLevel)
 	GameUnit::LevelStart(_PrevLevel);
 }
 
-void Monk::LevelEnd(GameEngineLevel* _NextLevel)
-{
-
-}
-
 void Monk::SpwanStart()
 {
 	GameUnit::SpwanStart();

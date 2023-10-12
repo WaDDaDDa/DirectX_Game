@@ -84,6 +84,12 @@ void FireSpirit::Start()
 	ChangeState(FireSpiritState::Spwan);
 }
 
+void FireSpirit::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
+
 void FireSpirit::Update(float _Delta)
 {
 	AttackValue += _Delta;

@@ -84,11 +84,6 @@ void Ninja::LevelStart(GameEngineLevel* _PrevLevel)
 	GameUnit::LevelStart(_PrevLevel);
 }
 
-void Ninja::LevelEnd(GameEngineLevel* _NextLevel)
-{
-
-}
-
 void Ninja::SpwanStart()
 {
 	GameUnit::SpwanStart();

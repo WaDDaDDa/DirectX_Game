@@ -59,6 +59,11 @@ void MonkUlt::Start()
 
 }
 
+void MonkUlt::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
 void MonkUlt::Update(float _Delta)
 {
 	if (true == Renderer->IsCurAnimationEnd())

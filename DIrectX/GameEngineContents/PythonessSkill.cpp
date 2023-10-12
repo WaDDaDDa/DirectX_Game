@@ -92,6 +92,12 @@ void PythonessSkill::Start()
 
 }
 
+void PythonessSkill::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
+
 void PythonessSkill::Update(float _Delta)
 {
 	LifeTime -= _Delta;

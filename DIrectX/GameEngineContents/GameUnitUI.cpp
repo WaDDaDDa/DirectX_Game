@@ -87,11 +87,18 @@ void GameUnitUI::InitUniUI()
 
 void GameUnitUI::LevelStart(GameEngineLevel* _PrevLevel)
 {
-	// InitUniUI();
+
 }
+
+void GameUnitUI::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
 
 void GameUnitUI::Update(float _Delta)
 {
+
 	Transform.SetWorldPosition(Unit->Transform.GetWorldPosition());
 
 	{// mp 회복 부분

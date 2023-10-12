@@ -36,6 +36,7 @@ public:
 protected:
     void Start();
     void Update(float _Delta);
+    void LevelEnd(GameEngineLevel* _NextLevel) override;
 
 private:
     std::shared_ptr<GameEngineCollision> Col;

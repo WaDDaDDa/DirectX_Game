@@ -25,6 +25,11 @@ void Bird::Start()
 
 }
 
+void Bird::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
 void Bird::Update(float _Delta)
 {
 	float Speed = 100.0f;

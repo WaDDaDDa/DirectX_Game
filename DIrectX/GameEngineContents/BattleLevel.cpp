@@ -153,17 +153,17 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 void BattleLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
-	for (size_t i = 0; i < BlueTeam.size(); i++)
-	{
-		BlueTeam[static_cast<int>(i)]->Death();
+	//for (size_t i = 0; i < BlueTeam.size(); i++)
+	//{
+	//	BlueTeam[static_cast<int>(i)]->Death();
 
-	}
+	//}
 
-	for (size_t i = 0; i < RedTeam.size(); i++)
-	{
-		RedTeam[static_cast<int>(i)]->Death();
+	//for (size_t i = 0; i < RedTeam.size(); i++)
+	//{
+	//	RedTeam[static_cast<int>(i)]->Death();
 
-	}
+	//}
 
 	BlueTeam.clear();
 	RedTeam.clear();

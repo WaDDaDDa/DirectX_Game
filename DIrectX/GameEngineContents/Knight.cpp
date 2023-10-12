@@ -80,11 +80,6 @@ void Knight::LevelStart(GameEngineLevel* _PrevLevel)
 	GameUnit::LevelStart(_PrevLevel);
 }
 
-void Knight::LevelEnd(GameEngineLevel* _NextLevel)
-{
-
-}
-
 void Knight::SpwanStart()
 {
 	GameUnit::SpwanStart();

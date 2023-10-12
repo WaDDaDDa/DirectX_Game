@@ -81,11 +81,6 @@ void Pyromancer::LevelStart(GameEngineLevel* _PrevLevel)
 	GameUnit::LevelStart(_PrevLevel);
 }
 
-void Pyromancer::LevelEnd(GameEngineLevel* _NextLevel)
-{
-
-}
-
 void Pyromancer::SpwanStart()
 {
 	GameUnit::SpwanStart();

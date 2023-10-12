@@ -82,11 +82,6 @@ void Priest::LevelStart(GameEngineLevel* _PrevLevel)
 	GameUnit::LevelStart(_PrevLevel);
 }
 
-void Priest::LevelEnd(GameEngineLevel* _NextLevel)
-{
-
-}
-
 bool Priest::AttCheck()
 {
 	if (TeamType::Blue == MyTeam)

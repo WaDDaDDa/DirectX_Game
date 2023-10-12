@@ -83,11 +83,6 @@ void Archer::LevelStart(GameEngineLevel* _PrevLevel)
 	GameUnit::LevelStart(_PrevLevel);
 }
 
-void Archer::LevelEnd(GameEngineLevel* _NextLevel)
-{
-
-}
-
 void Archer::SpwanStart()
 {
 	GameUnit::SpwanStart();

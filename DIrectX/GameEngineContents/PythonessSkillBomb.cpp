@@ -61,6 +61,11 @@ void PythonessSkillBomb::Start()
 
 }
 
+void PythonessSkillBomb::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
 void PythonessSkillBomb::Update(float _Delta)
 {
 	if (true == Renderer->IsCurAnimationEnd())

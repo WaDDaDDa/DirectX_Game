@@ -22,6 +22,11 @@ void FlameEffect::Start()
 	Renderer->SetAutoScaleRatio(1.3f);
 }
 
+void FlameEffect::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
 void FlameEffect::Update(float _Delta)
 {
 	if (true == Renderer->IsCurAnimationEnd())

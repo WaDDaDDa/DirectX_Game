@@ -68,6 +68,12 @@ void SwordmanUltEffect::LevelStart(GameEngineLevel* _PrevLevel)
 
 }
 
+void SwordmanUltEffect::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
+
 void SwordmanUltEffect::Update(float _Delta)
 {
 	if (Renderer->IsCurAnimationEnd())

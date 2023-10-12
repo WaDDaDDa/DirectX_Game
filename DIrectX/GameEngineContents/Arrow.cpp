@@ -72,6 +72,11 @@ void Arrow::Start()
 
 }
 
+void Arrow::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
 void Arrow::Update(float _Delta)
 {
 	LifeTime -= _Delta;

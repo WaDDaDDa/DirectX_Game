@@ -63,6 +63,12 @@ void FlameUlt::Start()
 
 }
 
+void FlameUlt::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
+
 void FlameUlt::Update(float _Delta)
 {
 	AttInter -= _Delta;

@@ -41,6 +41,12 @@ void KnightUltEffect::LevelStart(GameEngineLevel* _PrevLevel)
 
 }
 
+void KnightUltEffect::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
+
 void KnightUltEffect::Update(float _Delta)
 {
 	Transform.SetWorldPosition(Unit->Transform.GetWorldPosition());

@@ -85,6 +85,12 @@ void PythonessHeal::Start()
 
 }
 
+void PythonessHeal::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
+
 void PythonessHeal::Update(float _Delta)
 {
 	LifeTime -= _Delta;

@@ -60,6 +60,11 @@ void FlameAttack::Start()
 
 }
 
+void FlameAttack::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
 void FlameAttack::Update(float _Delta)
 {
 	if (true == Renderer->IsCurAnimationEnd())

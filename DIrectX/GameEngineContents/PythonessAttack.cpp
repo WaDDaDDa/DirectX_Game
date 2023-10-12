@@ -76,6 +76,12 @@ void PythonessAttack::Start()
 
 }
 
+void PythonessAttack::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
+
 void PythonessAttack::Update(float _Delta)
 {
 	LifeTime -= _Delta;

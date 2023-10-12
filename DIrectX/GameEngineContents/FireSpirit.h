@@ -93,6 +93,7 @@ public:
 protected:
     void Start();
     void Update(float _Delta);
+    void LevelEnd(GameEngineLevel* _NextLevel) override;
 
     void ChangeState(FireSpiritState _State);
     void StateUpdate(float _Delta);

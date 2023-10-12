@@ -71,6 +71,12 @@ void PythonessUlt::Start()
 	ChangeState(PythonessUltState::Spwan);
 }
 
+void PythonessUlt::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
+
 void PythonessUlt::Update(float _Delta)
 {
 	AttackValue += _Delta;

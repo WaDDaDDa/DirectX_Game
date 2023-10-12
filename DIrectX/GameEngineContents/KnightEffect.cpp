@@ -30,6 +30,12 @@ void KnightEffect::LevelStart(GameEngineLevel* _PrevLevel)
 
 }
 
+void KnightEffect::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
+
 void KnightEffect::Update(float _Delta)
 {
 	Unit->AggroSetting(AgrUnit->GetPointer());

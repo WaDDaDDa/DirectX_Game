@@ -82,7 +82,7 @@ void GameUnit::LevelStart(GameEngineLevel* _PrevLevel)
 
 void GameUnit::LevelEnd(GameEngineLevel* _NextLevel)
 {
-
+	Death();
 }
 
 // 팀정보 셋팅.  공격범위 같은것들도 셋팅됨.

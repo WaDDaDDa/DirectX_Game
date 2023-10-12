@@ -62,6 +62,11 @@ void PriestUlt::Start()
 
 }
 
+void PriestUlt::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
 void PriestUlt::Update(float _Delta)
 {
 	AttInter -= _Delta;

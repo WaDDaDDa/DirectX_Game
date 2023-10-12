@@ -91,11 +91,6 @@ void Pythoness::LevelStart(GameEngineLevel* _PrevLevel)
 	GameUnit::LevelStart(_PrevLevel);
 }
 
-void Pythoness::LevelEnd(GameEngineLevel* _NextLevel)
-{
-
-}
-
 void Pythoness::SpwanStart()
 {
 	GameUnit::SpwanStart();

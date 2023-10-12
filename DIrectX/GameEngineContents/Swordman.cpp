@@ -114,11 +114,6 @@ void Swordman::LevelStart(GameEngineLevel* _PrevLevel)
 	GameUnit::LevelStart(_PrevLevel);
 }
 
-void Swordman::LevelEnd(GameEngineLevel* _NextLevel)
-{
-
-}
-
 void Swordman::SpwanStart()
 {
 	GameUnit::SpwanStart();

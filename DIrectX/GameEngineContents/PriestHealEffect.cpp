@@ -22,6 +22,11 @@ void PriestHealEffect::Start()
 	Renderer->SetAutoScaleRatio(1.3f);
 }
 
+void PriestHealEffect::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
 void PriestHealEffect::Update(float _Delta)
 {
 	if (true == Renderer->IsCurAnimationEnd())
