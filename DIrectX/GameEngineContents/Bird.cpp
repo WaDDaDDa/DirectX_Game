@@ -19,6 +19,7 @@ void Bird::Start()
 	Renderer->CreateAnimation("Bird", "Bird", 0.2f);
 	Renderer->ChangeAnimation("Bird");
 	Renderer->AutoSpriteSizeOn();
+	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
 
 	BodyCol = CreateComponent<GameEngineCollision>(CollisionOrder::TestType);
 	BodyCol->Transform.SetLocalScale(BodyColScale);

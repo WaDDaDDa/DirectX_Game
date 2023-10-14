@@ -7,7 +7,11 @@ enum class ContentsOrder
 	Water,
 	Map,
 	BackEffect,
+	BackEffect2,
 	HPLayer1,
+	HPLayer2,
+	HPLayer3,
+	HPLayer4,
 	Unit,
 	Projectile,  // ≈ıªÁ√º
 	FrontEffect,

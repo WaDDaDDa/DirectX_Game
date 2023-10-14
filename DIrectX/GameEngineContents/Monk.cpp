@@ -61,6 +61,7 @@ void Monk::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer->CreateAnimation("Monk_Skill", "MonkAni", 0.1f, 34, 43, false);
 		MainSpriteRenderer->CreateAnimation("Monk_Ult", "MonkAni", 0.1f, 44, 53, false);
 		MainSpriteRenderer->CreateAnimation("Monk_Die", "MonkAni", 0.1f, 19, 33, false);
+		MainSpriteRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
 
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
 		SkillEffectRenderer->CreateAnimation("MonkSkillEffect", "MonkEffect", 0.1f, 17, 26, false);
@@ -70,6 +71,7 @@ void Monk::LevelStart(GameEngineLevel* _PrevLevel)
 		SkillEffectRenderer->SetAutoScaleRatio(1.3f);
 		SkillEffectRenderer->Transform.AddLocalPosition({0, -20.0f});
 		SkillEffectRenderer->SetPivotType(PivotType::Bottom);
+		SkillEffectRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::FrontEffect) });
 
 		MainSpriteRenderer->ChangeAnimation("Monk_Idle");
 		MainSpriteRenderer->AutoSpriteSizeOn();

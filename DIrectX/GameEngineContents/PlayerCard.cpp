@@ -57,12 +57,15 @@ void PlayerCard::CreateStatus()
 
 void PlayerCard::Init()
 {
+	Transform.AddLocalPosition({0.0f, 0.0f, 100.0f});
+
 	// Card 틀
 	Renderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
 	Renderer->CreateAnimation("PlayerCardBlue", "PlayerCard", 0.1f, 2, 2, false);
 	Renderer->CreateAnimation("PlayerCardRed", "PlayerCard", 0.1f, 6, 6, false);
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(2.0f);
+	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 
 	// Unit이미지
 	UnitImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
@@ -71,6 +74,7 @@ void PlayerCard::Init()
 	UnitImage->SetAutoScaleRatio(2.0f);
 	UnitImage->Transform.AddLocalPosition(UnitImagePos);
 	UnitImage->SetPivotType(PivotType::Bottom);
+	UnitImage->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
 
 	// atticon
 	AttIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
@@ -79,6 +83,7 @@ void PlayerCard::Init()
 	AttIcon->SetAutoScaleRatio(2.0f);
 	AttIcon->Transform.AddLocalPosition(AttIconPos);
 	AttIcon->SetPivotType(PivotType::Bottom);
+	AttIcon->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
 
 	// deficon
 	DefIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
@@ -87,6 +92,7 @@ void PlayerCard::Init()
 	DefIcon->SetAutoScaleRatio(2.0f);
 	DefIcon->Transform.AddLocalPosition(DefIconPos);
 	DefIcon->SetPivotType(PivotType::Bottom);
+	DefIcon->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
 
 
 	float4 WindowScale = GameEngineCore::MainWindow.GetScale();
@@ -95,7 +101,7 @@ void PlayerCard::Init()
 
 	if (TeamType::Blue == Unit->MyTeam)
 	{
-		Transform.SetLocalPosition({ -HalfWindowScale.X + 79.0f, StartY + BlueYInter });
+		Transform.AddLocalPosition({ -HalfWindowScale.X + 79.0f, StartY + BlueYInter });
 
 		Renderer->ChangeAnimation("PlayerCardBlue");
 
@@ -106,7 +112,7 @@ void PlayerCard::Init()
 	}
 	else if (TeamType::Red == Unit->MyTeam)
 	{
-		Transform.SetLocalPosition({ HalfWindowScale.X - 79.0f , StartY + RedYInter });
+		Transform.AddLocalPosition({ HalfWindowScale.X - 79.0f , StartY + RedYInter });
 
 		Renderer->ChangeAnimation("PlayerCardRed");
 

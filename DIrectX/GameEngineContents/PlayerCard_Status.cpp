@@ -44,6 +44,7 @@ void PlayerCard_Status::Init()
 	{
 		StartPos.X = 118.0f;
 		Transform.SetLocalPosition(CardPos + StartPos);
+		Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 
 		Renderer->ChangeAnimation("PlayerCard_StatusBlue");
 
@@ -53,6 +54,7 @@ void PlayerCard_Status::Init()
 		StartPos.X = -118.0f;
 
 		Transform.SetLocalPosition(CardPos + StartPos);
+		Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 
 		Renderer->ChangeAnimation("PlayerCard_StatusRed");
 

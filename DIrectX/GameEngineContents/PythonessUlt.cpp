@@ -23,6 +23,7 @@ void PythonessUlt::Start()
 	Renderer->ChangeAnimation("PythonessUlt_Spwan");
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(1.3f);
+	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
 
 	// 이벤트 셋팅
 	Event.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)

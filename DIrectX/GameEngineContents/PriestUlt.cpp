@@ -19,6 +19,7 @@ void PriestUlt::Start()
 	AttRangeRenderer->CreateAnimation("PriestUltEffect_AttRange", "PriestEffect", 0.1f, 29, 29, false);
 	AttRangeRenderer->ChangeAnimation("PriestUltEffect_AttRange");
 	AttRangeRenderer->SetImageScale({ 0.0f, 0.0f });
+	AttRangeRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackEffect) });
 
 	// 이벤트 셋팅
 	Event.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)

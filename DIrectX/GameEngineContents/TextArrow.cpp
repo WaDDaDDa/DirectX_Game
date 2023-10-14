@@ -39,6 +39,8 @@ void TextArrow::Start()
 
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(2.5f);
+	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
+
 
 }
 

@@ -74,6 +74,9 @@ void Archer::LevelStart(GameEngineLevel* _PrevLevel)
 		SkillEffectRenderer->AutoSpriteSizeOn();
 		SkillEffectRenderer->SetAutoScaleRatio(1.3f);
 		SkillEffectRenderer->Transform.AddLocalPosition({ 30.0f, 4.0f});
+		SkillEffectRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::FrontEffect) });
+
+		MainSpriteRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
 
 		MainSpriteRenderer->ChangeAnimation("Archer_Idle");
 		MainSpriteRenderer->AutoSpriteSizeOn();
@@ -124,6 +127,7 @@ void Archer::SearchMoveStart()
 void Archer::AttackStart()
 {
 	GameUnit::AttackStart();
+	SkillEffectRenderer->Off();
 	SkillEffectRenderer->ChangeAnimation("ArcherSkillBlack");
 	MainSpriteRenderer->ChangeAnimation("Archer_Attack");
 }
@@ -143,7 +147,7 @@ void Archer::AttackUpdate(float _Delta)
 void Archer::Attack2Start()
 {
 	AttackValue = 0.0f;
-
+	SkillEffectRenderer->On();
 	GetLevel()->CreateActor<Arrow>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
 	SkillEffectRenderer->ChangeAnimation("ArcherAttackEffect");
 	MainSpriteRenderer->ChangeAnimation("Archer_Attack2");
@@ -173,6 +177,9 @@ void Archer::SkillStart()
 	GameUnit::SkillStart();
 	MainSpriteRenderer->ChangeAnimation("Archer_Skill");
 
+	SkillEffectRenderer->Off();
+	SkillEffectRenderer->ChangeAnimation("ArcherSkillBlack");
+
 	float4 EnemyPos = AggroUnit->Transform.GetWorldPosition();
 	float4 MyPos = Transform.GetWorldPosition();
 
@@ -199,6 +206,8 @@ void Archer::SkillUpdate(float _Delta)
 void Archer::Skill2Start()
 {
 	MainSpriteRenderer->ChangeAnimation("Archer_Skill2");
+
+	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("ArcherSkillEffect");
 	GetLevel()->CreateActor<Arrow>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
 
@@ -216,6 +225,7 @@ void Archer::Skill2Update(float _Delta)
 
 	if (MainSpriteRenderer->IsCurAnimationEnd())
 	{
+		SkillEffectRenderer->Off();
 		SkillEffectRenderer->ChangeAnimation("ArcherSkillBlack");
 		//이벤트 사용.
 		if (TeamType::Blue == MyTeam && AttackRangeCol->CollisionEvent(CollisionOrder::RedTeamBody, MoveEvent))
@@ -240,6 +250,7 @@ void Archer::UltStart()
 	GameUnit::UltStart();
 
 	MainSpriteRenderer->ChangeAnimation("Archer_Ult");
+	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("ArcherUltEffect");
 }
 

@@ -21,6 +21,7 @@ void MonkShield::Start()
 	Renderer->ChangeAnimation("MonkShield");
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(1.5f);
+	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::FrontEffect) });
 	//Renderer->Transform.AddLocalPosition({ 20.0f, -20.0f });
 	//Renderer->SetPivotType(PivotType::Bottom);
 }

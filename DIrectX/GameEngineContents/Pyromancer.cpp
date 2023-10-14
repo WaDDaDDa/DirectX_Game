@@ -65,13 +65,15 @@ void Pyromancer::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer->CreateAnimation("Pyromancer_Ult", "PyromancerAni", 0.2f, 39, 40, false);
 		MainSpriteRenderer->CreateAnimation("Pyromancer_Ult2", "PyromancerAni", 0.2f, 41, 42, false);
 		MainSpriteRenderer->CreateAnimation("Pyromancer_Die", "PyromancerAni", 0.1f, 17, 25, false);
-		
+		MainSpriteRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
+
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
 		SkillEffectRenderer->CreateAnimation("PyromancerUltEffect", "PyromancerEffect", 0.2f, 38, 44, false);
 		SkillEffectRenderer->CreateAnimation("PyromancerSkillBlack", "PyromancerEffect", 0.1f, 30, 30, false);
 		SkillEffectRenderer->ChangeAnimation("PyromancerSkillBlack");
 		SkillEffectRenderer->AutoSpriteSizeOn();
 		SkillEffectRenderer->SetAutoScaleRatio(1.3f);
+		SkillEffectRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::FrontEffect) });
 
 		MainSpriteRenderer->ChangeAnimation("Pyromancer_Idle");
 		MainSpriteRenderer->AutoSpriteSizeOn();

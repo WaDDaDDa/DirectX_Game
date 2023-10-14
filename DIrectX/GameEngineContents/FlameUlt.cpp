@@ -15,10 +15,11 @@ FlameUlt::~FlameUlt()
 
 void FlameUlt::Start()
 {
-	AttRangeRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::BackEffect);
+	AttRangeRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::BackEffect2);
 	AttRangeRenderer->CreateAnimation("FlameUltEffect_AttRange", "PyromancerEffect", 0.1f, 45, 45, false);
 	AttRangeRenderer->ChangeAnimation("FlameUltEffect_AttRange");
 	AttRangeRenderer->SetImageScale({ 0.0f, 0.0f });
+	AttRangeRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackEffect2) });
 
 	// 이벤트 셋팅
 	Event.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
