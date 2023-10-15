@@ -70,7 +70,7 @@ void GameUnitUI::InitUniUI()
 	Renderer4 = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::HPLayer4);
 	Renderer4->CreateAnimation("GameUnitHPLayer4", "UnitHPBar", 0.1f, 5, 5, false);
 	Renderer4->ChangeAnimation("GameUnitHPLayer4");
-	Renderer4->SetImageScale({ 50.0f,9.0f });
+	Renderer4->SetImageScale({ 50.0f, 9.0f });
 	Renderer4->SetPivotType(PivotType::Left);
 	Renderer4->Transform.AddLocalPosition({ -24.0f, -27.0f });
 	Renderer4->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::HPLayer4) });
@@ -83,14 +83,15 @@ void GameUnitUI::InitUniUI()
 	Renderer6->SetAutoScaleRatio(1.3f);
 	Renderer6->SetPivotType(PivotType::Bottom);
 	Renderer6->Transform.AddLocalPosition({ 0.0f, -22.0f });
-	Renderer6->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackEffect) });
+	//Renderer6->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackEffect) });
+	Renderer6->Transform.AddLocalPosition({ 0.0f, 0.0f, 150.0f });
 
 	//±√±ÿ±‚ æ∆¿Ãƒ‹
 	Renderer7 = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::HPLayer2);
 	Renderer7->SetSprite(Unit->GetUnitName() += "_ult.png");
 	Renderer7->SetImageScale({ 12.0f,12.0f });
 	Renderer7->Transform.AddLocalPosition({ -31.5f, -30.0f });
-	Renderer6->Transform.AddLocalPosition({ 0.0f, 0.0f, 150.0f });
+	Renderer7->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::HPLayer2) });
 }
 
 

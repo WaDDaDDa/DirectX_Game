@@ -145,6 +145,8 @@ void Priest::SearchMoveStart()
 void Priest::AttackStart()
 {
 	MainSpriteRenderer->ChangeAnimation("Priest_Attack");
+
+	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("PriestAttackEffect");
 
 }
@@ -213,6 +215,7 @@ void Priest::SkillStart()
 {
 	GameUnit::SkillStart();
 	MainSpriteRenderer->ChangeAnimation("Priest_Skill");
+	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("PriestSkillEffect");
 
 	float CurHpRate = 1.0f;
@@ -281,6 +284,7 @@ void Priest::Ult2Start()
 {
 	GameUnit::UltStart();
 	MainSpriteRenderer->ChangeAnimation("Priest_Ult2");
+	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("PriestUltEffect");
 	GetLevel()->CreateActor<PriestUlt>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
 
