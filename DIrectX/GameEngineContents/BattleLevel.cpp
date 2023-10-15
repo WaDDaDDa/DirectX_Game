@@ -43,7 +43,7 @@ void BattleLevel::Start()
 
 void BattleLevel::Update(float _Delta)
 {
-	if (GameEngineInput::IsDown('1'))
+	if (GameEngineInput::IsDown('1', this))
 	{
 		GameEngineLevel::DebugSwitch();
 	}

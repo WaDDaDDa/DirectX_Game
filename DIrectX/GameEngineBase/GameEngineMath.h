@@ -663,8 +663,9 @@ public:
 		//Rot.RotationDeg(_RotQuaternion.QuaternionToEulerDeg());
 		//Pos.Position(_Pos);
 		//*this = Scale * Rot * Pos;
-
-		DirectXMatrix = DirectX::XMMatrixAffineTransformation(_Scale.DirectXVector, _RotQuaternion.DirectXVector, _RotQuaternion.DirectXVector, _Pos.DirectXVector);
+		float4 Rot = _RotQuaternion;
+		Rot.QuaternionToEulerDeg();
+		DirectXMatrix = DirectX::XMMatrixAffineTransformation(_Scale.DirectXVector, Rot.DirectXVector, _RotQuaternion.DirectXVector, _Pos.DirectXVector);
 	}
 
 	// 행렬에서 크기, 회전, 이동값을 뽑아내는 함수.
