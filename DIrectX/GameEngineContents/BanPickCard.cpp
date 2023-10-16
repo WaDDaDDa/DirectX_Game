@@ -1,5 +1,9 @@
 #include "PreCompile.h"
 #include "BanPickCard.h"
+#include "GameUnitStatus.h"
+
+float BanPickCard::XInter = 0.0f;
+
 
 BanPickCard::BanPickCard()
 {
@@ -39,8 +43,6 @@ void BanPickCard::Start()
 		GameEngineSprite::CreateSingle("Swordman_Icon.png");
 	}
 
-	Transform.AddLocalPosition({ 0.0f, 0.0f, 100.0f });
-
 	// Card 배경
 	Renderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
 	Renderer->CreateAnimation("BanPickCard_Null", "BanPick", 0.1f, 15, 15, false);
@@ -52,29 +54,35 @@ void BanPickCard::Start()
 	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 	Renderer->ChangeAnimation("BanPickCard_Null");
 
-	// Unit이미지
-	UnitImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
-	UnitImage->CreateAnimation("Archer_Idle", "ArcherAni", 0.2f, 0, 0);
-	UnitImage->CreateAnimation("Archer_Stay", "ArcherAni", 0.2f, 0, 4);
-	UnitImage->AutoSpriteSizeOn();
-	UnitImage->SetAutoScaleRatio(2.0f);
-	UnitImage->Transform.AddLocalPosition(UnitImagePos);
-	UnitImage->SetPivotType(PivotType::Bottom);
-	UnitImage->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
-	UnitImage->ChangeAnimation("Archer_Idle");
+	Transform.AddLocalPosition(StartPos);
 
-	ChangeState(BanPickState::Idle);
 }
 
 void BanPickCard::LevelStart(GameEngineLevel* _PrevLevel)
 {
-
+	XInter = 0.0f;
 }
 
-
-void BanPickCard::Init()
+void BanPickCard::Init(const GameUnitStatus& _Status)
 {
+	UnitName = _Status.UnitName;
 
+	// Unit이미지
+	UnitImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	UnitImage->CreateAnimation(GetUnitName() += "_Idle", GetUnitName() += "Ani", 0.2f, 0, 0);
+	UnitImage->CreateAnimation(GetUnitName() += "_Stay", GetUnitName() += "Ani", 0.2f, 0, 4);
+	UnitImage->AutoSpriteSizeOn();
+	UnitImage->SetAutoScaleRatio(2.0f);
+	UnitImage->Transform.AddLocalPosition(UnitImagePos);
+	//UnitImage->SetPivotType(PivotType::Bottom);
+	UnitImage->Transform.AddLocalPosition({ 0.0f, 63.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	UnitImage->ChangeAnimation(GetUnitName() += "_Idle");
+
+	Transform.AddLocalPosition({ XInter, 0.0f });
+
+	XInter += 80.0f;
+
+	ChangeState(BanPickState::Idle);
 }
 
 void BanPickCard::Update(float _Delta)

@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+
 enum class BanPickState
 {
     Idle,
@@ -19,9 +20,17 @@ public:
     BanPickCard& operator=(const BanPickCard& _Other) = delete;
     BanPickCard& operator=(BanPickCard&& _Other) noexcept = delete;
 
-    void Init();
+    float4 StartPos = { -370.0f, 75.0f, 100.0f };
+    void Init(const class GameUnitStatus& _Status);
 
     BanPickState State = BanPickState::Max;
+    
+    std::string GetUnitName()
+    {
+        return UnitName.data();
+    }
+
+    static float XInter;
 
 protected:
     void Start() override;
@@ -38,6 +47,8 @@ protected:
 
     void IdleStart();
     void IdleUpdate(float _Delta);
+
+    std::string_view UnitName = "";
 
 private:
     std::shared_ptr<class GameEngineSpriteRenderer> Renderer;

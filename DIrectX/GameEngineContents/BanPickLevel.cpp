@@ -107,7 +107,14 @@ void BanPickLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	}
 
 	CreateActor<BanPickBoard>();
-	CreateActor<BanPickCard>();
+	CreateActor<BanPickCard>()->Init(ArcherStatus::ArcherStat);
+	CreateActor<BanPickCard>()->Init(KnightStatus::KnightStat);
+	CreateActor<BanPickCard>()->Init(MonkStatus::MonkStat);
+	CreateActor<BanPickCard>()->Init(NinjaStatus::NinjaStat);
+	CreateActor<BanPickCard>()->Init(PyromancerStatus::PyromancerStat);
+	CreateActor<BanPickCard>()->Init(PriestStatus::PriestStat);
+	CreateActor<BanPickCard>()->Init(SwordmanStatus::SwordmanStat);
+	CreateActor<BanPickCard>()->Init(PythonessStatus::PythonessStat);
 }
 
 void BanPickLevel::LevelEnd(GameEngineLevel* _NextLevel)
