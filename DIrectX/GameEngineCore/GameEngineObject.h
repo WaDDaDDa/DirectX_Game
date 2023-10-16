@@ -115,6 +115,7 @@ public:
 		std::shared_ptr<GameEngineObject> NewChild = std::make_shared<ChildType>();
 		NewChild->SetOrder(_Order);
 		NewChild->SetParent(this, _Order);
+		//NewChild->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(_Order) });
 		NewChild->Start();
 		return NewChild;
 	}

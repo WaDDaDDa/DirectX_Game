@@ -28,8 +28,9 @@ public:
             Col->Transform.SetLocalScale(Scale);
             //Col->Transform.AddLocalPosition((Scale * 1.3f).hX());
         }
-
-        Transform.SetWorldPosition(Unit->Transform.GetWorldPosition());
+        float4 SpawnPos = Unit->Transform.GetWorldPosition();
+        SpawnPos.Z = 350.0f;
+        Transform.SetWorldPosition(SpawnPos);
 
     }
 

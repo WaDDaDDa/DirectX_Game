@@ -19,6 +19,7 @@ void FlameAttack::Start()
 	Renderer->CreateAnimation("FlameAttackEffect", "PyromancerEffect", 0.1f , 29, 37, false);
 	Renderer->ChangeAnimation("FlameAttackEffect");
 	Renderer->AutoSpriteSizeOn();
+	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Projectile) });
 
 	// 이벤트 셋팅
 	Event.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)

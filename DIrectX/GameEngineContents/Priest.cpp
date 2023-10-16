@@ -62,6 +62,7 @@ void Priest::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer->CreateAnimation("Priest_Ult", "PriestAni", 0.1f, 42, 45, false);
 		MainSpriteRenderer->CreateAnimation("Priest_Ult2", "PriestAni", 0.1f, 46, 51, false);
 		MainSpriteRenderer->CreateAnimation("Priest_Die", "PriestAni", 0.1f, 23, 32, false);
+		MainSpriteRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
 
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
 		SkillEffectRenderer->CreateAnimation("PriestAttackEffect", "PriestEffect", 0.1f, 2, 8, false);
@@ -73,6 +74,7 @@ void Priest::LevelStart(GameEngineLevel* _PrevLevel)
 		SkillEffectRenderer->SetAutoScaleRatio(1.3f);
 		SkillEffectRenderer->Transform.AddLocalPosition({0, -20.0f});
 		SkillEffectRenderer->SetPivotType(PivotType::Bottom);
+		SkillEffectRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::FrontEffect) });
 
 		MainSpriteRenderer->ChangeAnimation("Priest_Idle");
 		MainSpriteRenderer->AutoSpriteSizeOn();
@@ -143,6 +145,8 @@ void Priest::SearchMoveStart()
 void Priest::AttackStart()
 {
 	MainSpriteRenderer->ChangeAnimation("Priest_Attack");
+
+	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("PriestAttackEffect");
 
 }
@@ -211,6 +215,7 @@ void Priest::SkillStart()
 {
 	GameUnit::SkillStart();
 	MainSpriteRenderer->ChangeAnimation("Priest_Skill");
+	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("PriestSkillEffect");
 
 	float CurHpRate = 1.0f;
@@ -279,6 +284,7 @@ void Priest::Ult2Start()
 {
 	GameUnit::UltStart();
 	MainSpriteRenderer->ChangeAnimation("Priest_Ult2");
+	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("PriestUltEffect");
 	GetLevel()->CreateActor<PriestUlt>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
 

@@ -20,6 +20,7 @@ void PriestHealEffect::Start()
 	Renderer->ChangeAnimation("PriestHealEffect");
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(1.3f);
+	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::FrontEffect) });
 }
 
 void PriestHealEffect::LevelEnd(GameEngineLevel* _NextLevel)

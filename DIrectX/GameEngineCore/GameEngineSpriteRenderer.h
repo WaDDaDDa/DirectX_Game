@@ -6,6 +6,7 @@ class GameEngineFrameAnimation
 {
 	friend class GameEngineSpriteRenderer;
 
+public:
 	GameEngineSpriteRenderer* Parent = nullptr;
 
 	std::string AnimationName;
@@ -189,6 +190,11 @@ public:
 	inline GameEngineTransform& GetImageTransform()
 	{
 		return ImageTransform;
+	}
+
+	std::shared_ptr<GameEngineFrameAnimation> CurAnimation()
+	{
+		return CurFrameAnimations;
 	}
 
 protected:

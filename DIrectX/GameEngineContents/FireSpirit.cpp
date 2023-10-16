@@ -25,17 +25,20 @@ void FireSpirit::Start()
 	Renderer->ChangeAnimation("FireSpirit_Spwan");
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(1.3f);
+	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
 
 	EffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
 	EffectRenderer->CreateAnimation("FireSpiritEffect_Spwan", "FireSpiritEffect", 0.1f, 0, 7, false);
 	EffectRenderer->ChangeAnimation("FireSpiritEffect_Spwan");
 	EffectRenderer->AutoSpriteSizeOn();
 	EffectRenderer->SetAutoScaleRatio(1.3f);
+	EffectRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::FrontEffect) });
 
 	AttRangeRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::BackEffect);
 	AttRangeRenderer->CreateAnimation("FireSpiritEffect_AttRange", "FireSpiritEffect", 0.1f, 32, 32, false);
 	AttRangeRenderer->ChangeAnimation("FireSpiritEffect_AttRange");
 	AttRangeRenderer->SetImageScale({0.0f, 0.0f});
+	AttRangeRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackEffect) });
 
 	// 이벤트 셋팅
 	Event.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)

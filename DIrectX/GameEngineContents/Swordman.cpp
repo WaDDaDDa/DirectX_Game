@@ -98,13 +98,15 @@ void Swordman::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer->CreateAnimation("Swordman_Ult", "SwordmanAni", 0.1f, 36, 39, false);
 		MainSpriteRenderer->CreateAnimation("Swordman_Ult2", "SwordmanAni", 0.1f, 40, 43, false);
 		MainSpriteRenderer->CreateAnimation("Swordman_Die", "SwordmanAni", 0.1f, 27, 34, false);
-		
+		MainSpriteRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
+
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
 		SkillEffectRenderer->CreateAnimation("SwordmanSkillEffect", "SwordmanEffect", 0.1f, 8, 13, false);
 		SkillEffectRenderer->CreateAnimation("SwordmanSkillBlack", "SwordmanEffect", 0.1f, 23, 23, false);
 		SkillEffectRenderer->ChangeAnimation("SwordmanSkillBlack");
 		SkillEffectRenderer->AutoSpriteSizeOn();
 		SkillEffectRenderer->SetAutoScaleRatio(1.3f);
+		SkillEffectRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::FrontEffect) });
 
 		MainSpriteRenderer->ChangeAnimation("Swordman_Idle");
 		MainSpriteRenderer->AutoSpriteSizeOn();

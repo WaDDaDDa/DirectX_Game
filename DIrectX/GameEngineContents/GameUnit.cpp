@@ -22,6 +22,8 @@ GameUnit::~GameUnit()
 
 void GameUnit::Start()
 {
+	Transform.AddLocalPosition({ 0.0f, 0.0f, 300.0f });
+
 	{
 
 		GameEngineDirectory Dir;
@@ -41,9 +43,9 @@ void GameUnit::Start()
 			SpwanRenderer->CreateAnimation("SpwanEffect", "SpwanEffect", 0.1f, 0, 10, false);
 			SpwanRenderer->CreateAnimation("SpwanEffectBlack", "SpwanEffect", 0.1f, 22, 22, false);
 			// SpwanRenderer->ChangeAnimation("SpwanEffect");
+			SpwanRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::FrontEffect) });
 			SpwanRenderer->AutoSpriteSizeOn();
 		}
-
 		{	// 콜리젼
 			PushCol = CreateComponent<GameEngineCollision>(CollisionOrder::UnitBody);
 			PushCol->Transform.SetLocalScale(PushColScale);
@@ -272,28 +274,28 @@ void GameUnit::MapOverCheck()
 	// 맵왼쪽 끝
 	if (MAP_LEFT >= Transform.GetWorldPosition().X)
 	{
-		Transform.SetWorldPosition({ MAP_LEFT + 1.0f, Transform.GetWorldPosition().Y });
+		Transform.SetWorldPosition({ MAP_LEFT + 1.0f, Transform.GetWorldPosition().Y, 300.0f });
 		MoveDir = { -MoveDir.X, MoveDir.Y };
 	}
 
 	// 맵오른쪽 끝
 	if (MAP_RIGHT <= Transform.GetWorldPosition().X)
 	{
-		Transform.SetWorldPosition({ MAP_RIGHT - 1.0f, Transform.GetWorldPosition().Y });
+		Transform.SetWorldPosition({ MAP_RIGHT - 1.0f, Transform.GetWorldPosition().Y, 300.0f });
 		MoveDir = { -MoveDir.X, MoveDir.Y };
 	}
 
 	// 맵 위끝
 	if (MAP_UP <= Transform.GetWorldPosition().Y)
 	{
-		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, MAP_UP - 1.0f });
+		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, MAP_UP - 1.0f, 300.0f });
 		MoveDir = { MoveDir.X, -MoveDir.Y };
 	}
 
 	// 맵 아래끝
 	if (MAP_DOWN >= Transform.GetWorldPosition().Y)
 	{
-		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, MAP_DOWN + 1.0f });
+		Transform.SetWorldPosition({ Transform.GetWorldPosition().X, MAP_DOWN + 1.0f, 300.0f });
 		MoveDir = { MoveDir.X, -MoveDir.Y };
 	}
 }
@@ -435,6 +437,8 @@ void GameUnit::ChangeState(GameUnitState _State)
 
 void GameUnit::SpwanStart()
 {
+	SkillEffectRenderer->Off();
+
 	GameEngineRandom NewRandom;
 	static long long RandSeed = reinterpret_cast<long long>(this);
 	RandSeed++;
@@ -442,6 +446,7 @@ void GameUnit::SpwanStart()
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	HalfWindowScale.Y = -HalfWindowScale.Y;
+	HalfWindowScale.Z = 300.0f;
 	//Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 
 	if (TeamType::Blue == MyTeam)
@@ -471,6 +476,7 @@ void GameUnit::SpwanUpdate(float _Delta)
 
 void GameUnit::IdleStart()
 {
+	SkillEffectRenderer->Off();
 	SpwanRenderer->Off();
 	SpwanRenderer->ChangeAnimation("SpwanEffectBlack");
 	ChangeDir();
@@ -545,6 +551,8 @@ void GameUnit::IdleUpdate(float _Delta)
 // 어그로 유닛에게 다가가는 움직임.
 void GameUnit::MoveStart()
 {
+	SkillEffectRenderer->Off();
+
 	if (AggroUnit->GetState() == GameUnitState::Die || AggroUnit->GetState() == GameUnitState::DiePrev)
 	{
 		NextAggroChange();
@@ -637,6 +645,8 @@ void GameUnit::MoveUpdate(float _Delta)
 // 어그로유닛에게서 멀어지는 움직임.
 void GameUnit::BackMoveStart()
 {
+	SkillEffectRenderer->Off();
+
 	//AggroSetting();
 
 	// 적위치 - 내위치
@@ -722,6 +732,8 @@ void GameUnit::BackMoveUpdate(float _Delta)
 // 맵의 랜덤한 위치를 탐색해서 이동하는 움직임. 유닛 방향에따라 다름.
 void GameUnit::SearchMoveStart()
 {
+	SkillEffectRenderer->Off();
+
 	GameEngineRandom Rand;
 	static long long RandSeed = reinterpret_cast<long long>(this);
 	RandSeed++;
@@ -812,7 +824,8 @@ void GameUnit::CollMoveStart()
 	{
 		for (size_t i = 0; i < _Collision.size(); i++)
 		{
-			float4 EnemyPos = _Collision[i]->Transform.GetWorldPosition();
+			float4 EnemyPos = _Collision[i]->GetActor()->Transform.GetWorldPosition();
+			//float4 EnemyPos = _Collision[i]->Transform.GetWorldPosition();
 			float4 MyPos = this->Transform.GetWorldPosition();
 			MoveDir = -(EnemyPos - MyPos);
 			MoveDir.Normalize();
@@ -925,6 +938,8 @@ void GameUnit::DiePrevStart()
 {
 	ImDie = true;
 	DieCount += 1;
+	SkillEffectRenderer->Off();
+
 	SpwanRenderer->Off();
 	SpwanRenderer->ChangeAnimation("SpwanEffectBlack");
 }

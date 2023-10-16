@@ -15,6 +15,7 @@ Arrow::~Arrow()
 void Arrow::Start()
 {
 	Renderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Projectile);
+	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Projectile) });
 
 	Renderer->SetSprite("Arrow.png");
 	Renderer->AutoSpriteSizeOn();

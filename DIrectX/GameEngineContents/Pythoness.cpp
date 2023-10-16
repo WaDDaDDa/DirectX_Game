@@ -68,7 +68,8 @@ void Pythoness::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer->CreateAnimation("Pythoness_Ult", "PythonessAni", 0.2f, 78, 81, false);
 		MainSpriteRenderer->CreateAnimation("Pythoness_Ult2", "PythonessAni", 0.2f, 82, 83, false);
 		MainSpriteRenderer->CreateAnimation("Pythoness_Die", "PythonessAni", 0.1f, 61, 71, false);
-		
+		MainSpriteRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
+
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
 		SkillEffectRenderer->CreateAnimation("PythonessAttack1Effect", "PythonessEffect", 0.2f, 0, 1, false);
 		SkillEffectRenderer->CreateAnimation("PythonessAttack2Effect", "PythonessEffect", 0.2f, 2, 3, false);
@@ -82,6 +83,7 @@ void Pythoness::LevelStart(GameEngineLevel* _PrevLevel)
 		SkillEffectRenderer->ChangeAnimation("PythonessSkillBlack");
 		SkillEffectRenderer->AutoSpriteSizeOn();
 		SkillEffectRenderer->SetAutoScaleRatio(1.3f);
+		SkillEffectRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::FrontEffect) });
 
 		MainSpriteRenderer->ChangeAnimation("Pythoness_Idle");
 		MainSpriteRenderer->AutoSpriteSizeOn();

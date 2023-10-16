@@ -62,6 +62,7 @@ void Knight::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer->CreateAnimation("Knight_Skill", "KnightAni", 0.1f, 30, 36, false);
 		MainSpriteRenderer->CreateAnimation("Knight_Ult", "KnightAni", 0.1f, 37, 43, false);
 		MainSpriteRenderer->CreateAnimation("Knight_Die", "KnightAni", 0.1f, 22, 29, false);
+		MainSpriteRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
 
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
 		SkillEffectRenderer->CreateAnimation("KnightSkillEffect", "KnightEffect", 0.1f, 1, 5, false);
@@ -71,6 +72,7 @@ void Knight::LevelStart(GameEngineLevel* _PrevLevel)
 		SkillEffectRenderer->SetAutoScaleRatio(1.3f);
 		SkillEffectRenderer->Transform.AddLocalPosition({0, -20.0f});
 		SkillEffectRenderer->SetPivotType(PivotType::Bottom);
+		SkillEffectRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::FrontEffect) });
 
 		MainSpriteRenderer->ChangeAnimation("Knight_Idle");
 		MainSpriteRenderer->AutoSpriteSizeOn();

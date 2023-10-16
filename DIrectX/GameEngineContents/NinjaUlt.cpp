@@ -29,6 +29,7 @@ void NinjaUlt::Start()
 		MainSpriteRenderer->CreateAnimation("Ninja_Die", "NinjaAni", 0.1f, 18, 27, false);
 
 		MainSpriteRenderer->FindAnimation("Ninja_Skill2")->Inter[2] = 0.2;
+		MainSpriteRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
 
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
 		SkillEffectRenderer->CreateAnimation("NinjaSkillEffect", "NinjaEffect", 0.05f, 7, 13, false);
@@ -39,6 +40,7 @@ void NinjaUlt::Start()
 		SkillEffectRenderer->SetAutoScaleRatio(1.3f);
 		SkillEffectRenderer->Transform.AddLocalPosition({ 0, -20.0f });
 		SkillEffectRenderer->SetPivotType(PivotType::Bottom);
+		SkillEffectRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::FrontEffect) });
 
 		MainSpriteRenderer->ChangeAnimation("Ninja_Idle");
 		MainSpriteRenderer->AutoSpriteSizeOn();

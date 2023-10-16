@@ -23,6 +23,7 @@ void NewGame_UI::Start()
 	NewGameBoxRenderer->SetSprite("new_game_ui_bg.png");
 	NewGameBoxRenderer->AutoSpriteSizeOn();
 	NewGameBoxRenderer->SetAutoScaleRatio(2.0f);
+	NewGameBoxRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 }
 
 void NewGame_UI::Update(float _Delta)

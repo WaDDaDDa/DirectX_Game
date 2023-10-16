@@ -23,9 +23,11 @@ void IntroCut::Start()
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 	MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::BackGround);
+	MainSpriteRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackGround) });
 	TextBoxRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::UI);
 
 	TextBoxRenderer->SetSprite("equipment_slot_bg_0.png");
+	TextBoxRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 
 	// 텍스트 출력 위치.
 	TextBoxRenderer->SetImageScale(TextBoxScale);
@@ -33,46 +35,15 @@ void IntroCut::Start()
 	// MainSpriteRenderer->SetPivotType(PivotType::Bottom);
 
 	ChangeState(IntroCutState::CutScene1);
+
+	GameEngineInput::AddInputObject(this);
 }
 
 
 void IntroCut::Update(float _Delta)
 {
-	float Speed = 100.0f;
 
-	float4 WPos = Transform.GetWorldPosition();
-
-	if (GameEngineInput::IsPress('A'))
-	{
-		Transform.AddLocalPosition(float4::LEFT * _Delta * Speed);
-	}
-
-	if (GameEngineInput::IsPress('D'))
-	{
-		Transform.AddLocalPosition(float4::RIGHT * _Delta * Speed);
-	}
-
-	if (GameEngineInput::IsPress('W'))
-	{
-		Transform.AddLocalPosition(float4::UP * _Delta * Speed);
-	}
-
-	if (GameEngineInput::IsPress('S'))
-	{
-		Transform.AddLocalPosition(float4::DOWN * _Delta * Speed);
-	}
-
-	if (GameEngineInput::IsPress('Q'))
-	{
-		Transform.AddLocalRotation({ 0.0f, 0.0f, 360.0f * _Delta });
-	}
-
-	if (GameEngineInput::IsPress('E'))
-	{
-		Transform.AddLocalRotation({ 0.0f, 0.0f, -360.0f * _Delta });
-	}
-
-	if (GameEngineInput::IsDown('P'))
+	if (GameEngineInput::IsDown('P', this))
 	{
 		GameEngineCore::ChangeLevel("BattleLevel");
 		return;
@@ -190,7 +161,7 @@ void IntroCut::CutScene1Start()
 
 void IntroCut::CutScene1Update(float _Delta)
 {
-	if (GameEngineInput::IsDown(VK_SPACE))
+	if (GameEngineInput::IsDown(VK_SPACE, this))
 	{
 		ChangeState(IntroCutState::Black);
 		return;
@@ -206,7 +177,7 @@ void IntroCut::CutScene2Start()
 
 void IntroCut::CutScene2Update(float _Delta)
 {
-	if (GameEngineInput::IsDown(VK_SPACE))
+	if (GameEngineInput::IsDown(VK_SPACE, this))
 	{
 		ChangeState(IntroCutState::Black);
 		return;
@@ -222,7 +193,7 @@ void IntroCut::CutScene3Start()
 
 void IntroCut::CutScene3Update(float _Delta)
 {
-	if (GameEngineInput::IsDown(VK_SPACE))
+	if (GameEngineInput::IsDown(VK_SPACE, this))
 	{
 		ChangeState(IntroCutState::Black);
 		return;
@@ -238,7 +209,7 @@ void IntroCut::CutScene4Start()
 
 void IntroCut::CutScene4Update(float _Delta)
 {
-	if (GameEngineInput::IsDown(VK_SPACE))
+	if (GameEngineInput::IsDown(VK_SPACE, this))
 	{
 		ChangeState(IntroCutState::Black);
 		return;
@@ -254,7 +225,7 @@ void IntroCut::CutScene5Start()
 
 void IntroCut::CutScene5Update(float _Delta)
 {
-	if (GameEngineInput::IsDown(VK_SPACE))
+	if (GameEngineInput::IsDown(VK_SPACE, this))
 	{
 		ChangeState(IntroCutState::Black);
 		return;
@@ -269,7 +240,7 @@ void IntroCut::CutScene6Start()
 
 void IntroCut::CutScene6Update(float _Delta)
 {
-	if (GameEngineInput::IsDown(VK_SPACE))
+	if (GameEngineInput::IsDown(VK_SPACE, this))
 	{
 		// 임시 - 마지막 씬이므로 Team UI 생성.
 		//ChangeState(IntroCutState::Black);
@@ -299,7 +270,7 @@ void IntroCut::NewGameStart()
 
 void IntroCut::NewGameUpdate(float _Delta)
 {
-	if (GameEngineInput::IsDown(VK_SPACE))
+	if (GameEngineInput::IsDown(VK_SPACE, this))
 	{
 		GameEngineCore::ChangeLevel("BattleLevel");
 		return;
