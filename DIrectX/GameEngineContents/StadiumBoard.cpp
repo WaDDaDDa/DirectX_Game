@@ -53,8 +53,7 @@ void StadiumBoard::Start()
 
 void StadiumBoard::LevelStart(GameEngineLevel* _PrevLevel)
 {
-	GameTime = 5.0f;
-
+	GameTime = 60.0f;
 }
 
 void StadiumBoard::Update(float _Delta)
@@ -88,5 +87,6 @@ void StadiumBoard::Update(float _Delta)
 
 void StadiumBoard::LevelEnd(GameEngineLevel* _NextLevel)
 {
-
+	// if 승패 머시기 해서 값 살려두기
+	Death();
 }

@@ -27,7 +27,7 @@ public:
     int BlueWinCount = 0;
     int RedKWinCount = 0;
 
-    float GameTime = 10.0f;
+    float GameTime = 60.0f;
 
 protected:
     void Start() override;

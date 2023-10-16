@@ -57,6 +57,7 @@ void PlayerCard::CreateStatus()
 
 void PlayerCard::Init()
 {
+
 	// Card Ʋ
 	Renderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
 	Renderer->CreateAnimation("PlayerCardBlue", "PlayerCard", 0.1f, 2, 2, false);
@@ -124,5 +125,7 @@ void PlayerCard::Update(float _Delta)
 
 void PlayerCard::LevelEnd(GameEngineLevel* _NextLevel)
 {
-
+	PlayerCard::BlueYInter = 0.0f;
+	PlayerCard::RedYInter = 0.0f;
+	Death();
 }

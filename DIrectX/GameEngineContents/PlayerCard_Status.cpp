@@ -66,5 +66,5 @@ void PlayerCard_Status::Update(float _Delta)
 
 void PlayerCard_Status::LevelEnd(GameEngineLevel* _NextLevel)
 {
-
+	Death();
 }
