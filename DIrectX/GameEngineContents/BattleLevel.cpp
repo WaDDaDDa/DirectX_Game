@@ -38,6 +38,7 @@ void BattleLevel::Start()
 	// 카메라의 위치를 화면의 왼쪽맨위에 0,0이 위치하도록 자리를 잡는다.
 	GetMainCamera()->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Orthographic);
+	GameEngineInput::AddInputObject(this);
 
 }
 
@@ -112,17 +113,17 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 	// 유닛 생성
 	// 블루팀 유닛 (왼쪽)
-	BlueTeam.push_back(CreateActor<Monk>()->GetPointer());
-	BlueTeam.push_back(CreateActor<Priest>()->GetPointer());
-	BlueTeam.push_back(CreateActor<Pyromancer>()->GetPointer());
 	BlueTeam.push_back(CreateActor<Ninja>()->GetPointer());
+	BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
+	BlueTeam.push_back(CreateActor<Pyromancer>()->GetPointer());
+	BlueTeam.push_back(CreateActor<Swordman>()->GetPointer());
 	//BlueTeam.push_back(CreateActor<Pythoness>()->GetPointer());
 
 
 		// 레드팀 유닛 (오른쪽)
-	RedTeam.push_back(CreateActor<Swordman>()->GetPointer());
+	RedTeam.push_back(CreateActor<Monk>()->GetPointer());
 	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
-	RedTeam.push_back(CreateActor<Archer>()->GetPointer());
+	RedTeam.push_back(CreateActor<Priest>()->GetPointer());
 	RedTeam.push_back(CreateActor<Pythoness>()->GetPointer());
 	//RedTeam.push_back(CreateActor<Archer>()->GetPointer());
 

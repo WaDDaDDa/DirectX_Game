@@ -51,10 +51,23 @@ public:
 		return IsDeathValue;
 	}
 
+	void SetName(const std::string& _Name)
+	{
+		Name = _Name;
+	}
+
+	std::string GetName()
+	{
+		return Name;
+	}
+
 protected:
+	std::string Name;
+
 	int Order = 0;
 	bool IsUpdateValue = true; // 이걸 false로 만들면 됩니다.
 	bool IsDeathValue = false; // 아예 메모리에서 날려버리고 싶어.
+
 };
 
 // 설명 :
@@ -91,16 +104,6 @@ public:
 	void ResetLiveTime()
 	{
 		LiveTime = 0.0f;
-	}
-
-	void SetName(const std::string& _Name)
-	{
-		Name = _Name;
-	}
-
-	std::string GetName()
-	{
-		return Name;
 	}
 
 	void AllLevelStart(class GameEngineLevel* _PrevLevel);
@@ -225,7 +228,6 @@ protected:
 
 private:
 
-	std::string Name;
 	float LiveTime = 0.0f;
 
 	void AddLiveTime(float _DeltaTime)
