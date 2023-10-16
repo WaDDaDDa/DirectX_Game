@@ -12,28 +12,6 @@ public:
     Monk& operator=(const Monk& _Other) = delete;
     Monk& operator=(Monk&& _Other) noexcept = delete;
 
-    void SetUnitStatus()
-    {
-        UnitName = "Monk";
-        AttackRange = MonkAttackRange;
-        SkillRange = MonkSkillRange;
-        SkillColRange = MonkSkillColRange;
-        UltRange = MonkUltRange;
-
-        UnitSpeed = MonkSpeed;
-        UnitHP = MonkHp;
-        UnitMaxHP = MonkHp;
-        UnitAtt = MonkAtt;
-        UnitDef = MonkDef;
-        UnitAbsoluteDef = MonkAbsoluteDef;
-
-        AttackSpeed = MonkAttackSpeed;
-
-        SkillCooltime = MonkSkillCooltime;
-
-        UltCooltime = MonkUltCooltime;
-    }
-
 
 protected:
     void Start() override;
@@ -65,18 +43,7 @@ protected:
     void DiePrevStart() override;
 
 private:
-    float4 MonkAttackRange = { 70.0f, 0.0f };
-    float4 MonkSkillRange = { 200.0f, 0.0f };
-    float4 MonkSkillColRange = { 200.0f, 0.0f };
-    float4 MonkUltRange = { 300.0f, 0.0f };
+ 
 
-    float MonkSpeed = 100.0f;
-    float MonkHp = 210.0f;
-    float MonkAtt = 32.0f;
-    float MonkDef = 40.0f;
-    float MonkAbsoluteDef = 40.0f;
-    float MonkAttackSpeed = 1.4f;
-    float MonkSkillCooltime = 5.4f;
-    float MonkUltCooltime = 30.0f;
 };
 

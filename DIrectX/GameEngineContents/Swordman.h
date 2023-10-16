@@ -12,29 +12,6 @@ public:
     Swordman& operator=(const Swordman& _Other) = delete;
     Swordman& operator=(Swordman&& _Other) noexcept = delete;
 
-    void SetUnitStatus()
-    {
-        UnitName = "Swordman";
-        AttackRange = SwordmanAttackRange;
-        SkillRange = SwordmanSkillRange;
-        SkillColRange = SwordmanSkillColRange;
-        UltRange = SwordmanUltRange;
-
-        UnitSpeed = SwordmanSpeed;
-        UnitHP = SwordmanHp;
-        UnitMaxHP = SwordmanHp;
-        UnitAtt = SwordmanAtt;
-        UnitDef = SwordmanDef;
-        UnitAbsoluteDef = SwordmanAbsoluteDef;
-
-        AttackSpeed = SwordmanAttackSpeed;
-
-        SkillCooltime = SwordmanSkillCooltime;
-
-        UltCooltime = SwordmanUltCooltime;
-    }
-
-
 protected:
     void Start() override;
     // void Update(float _Delta) override;
@@ -73,21 +50,6 @@ protected:
     void DiePrevStart() override;
 
 private:
-    float4 SwordmanAttackRange = { 90.0f, 0.0f };
-    float4 SwordmanSkillRange = { 80.0f, 0.0f };
-    float4 SwordmanSkillColRange = { 100.0f, 0.0f };
-    float4 SwordmanUltRange = { 500.0f, 0.0f };
-
-    float SwordmanSpeed = 120.0f;
-    float SwordmanHp = 130.0f;
-    float SwordmanAtt = 24.0f;
-    float SwordmanDef = 30.0f;
-    float SwordmanAbsoluteDef = 30.0f;
-    float SwordmanAttackSpeed = 1.25f;
-    float SwordmanSkillCooltime = 3.8f;
-    float SwordmanUltCooltime = 25.0f;
-
-
     float SkillTick = 3.0f;
     float SkillDamageDeley = 0.1f;
 

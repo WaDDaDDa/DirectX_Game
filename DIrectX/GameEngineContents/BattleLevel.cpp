@@ -9,7 +9,6 @@
 #include "StadiumBoard.h"
 
 // GameUnit
-#include "GameUnitUI.h"
 #include "Knight.h"
 #include "Swordman.h"
 #include "Monk.h"

@@ -128,6 +128,42 @@
     <ClCompile Include="PlayerCard_Status.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="BanPickLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="BanPickBoard.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameUnitStatus.cpp">
+      <Filter>GameUnit\Status</Filter>
+    </ClCompile>
+    <ClCompile Include="PriestStatus.cpp">
+      <Filter>GameUnit\Status</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcherStatus.cpp">
+      <Filter>GameUnit\Status</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightStatus.cpp">
+      <Filter>GameUnit\Status</Filter>
+    </ClCompile>
+    <ClCompile Include="MonkStatus.cpp">
+      <Filter>GameUnit\Status</Filter>
+    </ClCompile>
+    <ClCompile Include="NinjaStatus.cpp">
+      <Filter>GameUnit\Status</Filter>
+    </ClCompile>
+    <ClCompile Include="PyromancerStatus.cpp">
+      <Filter>GameUnit\Status</Filter>
+    </ClCompile>
+    <ClCompile Include="PythonessStatus.cpp">
+      <Filter>GameUnit\Status</Filter>
+    </ClCompile>
+    <ClCompile Include="SwordmanStatus.cpp">
+      <Filter>GameUnit\Status</Filter>
+    </ClCompile>
+    <ClCompile Include="BanPickCard.cpp">
+      <Filter>UI\UnitCard</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -260,6 +296,42 @@
     <ClInclude Include="PlayerCard_Status.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="BanPickLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="BanPickBoard.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="GameUnitStatus.h">
+      <Filter>GameUnit\Status</Filter>
+    </ClInclude>
+    <ClInclude Include="PriestStatus.h">
+      <Filter>GameUnit\Status</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcherStatus.h">
+      <Filter>GameUnit\Status</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightStatus.h">
+      <Filter>GameUnit\Status</Filter>
+    </ClInclude>
+    <ClInclude Include="MonkStatus.h">
+      <Filter>GameUnit\Status</Filter>
+    </ClInclude>
+    <ClInclude Include="NinjaStatus.h">
+      <Filter>GameUnit\Status</Filter>
+    </ClInclude>
+    <ClInclude Include="PyromancerStatus.h">
+      <Filter>GameUnit\Status</Filter>
+    </ClInclude>
+    <ClInclude Include="PythonessStatus.h">
+      <Filter>GameUnit\Status</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordmanStatus.h">
+      <Filter>GameUnit\Status</Filter>
+    </ClInclude>
+    <ClInclude Include="BanPickCard.h">
+      <Filter>UI\UnitCard</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -306,6 +378,12 @@
     </Filter>
     <Filter Include="GameUnit\Priest">
       <UniqueIdentifier>{c7a50339-09df-4b9a-94cb-da79b1d6cbf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameUnit\Status">
+      <UniqueIdentifier>{fd631684-eb58-4cae-b6a2-d009b9a81b71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\UnitCard">
+      <UniqueIdentifier>{8d514104-6634-420e-aed6-96dce1e0fdea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

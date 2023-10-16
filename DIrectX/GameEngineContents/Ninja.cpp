@@ -2,6 +2,7 @@
 #include "Ninja.h"
 #include "NinjaUlt.h"
 #include "GameUnitUI.h"
+#include "NinjaStatus.h"
 
 Ninja::Ninja()
 {
@@ -48,7 +49,7 @@ void Ninja::Start()
 		GameEngineSprite::CreateSingle("Ninja_ult.png");
 	}
 
-	SetUnitStatus();
+	SetUnitStatus(NinjaStatus::NinjaStat);
 }
 
 void Ninja::LevelStart(GameEngineLevel* _PrevLevel)

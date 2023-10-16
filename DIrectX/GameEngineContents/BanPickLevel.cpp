@@ -1,0 +1,116 @@
+#include "PreCompile.h"
+#include "BanPickLevel.h"
+
+// UI
+#include "BanPickBoard.h"
+
+// GameUnit
+#include "BanPickCard.h"
+
+
+BanPickLevel::BanPickLevel()
+{
+
+}
+
+BanPickLevel::~BanPickLevel()
+{
+
+}
+
+void BanPickLevel::Start()
+{
+	//GameEngineRenderTarget::IsDepth = false;
+
+	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
+	GetMainCamera()->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
+	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Orthographic);
+	GameEngineInput::AddInputObject(this);
+
+}
+
+void BanPickLevel::Update(float _Delta)
+{
+
+}
+
+void BanPickLevel::LevelStart(GameEngineLevel* _PrevLevel)
+{
+	{
+		// 폴더 로드
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("GameEngineResources");
+		Dir.MoveChild("ContentsResources\\Stadium\\");
+		std::vector<GameEngineDirectory> Directorys = Dir.GetAllDirectory();
+
+		for (size_t i = 0; i < Directorys.size(); i++)
+		{
+			GameEngineDirectory& Dir = Directorys[i];
+
+			GameEngineSprite::CreateFolder(Dir.GetStringPath());
+		}
+	}
+
+	{
+		// 폴더 로드
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("GameEngineResources");
+		Dir.MoveChild("ContentsResources\\UI\\");
+		std::vector<GameEngineDirectory> Directorys = Dir.GetAllDirectory();
+
+		for (size_t i = 0; i < Directorys.size(); i++)
+		{
+			GameEngineDirectory& Dir = Directorys[i];
+
+			GameEngineSprite::CreateFolder(Dir.GetStringPath());
+		}
+	}
+
+	{
+		// 싱글 스프라이트 로드
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("GameEngineResources");
+		Dir.MoveChild("ContentsResources\\Stadium");
+
+		std::vector<GameEngineFile> Files = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Files.size(); i++)
+		{
+			GameEngineFile& File = Files[i];
+			GameEngineTexture::Load(File.GetStringPath());
+		}
+
+		GameEngineSprite::CreateSingle("stadium.png");
+		GameEngineSprite::CreateSingle("stadium_sky_bg.png");
+		GameEngineSprite::CreateSingle("stadium_VS.png");
+		GameEngineSprite::CreateSingle("win_indicator_0.png");
+		GameEngineSprite::CreateSingle("win_indicator_1.png");
+		GameEngineSprite::CreateSingle("banpick_ui_bg.png");
+	}
+
+	{
+		// 싱글 스프라이트 아이콘
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("GameEngineResources");
+		Dir.MoveChild("ContentsResources\\Icon");
+
+		std::vector<GameEngineFile> Files = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Files.size(); i++)
+		{
+			GameEngineFile& File = Files[i];
+			GameEngineTexture::Load(File.GetStringPath());
+		}
+
+		GameEngineSprite::CreateSingle("armor_icon.png");
+		GameEngineSprite::CreateSingle("attack_icon.png");
+	}
+
+	CreateActor<BanPickBoard>();
+	CreateActor<BanPickCard>();
+}
+
+void BanPickLevel::LevelEnd(GameEngineLevel* _NextLevel)
+{
+
+}

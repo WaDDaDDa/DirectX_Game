@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Monk.h"
 #include "MonkUlt.h"
+#include "MonkStatus.h"
 
 Monk::Monk()
 {
@@ -47,7 +48,7 @@ void Monk::Start()
 		GameEngineSprite::CreateSingle("Monk_ult.png");
 	}
 
-	SetUnitStatus();
+	SetUnitStatus(MonkStatus::MonkStat);
 }
 
 void Monk::LevelStart(GameEngineLevel* _PrevLevel)

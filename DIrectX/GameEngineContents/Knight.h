@@ -12,36 +12,14 @@ public:
     Knight& operator=(const Knight& _Other) = delete;
     Knight& operator=(Knight&& _Other) noexcept = delete;
 
-    void SetUnitStatus()
-    {
-        UnitName = "Knight";
-        AttackRange = KnightAttackRange;
-        SkillRange = KnightSkillRange;
-        SkillColRange = KnightSkillColRange;
-        UltRange = KnightUltRange;
-
-        UnitSpeed = KnightSpeed;
-        UnitHP = KnightHp;
-        UnitMaxHP = KnightHp;
-        UnitAtt = KnightAtt;
-        UnitDef = KnightDef;
-        UnitAbsoluteDef = KnightAbsoluteDef;
-
-        AttackSpeed = KnightAttackSpeed;
-
-        SkillCooltime = KnightSkillCooltime;
-
-        UltCooltime = KnightUltCooltime;
-    }
-
     void CreateUltEffect();
-
 
 protected:
     void Start() override;
     // void Update(float _Delta) override;
 
     void LevelStart(GameEngineLevel* _PrevLevel) override;
+
 
     void SpwanStart() override;
 
@@ -67,18 +45,6 @@ protected:
     void DiePrevStart() override;
 
 private:
-    float4 KnightAttackRange = { 74.0f, 0.0f };
-    float4 KnightSkillRange = { 200.0f, 0.0f };
-    float4 KnightSkillColRange = { 200.0f, 0.0f };
-    float4 KnightUltRange = { 200.0f, 0.0f };
 
-    float KnightSpeed = 100.0f;
-    float KnightHp = 200.0f;
-    float KnightAtt = 33.0f;
-    float KnightDef = 60.0f;
-    float KnightAbsoluteDef = 60.0f;
-    float KnightAttackSpeed = 1.7f;
-    float KnightSkillCooltime = 4.2f;
-    float KnightUltCooltime = 20.0f;
 };
 

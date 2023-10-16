@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 #include <vector>
+#include "GameUnitStatus.h"
 
 enum class GameUnitState
 {
@@ -331,6 +332,28 @@ protected:
     virtual bool UltCheck();
 
     void MapOverCheck();
+
+    void SetUnitStatus(const GameUnitStatus& _Status)
+    {
+        UnitName = _Status.UnitName;
+        AttackRange = _Status.AttackRange;
+        SkillRange = _Status.SkillRange;
+        SkillColRange = _Status.SkillColRange;
+        UltRange = _Status.UltRange;
+
+        UnitSpeed = _Status.UnitSpeed;
+        UnitHP = _Status.UnitHP;
+        UnitMaxHP = _Status.UnitMaxHP;
+        UnitAtt = _Status.UnitAtt;
+        UnitDef = _Status.UnitDef;
+        UnitAbsoluteDef = _Status.UnitAbsoluteDef;
+
+        AttackSpeed = _Status.AttackSpeed;
+
+        SkillCooltime = _Status.SkillCooltime;
+
+        UltCooltime = _Status.UltCooltime;
+    }
 
     // State
     void MaxStart();

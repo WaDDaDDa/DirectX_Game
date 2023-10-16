@@ -15,6 +15,7 @@ enum class ContentsOrder
 	Unit,
 	Projectile,  // 투사체
 	FrontEffect,
+	BackUI,
 	UI, // UI틀
 	UIImage,
 	Text,

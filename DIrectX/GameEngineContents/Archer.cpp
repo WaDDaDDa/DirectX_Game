@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Archer.h"
 #include "Arrow.h"
+#include "ArcherStatus.h"
 
 Archer::Archer()
 {
@@ -47,8 +48,7 @@ void Archer::Start()
 		GameEngineSprite::CreateSingle("arrow.png");
 	}
 
-	SetUnitStatus();
-
+	SetUnitStatus(ArcherStatus::ArcherStat);
 }
 
 void Archer::LevelStart(GameEngineLevel* _PrevLevel)

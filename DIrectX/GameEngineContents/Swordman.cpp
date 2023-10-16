@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Swordman.h"
 #include "SwordmanUltEffect.h"
+#include "SwordmanStatus.h"
 
 Swordman::Swordman()
 {
@@ -81,7 +82,7 @@ void Swordman::Start()
 			return false;
 		};
 
-	SetUnitStatus();
+	SetUnitStatus(SwordmanStatus::SwordmanStat);
 
 }
 

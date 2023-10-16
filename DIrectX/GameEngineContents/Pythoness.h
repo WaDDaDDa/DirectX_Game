@@ -12,29 +12,6 @@ public:
     Pythoness& operator=(const Pythoness& _Other) = delete;
     Pythoness& operator=(Pythoness&& _Other) noexcept = delete;
 
-    void SetUnitStatus()
-    {
-        UnitName = "Pythoness";
-        AttackRange = PythonessAttackRange;
-        SkillRange = PythonessSkillRange;
-        SkillColRange = PythonessSkillColRange;
-        UltRange = PythonessUltRange;
-
-        UnitSpeed = PythonessSpeed;
-        UnitHP = PythonessHp;
-        UnitMaxHP = PythonessHp;
-        UnitAtt = PythonessAtt;
-        UnitDef = PythonessDef;
-        UnitAbsoluteDef = PythonessAbsoluteDef;
-
-        AttackSpeed = PythonessAttackSpeed;
-
-        SkillCooltime = PythonessSkillCooltime;
-
-        UltCooltime = PythonessUltCooltime;
-    }
-
-
 protected:
     void Start() override;
     // void Update(float _Delta) override;
@@ -77,19 +54,8 @@ protected:
     }
 
 private:
-    float4 PythonessAttackRange = { 300.0f, 0.0f };
-    float4 PythonessSkillRange = { 300.0f, 0.0f };
-    float4 PythonessSkillColRange = { 300.0f, 0.0f };
-    float4 PythonessUltRange = { 500.0f, 0.0f };
 
-    float PythonessSpeed = 60.0f;
-    float PythonessHp = 65.0f;
-    float PythonessAtt = 30.0f;
-    float PythonessDef = 3.0f;
-    float PythonessAbsoluteDef = 30.0f;
-    float PythonessAttackSpeed = 1.1f;
-    float PythonessSkillCooltime = 6.5f;
-    float PythonessUltCooltime = 20.0f;
+
     float PythonessUltInter = 0.05f;
 
     // true¸é °ø°Ý  false¸é Èú
