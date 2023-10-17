@@ -14,10 +14,12 @@ StadiumBoard::~StadiumBoard()
 
 void StadiumBoard::Start()
 {
+
+
 	float4 WindowScale = GameEngineCore::MainWindow.GetScale();
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
-	Transform.SetLocalPosition({ 0.0f, HalfWindowScale.Y , 100.0f});
+	Transform.SetLocalPosition({ HalfWindowScale.X, 0.0f , 100.0f});
 
 	Renderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
 

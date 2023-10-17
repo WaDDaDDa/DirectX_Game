@@ -256,6 +256,14 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="UI_Button.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="UI_Mouse.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archer.h" />
@@ -344,6 +352,14 @@
     <ClInclude Include="SwordmanStatus.h" />
     <ClInclude Include="SwordmanUltEffect.h" />
     <ClInclude Include="TextArrow.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="UI_Button.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="UI_Mouse.h">
       <SubType>
       </SubType>
     </ClInclude>

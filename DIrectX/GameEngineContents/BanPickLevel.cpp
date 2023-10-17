@@ -3,6 +3,9 @@
 
 // UI
 #include "BanPickBoard.h"
+#include "UI_Mouse.h"
+#include "UI_Button.h"
+
 
 // GameUnit
 #include "BanPickCard.h"
@@ -21,17 +24,23 @@ BanPickLevel::~BanPickLevel()
 void BanPickLevel::Start()
 {
 	//GameEngineRenderTarget::IsDepth = false;
-
+	//메인카메라 위치잡기
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	GetMainCamera()->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Orthographic);
+	//UI도 같은 위치로잡기
+	GetCamera(static_cast<int>(ECAMERAORDER::UI))->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
+
 	GameEngineInput::AddInputObject(this);
 
 }
 
 void BanPickLevel::Update(float _Delta)
 {
-
+	if (GameEngineInput::IsDown('1', this))
+	{
+		GameEngineLevel::DebugSwitch();
+	}
 }
 
 void BanPickLevel::LevelStart(GameEngineLevel* _PrevLevel)
@@ -105,6 +114,8 @@ void BanPickLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		GameEngineSprite::CreateSingle("armor_icon.png");
 		GameEngineSprite::CreateSingle("attack_icon.png");
 	}
+
+	CreateActor<UI_Mouse>();
 
 	CreateActor<BanPickBoard>();
 	CreateActor<BanPickCard>()->Init(ArcherStatus::ArcherStat);

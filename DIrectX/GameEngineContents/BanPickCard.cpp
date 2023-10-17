@@ -17,6 +17,8 @@ BanPickCard::~BanPickCard()
 
 void BanPickCard::Start()
 {
+	UI_Button::Start();
+
 	{
 		// 싱글 스프라이트 로드
 		GameEngineDirectory Dir;
@@ -50,12 +52,43 @@ void BanPickCard::Start()
 	Renderer->CreateAnimation("BanPickCard_Red", "BanPick", 0.1f, 10, 10, false);
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(2.0f);
-	Renderer->SetPivotType(PivotType::Bottom);
+	//Renderer->SetPivotType(PivotType::Bottom);
 	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 	Renderer->ChangeAnimation("BanPickCard_Null");
 
+	SetButtonColScale(ColScale);
+
 	Transform.AddLocalPosition(StartPos);
 
+	// 이벤트 셋팅
+	ColEvent.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
+		{
+			// 처음한번 실행.
+			if (false == IsSelect)
+			{
+				UnitImage->ChangeAnimation(GetUnitName() += "_Idle");
+			}
+		};
+
+	ColEvent.Stay = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
+		{
+			// 커서 올라가있는 중 실행.
+			if (GameEngineInput::IsDown(VK_LBUTTON, this))
+			{
+				UnitImage->ChangeAnimation(GetUnitName() += "_Att");
+				IsSelect = true;
+			}
+		};
+
+	ColEvent.Exit = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
+		{
+			// 커서 올라가있다가 떨어졌을때 실행.
+			if (false == IsSelect)
+			{
+				UnitImage->ChangeAnimation(GetUnitName() += "_Stay");
+			}
+
+		};
 }
 
 void BanPickCard::LevelStart(GameEngineLevel* _PrevLevel)
@@ -69,76 +102,24 @@ void BanPickCard::Init(const GameUnitStatus& _Status)
 
 	// Unit이미지
 	UnitImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
-	UnitImage->CreateAnimation(GetUnitName() += "_Idle", GetUnitName() += "Ani", 0.2f, 0, 0);
-	UnitImage->CreateAnimation(GetUnitName() += "_Stay", GetUnitName() += "Ani", 0.2f, 0, 4);
+	UnitImage->CreateAnimation(GetUnitName() += "_Stay", GetUnitName() += "Ani", 0.2f, 0, 0, false);
+	UnitImage->CreateAnimation(GetUnitName() += "_Idle", GetUnitName() += "Ani", 0.2f, 0, 4, true);
+	UnitImage->CreateAnimation(GetUnitName() += "_Att", GetUnitName() += "Ani", 0.2f, 13, 16, false);
 	UnitImage->AutoSpriteSizeOn();
 	UnitImage->SetAutoScaleRatio(2.0f);
 	UnitImage->Transform.AddLocalPosition(UnitImagePos);
-	//UnitImage->SetPivotType(PivotType::Bottom);
-	UnitImage->Transform.AddLocalPosition({ 0.0f, 63.0f, -static_cast<float>(ContentsOrder::UIImage) });
-	UnitImage->ChangeAnimation(GetUnitName() += "_Idle");
+	UnitImage->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	UnitImage->ChangeAnimation(GetUnitName() += "_Stay");
 
 	Transform.AddLocalPosition({ XInter, 0.0f });
 
 	XInter += 80.0f;
 
-	ChangeState(BanPickState::Idle);
-}
-
-void BanPickCard::Update(float _Delta)
-{
-	StateUpdate(_Delta);
-}
-
-
-void BanPickCard::StateUpdate(float _Delta)
-{
-	switch (State)
-	{
-	case BanPickState::Idle:
-		return IdleUpdate(_Delta);
-	case BanPickState::Max:
-		return MaxUpdate(_Delta);
-	default:
-		break;
-	}
-}
-
-void BanPickCard::ChangeState(BanPickState _State)
-{
-	if (_State != State)
-	{
-		switch (_State)
-		{
-		case BanPickState::Idle:
-			IdleStart();
-			break;
-		case BanPickState::Max:
-			MaxStart();
-			break;
-		default:
-			break;
-		}
-	}
-
-	ResetLiveTime();
-
-	State = _State;
 }
 
 void BanPickCard::LevelEnd(GameEngineLevel* _NextLevel)
 {
 	Death();
-}
-
-void BanPickCard::MaxStart()
-{
-
-}
-
-void BanPickCard::MaxUpdate(float _Delta)
-{
-
 }
 
 void BanPickCard::IdleStart()
@@ -151,3 +132,22 @@ void BanPickCard::IdleUpdate(float _Delta)
 
 }
 
+void BanPickCard::StayStart()
+{
+
+}
+
+void BanPickCard::StayUpdate(float _Delta)
+{
+	
+}
+
+void BanPickCard::ClickStart()
+{
+
+}
+
+void BanPickCard::ClickUpdate(float _Delta)
+{
+
+}

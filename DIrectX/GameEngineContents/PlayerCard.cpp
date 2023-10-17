@@ -18,6 +18,9 @@ PlayerCard::~PlayerCard()
 
 void PlayerCard::Start()
 {
+	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
+	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y});
+
 	{
 		// 싱글 스프라이트 로드
 		GameEngineDirectory Dir;

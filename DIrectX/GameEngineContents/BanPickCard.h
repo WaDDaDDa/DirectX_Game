@@ -1,15 +1,7 @@
 #pragma once
-#include <GameEngineCore/GameEngineActor.h>
+#include "UI_Button.h"
 
-enum class BanPickState
-{
-    Idle,
-    Stay,
-    Select,
-    Max,
-};
-
-class BanPickCard : public GameEngineActor
+class BanPickCard : public UI_Button
 {
 public:
     BanPickCard();
@@ -20,10 +12,9 @@ public:
     BanPickCard& operator=(const BanPickCard& _Other) = delete;
     BanPickCard& operator=(BanPickCard&& _Other) noexcept = delete;
 
-    float4 StartPos = { -370.0f, 75.0f, 100.0f };
-    void Init(const class GameUnitStatus& _Status);
+    float4 StartPos = { -370.0f, 125.0f, 100.0f };
 
-    BanPickState State = BanPickState::Max;
+    void Init(const class GameUnitStatus& _Status);
     
     std::string GetUnitName()
     {
@@ -33,20 +24,20 @@ public:
     static float XInter;
 
 protected:
-    void Start() override;
-    void Update(float _Delta) override;
 
-    void ChangeState(BanPickState _State);
-    void StateUpdate(float _Delta);
+    void Start() override;
 
     void LevelStart(GameEngineLevel* _PrevLevel) override;
     void LevelEnd(GameEngineLevel* _NextLevel) override;
 
-    void MaxStart();
-    void MaxUpdate(float _Delta);
+    void IdleStart()override;
+    void IdleUpdate(float _Delta)override;
 
-    void IdleStart();
-    void IdleUpdate(float _Delta);
+    void StayStart()override;
+    void StayUpdate(float _Delta)override;
+
+    void ClickStart()override;
+    void ClickUpdate(float _Delta) override;
 
     std::string_view UnitName = "";
 
@@ -56,5 +47,8 @@ private:
     std::shared_ptr<class GameEngineSpriteRenderer> UnitImage;
     float4 UnitImagePos = { 0.0f, -10.0f };
 
+    bool IsSelect = false;
+
+    float4 ColScale = { 76.0f, 104.0f };
 };
 

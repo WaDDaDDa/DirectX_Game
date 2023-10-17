@@ -37,6 +37,8 @@ enum class CollisionOrder
 	UnitAttack,
 	UnitTarget,
 	TestType,
+	Button,
+	Mouse,
 };
 
 enum class TeamType
