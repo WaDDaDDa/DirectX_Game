@@ -20,7 +20,7 @@ private:
     float4 PyromancerAttackRange = { 200.0f, 0.0f };
     float4 PyromancerSkillRange = { 200.0f, 0.0f };
     float4 PyromancerSkillColRange = { 200.0f, 0.0f };
-    float4 PyromancerUltRange = { 500.0f, 0.0f };
+    float4 PyromancerUltRange = { 400.0f, 0.0f };
 
     float PyromancerSpeed = 60.0f;
     float PyromancerHp = 80.0f;

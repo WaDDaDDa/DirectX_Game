@@ -113,17 +113,17 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	// À¯´Ö »ý¼º
 	// ºí·çÆÀ À¯´Ö (¿ÞÂÊ)
 	BlueTeam.push_back(CreateActor<Ninja>()->GetPointer());
-	BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
-	BlueTeam.push_back(CreateActor<Pyromancer>()->GetPointer());
+	//BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
+	//BlueTeam.push_back(CreateActor<Pyromancer>()->GetPointer());
 	BlueTeam.push_back(CreateActor<Swordman>()->GetPointer());
 	//BlueTeam.push_back(CreateActor<Pythoness>()->GetPointer());
 
 
 		// ·¹µåÆÀ À¯´Ö (¿À¸¥ÂÊ)
-	RedTeam.push_back(CreateActor<Monk>()->GetPointer());
 	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
-	RedTeam.push_back(CreateActor<Priest>()->GetPointer());
-	RedTeam.push_back(CreateActor<Pythoness>()->GetPointer());
+	//RedTeam.push_back(CreateActor<Knight>()->GetPointer());
+	//RedTeam.push_back(CreateActor<Priest>()->GetPointer());
+	RedTeam.push_back(CreateActor<Archer>()->GetPointer());
 	//RedTeam.push_back(CreateActor<Archer>()->GetPointer());
 
 	
@@ -148,7 +148,6 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	CreateActor<Bird>();
 
 	CreateActor<StadiumBoard>()->Setting(BlueTeam, RedTeam);
-	
 }
 
 void BattleLevel::LevelEnd(GameEngineLevel* _NextLevel)

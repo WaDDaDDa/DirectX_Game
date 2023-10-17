@@ -23,7 +23,7 @@ private:
     float4 ArcherSkillColRange = { 50.0f, 0.0f };
     float4 ArcherUltRange = { 700.0f, 0.0f };
     float ArcherSpeed = 60.0f;
-    float ArcherHp = 100.0f;
+    float ArcherHp = 80.0f;
     float ArcherAtt = 65.0f;
     float ArcherDef = 5.0f;
     float ArcherAbsoluteDef = 30.0f;

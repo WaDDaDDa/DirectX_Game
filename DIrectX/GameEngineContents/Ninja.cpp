@@ -58,11 +58,11 @@ void Ninja::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
 		MainSpriteRenderer->CreateAnimation("Ninja_Idle", "NinjaAni", 0.2f, 0, 4);
 		MainSpriteRenderer->CreateAnimation("Ninja_Move", "NinjaAni", 0.2f, 5, 12);
-		MainSpriteRenderer->CreateAnimation("Ninja_Attack", "NinjaAni", 0.1f, 13, 14, false);
-		MainSpriteRenderer->CreateAnimation("Ninja_Attack2", "NinjaAni", 0.1f, 15, 17, false);
+		MainSpriteRenderer->CreateAnimation("Ninja_Attack", "NinjaAni", 0.05f, 13, 14, false);
+		MainSpriteRenderer->CreateAnimation("Ninja_Attack2", "NinjaAni", 0.05f, 15, 17, false);
 		MainSpriteRenderer->CreateAnimation("Ninja_Skill", "NinjaAni", 0.05f, 28, 35, false);
-		MainSpriteRenderer->CreateAnimation("Ninja_Skill2", "NinjaAni", 0.1f, 36, 38, false);
-		MainSpriteRenderer->CreateAnimation("Ninja_Ult", "NinjaAni", 0.2f, 44, 49, false);
+		MainSpriteRenderer->CreateAnimation("Ninja_Skill2", "NinjaAni", 0.05f, 36, 38, false);
+		MainSpriteRenderer->CreateAnimation("Ninja_Ult", "NinjaAni", 0.1f, 44, 49, false);
 		MainSpriteRenderer->CreateAnimation("Ninja_Die", "NinjaAni", 0.1f, 18, 27, false);
 
 		MainSpriteRenderer->FindAnimation("Ninja_Skill2")->Inter[2] = 0.2;
@@ -71,7 +71,7 @@ void Ninja::LevelStart(GameEngineLevel* _PrevLevel)
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
 		SkillEffectRenderer->CreateAnimation("NinjaSkillEffect", "NinjaEffect", 0.05f, 7, 13, false);
 		SkillEffectRenderer->CreateAnimation("NinjaSkillBlack", "NinjaEffect", 0.1f, 0, 0, false);
-		SkillEffectRenderer->CreateAnimation("NinjaUltEffect", "NinjaEffect", 0.2f, 22, 27, false);
+		SkillEffectRenderer->CreateAnimation("NinjaUltEffect", "NinjaEffect", 0.1f, 22, 27, false);
 		SkillEffectRenderer->ChangeAnimation("NinjaSkillBlack");
 		SkillEffectRenderer->AutoSpriteSizeOn();
 		SkillEffectRenderer->SetAutoScaleRatio(1.3f);
@@ -225,7 +225,7 @@ void Ninja::Skill2Update(float _Delta)
 				{
 					// 공격대미지 공식
 					AggroUnit = reinterpret_cast<GameUnit*>(_Collision[i]->GetActor());
-					AggroUnit->DamageHP(UnitAtt * 1.3f);
+					AggroUnit->DamageHP(UnitAtt * 2.0f);
 					SkillTick -= 1;
 					return;
 				}
@@ -240,7 +240,7 @@ void Ninja::Skill2Update(float _Delta)
 				{
 					// 공격대미지 공식
 					AggroUnit = reinterpret_cast<GameUnit*>(_Collision[i]->GetActor());
-					AggroUnit->DamageHP(UnitAtt * 1.3f);
+					AggroUnit->DamageHP(UnitAtt * 2.0f);
 					SkillTick -= 1;
 					return;
 				}

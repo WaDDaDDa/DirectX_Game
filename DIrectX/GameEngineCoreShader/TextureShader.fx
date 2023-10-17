@@ -2,6 +2,7 @@
 
 struct GameEngineVertex2D
 {
+    // -1 ~ 1 사이의 포지션 뷰직전단계
     float4 POSITION : POSITION;
     float4 TEXCOORD : TEXCOORD;
 };
@@ -10,6 +11,7 @@ struct GameEngineVertex2D
 struct PixelOutPut
 {
     // 픽셀쉐이더에 보내느 ㄴ역
+    // 뷰포트 까지 다 곱해진 포지션
     float4 POSITION : SV_POSITION;
     float4 TEXCOORD : TEXCOORD;
 };

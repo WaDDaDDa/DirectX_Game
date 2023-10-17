@@ -26,9 +26,10 @@ public:
     float SkillCooltime;
     float UltCooltime;
 
+    static GameUnitStatus KnightStat;
+
 protected:
 
 private:
-
 };
 
