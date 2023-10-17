@@ -11,6 +11,7 @@
     <FxCompile Include="Transform.fx" />
     <FxCompile Include="RenderBase.fx" />
     <FxCompile Include="DebugColorShader.fx" />
+    <FxCompile Include="TextureMaskShader.fx" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ShaderRule.txt">
