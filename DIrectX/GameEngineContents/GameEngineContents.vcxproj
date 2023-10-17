@@ -169,6 +169,7 @@
     <ClCompile Include="BanPickBoard.cpp" />
     <ClCompile Include="BanPickCard.cpp" />
     <ClCompile Include="BanPickLevel.cpp" />
+    <ClCompile Include="BanPickManager.cpp" />
     <ClCompile Include="BattleField.cpp">
       <SubType>
       </SubType>
@@ -272,6 +273,7 @@
     <ClInclude Include="BanPickBoard.h" />
     <ClInclude Include="BanPickCard.h" />
     <ClInclude Include="BanPickLevel.h" />
+    <ClInclude Include="BanPickManager.h" />
     <ClInclude Include="BattleField.h">
       <SubType>
       </SubType>

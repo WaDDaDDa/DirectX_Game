@@ -66,7 +66,7 @@ void BanPickCard::Start()
 			// 처음한번 실행.
 			if (false == IsSelect)
 			{
-				UnitImage->ChangeAnimation(GetUnitName() += "_Idle");
+				UnitImage->ChangeAnimation(GetUnitName() += "_Stay");
 			}
 		};
 
@@ -85,7 +85,7 @@ void BanPickCard::Start()
 			// 커서 올라가있다가 떨어졌을때 실행.
 			if (false == IsSelect)
 			{
-				UnitImage->ChangeAnimation(GetUnitName() += "_Stay");
+				UnitImage->ChangeAnimation(GetUnitName() += "_Idle");
 			}
 
 		};
@@ -102,14 +102,14 @@ void BanPickCard::Init(const GameUnitStatus& _Status)
 
 	// Unit이미지
 	UnitImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
-	UnitImage->CreateAnimation(GetUnitName() += "_Stay", GetUnitName() += "Ani", 0.2f, 0, 0, false);
-	UnitImage->CreateAnimation(GetUnitName() += "_Idle", GetUnitName() += "Ani", 0.2f, 0, 4, true);
+	UnitImage->CreateAnimation(GetUnitName() += "_Idle", GetUnitName() += "Ani", 0.2f, 0, 0, false);
+	UnitImage->CreateAnimation(GetUnitName() += "_Stay", GetUnitName() += "Ani", 0.2f, 0, 4, true);
 	UnitImage->CreateAnimation(GetUnitName() += "_Att", GetUnitName() += "Ani", 0.2f, 13, 16, false);
 	UnitImage->AutoSpriteSizeOn();
 	UnitImage->SetAutoScaleRatio(2.0f);
 	UnitImage->Transform.AddLocalPosition(UnitImagePos);
 	UnitImage->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
-	UnitImage->ChangeAnimation(GetUnitName() += "_Stay");
+	UnitImage->ChangeAnimation(GetUnitName() += "_Idle");
 
 	Transform.AddLocalPosition({ XInter, 0.0f });
 

@@ -170,6 +170,9 @@
     <ClCompile Include="UI_Mouse.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="BanPickManager.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -342,6 +345,9 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="UI_Mouse.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="BanPickManager.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>

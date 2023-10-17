@@ -1,14 +1,11 @@
 #include "PreCompile.h"
 #include "BanPickLevel.h"
+#include "BanPickManager.h"
 
 // UI
-#include "BanPickBoard.h"
-#include "UI_Mouse.h"
-#include "UI_Button.h"
 
 
 // GameUnit
-#include "BanPickCard.h"
 
 
 BanPickLevel::BanPickLevel()
@@ -115,17 +112,8 @@ void BanPickLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		GameEngineSprite::CreateSingle("attack_icon.png");
 	}
 
-	CreateActor<UI_Mouse>();
+	CreateActor<BanPickManager>();
 
-	CreateActor<BanPickBoard>();
-	CreateActor<BanPickCard>()->Init(ArcherStatus::ArcherStat);
-	CreateActor<BanPickCard>()->Init(KnightStatus::KnightStat);
-	CreateActor<BanPickCard>()->Init(MonkStatus::MonkStat);
-	CreateActor<BanPickCard>()->Init(NinjaStatus::NinjaStat);
-	CreateActor<BanPickCard>()->Init(PyromancerStatus::PyromancerStat);
-	CreateActor<BanPickCard>()->Init(PriestStatus::PriestStat);
-	CreateActor<BanPickCard>()->Init(SwordmanStatus::SwordmanStat);
-	CreateActor<BanPickCard>()->Init(PythonessStatus::PythonessStat);
 }
 
 void BanPickLevel::LevelEnd(GameEngineLevel* _NextLevel)

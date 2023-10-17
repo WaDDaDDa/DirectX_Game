@@ -1,6 +1,7 @@
 #pragma once
 #include "UI_Button.h"
 
+
 class BanPickCard : public UI_Button
 {
 public:
@@ -15,6 +16,40 @@ public:
     float4 StartPos = { -370.0f, 125.0f, 100.0f };
 
     void Init(const class GameUnitStatus& _Status);
+
+    void Init(size_t _Stat)
+    {
+        switch (_Stat)
+        {
+        case 0:
+            Init(ArcherStatus::ArcherStat);
+            break;
+        case 1:
+            Init(KnightStatus::KnightStat);
+            break;
+        case 2:
+            Init(MonkStatus::MonkStat);
+            break;
+        case 3:
+            Init(NinjaStatus::NinjaStat);
+            break;
+        case 4:
+            Init(PyromancerStatus::PyromancerStat);
+            break;
+        case 5:
+            Init(PriestStatus::PriestStat);
+            break;
+        case 6:
+            Init(SwordmanStatus::SwordmanStat);
+            break;
+        case 7:
+            Init(PythonessStatus::PythonessStat);
+            break;
+        default:
+            break;
+        }
+    }
+
     
     std::string GetUnitName()
     {
