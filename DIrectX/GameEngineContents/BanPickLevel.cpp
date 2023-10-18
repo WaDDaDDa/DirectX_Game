@@ -38,6 +38,12 @@ void BanPickLevel::Update(float _Delta)
 	{
 		GameEngineLevel::DebugSwitch();
 	}
+	
+	if (GameEngineInput::IsDown(VK_SPACE, this))
+	{
+		GameEngineCore::ChangeLevel("BattleLevel");
+		return;
+	}
 }
 
 void BanPickLevel::LevelStart(GameEngineLevel* _PrevLevel)

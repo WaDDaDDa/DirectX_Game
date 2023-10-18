@@ -23,7 +23,6 @@ protected:
     void DiePrevStart() override;
 
     void DieStart() override;
-
 private:
 
 };

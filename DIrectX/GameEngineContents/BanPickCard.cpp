@@ -102,9 +102,9 @@ void BanPickCard::Init(const GameUnitStatus& _Status)
 
 	// Unit¿ÃπÃ¡ˆ
 	UnitImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
-	UnitImage->CreateAnimation(GetUnitName() += "_Idle", GetUnitName() += "Ani", 0.2f, 0, 0, false);
-	UnitImage->CreateAnimation(GetUnitName() += "_Stay", GetUnitName() += "Ani", 0.2f, 0, 4, true);
-	UnitImage->CreateAnimation(GetUnitName() += "_Att", GetUnitName() += "Ani", 0.2f, 13, 16, false);
+	UnitImage->CreateAnimation(GetUnitName() += "_Idle", GetUnitName() += "CardAni", 0.2f, 0, 0, false);
+	UnitImage->CreateAnimation(GetUnitName() += "_Stay", GetUnitName() += "CardAni", 0.2f, 0, 4, true);
+	UnitImage->CreateAnimation(GetUnitName() += "_Att", GetUnitName() += "CardAni", 0.2f, 13, 16, false);
 	UnitImage->AutoSpriteSizeOn();
 	UnitImage->SetAutoScaleRatio(2.0f);
 	UnitImage->Transform.AddLocalPosition(UnitImagePos);

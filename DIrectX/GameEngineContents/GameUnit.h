@@ -304,6 +304,8 @@ public:
         return DieCount;
     }
 
+    void ChangeState(GameUnitState _State);
+
 protected:
     std::shared_ptr<GameEngineSpriteRenderer> SpwanRenderer;
     std::shared_ptr<GameEngineCollision> BodyCol;
@@ -324,7 +326,6 @@ protected:
     void LevelStart(GameEngineLevel* _PrevLevel) override;
     void LevelEnd(GameEngineLevel* _NextLevel) override;
 
-    void ChangeState(GameUnitState _State);
     void StateUpdate(float _Delta);
 
     virtual bool AttCheck();

@@ -162,6 +162,7 @@ void Ninja::SkillStart()
 {
 	GameUnit::SkillStart();
 	MainSpriteRenderer->ChangeAnimation("Ninja_Skill");
+	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("NinjaSkillEffect");
 }
 
@@ -252,6 +253,7 @@ void Ninja::UltStart()
 {
 	GameUnit::UltStart();
 	MainSpriteRenderer->ChangeAnimation("Ninja_Ult");
+	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("NinjaUltEffect");
 
 	GameUnit* NinNin = GetLevel()->CreateActor<NinjaUlt>()->GetPointer();

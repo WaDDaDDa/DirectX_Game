@@ -304,7 +304,7 @@ void GameUnit::MapOverCheck()
 void GameUnit::Update(float _Delta)
 {
 	DieCheck();
-	StateUpdate(_Delta);
+
 
 	PushValue += _Delta;
 	AttackValue += _Delta;
@@ -328,7 +328,7 @@ void GameUnit::Update(float _Delta)
 		NextAggro();
 	}
 
-
+	StateUpdate(_Delta);
 }
 
 
