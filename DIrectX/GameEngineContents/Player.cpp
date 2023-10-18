@@ -14,14 +14,14 @@ Player::~Player()
 
 void Player::Start()
 {
+	Transform.SetWorldPosition(float4::ZERO);
 	{
-		//MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>();
-		//MainSpriteRenderer->CreateAnimation("Run", "HoHoYee_AttackABC");
-		//MainSpriteRenderer->ChangeAnimation("Run");
-		//MainSpriteRenderer->AutoSpriteSizeOn();
-
-		// MainSpriteRenderer->SetSprite("TestPlayer.png", 5);
-		// MaiSpriteRenderer->CreateAnimation
+		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>();
+		MainSpriteRenderer->SetMaskTexture("TestMask.png");
+		MainSpriteRenderer->CreateAnimation("TestAni", "ArcherCardAni", 0.1f, 0, 0, false);
+		MainSpriteRenderer->ChangeAnimation("TestAni");
+		MainSpriteRenderer->AutoSpriteSizeOn();
+		GameEngineInput::AddInputObject(this);
 	}
 }
 
@@ -29,5 +29,37 @@ void Player::Update(float _Delta)
 {
 	// 페이드 예제
 	// Renderer->GetColorData().MulColor.A -= _DeltaTime;
+	float Speed = 100.0f;
 
+	float4 WPos = Transform.GetWorldPosition();
+
+	if (GameEngineInput::IsPress('A', this))
+	{
+		Transform.AddLocalPosition(float4::LEFT * _Delta * Speed);
+	}
+
+	if (GameEngineInput::IsPress('D', this))
+	{
+		Transform.AddLocalPosition(float4::RIGHT * _Delta * Speed);
+	}
+
+	if (GameEngineInput::IsPress('W', this))
+	{
+		Transform.AddLocalPosition(float4::UP * _Delta * Speed);
+	}
+
+	if (GameEngineInput::IsPress('S', this))
+	{
+		Transform.AddLocalPosition(float4::DOWN * _Delta * Speed);
+	}
+
+	if (GameEngineInput::IsPress('Q', this))
+	{
+		Transform.AddLocalRotation({ 0.0f, 0.0f, 360.0f * _Delta });
+	}
+
+	if (GameEngineInput::IsPress('E', this))
+	{
+		Transform.AddLocalRotation({ 0.0f, 0.0f, -360.0f * _Delta });
+	}
 }

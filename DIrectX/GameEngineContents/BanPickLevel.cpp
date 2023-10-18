@@ -122,6 +122,7 @@ void BanPickLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		GameEngineSprite::CreateSingle("ingame_stat_icon_4.png");
 		GameEngineSprite::CreateSingle("ingame_stat_icon_5.png");
 		GameEngineSprite::CreateSingle("patch_icons_1.png");
+		GameEngineSprite::CreateSingle("TestMask.png");
 
 
 		// 공격방어 아이콘들

@@ -54,7 +54,6 @@ void PlayLevel::Start()
 	GetMainCamera()->Transform.SetLocalPosition({ 0.0f, 0.0f, -500.0f });
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Perspective);
 
-	std::shared_ptr<Player> NewPlayer = CreateActor<Player>();
 }
 
 void PlayLevel::Update(float _Delta)
@@ -64,6 +63,7 @@ void PlayLevel::Update(float _Delta)
 
 void PlayLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
+	std::shared_ptr<Player> NewPlayer = CreateActor<Player>();
 	int a = 0;
 }
 
