@@ -114,6 +114,16 @@ void BanPickLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			GameEngineFile& File = Files[i];
 			GameEngineTexture::Load(File.GetStringPath());
 		}
+		// 스탯관련 아이콘들(흑백)
+		GameEngineSprite::CreateSingle("ingame_stat_icon_0.png");
+		GameEngineSprite::CreateSingle("ingame_stat_icon_1.png");
+		GameEngineSprite::CreateSingle("ingame_stat_icon_2.png");
+		GameEngineSprite::CreateSingle("ingame_stat_icon_3.png");
+		GameEngineSprite::CreateSingle("ingame_stat_icon_4.png");
+		GameEngineSprite::CreateSingle("ingame_stat_icon_5.png");
+		GameEngineSprite::CreateSingle("patch_icons_1.png");
+
+
 		// 공격방어 아이콘들
 		GameEngineSprite::CreateSingle("armor_icon.png");
 		GameEngineSprite::CreateSingle("attack_icon.png");
@@ -122,7 +132,6 @@ void BanPickLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		GameEngineSprite::CreateSingle("Archer_ult.png");
 		GameEngineSprite::CreateSingle("Archer_skill.png");
 		GameEngineSprite::CreateSingle("arrow.png");
-
 		GameEngineSprite::CreateSingle("knight_ult.png");
 		GameEngineSprite::CreateSingle("knight_skill.png");
 		GameEngineSprite::CreateSingle("Monk_ult.png");

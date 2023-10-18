@@ -33,7 +33,7 @@ private:
 
     std::shared_ptr<class GameEngineSpriteRenderer> UnitUltImage;
     float4 UnitUltImagePos = { 582.0f, -530.0f };
-
+    // box
     std::shared_ptr<class GameEngineSpriteRenderer> UniAttBox;
     float4 UnitAttBoxPos = { 336.0f, -428.0f };
     std::shared_ptr<class GameEngineSpriteRenderer> UniAttSpeedBox;
@@ -46,6 +46,23 @@ private:
     float4 UnitHpBoxPos = { 445.0f, -474.0f };
     std::shared_ptr<class GameEngineSpriteRenderer> UniSpeedBox;
     float4 UnitSpeedBoxPos = { 445.0f, -520.0f };
+    // icon
+    std::shared_ptr<class GameEngineSpriteRenderer> UniAttIcon;
+    float4 UnitAttIconPos = { 338.0f, -430.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> UniAttSpeedIcon;
+    float4 UnitAttSpeedIconPos = { 338.0f, -476.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> UniAttRangeIcon;
+    float4 UnitAttRangeIconPos = { 338.0f, -522.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> UniDefIcon;
+    float4 UnitDefIconPos = { 447.0f, -430.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> UniHpIcon;
+    float4 UnitHpIconPos = { 447.0f, -476.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> UniSpeedIcon;
+    float4 UnitSpeedIconPos = { 447.0f, -522.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> SkillTimeIcon;
+    float4 SkillTimeIconPos = { 622.0f, -472.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> UltTimeIcon;
+    float4 UltTimeIconPos = { 622.0f, -542.0f };
 
     size_t UnitCount = 8;
     std::shared_ptr<class BanPickCard> CurCard;

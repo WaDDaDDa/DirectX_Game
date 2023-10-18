@@ -128,6 +128,70 @@ void BanPickManager::Start()
 	UniSpeedBox->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UI) });
 	UniSpeedBox->ChangeAnimation("SpeedBox");
 	UniSpeedBox->SetPivotType(PivotType::LeftTop);
+
+	// æ∆¿Ãƒ‹
+	UniAttIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	UniAttIcon->SetSprite("ingame_stat_icon_0.png");
+	UniAttIcon->AutoSpriteSizeOn();
+	UniAttIcon->SetAutoScaleRatio(2.0f);
+	UniAttIcon->Transform.AddLocalPosition(UnitAttIconPos);
+	UniAttIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	UniAttIcon->SetPivotType(PivotType::LeftTop);
+
+	UniAttSpeedIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	UniAttSpeedIcon->SetSprite("ingame_stat_icon_5.png");
+	UniAttSpeedIcon->AutoSpriteSizeOn();
+	UniAttSpeedIcon->SetAutoScaleRatio(2.0f);
+	UniAttSpeedIcon->Transform.AddLocalPosition(UnitAttSpeedIconPos);
+	UniAttSpeedIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	UniAttSpeedIcon->SetPivotType(PivotType::LeftTop);
+
+	UniAttRangeIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	UniAttRangeIcon->SetSprite("ingame_stat_icon_3.png");
+	UniAttRangeIcon->AutoSpriteSizeOn();
+	UniAttRangeIcon->SetAutoScaleRatio(2.0f);
+	UniAttRangeIcon->Transform.AddLocalPosition(UnitAttRangeIconPos);
+	UniAttRangeIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	UniAttRangeIcon->SetPivotType(PivotType::LeftTop);
+
+	UniDefIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	UniDefIcon->SetSprite("ingame_stat_icon_1.png");
+	UniDefIcon->AutoSpriteSizeOn();
+	UniDefIcon->SetAutoScaleRatio(2.0f);
+	UniDefIcon->Transform.AddLocalPosition(UnitDefIconPos);
+	UniDefIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	UniDefIcon->SetPivotType(PivotType::LeftTop);
+
+	UniHpIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	UniHpIcon->SetSprite("ingame_stat_icon_2.png");
+	UniHpIcon->AutoSpriteSizeOn();
+	UniHpIcon->SetAutoScaleRatio(2.0f);
+	UniHpIcon->Transform.AddLocalPosition(UnitHpIconPos);
+	UniHpIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	UniHpIcon->SetPivotType(PivotType::LeftTop);
+
+	UniSpeedIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	UniSpeedIcon->SetSprite("ingame_stat_icon_4.png");
+	UniSpeedIcon->AutoSpriteSizeOn();
+	UniSpeedIcon->SetAutoScaleRatio(2.0f);
+	UniSpeedIcon->Transform.AddLocalPosition(UnitSpeedIconPos);
+	UniSpeedIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	UniSpeedIcon->SetPivotType(PivotType::LeftTop);
+
+	SkillTimeIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	SkillTimeIcon->SetSprite("patch_icons_1.png");
+	SkillTimeIcon->AutoSpriteSizeOn();
+	SkillTimeIcon->SetAutoScaleRatio(2.0f);
+	SkillTimeIcon->Transform.AddLocalPosition(SkillTimeIconPos);
+	SkillTimeIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
+
+	UltTimeIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	UltTimeIcon->SetSprite("patch_icons_1.png");
+	UltTimeIcon->AutoSpriteSizeOn();
+	UltTimeIcon->SetAutoScaleRatio(2.0f);
+	UltTimeIcon->Transform.AddLocalPosition(UltTimeIconPos);
+	UltTimeIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
+
 }
 
 
