@@ -137,30 +137,6 @@
     <ClCompile Include="GameUnitStatus.cpp">
       <Filter>GameUnit\Status</Filter>
     </ClCompile>
-    <ClCompile Include="PriestStatus.cpp">
-      <Filter>GameUnit\Status</Filter>
-    </ClCompile>
-    <ClCompile Include="ArcherStatus.cpp">
-      <Filter>GameUnit\Status</Filter>
-    </ClCompile>
-    <ClCompile Include="KnightStatus.cpp">
-      <Filter>GameUnit\Status</Filter>
-    </ClCompile>
-    <ClCompile Include="MonkStatus.cpp">
-      <Filter>GameUnit\Status</Filter>
-    </ClCompile>
-    <ClCompile Include="NinjaStatus.cpp">
-      <Filter>GameUnit\Status</Filter>
-    </ClCompile>
-    <ClCompile Include="PyromancerStatus.cpp">
-      <Filter>GameUnit\Status</Filter>
-    </ClCompile>
-    <ClCompile Include="PythonessStatus.cpp">
-      <Filter>GameUnit\Status</Filter>
-    </ClCompile>
-    <ClCompile Include="SwordmanStatus.cpp">
-      <Filter>GameUnit\Status</Filter>
-    </ClCompile>
     <ClCompile Include="BanPickCard.cpp">
       <Filter>UI\UnitCard</Filter>
     </ClCompile>
@@ -315,30 +291,6 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="GameUnitStatus.h">
-      <Filter>GameUnit\Status</Filter>
-    </ClInclude>
-    <ClInclude Include="PriestStatus.h">
-      <Filter>GameUnit\Status</Filter>
-    </ClInclude>
-    <ClInclude Include="ArcherStatus.h">
-      <Filter>GameUnit\Status</Filter>
-    </ClInclude>
-    <ClInclude Include="KnightStatus.h">
-      <Filter>GameUnit\Status</Filter>
-    </ClInclude>
-    <ClInclude Include="MonkStatus.h">
-      <Filter>GameUnit\Status</Filter>
-    </ClInclude>
-    <ClInclude Include="NinjaStatus.h">
-      <Filter>GameUnit\Status</Filter>
-    </ClInclude>
-    <ClInclude Include="PyromancerStatus.h">
-      <Filter>GameUnit\Status</Filter>
-    </ClInclude>
-    <ClInclude Include="PythonessStatus.h">
-      <Filter>GameUnit\Status</Filter>
-    </ClInclude>
-    <ClInclude Include="SwordmanStatus.h">
       <Filter>GameUnit\Status</Filter>
     </ClInclude>
     <ClInclude Include="BanPickCard.h">

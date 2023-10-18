@@ -1,7 +1,6 @@
 #include "PreCompile.h"
 #include "Archer.h"
 #include "Arrow.h"
-#include "ArcherStatus.h"
 
 Archer::Archer()
 {
@@ -43,12 +42,11 @@ void Archer::Start()
 			GameEngineFile& File = Files[i];
 			GameEngineTexture::Load(File.GetStringPath());
 		}
-
-		GameEngineSprite::CreateSingle("Archer_ult.png");
-		GameEngineSprite::CreateSingle("arrow.png");
 	}
 
-	SetUnitStatus(ArcherStatus::ArcherStat);
+	//SetUnitStatus(ArcherStatus::ArcherStat);
+	SetUnitStatus(GameUnitStatus::ArcherStat);
+
 }
 
 void Archer::LevelStart(GameEngineLevel* _PrevLevel)

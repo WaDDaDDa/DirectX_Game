@@ -26,7 +26,7 @@ void UI_Button::Start()
 	// 콜리젼이 가려지지 않게 하기위함.
 	ButtonCol->Transform.AddLocalPosition({0.0f, 0.0f, -30.0f});
 
-	ChangeState(UI_ButtonState::Idle);
+	//ChangeState(UI_ButtonState::Idle);
 
 	GameEngineInput::AddInputObject(this);
 
@@ -34,17 +34,31 @@ void UI_Button::Start()
 	ColEvent.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
 		{
 			// 처음한번 실행.
+			ChangeState(UI_ButtonState::Enter);
+			return;
 		};
 
 	ColEvent.Stay = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
 		{
 			// 커서 올라가있는 중 실행.
+			if (GameEngineInput::IsDown(VK_LBUTTON, this))
+			{
+				ChangeState(UI_ButtonState::Click);
+				return;
+			}
+			else
+			{
+				ChangeState(UI_ButtonState::Stay);
+				return;
+			}
 
 		};
 
 	ColEvent.Exit = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
 		{
 			// 커서 올라가있다가 떨어졌을때 실행.
+			ChangeState(UI_ButtonState::End);
+			return;
 		};
 }
 
@@ -72,8 +86,12 @@ void UI_Button::StateUpdate(float _Delta)
 	{
 	case UI_ButtonState::Idle:
 		return IdleUpdate(_Delta);
+	case UI_ButtonState::Enter:
+		return EnterUpdate(_Delta);
 	case UI_ButtonState::Stay:
 		return StayUpdate(_Delta);
+	case UI_ButtonState::End:
+		return EndUpdate(_Delta);
 	case UI_ButtonState::Click:
 		return ClickUpdate(_Delta);
 	case UI_ButtonState::Max:
@@ -92,8 +110,14 @@ void UI_Button::ChangeState(UI_ButtonState _State)
 		case UI_ButtonState::Idle:
 			IdleStart();
 			break;
+		case UI_ButtonState::Enter:
+			EnterStart();
+			break;
 		case UI_ButtonState::Stay:
 			StayStart();
+			break;
+		case UI_ButtonState::End:
+			EndStart();
 			break;
 		case UI_ButtonState::Click:
 			ClickStart();
@@ -131,12 +155,32 @@ void UI_Button::IdleUpdate(float _Delta)
 
 }
 
+void UI_Button::EnterStart()
+{
+
+}
+
+void UI_Button::EnterUpdate(float _Delta)
+{
+
+}
+
 void UI_Button::StayStart()
 {
 
 }
 
 void UI_Button::StayUpdate(float _Delta)
+{
+
+}
+
+void UI_Button::EndStart()
+{
+
+}
+
+void UI_Button::EndUpdate(float _Delta)
 {
 
 }

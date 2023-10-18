@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "BanPickLevel.h"
 #include "BanPickManager.h"
-
+#include "UI_Mouse.h"
 // UI
 
 
@@ -30,6 +30,7 @@ void BanPickLevel::Start()
 
 	GameEngineInput::AddInputObject(this);
 
+	CreateActor<UI_Mouse>();
 }
 
 void BanPickLevel::Update(float _Delta)
@@ -113,9 +114,30 @@ void BanPickLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			GameEngineFile& File = Files[i];
 			GameEngineTexture::Load(File.GetStringPath());
 		}
-
+		// 공격방어 아이콘들
 		GameEngineSprite::CreateSingle("armor_icon.png");
 		GameEngineSprite::CreateSingle("attack_icon.png");
+
+		// 유닛 아이콘들
+		GameEngineSprite::CreateSingle("Archer_ult.png");
+		GameEngineSprite::CreateSingle("Archer_skill.png");
+		GameEngineSprite::CreateSingle("arrow.png");
+
+		GameEngineSprite::CreateSingle("knight_ult.png");
+		GameEngineSprite::CreateSingle("knight_skill.png");
+		GameEngineSprite::CreateSingle("Monk_ult.png");
+		GameEngineSprite::CreateSingle("Monk_skill.png");
+		GameEngineSprite::CreateSingle("Ninja_ult.png");
+		GameEngineSprite::CreateSingle("Ninja_skill.png");
+		GameEngineSprite::CreateSingle("Priest_ult.png");
+		GameEngineSprite::CreateSingle("Priest_skill.png");
+		GameEngineSprite::CreateSingle("Pyromancer_ult.png");
+		GameEngineSprite::CreateSingle("Pyromancer_skill.png");
+		GameEngineSprite::CreateSingle("Pythoness_ult.png");
+		GameEngineSprite::CreateSingle("Pythoness_skill.png");
+		GameEngineSprite::CreateSingle("swordman_ult.png");
+		GameEngineSprite::CreateSingle("swordman_skill.png");
+
 	}
 
 	CreateActor<BanPickManager>();

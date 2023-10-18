@@ -3,7 +3,6 @@
 #include "FlameAttack.h"
 #include "FireSpirit.h"
 #include "FlameUlt.h"
-#include "PyromancerStatus.h"
 
 Pyromancer::Pyromancer()
 {
@@ -46,10 +45,10 @@ void Pyromancer::Start()
 			GameEngineTexture::Load(File.GetStringPath());
 		}
 
-		GameEngineSprite::CreateSingle("Pyromancer_ult.png");
 	}
 
-	SetUnitStatus(PyromancerStatus::PyromancerStat);
+	//SetUnitStatus(PyromancerStatus::PyromancerStat);
+	SetUnitStatus(GameUnitStatus::PyromancerStat);
 
 }
 

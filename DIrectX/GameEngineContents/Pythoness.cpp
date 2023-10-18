@@ -4,7 +4,6 @@
 #include "PythonessHeal.h"
 #include "PythonessSkill.h"
 #include "PythonessUlt.h"
-#include "PythonessStatus.h"
 
 Pythoness::Pythoness()
 {
@@ -47,10 +46,10 @@ void Pythoness::Start()
 			GameEngineTexture::Load(File.GetStringPath());
 		}
 
-		GameEngineSprite::CreateSingle("Pythoness_ult.png");
 	}
 
-	SetUnitStatus(PythonessStatus::PythonessStat);
+	//SetUnitStatus(PythonessStatus::PythonessStat);
+	SetUnitStatus(GameUnitStatus::PythonessStat);
 
 }
 

@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "UI_Mouse.h"
 
+std::shared_ptr<class UI_Mouse> UI_Mouse::GameMouse = nullptr;
 
 UI_Mouse::UI_Mouse()
 {
@@ -19,6 +20,10 @@ void UI_Mouse::Start()
 	MouseCol->Transform.SetLocalScale(MouseColScale);
 
 	ChangeState(UI_MouseState::Idle);
+
+	GameEngineInput::AddInputObject(this);
+
+	GameMouse = GetDynamic_Cast_This<UI_Mouse>();
 
 	// 이벤트 셋팅
 	ColEvent.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
@@ -49,6 +54,12 @@ void UI_Mouse::LevelEnd(GameEngineLevel* _NextLevel)
 
 void UI_Mouse::Update(float _Delta)
 {
+	if (GameEngineInput::IsDown('Z', this))
+	{
+		TeamSwitch();
+	}
+
+
 	//이벤트 사용.
 	Transform.SetWorldPosition(GetLevel()->GetMainCamera()->GetWorldMousePos2D());
 	StateUpdate(_Delta);

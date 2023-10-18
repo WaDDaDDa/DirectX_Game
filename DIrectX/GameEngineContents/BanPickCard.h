@@ -15,39 +15,41 @@ public:
 
     float4 StartPos = { -370.0f, 125.0f, 100.0f };
 
-    void Init(const class GameUnitStatus& _Status);
+    void Init();
 
     void Init(size_t _Stat)
     {
         switch (_Stat)
         {
         case 0:
-            Init(ArcherStatus::ArcherStat);
+            UnitStat = GameUnitStatus::ArcherStat;
             break;
         case 1:
-            Init(KnightStatus::KnightStat);
+            UnitStat = GameUnitStatus::KnightStat;
             break;
         case 2:
-            Init(MonkStatus::MonkStat);
+            UnitStat = GameUnitStatus::MonkStat;
             break;
         case 3:
-            Init(NinjaStatus::NinjaStat);
+            UnitStat = GameUnitStatus::NinjaStat;
             break;
         case 4:
-            Init(PyromancerStatus::PyromancerStat);
+            UnitStat = GameUnitStatus::PriestStat;
             break;
         case 5:
-            Init(PriestStatus::PriestStat);
+            UnitStat = GameUnitStatus::PyromancerStat;
             break;
         case 6:
-            Init(SwordmanStatus::SwordmanStat);
+            UnitStat = GameUnitStatus::SwordmanStat;
             break;
         case 7:
-            Init(PythonessStatus::PythonessStat);
+            UnitStat = GameUnitStatus::PythonessStat;
             break;
         default:
             break;
         }
+
+        Init();
     }
 
     
@@ -57,6 +59,21 @@ public:
     }
 
     static float XInter;
+
+    TeamType GetPlayerTeam()
+    {
+        return PlayerTeam;
+    }
+
+    void SetPlayerTeam(TeamType _Team)
+    {
+        PlayerTeam = _Team;
+    }
+
+    bool IsSelect = false;
+    bool IsStart = false;
+
+    GameUnitStatus UnitStat;
 
 protected:
 
@@ -68,22 +85,30 @@ protected:
     void IdleStart()override;
     void IdleUpdate(float _Delta)override;
 
+    void EnterStart()override;
+    void EnterUpdate(float _Delta)override;
+
     void StayStart()override;
     void StayUpdate(float _Delta)override;
+
+    void EndStart()override;
+    void EndUpdate(float _Delta) override;
 
     void ClickStart()override;
     void ClickUpdate(float _Delta) override;
 
     std::string_view UnitName = "";
 
+    TeamType PlayerTeam = TeamType::Blue;
+
 private:
     std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
+    std::shared_ptr<class GameEngineSpriteRenderer> Renderer2;
 
     std::shared_ptr<class GameEngineSpriteRenderer> UnitImage;
     float4 UnitImagePos = { 0.0f, -10.0f };
 
-    bool IsSelect = false;
-
     float4 ColScale = { 76.0f, 104.0f };
+
 };
 

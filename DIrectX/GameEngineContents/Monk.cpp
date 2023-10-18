@@ -1,7 +1,6 @@
 #include "PreCompile.h"
 #include "Monk.h"
 #include "MonkUlt.h"
-#include "MonkStatus.h"
 
 Monk::Monk()
 {
@@ -45,10 +44,10 @@ void Monk::Start()
 			GameEngineTexture::Load(File.GetStringPath());
 		}
 
-		GameEngineSprite::CreateSingle("Monk_ult.png");
 	}
 
-	SetUnitStatus(MonkStatus::MonkStat);
+	//SetUnitStatus(MonkStatus::MonkStat);
+	SetUnitStatus(GameUnitStatus::MonkStat);
 }
 
 void Monk::LevelStart(GameEngineLevel* _PrevLevel)

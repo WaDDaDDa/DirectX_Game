@@ -25,11 +25,3 @@
 #include "ContentsEnum.h"
 
 #include "GameUnitStatus.h"
-#include "ArcherStatus.h"
-#include "KnightStatus.h"
-#include "MonkStatus.h"
-#include "NinjaStatus.h"
-#include "PythonessStatus.h"
-#include "PyromancerStatus.h"
-#include "PriestStatus.h"
-#include "SwordmanStatus.h"

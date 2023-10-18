@@ -19,11 +19,36 @@ public:
     UI_Mouse& operator=(const UI_Mouse& _Other) = delete;
     UI_Mouse& operator=(UI_Mouse&& _Other) noexcept = delete;
 
+    static std::shared_ptr<class UI_Mouse> GameMouse;
+
     void SetMouseColScale(float4 _Scale)
     {
         MouseColScale = _Scale;
         MouseCol->Transform.SetLocalScale(MouseColScale);
     }
+
+    TeamType GetPlayerTeam()
+    {
+        return PlayerTeam;
+    }
+
+    void SetPlayerTeam(TeamType _Team)
+    {
+        PlayerTeam = _Team;
+    }
+
+    void TeamSwitch()
+    {
+        if (TeamType::Blue == PlayerTeam)
+        {
+            PlayerTeam = TeamType::Red;
+        }
+        else if (TeamType::Red == PlayerTeam)
+        {
+            PlayerTeam = TeamType::Blue;
+        }
+    }
+
 
 protected:
     EventParameter ColEvent;
@@ -51,6 +76,8 @@ protected:
 
     UI_MouseState State = UI_MouseState::Max;
 private:
+    TeamType PlayerTeam = TeamType::Red;
+
     std::shared_ptr<GameEngineCollision> MouseCol;
     float4 MouseColScale = { 5.0f, 5.0f };
 };

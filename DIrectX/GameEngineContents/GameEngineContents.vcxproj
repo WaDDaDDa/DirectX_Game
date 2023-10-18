@@ -164,7 +164,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Archer.cpp" />
-    <ClCompile Include="ArcherStatus.cpp" />
     <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="BanPickBoard.cpp" />
     <ClCompile Include="BanPickCard.cpp" />
@@ -205,21 +204,18 @@
     </ClCompile>
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="KnightEffect.cpp" />
-    <ClCompile Include="KnightStatus.cpp" />
     <ClCompile Include="KnightUltEffect.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="Monk.cpp" />
     <ClCompile Include="MonkShield.cpp" />
-    <ClCompile Include="MonkStatus.cpp" />
     <ClCompile Include="MonkUlt.cpp" />
     <ClCompile Include="NewGame_UI.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="Ninja.cpp" />
-    <ClCompile Include="NinjaStatus.cpp" />
     <ClCompile Include="NinjaUlt.cpp">
       <SubType>
       </SubType>
@@ -236,23 +232,16 @@
     </ClCompile>
     <ClCompile Include="Priest.cpp" />
     <ClCompile Include="PriestHealEffect.cpp" />
-    <ClCompile Include="PriestStatus.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="PriestUlt.cpp" />
     <ClCompile Include="Pyromancer.cpp" />
-    <ClCompile Include="PyromancerStatus.cpp" />
     <ClCompile Include="Pythoness.cpp" />
     <ClCompile Include="PythonessAttack.cpp" />
     <ClCompile Include="PythonessHeal.cpp" />
     <ClCompile Include="PythonessSkill.cpp" />
     <ClCompile Include="PythonessSkillBomb.cpp" />
-    <ClCompile Include="PythonessStatus.cpp" />
     <ClCompile Include="PythonessUlt.cpp" />
     <ClCompile Include="StadiumBoard.cpp" />
     <ClCompile Include="Swordman.cpp" />
-    <ClCompile Include="SwordmanStatus.cpp" />
     <ClCompile Include="SwordmanUltEffect.cpp" />
     <ClCompile Include="TextArrow.cpp">
       <SubType>
@@ -269,7 +258,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archer.h" />
-    <ClInclude Include="ArcherStatus.h" />
     <ClInclude Include="Arrow.h" />
     <ClInclude Include="BanPickBoard.h" />
     <ClInclude Include="BanPickCard.h" />
@@ -311,21 +299,18 @@
     </ClInclude>
     <ClInclude Include="Knight.h" />
     <ClInclude Include="KnightEffect.h" />
-    <ClInclude Include="KnightStatus.h" />
     <ClInclude Include="KnightUltEffect.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="Monk.h" />
     <ClInclude Include="MonkShield.h" />
-    <ClInclude Include="MonkStatus.h" />
     <ClInclude Include="MonkUlt.h" />
     <ClInclude Include="NewGame_UI.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="Ninja.h" />
-    <ClInclude Include="NinjaStatus.h" />
     <ClInclude Include="NinjaUlt.h">
       <SubType>
       </SubType>
@@ -337,23 +322,16 @@
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="Priest.h" />
     <ClInclude Include="PriestHealEffect.h" />
-    <ClInclude Include="PriestStatus.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="PriestUlt.h" />
     <ClInclude Include="Pyromancer.h" />
-    <ClInclude Include="PyromancerStatus.h" />
     <ClInclude Include="Pythoness.h" />
     <ClInclude Include="PythonessAttack.h" />
     <ClInclude Include="PythonessHeal.h" />
     <ClInclude Include="PythonessSkill.h" />
     <ClInclude Include="PythonessSkillBomb.h" />
-    <ClInclude Include="PythonessStatus.h" />
     <ClInclude Include="PythonessUlt.h" />
     <ClInclude Include="StadiumBoard.h" />
     <ClInclude Include="Swordman.h" />
-    <ClInclude Include="SwordmanStatus.h" />
     <ClInclude Include="SwordmanUltEffect.h" />
     <ClInclude Include="TextArrow.h">
       <SubType>

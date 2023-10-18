@@ -1,7 +1,6 @@
 #include "PreCompile.h"
 #include "Priest.h"
 #include "PriestUlt.h"
-#include "PriestStatus.h"
 
 Priest::Priest()
 {
@@ -45,10 +44,10 @@ void Priest::Start()
 			GameEngineTexture::Load(File.GetStringPath());
 		}
 
-		GameEngineSprite::CreateSingle("Priest_ult.png");
 	}
 
-	SetUnitStatus(PriestStatus::PriestStat);
+	//SetUnitStatus(PriestStatus::PriestStat);
+	SetUnitStatus(GameUnitStatus::PriestStat);
 }
 
 void Priest::LevelStart(GameEngineLevel* _PrevLevel)

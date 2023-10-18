@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "BanPickCard.h"
 #include "GameUnitStatus.h"
+#include "UI_Mouse.h"
 
 float BanPickCard::XInter = 0.0f;
 
@@ -48,47 +49,54 @@ void BanPickCard::Start()
 	// Card 배경
 	Renderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
 	Renderer->CreateAnimation("BanPickCard_Null", "BanPick", 0.1f, 15, 15, false);
-	Renderer->CreateAnimation("BanPickCard_Blue", "BanPick", 0.1f, 9, 9, false);
-	Renderer->CreateAnimation("BanPickCard_Red", "BanPick", 0.1f, 10, 10, false);
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(2.0f);
-	//Renderer->SetPivotType(PivotType::Bottom);
 	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 	Renderer->ChangeAnimation("BanPickCard_Null");
+
+	// Card 테두리
+	Renderer2 = CreateComponent<GameEngineUIRenderer>(ContentsOrder::BackUI);
+	Renderer2->CreateAnimation("BanPickCard_Blue", "BanPick", 0.1f, 19, 19, false);
+	Renderer2->CreateAnimation("BanPickCard_Red", "BanPick", 0.1f, 20, 20, false);
+	Renderer2->AutoSpriteSizeOn();
+	Renderer2->SetAutoScaleRatio(2.0f);
+	Renderer2->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackUI) });
+	Renderer2->ChangeAnimation("BanPickCard_Blue");
+	Renderer2->Off();
 
 	SetButtonColScale(ColScale);
 
 	Transform.AddLocalPosition(StartPos);
 
 	// 이벤트 셋팅
-	ColEvent.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
-		{
-			// 처음한번 실행.
-			if (false == IsSelect)
-			{
-				UnitImage->ChangeAnimation(GetUnitName() += "_Stay");
-			}
-		};
+	//ColEvent.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
+	//	{
+	//		// 처음한번 실행.
+	//		if (false == IsSelect)
+	//		{
+	//			UnitImage->ChangeAnimation(GetUnitName() += "_Stay");
+	//		}
+	//	};
 
-	ColEvent.Stay = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
-		{
-			// 커서 올라가있는 중 실행.
-			if (GameEngineInput::IsDown(VK_LBUTTON, this))
-			{
-				UnitImage->ChangeAnimation(GetUnitName() += "_Att");
-				IsSelect = true;
-			}
-		};
+	//ColEvent.Stay = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
+	//	{
+	//		// 커서 올라가있는 중 실행.
+	//		if (GameEngineInput::IsDown(VK_LBUTTON, this))
+	//		{
+	//			UnitImage->ChangeAnimation(GetUnitName() += "_Att");
+	//			IsSelect = true;
+	//		}
+	//	};
 
-	ColEvent.Exit = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
-		{
-			// 커서 올라가있다가 떨어졌을때 실행.
-			if (false == IsSelect)
-			{
-				UnitImage->ChangeAnimation(GetUnitName() += "_Idle");
-			}
+	//ColEvent.Exit = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
+	//	{
+	//		// 커서 올라가있다가 떨어졌을때 실행.
+	//		if (false == IsSelect)
+	//		{
+	//			UnitImage->ChangeAnimation(GetUnitName() += "_Idle");
+	//		}
 
-		};
+	//	};
 }
 
 void BanPickCard::LevelStart(GameEngineLevel* _PrevLevel)
@@ -96,15 +104,15 @@ void BanPickCard::LevelStart(GameEngineLevel* _PrevLevel)
 	XInter = 0.0f;
 }
 
-void BanPickCard::Init(const GameUnitStatus& _Status)
+void BanPickCard::Init()
 {
-	UnitName = _Status.UnitName;
+	UnitName = UnitStat.UnitName;
 
 	// Unit이미지
 	UnitImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
-	UnitImage->CreateAnimation(GetUnitName() += "_Idle", GetUnitName() += "CardAni", 0.2f, 0, 0, false);
-	UnitImage->CreateAnimation(GetUnitName() += "_Stay", GetUnitName() += "CardAni", 0.2f, 0, 4, true);
-	UnitImage->CreateAnimation(GetUnitName() += "_Att", GetUnitName() += "CardAni", 0.2f, 13, 16, false);
+	UnitImage->CreateAnimation(GetUnitName() += "_Idle", GetUnitName() += "CardAni", 0.1f, 0, 0, false);
+	UnitImage->CreateAnimation(GetUnitName() += "_Stay", GetUnitName() += "CardAni", 0.1f, 0, 4, true);
+	UnitImage->CreateAnimation(GetUnitName() += "_Att", GetUnitName() += "CardAni", 0.1f, 13, 16, false);
 	UnitImage->AutoSpriteSizeOn();
 	UnitImage->SetAutoScaleRatio(2.0f);
 	UnitImage->Transform.AddLocalPosition(UnitImagePos);
@@ -124,7 +132,10 @@ void BanPickCard::LevelEnd(GameEngineLevel* _NextLevel)
 
 void BanPickCard::IdleStart()
 {
-
+	if (false == IsSelect)
+	{
+		UnitImage->ChangeAnimation(GetUnitName() += "_Idle");
+	}
 }
 
 void BanPickCard::IdleUpdate(float _Delta)
@@ -132,9 +143,36 @@ void BanPickCard::IdleUpdate(float _Delta)
 
 }
 
-void BanPickCard::StayStart()
+void BanPickCard::EnterStart()
 {
 
+}
+
+void BanPickCard::EnterUpdate(float _Delta)
+{
+
+}
+
+void BanPickCard::StayStart()
+{
+	if (false == IsSelect)
+	{
+		UnitImage->ChangeAnimation(GetUnitName() += "_Stay");
+	}
+
+	IsStart = true;
+
+	if (TeamType::Blue == UI_Mouse::GameMouse->GetPlayerTeam())
+	{
+		Renderer2->ChangeAnimation("BanPickCard_Blue");
+
+	}
+	else if (TeamType::Red == UI_Mouse::GameMouse->GetPlayerTeam())
+	{
+		Renderer2->ChangeAnimation("BanPickCard_Red");
+	}
+
+	Renderer2->On();
 }
 
 void BanPickCard::StayUpdate(float _Delta)
@@ -142,9 +180,26 @@ void BanPickCard::StayUpdate(float _Delta)
 	
 }
 
-void BanPickCard::ClickStart()
+void BanPickCard::EndStart()
+{
+	if (false == IsSelect)
+	{
+		UnitImage->ChangeAnimation(GetUnitName() += "_Idle");
+	}
+
+	Renderer2->Off();
+
+}
+
+void BanPickCard::EndUpdate(float _Delta)
 {
 
+}
+
+void BanPickCard::ClickStart()
+{
+	UnitImage->ChangeAnimation(GetUnitName() += "_Att");
+	IsSelect = true;
 }
 
 void BanPickCard::ClickUpdate(float _Delta)

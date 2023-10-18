@@ -1,7 +1,6 @@
 #include "PreCompile.h"
 #include "Swordman.h"
 #include "SwordmanUltEffect.h"
-#include "SwordmanStatus.h"
 
 Swordman::Swordman()
 {
@@ -44,7 +43,6 @@ void Swordman::Start()
 			GameEngineTexture::Load(File.GetStringPath());
 		}
 
-		GameEngineSprite::CreateSingle("swordman_ult.png");
 	}
 
 	// 이벤트 셋팅
@@ -82,7 +80,8 @@ void Swordman::Start()
 			return false;
 		};
 
-	SetUnitStatus(SwordmanStatus::SwordmanStat);
+	//SetUnitStatus(SwordmanStatus::SwordmanStat);
+	SetUnitStatus(GameUnitStatus::SwordmanStat);
 
 }
 

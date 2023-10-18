@@ -2,7 +2,6 @@
 #include "Knight.h"
 #include "KnightUltEffect.h"
 #include "KnightEffect.h"
-#include "KnightStatus.h"
 
 Knight::Knight()
 {
@@ -46,10 +45,11 @@ void Knight::Start()
 			GameEngineTexture::Load(File.GetStringPath());
 		}
 
-		GameEngineSprite::CreateSingle("knight_ult.png");
 	}
 
-	SetUnitStatus(KnightStatus::KnightStat);
+	//SetUnitStatus(KnightStatus::KnightStat);
+	SetUnitStatus(GameUnitStatus::KnightStat);
+
 }
 
 void Knight::LevelStart(GameEngineLevel* _PrevLevel)
