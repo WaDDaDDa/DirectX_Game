@@ -80,6 +80,11 @@ public:
 		return MainDevcie.GetContext();
 	}
 
+	static std::map<std::string, std::shared_ptr<GameEngineLevel>>& GetAllLevel()
+	{
+		return AllLevel;
+	}
+
 protected:
 
 private:

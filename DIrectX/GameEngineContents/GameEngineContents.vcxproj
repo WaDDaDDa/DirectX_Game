@@ -179,6 +179,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Bird.cpp" />
+    <ClCompile Include="ContentsControlWindow.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="FireSpirit.cpp" />
     <ClCompile Include="FireSpiritAttack.cpp" />
@@ -283,6 +284,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Bird.h" />
+    <ClInclude Include="ContentsControlWindow.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="FireSpirit.h" />

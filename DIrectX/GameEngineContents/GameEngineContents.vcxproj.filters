@@ -173,6 +173,9 @@
     <ClCompile Include="BanPickManager.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="ContentsControlWindow.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -349,6 +352,9 @@
     </ClInclude>
     <ClInclude Include="BanPickManager.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsControlWindow.h">
+      <Filter>Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

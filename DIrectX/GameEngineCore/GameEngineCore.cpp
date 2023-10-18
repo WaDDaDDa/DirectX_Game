@@ -39,6 +39,7 @@ void GameEngineCore::Update()
 		{
 			// get() 은 shared_ptr에서의 this
 			CurLevel->AllLevelEnd(NextLevel.get());
+			CurLevel->AllReleaseCheck();
 		}
 
 		// NextLevel->OverCheck(CurLevel);
