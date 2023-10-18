@@ -27,5 +27,7 @@ void Player::Start()
 
 void Player::Update(float _Delta)
 {
+	// 페이드 예제
+	// Renderer->GetColorData().MulColor.A -= _DeltaTime;
 
 }
