@@ -9,6 +9,8 @@
 // GameUnit
 #include "BanPickCard.h"
 
+BanPickInfo BanPickInfo::Info;
+
 BanPickManager::BanPickManager()
 {
 
@@ -50,7 +52,7 @@ void BanPickManager::Start()
 	UnitImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
 	for (size_t i = 0; i < UnitCount; i++)
 	{
-		UnitImage->CreateAnimation(Card[i]->GetUnitName() += "_Idle", Card[i]->GetUnitName() += "CardAni", 0.1f, 0, 0, false);
+		UnitImage->CreateAnimation(Card[i]->GetUnitNameToString() += "_Idle", Card[i]->GetUnitNameToString() += "CardAni", 0.1f, 0, 0, false);
 	}
 
 	CurCard = Card[0];
@@ -59,21 +61,21 @@ void BanPickManager::Start()
 	UnitImage->SetAutoScaleRatio(2.0f);
 	UnitImage->Transform.AddLocalPosition(UnitImagePos);
 	UnitImage->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
-	UnitImage->ChangeAnimation(CurCard->GetUnitName() += "_Idle");
+	UnitImage->ChangeAnimation(CurCard->GetUnitNameToString() += "_Idle");
 
 	UnitSkillImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
 	UnitSkillImage->AutoSpriteSizeOn();
 	UnitSkillImage->SetAutoScaleRatio(2.0f);
 	UnitSkillImage->Transform.AddLocalPosition(UnitSkillImagePos);
 	UnitSkillImage->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
-	UnitSkillImage->SetSprite(CurCard->GetUnitName() += "_skill.png");
+	UnitSkillImage->SetSprite(CurCard->GetUnitNameToString() += "_skill.png");
 
 	UnitUltImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
 	UnitUltImage->AutoSpriteSizeOn();
 	UnitUltImage->SetAutoScaleRatio(2.0f);
 	UnitUltImage->Transform.AddLocalPosition(UnitUltImagePos);
 	UnitUltImage->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
-	UnitUltImage->SetSprite(CurCard->GetUnitName() += "_ult.png");
+	UnitUltImage->SetSprite(CurCard->GetUnitNameToString() += "_ult.png");
 
 	UniAttBox = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
 	UniAttBox->CreateAnimation("AttBox", "BanPick", 0.1f, 14, 14, false);
@@ -197,41 +199,57 @@ void BanPickManager::Start()
 
 void BanPickManager::LevelStart(GameEngineLevel* _PrevLevel)
 {
-
+	BanPickInfo::Info.Clear();
 }
 
 void BanPickManager::Update(float _Delta)
 {
 	// 카드의 팀정보 바꾸는것
-	for (size_t i = 0; i < UnitCount; i++)
-	{
-		if (true == Card[i]->IsSelect)
-		{
-			continue;
-		}
+	//for (size_t i = 0; i < UnitCount; i++)
+	//{
+	//	if (true == Card[i]->IsSelect)
+	//	{
+	//		continue;
+	//	}
 
-		Card[i]->SetPlayerTeam(UI_Mouse::GameMouse->GetPlayerTeam());
-	}
+	//	Card[i]->SetPlayerTeam(UI_Mouse::GameMouse->GetPlayerTeam());
+	//}
 
 	// 처음 들어온 카드 설정
 	for (size_t i = 0; i < UnitCount; i++)
 	{
-		if (CurCard == Card[i])
-		{
-			continue;
-		}
+		//if (CurCard == Card[i])
+		//{
+		//	continue;
+		//}
 
 		if (true == Card[i]->IsStart)
 		{
 			CardValueReset();
 			CurCard = Card[i];
 		}
+
+		if (true == Card[i]->IsPick)
+		{
+			if (TeamType::Blue == UI_Mouse::GameMouse->GetPlayerTeam())
+			{
+				BanPickInfo::Info.BlueTeamPick[BluePickCount] = CurCard->GetUnitName();
+				BluePickCount++;
+			}
+			else if (TeamType::Red == UI_Mouse::GameMouse->GetPlayerTeam())
+			{
+				BanPickInfo::Info.RedTeamPick[RedPickCount] = CurCard->GetUnitName();
+				RedPickCount++;
+			}
+
+			UI_Mouse::GameMouse->TeamSwitch();
+			Card[i]->IsPick = false;
+		}
 	}
 
-	UnitImage->ChangeAnimation(CurCard->GetUnitName() += "_Idle");
-	UnitSkillImage->SetSprite(CurCard->GetUnitName() += "_skill.png");
-	UnitUltImage->SetSprite(CurCard->GetUnitName() += "_ult.png");
-
+	UnitImage->ChangeAnimation(CurCard->GetUnitNameToString() += "_Idle");
+	UnitSkillImage->SetSprite(CurCard->GetUnitNameToString() += "_skill.png");
+	UnitUltImage->SetSprite(CurCard->GetUnitNameToString() += "_ult.png");
 }
 
 void BanPickManager::LevelEnd(GameEngineLevel* _NextLevel)

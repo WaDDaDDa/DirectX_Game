@@ -4,6 +4,7 @@
 #include "GameUnit.h"
 #include "BattleField.h"
 #include "Bird.h"
+#include "BanPickManager.h"
 
 // UI
 #include "StadiumBoard.h"
@@ -59,40 +60,8 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 	std::shared_ptr<BattleField> BF = CreateActor<BattleField>();
 
-	// À¯´Ö »ý¼º
-	// ºí·çÆÀ À¯´Ö (¿ÞÂÊ)
-	BlueTeam.push_back(CreateActor<Ninja>()->GetPointer());
-	//BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
-	//BlueTeam.push_back(CreateActor<Pyromancer>()->GetPointer());
-	BlueTeam.push_back(CreateActor<Swordman>()->GetPointer());
-	//BlueTeam.push_back(CreateActor<Pythoness>()->GetPointer());
-
-
-		// ·¹µåÆÀ À¯´Ö (¿À¸¥ÂÊ)
-	RedTeam.push_back(CreateActor<Knight>()->GetPointer());
-	//RedTeam.push_back(CreateActor<Knight>()->GetPointer());
-	//RedTeam.push_back(CreateActor<Priest>()->GetPointer());
-	RedTeam.push_back(CreateActor<Archer>()->GetPointer());
-	//RedTeam.push_back(CreateActor<Archer>()->GetPointer());
-
 	
-	// ÆÀ¼³Á¤
-	for (size_t i = 0; i < BlueTeam.size(); i++)
-	{
-		BlueTeam[static_cast<int>(i)]->EnemyUnitSetting(RedTeam);
-		BlueTeam[static_cast<int>(i)]->TeamUnitSetting(BlueTeam);
-
-		BlueTeam[static_cast<int>(i)]->TeamSet(TeamType::Blue);
-	}
-
-	for (size_t i = 0; i < RedTeam.size(); i++)
-	{
-		RedTeam[static_cast<int>(i)]->EnemyUnitSetting(BlueTeam);
-		RedTeam[static_cast<int>(i)]->TeamUnitSetting(RedTeam);
-
-		RedTeam[static_cast<int>(i)]->TeamSet(TeamType::Red);
-	}
-
+	UnitSetting();
 
 	CreateActor<Bird>();
 
@@ -117,4 +86,76 @@ void BattleLevel::LevelEnd(GameEngineLevel* _NextLevel)
 	RedTeam.clear();
 
 	int a = 0;
+}
+
+void BattleLevel::UnitSetting()
+{
+	size_t BSize = BanPickInfo::Info.BlueTeamPick.size();
+	size_t RSize = BanPickInfo::Info.BlueTeamPick.size();
+
+	
+	for (size_t i = 0; i < BSize; i++)
+	{
+		std::shared_ptr<GameUnit> Unit = CrateUnit(BanPickInfo::Info.BlueTeamPick[i]);
+		BlueTeam.push_back(Unit->GetPointer());
+	}
+	for (size_t i = 0; i < RSize; i++)
+	{
+		std::shared_ptr<GameUnit> Unit = CrateUnit(BanPickInfo::Info.RedTeamPick[i]);
+		RedTeam.push_back(Unit->GetPointer());
+	}
+
+	// ÆÀ¼³Á¤
+	for (size_t i = 0; i < BlueTeam.size(); i++)
+	{
+		BlueTeam[static_cast<int>(i)]->EnemyUnitSetting(RedTeam);
+		BlueTeam[static_cast<int>(i)]->TeamUnitSetting(BlueTeam);
+		BlueTeam[static_cast<int>(i)]->TeamSet(TeamType::Blue);
+	}
+
+	for (size_t i = 0; i < RedTeam.size(); i++)
+	{
+		RedTeam[static_cast<int>(i)]->EnemyUnitSetting(BlueTeam);
+		RedTeam[static_cast<int>(i)]->TeamUnitSetting(RedTeam);
+		RedTeam[static_cast<int>(i)]->TeamSet(TeamType::Red);
+	}
+}
+
+std::shared_ptr<GameUnit> BattleLevel::CrateUnit(std::string_view _Name)
+{
+	std::string Name = _Name.data();
+
+	if ("Archer" == Name)
+	{
+		return CreateActor<Archer>();
+	}
+	if ("Knight" == Name)
+	{
+		return CreateActor<Knight>();
+	}
+	if ("Monk" == Name)
+	{
+		return CreateActor<Monk>();
+	}
+	if ("Pyromancer" == Name)
+	{
+		return CreateActor<Pyromancer>();
+	}
+	if ("Pythoness" == Name)
+	{
+		return CreateActor<Pythoness>();
+	}
+	if ("Swordman" == Name)
+	{
+		return CreateActor<Swordman>();
+	}
+	if ("Priest" == Name)
+	{
+		return CreateActor<Priest>();
+	}
+	if ("Ninja" == Name)
+	{
+		return CreateActor<Ninja>();
+	}
+
 }

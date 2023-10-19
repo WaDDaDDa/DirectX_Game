@@ -110,14 +110,14 @@ void BanPickCard::Init()
 
 	// Unit¿ÃπÃ¡ˆ
 	UnitImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
-	UnitImage->CreateAnimation(GetUnitName() += "_Idle", GetUnitName() += "CardAni", 0.1f, 0, 0, false);
-	UnitImage->CreateAnimation(GetUnitName() += "_Stay", GetUnitName() += "CardAni", 0.1f, 0, 4, true);
-	UnitImage->CreateAnimation(GetUnitName() += "_Att", GetUnitName() += "CardAni", 0.1f, 13, 16, false);
+	UnitImage->CreateAnimation(GetUnitNameToString() += "_Idle", GetUnitNameToString() += "CardAni", 0.1f, 0, 0, false);
+	UnitImage->CreateAnimation(GetUnitNameToString() += "_Stay", GetUnitNameToString() += "CardAni", 0.1f, 0, 4, true);
+	UnitImage->CreateAnimation(GetUnitNameToString() += "_Att", GetUnitNameToString() += "CardAni", 0.1f, 13, 16, false);
 	UnitImage->AutoSpriteSizeOn();
 	UnitImage->SetAutoScaleRatio(2.0f);
 	UnitImage->Transform.AddLocalPosition(UnitImagePos);
 	UnitImage->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
-	UnitImage->ChangeAnimation(GetUnitName() += "_Idle");
+	UnitImage->ChangeAnimation(GetUnitNameToString() += "_Idle");
 
 	Transform.AddLocalPosition({ XInter, 0.0f });
 
@@ -134,7 +134,7 @@ void BanPickCard::IdleStart()
 {
 	if (false == IsSelect)
 	{
-		UnitImage->ChangeAnimation(GetUnitName() += "_Idle");
+		UnitImage->ChangeAnimation(GetUnitNameToString() += "_Idle");
 	}
 }
 
@@ -157,7 +157,7 @@ void BanPickCard::StayStart()
 {
 	if (false == IsSelect)
 	{
-		UnitImage->ChangeAnimation(GetUnitName() += "_Stay");
+		UnitImage->ChangeAnimation(GetUnitNameToString() += "_Stay");
 	}
 
 	IsStart = true;
@@ -184,7 +184,7 @@ void BanPickCard::EndStart()
 {
 	if (false == IsSelect)
 	{
-		UnitImage->ChangeAnimation(GetUnitName() += "_Idle");
+		UnitImage->ChangeAnimation(GetUnitNameToString() += "_Idle");
 	}
 
 	Renderer2->Off();
@@ -198,8 +198,12 @@ void BanPickCard::EndUpdate(float _Delta)
 
 void BanPickCard::ClickStart()
 {
-	UnitImage->ChangeAnimation(GetUnitName() += "_Att");
-	IsSelect = true;
+	if (false == IsSelect)
+	{
+		UnitImage->ChangeAnimation(GetUnitNameToString() += "_Att");
+		IsSelect = true;
+		IsPick = true;
+	}
 }
 
 void BanPickCard::ClickUpdate(float _Delta)

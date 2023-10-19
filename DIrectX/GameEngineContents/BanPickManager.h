@@ -1,6 +1,27 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 
+class BanPickInfo
+{
+public:
+    static BanPickInfo Info;
+    std::map<int, std::string_view> BlueTeamPick;
+    std::map<int, std::string_view> RedTeamPick;
+
+    void Clear()
+    {
+        if (false == BlueTeamPick.empty())
+        {
+            BlueTeamPick.clear();
+        }
+
+        if (false == RedTeamPick.empty())
+        {
+            RedTeamPick.clear();
+        }
+    }
+};
+
 class BanPickManager : public GameEngineActor
 {
 public:
@@ -15,7 +36,6 @@ public:
     void CardIntit();
 
     void CardValueReset();
-
 
 protected:
     void Start() override;
@@ -68,5 +88,8 @@ private:
     std::shared_ptr<class BanPickCard> CurCard;
     std::vector<std::shared_ptr<class BanPickCard>> Card;
     std::shared_ptr<class BanPickBoard> GameBoard;
+
+    int BluePickCount = 0;
+    int RedPickCount = 0;
 };
 

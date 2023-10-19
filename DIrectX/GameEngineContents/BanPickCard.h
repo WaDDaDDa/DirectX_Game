@@ -53,9 +53,14 @@ public:
     }
 
     
-    std::string GetUnitName()
+    std::string GetUnitNameToString()
     {
         return UnitName.data();
+    }
+
+    std::string_view GetUnitName()
+    {
+        return UnitName;
     }
 
     static float XInter;
@@ -72,6 +77,7 @@ public:
 
     bool IsSelect = false;
     bool IsStart = false;
+    bool IsPick = false;
 
     GameUnitStatus UnitStat;
 

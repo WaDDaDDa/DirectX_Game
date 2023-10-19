@@ -28,6 +28,11 @@ public:
         ButtonCol->Transform.SetLocalScale(ButtonColScale);
     }
 
+    UI_ButtonState GetState()
+    {
+        return State;
+    }
+
 protected:
     EventParameter ColEvent;
 

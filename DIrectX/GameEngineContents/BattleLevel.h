@@ -16,6 +16,10 @@ public:
     std::vector<class GameUnit*> RedTeam;
     std::vector<class GameUnit*> BlueTeam;
 
+    void UnitSetting();
+
+    std::shared_ptr<GameUnit> CrateUnit(std::string_view _Name);
+
 protected:
     void Start() override;
 

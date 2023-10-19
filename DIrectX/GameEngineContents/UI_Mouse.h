@@ -76,7 +76,7 @@ protected:
 
     UI_MouseState State = UI_MouseState::Max;
 private:
-    TeamType PlayerTeam = TeamType::Red;
+    TeamType PlayerTeam = TeamType::Blue;
 
     std::shared_ptr<GameEngineCollision> MouseCol;
     float4 MouseColScale = { 5.0f, 5.0f };

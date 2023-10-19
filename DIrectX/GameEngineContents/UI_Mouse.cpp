@@ -49,7 +49,6 @@ void UI_Mouse::LevelStart(GameEngineLevel* _PrevLevel)
 
 void UI_Mouse::LevelEnd(GameEngineLevel* _NextLevel)
 {
-	Death();
 }
 
 void UI_Mouse::Update(float _Delta)
