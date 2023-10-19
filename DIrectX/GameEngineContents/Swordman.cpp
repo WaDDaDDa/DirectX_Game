@@ -361,5 +361,10 @@ bool Swordman::UltCheck()
 		UltRangeCol->CollisionEvent(CollisionOrder::BlueTeamBody, Event);
 	}
 
+	if (50.0f <= UltValue && false == UseUlt)
+	{
+		SwordUlt = true;
+	}
+
 	return SwordUlt;
 }

@@ -159,6 +159,7 @@ void Knight::SkillStart()
 	GameUnit::SkillStart();
 	AttackValue = 1.0f;
 	MainSpriteRenderer->ChangeAnimation("Knight_Skill");
+	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("KnightSkillEffect");
 	// 어그로를 자신에게 끈다
 

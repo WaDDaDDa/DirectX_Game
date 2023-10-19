@@ -227,7 +227,7 @@ void Pyromancer::Skill2Update(float _Delta)
 void Pyromancer::UltStart()
 {
 	GameUnit::UltStart();
-
+	SkillEffectRenderer->On();
 	MainSpriteRenderer->ChangeAnimation("Pyromancer_Ult");
 	SkillEffectRenderer->ChangeAnimation("PyromancerUltEffect");
 }

@@ -59,24 +59,24 @@ void Pythoness::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
 		MainSpriteRenderer->CreateAnimation("Pythoness_Idle", "PythonessAni", 0.2f, 0, 4);
 		MainSpriteRenderer->CreateAnimation("Pythoness_Move", "PythonessAni", 0.2f, 5, 12);
-		MainSpriteRenderer->CreateAnimation("Pythoness_Attack", "PythonessAni", 0.2f, 13, 14, false);
-		MainSpriteRenderer->CreateAnimation("Pythoness_Attack2", "PythonessAni", 0.2f, 15, 16, false);
-		MainSpriteRenderer->CreateAnimation("Pythoness_Heal1", "PythonessAni", 0.2f, 17, 18, false);
-		MainSpriteRenderer->CreateAnimation("Pythoness_Heal2", "PythonessAni", 0.2f, 19, 20, false);
-		MainSpriteRenderer->CreateAnimation("Pythoness_Skill", "PythonessAni", 0.2f, 72, 74, false);
-		MainSpriteRenderer->CreateAnimation("Pythoness_Skill2", "PythonessAni", 0.2f, 75, 77, false);
+		MainSpriteRenderer->CreateAnimation("Pythoness_Attack", "PythonessAni", 0.1f, 13, 14, false);
+		MainSpriteRenderer->CreateAnimation("Pythoness_Attack2", "PythonessAni", 0.1f, 15, 16, false);
+		MainSpriteRenderer->CreateAnimation("Pythoness_Heal1", "PythonessAni", 0.1f, 17, 18, false);
+		MainSpriteRenderer->CreateAnimation("Pythoness_Heal2", "PythonessAni", 0.1f, 19, 20, false);
+		MainSpriteRenderer->CreateAnimation("Pythoness_Skill", "PythonessAni", 0.1f, 72, 74, false);
+		MainSpriteRenderer->CreateAnimation("Pythoness_Skill2", "PythonessAni", 0.1f, 75, 77, false);
 		MainSpriteRenderer->CreateAnimation("Pythoness_Ult", "PythonessAni", 0.2f, 78, 81, false);
 		MainSpriteRenderer->CreateAnimation("Pythoness_Ult2", "PythonessAni", 0.2f, 82, 83, false);
 		MainSpriteRenderer->CreateAnimation("Pythoness_Die", "PythonessAni", 0.1f, 61, 71, false);
 		MainSpriteRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
 
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
-		SkillEffectRenderer->CreateAnimation("PythonessAttack1Effect", "PythonessEffect", 0.2f, 0, 1, false);
-		SkillEffectRenderer->CreateAnimation("PythonessAttack2Effect", "PythonessEffect", 0.2f, 2, 3, false);
-		SkillEffectRenderer->CreateAnimation("PythonessHeal1Effect", "PythonessEffect", 0.2f, 4, 5, false);
-		SkillEffectRenderer->CreateAnimation("PythonessHeal2Effect", "PythonessEffect", 0.2f, 6, 7, false);
-		SkillEffectRenderer->CreateAnimation("PythonessSkill1Effect", "PythonessEffect", 0.2f, 8, 10, false);
-		SkillEffectRenderer->CreateAnimation("PythonessSkill2Effect", "PythonessEffect", 0.2f, 11, 13, false);
+		SkillEffectRenderer->CreateAnimation("PythonessAttack1Effect", "PythonessEffect", 0.1f, 0, 1, false);
+		SkillEffectRenderer->CreateAnimation("PythonessAttack2Effect", "PythonessEffect", 0.1f, 2, 3, false);
+		SkillEffectRenderer->CreateAnimation("PythonessHeal1Effect", "PythonessEffect", 0.1f, 4, 5, false);
+		SkillEffectRenderer->CreateAnimation("PythonessHeal2Effect", "PythonessEffect", 0.1f, 6, 7, false);
+		SkillEffectRenderer->CreateAnimation("PythonessSkill1Effect", "PythonessEffect", 0.1f, 8, 10, false);
+		SkillEffectRenderer->CreateAnimation("PythonessSkill2Effect", "PythonessEffect", 0.1f, 11, 13, false);
 		SkillEffectRenderer->CreateAnimation("PythonessUlt1Effect", "PythonessEffect", 0.2f, 14, 17, false);
 		SkillEffectRenderer->CreateAnimation("PythonessUlt2Effect", "PythonessEffect", 0.2f, 18, 19, false);
 		SkillEffectRenderer->CreateAnimation("PythonessSkillBlack", "PythonessEffect", 0.1f, 13, 13, false);
@@ -134,6 +134,7 @@ void Pythoness::SearchMoveStart()
 void Pythoness::AttackStart()
 {
 	GameUnit::AttackStart();
+	SkillEffectRenderer->On();
 
 	// true¸é °ø°Ý  false¸é Èú
 	if (true == AttVariable)
@@ -163,6 +164,7 @@ void Pythoness::AttackUpdate(float _Delta)
 void Pythoness::Attack2Start()
 {
 	AttackValue = 0.0f;
+	SkillEffectRenderer->On();
 
 	// true¸é °ø°Ý  false¸é Èú
 	if (true == AttVariable)
@@ -206,6 +208,7 @@ void Pythoness::Attack2Update(float _Delta)
 void Pythoness::SkillStart()
 {
 	GameUnit::SkillStart();
+	SkillEffectRenderer->On();
 	MainSpriteRenderer->ChangeAnimation("Pythoness_Skill");
 	SkillEffectRenderer->ChangeAnimation("PythonessSkill1Effect");
 
@@ -230,6 +233,7 @@ void Pythoness::SkillUpdate(float _Delta)
 
 void Pythoness::Skill2Start()
 {
+	SkillEffectRenderer->On();
 	MainSpriteRenderer->ChangeAnimation("Pythoness_Skill2");
 	SkillEffectRenderer->ChangeAnimation("PythonessSkill2Effect");
 
@@ -266,6 +270,7 @@ void Pythoness::UltStart()
 {
 	GameUnit::UltStart();
 
+	SkillEffectRenderer->On();
 	MainSpriteRenderer->ChangeAnimation("Pythoness_Ult");
 	SkillEffectRenderer->ChangeAnimation("PythonessUlt1Effect");
 }
@@ -283,6 +288,7 @@ void Pythoness::UltUpdate(float _Delta)
 
 void Pythoness::Ult2Start()
 {
+	SkillEffectRenderer->On();
 	MainSpriteRenderer->ChangeAnimation("Pythoness_Ult2");
 	SkillEffectRenderer->ChangeAnimation("PythonessUlt2Effect");
 

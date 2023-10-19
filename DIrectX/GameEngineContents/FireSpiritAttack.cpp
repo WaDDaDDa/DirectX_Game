@@ -28,7 +28,7 @@ void FireSpiritAttack::Start()
 		{
 			// ±Ã±Ø±â ´ë¹ÌÁö
 			float Att = Unit->Att;
-			Att *= 0.4f;
+			Att *= 1.0f;
 			if (TeamType::Blue == Unit->MyTeam)
 			{
 				Col->Collision(CollisionOrder::RedTeamBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)

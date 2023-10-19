@@ -68,7 +68,7 @@ void GameUnit::Start()
 
 	MoveEvent.Exit = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
 		{
-			ChangeState(GameUnitState::Idle);
+			ChangeState(GameUnitState::Move);
 			return;
 		};
 }

@@ -107,8 +107,8 @@ GameUnitStatus GameUnitStatus::PyromancerStat
 {
     std::string_view("Pyromancer"), // 유닛 이름
     float4{ 200.0f, 0.0f }, // 공격범위
-    float4{ 200.0f, 0.0f }, // 스킬범위
-    float4{ 200.0f, 0.0f }, // 스킬범위2
+    float4{ 300.0f, 0.0f }, // 스킬범위
+    float4{ 300.0f, 0.0f }, // 스킬범위2
     float4{ 400.0f, 0.0f }, //  궁극기 범위
     60.0f,                 // UnitSpeed 스피드
     80.0f,                 // UnitHP 

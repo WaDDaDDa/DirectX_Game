@@ -155,6 +155,7 @@ void Monk::SkillStart()
 {
 	GameUnit::SkillStart();
 	MainSpriteRenderer->ChangeAnimation("Monk_Skill");
+	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("MonkSkillEffect");
 
 	float CurHpRate = 1.0f;

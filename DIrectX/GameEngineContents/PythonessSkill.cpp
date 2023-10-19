@@ -29,7 +29,7 @@ void PythonessSkill::Start()
 		{
 			// ±Ã±Ø±â ´ë¹ÌÁö
 			float Att = Unit->GetUnitAttack();
-			Att *= 0.5f;
+			Att *= 1.0f;
 			if (TeamType::Blue == Unit->MyTeam)
 			{
 				Col->Collision(CollisionOrder::BlueTeamBody, [=](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)

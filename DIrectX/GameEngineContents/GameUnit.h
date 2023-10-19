@@ -445,7 +445,7 @@ private:
 
 
 
-    float4 BodyColScale = { 50.0f, 50.0f };
+    float4 BodyColScale = { 40.0f, 0.0f };
     float4 PushColScale = { 20.0f, 0.0f };
 
     bool BackMoveBool = false;
