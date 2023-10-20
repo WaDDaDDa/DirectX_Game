@@ -158,4 +158,5 @@ std::shared_ptr<GameUnit> BattleLevel::CrateUnit(std::string_view _Name)
 		return CreateActor<Ninja>();
 	}
 
+	return nullptr;
 }

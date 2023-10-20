@@ -78,32 +78,20 @@ public:
     bool IsSelect = false;
     bool IsStart = false;
     bool IsPick = false;
+    bool IsBan = false;
 
     GameUnitStatus UnitStat;
 
     int PickNum = 0;
 
-    void SetPickNum(int _Num)
-    {
-        switch (_Num)
-        {
-        case 0:
-            Renderer4->ChangeAnimation("1");
-            break;
-        case 1:
-            Renderer4->ChangeAnimation("2");
-            break;
-        case 2:
-            Renderer4->ChangeAnimation("3");
-            break;
-        case 3:
-            Renderer4->ChangeAnimation("4");
-            break;
-        default:
-            break;
-        }
+    void SetPickNum(int _Num);
 
+    void SetBan()
+    {
+        Renderer->ChangeAnimation("BanPickCard_Ban");
+        Renderer4->ChangeAnimation("Ban");
         Renderer4->On();
+        IsBan = true;
     }
 
 protected:

@@ -84,12 +84,30 @@ private:
     std::shared_ptr<class GameEngineSpriteRenderer> UltTimeIcon;
     float4 UltTimeIconPos = { 622.0f, -542.0f };
 
+    std::shared_ptr<class GameEngineSpriteRenderer> BlueBan;
+    float4 BlueBanPos = { 360.0f, -662.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> BlueBanIcon;
+    float4 BlueBanIconPos = { 388.0f, -626.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> BlueBanUnit;
+    float4 BlueBanUnitPos = { 360.0f, -657.0f };
+
+    std::shared_ptr<class GameEngineSpriteRenderer> RedBan;
+    float4 RedBanPos = { 920.0f, -662.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> RedBanIcon;
+    float4 RedBanIconPos = { 948.0f, -626.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> RedBanUnit;
+    float4 RedBanUnitPos = { 920.0f, -657.0f };
+
     size_t UnitCount = 8;
     std::shared_ptr<class BanPickCard> CurCard;
+    std::shared_ptr<class BanPickCard> BlueBanCard;
+    std::shared_ptr<class BanPickCard> RedBanCard;
+
     std::vector<std::shared_ptr<class BanPickCard>> Card;
     std::shared_ptr<class BanPickBoard> GameBoard;
 
     int BluePickCount = 0;
     int RedPickCount = 0;
+    int BanCount = 0;
 };
 

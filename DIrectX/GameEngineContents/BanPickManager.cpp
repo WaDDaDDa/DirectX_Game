@@ -132,68 +132,130 @@ void BanPickManager::Start()
 	UniSpeedBox->SetPivotType(PivotType::LeftTop);
 
 	// æ∆¿Ãƒ‹
-	UniAttIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	UniAttIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
 	UniAttIcon->SetSprite("ingame_stat_icon_0.png");
 	UniAttIcon->AutoSpriteSizeOn();
 	UniAttIcon->SetAutoScaleRatio(2.0f);
 	UniAttIcon->Transform.AddLocalPosition(UnitAttIconPos);
-	UniAttIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	UniAttIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
 	UniAttIcon->SetPivotType(PivotType::LeftTop);
 
-	UniAttSpeedIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	UniAttSpeedIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
 	UniAttSpeedIcon->SetSprite("ingame_stat_icon_5.png");
 	UniAttSpeedIcon->AutoSpriteSizeOn();
 	UniAttSpeedIcon->SetAutoScaleRatio(2.0f);
 	UniAttSpeedIcon->Transform.AddLocalPosition(UnitAttSpeedIconPos);
-	UniAttSpeedIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	UniAttSpeedIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
 	UniAttSpeedIcon->SetPivotType(PivotType::LeftTop);
 
-	UniAttRangeIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	UniAttRangeIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
 	UniAttRangeIcon->SetSprite("ingame_stat_icon_3.png");
 	UniAttRangeIcon->AutoSpriteSizeOn();
 	UniAttRangeIcon->SetAutoScaleRatio(2.0f);
 	UniAttRangeIcon->Transform.AddLocalPosition(UnitAttRangeIconPos);
-	UniAttRangeIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	UniAttRangeIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
 	UniAttRangeIcon->SetPivotType(PivotType::LeftTop);
 
-	UniDefIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	UniDefIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
 	UniDefIcon->SetSprite("ingame_stat_icon_1.png");
 	UniDefIcon->AutoSpriteSizeOn();
 	UniDefIcon->SetAutoScaleRatio(2.0f);
 	UniDefIcon->Transform.AddLocalPosition(UnitDefIconPos);
-	UniDefIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	UniDefIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
 	UniDefIcon->SetPivotType(PivotType::LeftTop);
 
-	UniHpIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	UniHpIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
 	UniHpIcon->SetSprite("ingame_stat_icon_2.png");
 	UniHpIcon->AutoSpriteSizeOn();
 	UniHpIcon->SetAutoScaleRatio(2.0f);
 	UniHpIcon->Transform.AddLocalPosition(UnitHpIconPos);
-	UniHpIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	UniHpIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
 	UniHpIcon->SetPivotType(PivotType::LeftTop);
 
-	UniSpeedIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	UniSpeedIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
 	UniSpeedIcon->SetSprite("ingame_stat_icon_4.png");
 	UniSpeedIcon->AutoSpriteSizeOn();
 	UniSpeedIcon->SetAutoScaleRatio(2.0f);
 	UniSpeedIcon->Transform.AddLocalPosition(UnitSpeedIconPos);
-	UniSpeedIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	UniSpeedIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
 	UniSpeedIcon->SetPivotType(PivotType::LeftTop);
 
-	SkillTimeIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	SkillTimeIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
 	SkillTimeIcon->SetSprite("patch_icons_1.png");
 	SkillTimeIcon->AutoSpriteSizeOn();
 	SkillTimeIcon->SetAutoScaleRatio(2.0f);
 	SkillTimeIcon->Transform.AddLocalPosition(SkillTimeIconPos);
-	SkillTimeIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	SkillTimeIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
 
-	UltTimeIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	UltTimeIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
 	UltTimeIcon->SetSprite("patch_icons_1.png");
 	UltTimeIcon->AutoSpriteSizeOn();
 	UltTimeIcon->SetAutoScaleRatio(2.0f);
 	UltTimeIcon->Transform.AddLocalPosition(UltTimeIconPos);
-	UltTimeIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	UltTimeIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
 
+	// ∫Ì∑Á∆¿ ∫• ∆≤
+	BlueBan = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	BlueBan->CreateAnimation("BlueBan", "BanPick", 0.1f, 8, 8, false);
+	BlueBan->AutoSpriteSizeOn();
+	BlueBan->ChangeAnimation("BlueBan");
+	BlueBan->SetAutoScaleRatio(2.0f);
+	BlueBan->Transform.AddLocalPosition(BlueBanPos);
+	BlueBan->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
+
+	// ∫Ì∑Á∆¿ ∫• æ∆¿Ãƒ‹
+	BlueBanIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	BlueBanIcon->CreateAnimation("BanIcon", "BanPick", 0.1f, 5, 5, false);
+	BlueBanIcon->AutoSpriteSizeOn();
+	BlueBanIcon->ChangeAnimation("BanIcon");
+	BlueBanIcon->SetAutoScaleRatio(2.0f);
+	BlueBanIcon->Transform.AddLocalPosition(BlueBanIconPos);
+	BlueBanIcon->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	// ∫Ì∑Á∆¿ ¿Ø¥÷
+	BlueBanUnit = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	for (size_t i = 0; i < UnitCount; i++)
+	{
+		BlueBanUnit->CreateAnimation(Card[i]->GetUnitNameToString() += "_Idle", Card[i]->GetUnitNameToString() += "CardAni", 0.1f, 0, 0, false);
+	}
+	BlueBanUnit->AutoSpriteSizeOn();
+	BlueBanUnit->ChangeAnimation(CurCard->GetUnitNameToString() += "_Idle");
+	BlueBanUnit->SetAutoScaleRatio(2.0f);
+	BlueBanUnit->Transform.AddLocalPosition(RedBanUnitPos);
+	BlueBanUnit->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
+
+	// ∑πµÂ∆¿ ∫• ∆≤
+	RedBan = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	RedBan->CreateAnimation("BlueBan", "BanPick", 0.1f, 8, 8, false);
+	RedBan->AutoSpriteSizeOn();
+	RedBan->ChangeAnimation("BlueBan");
+	RedBan->SetAutoScaleRatio(2.0f);
+	RedBan->Transform.AddLocalPosition(RedBanPos);
+	RedBan->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
+
+	// ∑πµÂ∆¿ ∫• æ∆¿Ãƒ‹
+	RedBanIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	RedBanIcon->CreateAnimation("BanIcon", "BanPick", 0.1f, 5, 5, false);
+	RedBanIcon->AutoSpriteSizeOn();
+	RedBanIcon->ChangeAnimation("BanIcon");
+	RedBanIcon->SetAutoScaleRatio(2.0f);
+	RedBanIcon->Transform.AddLocalPosition(RedBanIconPos);
+	RedBanIcon->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	// ∑πµÂ∆¿ ¿Ø¥÷
+	RedBanUnit = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	for (size_t i = 0; i < UnitCount; i++)
+	{
+		RedBanUnit->CreateAnimation(Card[i]->GetUnitNameToString() += "_Idle", Card[i]->GetUnitNameToString() += "CardAni", 0.1f, 0, 0, false);
+	}
+	RedBanUnit->AutoSpriteSizeOn();
+	RedBanUnit->ChangeAnimation(CurCard->GetUnitNameToString() += "_Idle");
+	RedBanUnit->SetAutoScaleRatio(2.0f);
+	RedBanUnit->Transform.AddLocalPosition(BlueBanUnitPos);
+	RedBanUnit->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
+
+	BlueBanUnit->Off();
+	RedBanUnit->Off();
 }
 
 
@@ -229,7 +291,17 @@ void BanPickManager::Update(float _Delta)
 			CurCard = Card[i];
 		}
 
-		if (true == Card[i]->IsPick)
+		// ∫• ±∏∞£
+		if (true == Card[i]->IsPick && 2 > BanCount)
+		{
+			CurCard->SetBan();
+			BanCount++;
+			UI_Mouse::GameMouse->TeamSwitch();
+			Card[i]->IsPick = false;
+		}
+
+		// √®««æ «» ±∏∞£
+		if (true == Card[i]->IsPick && 2 == BanCount)
 		{
 			if (TeamType::Blue == UI_Mouse::GameMouse->GetPlayerTeam())
 			{

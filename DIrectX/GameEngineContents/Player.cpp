@@ -16,13 +16,19 @@ void Player::Start()
 {
 	Transform.SetWorldPosition(float4::ZERO);
 	{
-		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>();
+		MainSpriteRenderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
 		MainSpriteRenderer->SetMaskTexture("TestMask.png");
-		MainSpriteRenderer->CreateAnimation("TestAni", "ArcherCardAni", 0.1f, 0, 0, false);
+		std::shared_ptr<GameEngineTexture> Tex = GameEngineTexture::Find("TestMask.png");
+		Tex->SetScaleRatio(2.0f);
+		MainSpriteRenderer->CreateAnimation("TestAni", "ArcherCardAni", 0.1f, 0, 4, false);
 		MainSpriteRenderer->ChangeAnimation("TestAni");
 		MainSpriteRenderer->AutoSpriteSizeOn();
+		MainSpriteRenderer->SetAutoScaleRatio(2.0f);
+		MainSpriteRenderer->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
 		GameEngineInput::AddInputObject(this);
 	}
+	BodyCol = CreateComponent<GameEngineCollision>(CollisionOrder::TestType);
+	BodyCol->Transform.SetLocalScale(BodyColScale);
 }
 
 void Player::Update(float _Delta)

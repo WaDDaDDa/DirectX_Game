@@ -51,6 +51,7 @@ void BanPickCard::Start()
 	Renderer->CreateAnimation("BanPickCard_Null", "BanPick", 0.1f, 15, 15, false);
 	Renderer->CreateAnimation("BanPickCard_Blue", "BanPick", 0.1f, 38, 38, false);
 	Renderer->CreateAnimation("BanPickCard_Red", "BanPick", 0.1f, 39, 39, false);
+	Renderer->CreateAnimation("BanPickCard_Ban", "BanPick", 0.1f, 12, 12, false);
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(2.0f);
 	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
@@ -83,6 +84,7 @@ void BanPickCard::Start()
 	Renderer4->CreateAnimation("2", "BanPick", 0.1f, 33, 33, false);
 	Renderer4->CreateAnimation("3", "BanPick", 0.1f, 34, 34, false);
 	Renderer4->CreateAnimation("4", "BanPick", 0.1f, 35, 35, false);
+	Renderer4->CreateAnimation("Ban", "BanPick", 0.1f, 5, 5, false);
 	Renderer4->AutoSpriteSizeOn();
 	Renderer4->SetAutoScaleRatio(2.0f);
 	Renderer4->Transform.AddLocalPosition({ 25.0f, 40.0f, -static_cast<float>(ContentsOrder::Text) });
@@ -135,6 +137,7 @@ void BanPickCard::Init()
 
 	// Unit¿ÃπÃ¡ˆ
 	UnitImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	//UnitImage->SetMaskTexture("TestMask.png");
 	UnitImage->CreateAnimation(GetUnitNameToString() += "_Idle", GetUnitNameToString() += "CardAni", 0.1f, 0, 0, false);
 	UnitImage->CreateAnimation(GetUnitNameToString() += "_Stay", GetUnitNameToString() += "CardAni", 0.1f, 0, 4, true);
 	UnitImage->CreateAnimation(GetUnitNameToString() += "_Att", GetUnitNameToString() += "CardAni", 0.1f, 13, 16, false);
@@ -227,20 +230,6 @@ void BanPickCard::ClickStart()
 	{
 		UnitImage->ChangeAnimation(GetUnitNameToString() += "_Att");
 
-		if (TeamType::Blue == UI_Mouse::GameMouse->GetPlayerTeam())
-		{
-			Renderer->ChangeAnimation("BanPickCard_Blue");
-			Renderer3->ChangeAnimation("Blue");
-
-		}
-		else if (TeamType::Red == UI_Mouse::GameMouse->GetPlayerTeam())
-		{
-			Renderer->ChangeAnimation("BanPickCard_Red");
-			Renderer3->ChangeAnimation("Red");
-
-		}
-		Renderer3->On();
-
 		IsSelect = true;
 		IsPick = true;
 	}
@@ -249,4 +238,41 @@ void BanPickCard::ClickStart()
 void BanPickCard::ClickUpdate(float _Delta)
 {
 
+}
+
+void BanPickCard::SetPickNum(int _Num)
+{
+	switch (_Num)
+	{
+	case 0:
+		Renderer4->ChangeAnimation("1");
+		break;
+	case 1:
+		Renderer4->ChangeAnimation("2");
+		break;
+	case 2:
+		Renderer4->ChangeAnimation("3");
+		break;
+	case 3:
+		Renderer4->ChangeAnimation("4");
+		break;
+	default:
+		break;
+	}
+
+	if (TeamType::Blue == UI_Mouse::GameMouse->GetPlayerTeam())
+	{
+		Renderer->ChangeAnimation("BanPickCard_Blue");
+		Renderer3->ChangeAnimation("Blue");
+
+	}
+	else if (TeamType::Red == UI_Mouse::GameMouse->GetPlayerTeam())
+	{
+		Renderer->ChangeAnimation("BanPickCard_Red");
+		Renderer3->ChangeAnimation("Red");
+
+	}
+	Renderer3->On();
+
+	Renderer4->On();
 }

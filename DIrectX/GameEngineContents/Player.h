@@ -21,6 +21,7 @@ protected:
 
 private:
 	std::shared_ptr<class GameEngineSpriteRenderer> MainSpriteRenderer;
-
+	std::shared_ptr<GameEngineCollision> BodyCol;
+	float4 BodyColScale = { 50.0f, 50.0f };
 };
 

@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "PlayLevel.h"
 #include "Player.h"
+#include "BanPickBoard.h"
 
 PlayLevel::PlayLevel()
 {
@@ -12,6 +13,11 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::Start()
 {
+	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
+	GetMainCamera()->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
+	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Orthographic);
+	//UI도 같은 위치로잡기
+	GetCamera(static_cast<int>(ECAMERAORDER::UI))->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 
 	//{
 	//	// 엔진용 쉐이더를 전부다 전부다 로드하는 코드를 친다.
@@ -64,10 +70,11 @@ void PlayLevel::Update(float _Delta)
 void PlayLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	std::shared_ptr<Player> NewPlayer = CreateActor<Player>();
-	int a = 0;
+	CreateActor<BanPickBoard>();
+	
 }
 
 void PlayLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
-	int a = 0;
+	
 }
