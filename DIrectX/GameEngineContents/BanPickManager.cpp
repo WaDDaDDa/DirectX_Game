@@ -234,11 +234,13 @@ void BanPickManager::Update(float _Delta)
 			if (TeamType::Blue == UI_Mouse::GameMouse->GetPlayerTeam())
 			{
 				BanPickInfo::Info.BlueTeamPick[BluePickCount] = CurCard->GetUnitName();
+				CurCard->SetPickNum(BluePickCount);
 				BluePickCount++;
 			}
 			else if (TeamType::Red == UI_Mouse::GameMouse->GetPlayerTeam())
 			{
 				BanPickInfo::Info.RedTeamPick[RedPickCount] = CurCard->GetUnitName();
+				CurCard->SetPickNum(RedPickCount);
 				RedPickCount++;
 			}
 

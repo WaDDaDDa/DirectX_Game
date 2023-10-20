@@ -96,12 +96,12 @@ void BattleLevel::UnitSetting()
 	
 	for (size_t i = 0; i < BSize; i++)
 	{
-		std::shared_ptr<GameUnit> Unit = CrateUnit(BanPickInfo::Info.BlueTeamPick[i]);
+		std::shared_ptr<GameUnit> Unit = CrateUnit(BanPickInfo::Info.BlueTeamPick[static_cast<int>(i)]);
 		BlueTeam.push_back(Unit->GetPointer());
 	}
 	for (size_t i = 0; i < RSize; i++)
 	{
-		std::shared_ptr<GameUnit> Unit = CrateUnit(BanPickInfo::Info.RedTeamPick[i]);
+		std::shared_ptr<GameUnit> Unit = CrateUnit(BanPickInfo::Info.RedTeamPick[static_cast<int>(i)]);
 		RedTeam.push_back(Unit->GetPointer());
 	}
 

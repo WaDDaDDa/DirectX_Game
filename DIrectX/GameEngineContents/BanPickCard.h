@@ -81,6 +81,31 @@ public:
 
     GameUnitStatus UnitStat;
 
+    int PickNum = 0;
+
+    void SetPickNum(int _Num)
+    {
+        switch (_Num)
+        {
+        case 0:
+            Renderer4->ChangeAnimation("1");
+            break;
+        case 1:
+            Renderer4->ChangeAnimation("2");
+            break;
+        case 2:
+            Renderer4->ChangeAnimation("3");
+            break;
+        case 3:
+            Renderer4->ChangeAnimation("4");
+            break;
+        default:
+            break;
+        }
+
+        Renderer4->On();
+    }
+
 protected:
 
     void Start() override;
@@ -110,6 +135,8 @@ protected:
 private:
     std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
     std::shared_ptr<class GameEngineSpriteRenderer> Renderer2;
+    std::shared_ptr<class GameEngineSpriteRenderer> Renderer3;
+    std::shared_ptr<class GameEngineSpriteRenderer> Renderer4;
 
     std::shared_ptr<class GameEngineSpriteRenderer> UnitImage;
     float4 UnitImagePos = { 0.0f, -10.0f };

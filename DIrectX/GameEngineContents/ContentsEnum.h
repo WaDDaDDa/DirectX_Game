@@ -17,6 +17,8 @@ enum class ContentsOrder
 	FrontEffect,
 	BackUI,
 	UI, // UIƲ
+	UILayer1,
+	UILayer2,
 	UIImage,
 	Text,
 };

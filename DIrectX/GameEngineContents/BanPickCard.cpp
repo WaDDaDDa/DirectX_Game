@@ -46,23 +46,48 @@ void BanPickCard::Start()
 		GameEngineSprite::CreateSingle("Swordman_Icon.png");
 	}
 
-	// Card 배경
+	// Card 틀
 	Renderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
 	Renderer->CreateAnimation("BanPickCard_Null", "BanPick", 0.1f, 15, 15, false);
+	Renderer->CreateAnimation("BanPickCard_Blue", "BanPick", 0.1f, 38, 38, false);
+	Renderer->CreateAnimation("BanPickCard_Red", "BanPick", 0.1f, 39, 39, false);
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(2.0f);
 	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 	Renderer->ChangeAnimation("BanPickCard_Null");
 
+	// Card 배경
+	Renderer3 = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UILayer2);
+	//Renderer3->CreateAnimation("Null", "BanPick", 0.1f, 11, 11, false);
+	Renderer3->CreateAnimation("Blue", "BanPick", 0.1f, 36, 36, false);
+	Renderer3->CreateAnimation("Red", "BanPick", 0.1f, 37, 37, false);
+	Renderer3->AutoSpriteSizeOn();
+	Renderer3->SetAutoScaleRatio(2.0f);
+	Renderer3->Transform.AddLocalPosition({ 0.0f, 13.0f, -static_cast<float>(ContentsOrder::UILayer2)});
+	Renderer3->ChangeAnimation("Blue");
+	Renderer3->Off();
+
 	// Card 테두리
-	Renderer2 = CreateComponent<GameEngineUIRenderer>(ContentsOrder::BackUI);
+	Renderer2 = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UILayer1);
 	Renderer2->CreateAnimation("BanPickCard_Blue", "BanPick", 0.1f, 19, 19, false);
 	Renderer2->CreateAnimation("BanPickCard_Red", "BanPick", 0.1f, 20, 20, false);
 	Renderer2->AutoSpriteSizeOn();
 	Renderer2->SetAutoScaleRatio(2.0f);
-	Renderer2->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackUI) });
+	Renderer2->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UILayer1) });
 	Renderer2->ChangeAnimation("BanPickCard_Blue");
 	Renderer2->Off();
+
+	// 숫자
+	Renderer4 = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	Renderer4->CreateAnimation("1", "BanPick", 0.1f, 32, 32, false);
+	Renderer4->CreateAnimation("2", "BanPick", 0.1f, 33, 33, false);
+	Renderer4->CreateAnimation("3", "BanPick", 0.1f, 34, 34, false);
+	Renderer4->CreateAnimation("4", "BanPick", 0.1f, 35, 35, false);
+	Renderer4->AutoSpriteSizeOn();
+	Renderer4->SetAutoScaleRatio(2.0f);
+	Renderer4->Transform.AddLocalPosition({ 25.0f, 40.0f, -static_cast<float>(ContentsOrder::Text) });
+	Renderer4->ChangeAnimation("1");
+	Renderer4->Off();
 
 	SetButtonColScale(ColScale);
 
@@ -171,8 +196,8 @@ void BanPickCard::StayStart()
 	{
 		Renderer2->ChangeAnimation("BanPickCard_Red");
 	}
-
 	Renderer2->On();
+
 }
 
 void BanPickCard::StayUpdate(float _Delta)
@@ -201,6 +226,21 @@ void BanPickCard::ClickStart()
 	if (false == IsSelect)
 	{
 		UnitImage->ChangeAnimation(GetUnitNameToString() += "_Att");
+
+		if (TeamType::Blue == UI_Mouse::GameMouse->GetPlayerTeam())
+		{
+			Renderer->ChangeAnimation("BanPickCard_Blue");
+			Renderer3->ChangeAnimation("Blue");
+
+		}
+		else if (TeamType::Red == UI_Mouse::GameMouse->GetPlayerTeam())
+		{
+			Renderer->ChangeAnimation("BanPickCard_Red");
+			Renderer3->ChangeAnimation("Red");
+
+		}
+		Renderer3->On();
+
 		IsSelect = true;
 		IsPick = true;
 	}
