@@ -122,7 +122,6 @@ void PlayerCard::Init()
 		CreateStatus();
 
 		RedYInter -= 160.0f;
-
 	}
 }
 

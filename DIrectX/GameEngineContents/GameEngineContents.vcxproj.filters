@@ -152,6 +152,9 @@
     <ClCompile Include="ContentsControlWindow.cpp">
       <Filter>Global</Filter>
     </ClCompile>
+    <ClCompile Include="CharacterCard.cpp">
+      <Filter>UI\UnitCard</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -306,6 +309,9 @@
       <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="BanPickCard.h">
+      <Filter>UI\UnitCard</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterCard.h">
       <Filter>UI\UnitCard</Filter>
     </ClInclude>
   </ItemGroup>

@@ -19,5 +19,7 @@ protected:
 private:
     // NewGame UI юс╫ц
     std::shared_ptr<class GameEngineSpriteRenderer> NewGameBoxRenderer;
+    std::vector<std::shared_ptr<class UI_Button>> TeamLogo;
+    std::vector<std::shared_ptr<class UI_Button>> CoachHair;
 };
 

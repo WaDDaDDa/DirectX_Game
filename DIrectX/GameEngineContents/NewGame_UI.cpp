@@ -16,9 +16,9 @@ NewGame_UI::~NewGame_UI()
 void NewGame_UI::Start()
 {
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
-	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
+	//Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 
-	NewGameBoxRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::UI);
+	NewGameBoxRenderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
 
 	NewGameBoxRenderer->SetSprite("new_game_ui_bg.png");
 	NewGameBoxRenderer->AutoSpriteSizeOn();

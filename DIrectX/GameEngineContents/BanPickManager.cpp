@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "BanPickManager.h"
 #include "GameUnit.h"
+#include "CharacterCard.h"
 
 // UI
 #include "BanPickBoard.h"
@@ -56,6 +57,9 @@ void BanPickManager::Start()
 	}
 
 	CurCard = Card[0];
+
+	// 캐릭터 카드 생성. 내선수, 적선수 반복 해야함.
+	// GetLevel()->CreateActor<CharacterCard>();
 
 	UnitImage->AutoSpriteSizeOn();
 	UnitImage->SetAutoScaleRatio(2.0f);

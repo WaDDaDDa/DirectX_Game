@@ -21,7 +21,7 @@ IntroCut::~IntroCut()
 void IntroCut::Start()
 {
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
-	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
+	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, 0.0f });
 	MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::BackGround);
 	MainSpriteRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackGround) });
 	TextBoxRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::UI);
@@ -39,6 +39,15 @@ void IntroCut::Start()
 	GameEngineInput::AddInputObject(this);
 }
 
+void IntroCut::LevelStart(GameEngineLevel* _PrevLevel)
+{
+
+}
+
+void IntroCut::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
 
 void IntroCut::Update(float _Delta)
 {
@@ -141,6 +150,7 @@ void IntroCut::BlackStart()
 
 void IntroCut::BlackUpdate(float _Delta)
 {
+
 	if (GetLiveTime() >= 0.2f)
 	{
 		if (Scene == 6)
