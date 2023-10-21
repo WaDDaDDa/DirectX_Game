@@ -221,7 +221,7 @@ void BanPickManager::Start()
 	BlueBanUnit->AutoSpriteSizeOn();
 	BlueBanUnit->ChangeAnimation(CurCard->GetUnitNameToString() += "_Idle");
 	BlueBanUnit->SetAutoScaleRatio(2.0f);
-	BlueBanUnit->Transform.AddLocalPosition(RedBanUnitPos);
+	BlueBanUnit->Transform.AddLocalPosition(BlueBanUnitPos);
 	BlueBanUnit->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
 
 	// 레드팀 벤 틀
@@ -251,57 +251,216 @@ void BanPickManager::Start()
 	RedBanUnit->AutoSpriteSizeOn();
 	RedBanUnit->ChangeAnimation(CurCard->GetUnitNameToString() += "_Idle");
 	RedBanUnit->SetAutoScaleRatio(2.0f);
-	RedBanUnit->Transform.AddLocalPosition(BlueBanUnitPos);
+	RedBanUnit->Transform.AddLocalPosition(RedBanUnitPos);
 	RedBanUnit->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
 
 	BlueBanUnit->Off();
 	RedBanUnit->Off();
+
+	// 현재 턴 컬러.
+	TurnColor = CreateComponent<GameEngineUIRenderer>(ContentsOrder::BackUI);
+	TurnColor->CreateAnimation("Blue", "BanPick", 0.1f, 30, 30, false);
+	TurnColor->CreateAnimation("Red", "BanPick", 0.1f, 31, 31, false);
+	TurnColor->ChangeAnimation("Blue");
+	TurnColor->SetImageScale({1280.0f, 60.0f});
+	TurnColor->Transform.AddLocalPosition(TurnColorPos);
+	TurnColor->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackUI) });
+
 }
 
 
 void BanPickManager::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	BanPickInfo::Info.Clear();
+	ChangeState(BanPickState::Idle);
 }
 
 void BanPickManager::Update(float _Delta)
 {
-	// 카드의 팀정보 바꾸는것
-	//for (size_t i = 0; i < UnitCount; i++)
-	//{
-	//	if (true == Card[i]->IsSelect)
-	//	{
-	//		continue;
-	//	}
-
-	//	Card[i]->SetPlayerTeam(UI_Mouse::GameMouse->GetPlayerTeam());
-	//}
-
-	// 처음 들어온 카드 설정
+	// CurCard셋팅하는거.
 	for (size_t i = 0; i < UnitCount; i++)
 	{
-		//if (CurCard == Card[i])
-		//{
-		//	continue;
-		//}
-
 		if (true == Card[i]->IsStart)
 		{
 			CardValueReset();
 			CurCard = Card[i];
 		}
+	}
+
+	if (TeamType::Blue == UI_Mouse::GameMouse->GetPlayerTeam())
+	{
+		TurnColor->ChangeAnimation("Blue");
+
+	}
+	else if (TeamType::Red == UI_Mouse::GameMouse->GetPlayerTeam())
+	{
+		TurnColor->ChangeAnimation("Red");
+
+	}
+
+	UnitImage->ChangeAnimation(CurCard->GetUnitNameToString() += "_Idle");
+	UnitSkillImage->SetSprite(CurCard->GetUnitNameToString() += "_skill.png");
+	UnitUltImage->SetSprite(CurCard->GetUnitNameToString() += "_ult.png");
+
+	StateUpdate(_Delta);
+}
+
+void BanPickManager::ChangeState(BanPickState _State)
+{
+
+	if (_State != State)
+	{
+		switch (_State)
+		{
+		case BanPickState::Idle:
+			IdleStart();
+			break;
+		case BanPickState::ChangeBan:
+			ChangeBanStart();
+			break;
+		case BanPickState::Ban:
+			BanStart();
+			break;
+		case BanPickState::Pick:
+			PickStart();
+			break;
+		case BanPickState::ChangePick:
+			ChangePickStart();
+			break;
+		case BanPickState::Max:
+			MaxStart();
+			break;
+		default:
+			break;
+		}
+	}
+
+	ResetLiveTime();
+
+	State = _State;
+}
+
+void BanPickManager::StateUpdate(float _Delta)
+{
+	switch (State)
+	{
+	case BanPickState::Idle:
+		return IdleUpdate(_Delta);
+	case BanPickState::ChangeBan:
+		return ChangeBanUpdate(_Delta);
+	case BanPickState::Ban:
+		return BanUpdate(_Delta);
+	case BanPickState::ChangePick:
+		return ChangePickUpdate(_Delta);
+	case BanPickState::Pick:
+		return PickUpdate(_Delta);
+	case BanPickState::Max:
+		return MaxUpdate(_Delta);
+	default:
+		break;
+	}
+}
+
+void BanPickManager::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
+void BanPickManager::IdleStart()
+{
+
+}
+
+void BanPickManager::IdleUpdate(float _Delta)
+{
+	if (GetLiveTime() >= 1.0f)
+	{
+		ChangeState(BanPickState::ChangeBan);
+		return;
+	}
+}
+
+void BanPickManager::ChangeBanStart()
+{
+
+}
+
+void BanPickManager::ChangeBanUpdate(float _Delta)
+{
+	if (GetLiveTime() >= 1.0f)
+	{
+		ChangeState(BanPickState::Ban);
+		return;
+	}
+}
+
+void BanPickManager::BanStart()
+{
+
+}
+
+void BanPickManager::BanUpdate(float _Delta)
+{
+	// 처음 들어온 카드 설정
+	for (size_t i = 0; i < UnitCount; i++)
+	{
 
 		// 벤 구간
 		if (true == Card[i]->IsPick && 2 > BanCount)
 		{
 			CurCard->SetBan();
+
+			if (0 == BanCount)
+			{
+				BlueBanUnit->ChangeAnimation(CurCard->GetUnitNameToString() += "_Idle");
+				BlueBanUnit->On();
+			}
+
+			if (1 == BanCount)
+			{
+				RedBanUnit->ChangeAnimation(CurCard->GetUnitNameToString() += "_Idle");
+				RedBanUnit->On();
+			}
 			BanCount++;
 			UI_Mouse::GameMouse->TeamSwitch();
 			Card[i]->IsPick = false;
 		}
+	}
 
+	if (2 == BanCount)
+	{
+		ChangeState(BanPickState::ChangePick);
+		return;
+	}
+
+}
+
+void BanPickManager::ChangePickStart()
+{
+
+}
+
+void BanPickManager::ChangePickUpdate(float _Delta)
+{
+	if (GetLiveTime() >= 1.0f)
+	{
+		ChangeState(BanPickState::Pick);
+		return;
+	}
+}
+
+void BanPickManager::PickStart()
+{
+
+}
+
+void BanPickManager::PickUpdate(float _Delta)
+{
+	// 처음 들어온 카드 설정
+	for (size_t i = 0; i < UnitCount; i++)
+	{
 		// 챔피언 픽 구간
-		if (true == Card[i]->IsPick && 2 == BanCount)
+		if (true == Card[i]->IsPick)
 		{
 			if (TeamType::Blue == UI_Mouse::GameMouse->GetPlayerTeam())
 			{
@@ -321,12 +480,9 @@ void BanPickManager::Update(float _Delta)
 		}
 	}
 
-	UnitImage->ChangeAnimation(CurCard->GetUnitNameToString() += "_Idle");
-	UnitSkillImage->SetSprite(CurCard->GetUnitNameToString() += "_skill.png");
-	UnitUltImage->SetSprite(CurCard->GetUnitNameToString() += "_ult.png");
-}
-
-void BanPickManager::LevelEnd(GameEngineLevel* _NextLevel)
-{
-	Death();
+	if (2 == BluePickCount && 2 == RedPickCount)
+	{
+		GameEngineCore::ChangeLevel("BattleLevel");
+		return;
+	}
 }

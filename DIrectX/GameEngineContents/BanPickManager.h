@@ -1,6 +1,16 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 
+enum class BanPickState
+{
+    Idle, // 대기 상태
+    ChangeBan, // 벤 선택 상태로 가기전
+    Ban, // 벤 선택 상태
+    ChangePick, // 픽창으로 가기전
+    Pick, // 픽 선택 상태
+    Max,
+};
+
 class BanPickInfo
 {
 public:
@@ -43,6 +53,27 @@ protected:
 
     void LevelStart(GameEngineLevel* _PrevLevel) override;
     void LevelEnd(GameEngineLevel* _NextLevel) override;
+
+    void ChangeState(BanPickState _State);
+    void StateUpdate(float _Delta);
+
+    void IdleStart();
+    void IdleUpdate(float _Delta);
+
+    void ChangeBanStart();
+    void ChangeBanUpdate(float _Delta);
+
+    void BanStart();
+    void BanUpdate(float _Delta);
+
+    void ChangePickStart();
+    void ChangePickUpdate(float _Delta);
+
+    void PickStart();
+    void PickUpdate(float _Delta);
+
+    void MaxStart() {}
+    void MaxUpdate(float _Delta) {}
 
 private:
     std::shared_ptr<class GameEngineSpriteRenderer> UnitImage;
@@ -89,14 +120,17 @@ private:
     std::shared_ptr<class GameEngineSpriteRenderer> BlueBanIcon;
     float4 BlueBanIconPos = { 388.0f, -626.0f };
     std::shared_ptr<class GameEngineSpriteRenderer> BlueBanUnit;
-    float4 BlueBanUnitPos = { 360.0f, -657.0f };
+    float4 BlueBanUnitPos = { 360.0f, -667.0f };
 
     std::shared_ptr<class GameEngineSpriteRenderer> RedBan;
     float4 RedBanPos = { 920.0f, -662.0f };
     std::shared_ptr<class GameEngineSpriteRenderer> RedBanIcon;
     float4 RedBanIconPos = { 948.0f, -626.0f };
     std::shared_ptr<class GameEngineSpriteRenderer> RedBanUnit;
-    float4 RedBanUnitPos = { 920.0f, -657.0f };
+    float4 RedBanUnitPos = { 920.0f, -667.0f };
+
+    std::shared_ptr<class GameEngineSpriteRenderer> TurnColor;
+    float4 TurnColorPos = { 640.0f, -125.0f };
 
     size_t UnitCount = 8;
     std::shared_ptr<class BanPickCard> CurCard;
@@ -105,6 +139,7 @@ private:
 
     std::vector<std::shared_ptr<class BanPickCard>> Card;
     std::shared_ptr<class BanPickBoard> GameBoard;
+    BanPickState State = BanPickState::Max;
 
     int BluePickCount = 0;
     int RedPickCount = 0;

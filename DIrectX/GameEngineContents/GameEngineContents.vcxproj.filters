@@ -293,9 +293,6 @@
     <ClInclude Include="GameUnitStatus.h">
       <Filter>GameUnit\Status</Filter>
     </ClInclude>
-    <ClInclude Include="BanPickCard.h">
-      <Filter>UI\UnitCard</Filter>
-    </ClInclude>
     <ClInclude Include="UI_Button.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -307,6 +304,9 @@
     </ClInclude>
     <ClInclude Include="ContentsControlWindow.h">
       <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="BanPickCard.h">
+      <Filter>UI\UnitCard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

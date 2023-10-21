@@ -228,8 +228,6 @@ void BanPickCard::ClickStart()
 {
 	if (false == IsSelect)
 	{
-		UnitImage->ChangeAnimation(GetUnitNameToString() += "_Att");
-
 		IsSelect = true;
 		IsPick = true;
 	}
@@ -272,6 +270,8 @@ void BanPickCard::SetPickNum(int _Num)
 		Renderer3->ChangeAnimation("Red");
 
 	}
+
+	UnitImage->ChangeAnimation(GetUnitNameToString() += "_Att");
 	Renderer3->On();
 
 	Renderer4->On();

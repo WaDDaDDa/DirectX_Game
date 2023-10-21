@@ -91,6 +91,7 @@ public:
         Renderer->ChangeAnimation("BanPickCard_Ban");
         Renderer4->ChangeAnimation("Ban");
         Renderer4->On();
+        UnitImage->ChangeAnimation(GetUnitNameToString() += "_Idle");
         IsBan = true;
     }
 
