@@ -365,10 +365,27 @@ void GameEngineSpriteRenderer::SetMaterialEvent(std::string_view _Name, int _Ind
 	SetSprite("NSet.png");
 }
 
+
 void GameEngineSpriteRenderer::SetMaskTexture(std::string_view _Texture)
 {
-	// 이녀석한테 있는
-	GameEngineRenderer::SetMaterial("2DTextureMask");
+	//std::shared_ptr<GameEngineFrameAnimation> TempCurFrameAnimation = CurFrameAnimations;
+	//std::shared_ptr<GameEngineSprite> TempSprite = Sprite;
+	//SpriteData TempCurSprite = CurSprite;
+
+	//GameEngineRenderer::SetMaterial("2DTextureMask");
+
+	//if (CurFrameAnimations != TempCurFrameAnimation)
+	//{
+	//	CurFrameAnimations = TempCurFrameAnimation;
+	//}
+
+	//if (Sprite != TempSprite)
+	//{
+	//	Sprite = TempSprite;
+	//	CurSprite = TempCurSprite;
+	//}
+
+	RenderBaseInfoValue.IsMask = 1;
 
 	GetShaderResHelper().SetTexture("MaskTex", _Texture);
 }

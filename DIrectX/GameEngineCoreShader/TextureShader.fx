@@ -1,8 +1,8 @@
 #include "Transform.fx"
+#include "RenderBase.fx"
 
 struct GameEngineVertex2D
 {
-    // -1 ~ 1 사이의 포지션 뷰직전단계
     float4 POSITION : POSITION;
     float4 TEXCOORD : TEXCOORD;
 };
@@ -11,7 +11,6 @@ struct GameEngineVertex2D
 struct PixelOutPut
 {
     // 픽셀쉐이더에 보내느 ㄴ역
-    // 뷰포트 까지 다 곱해진 포지션
     float4 POSITION : SV_POSITION;
     float4 TEXCOORD : TEXCOORD;
 };
@@ -45,8 +44,10 @@ cbuffer SpriteData : register(b1)
 // 의미있는 버텍스 쉐이더이다.
 PixelOutPut TextureShader_VS(GameEngineVertex2D _Input)
 {
+    // _Input 0.5 0.5
+    
     // 쉐이더 문법 모두 0인 자료형으로 초기화 하는것
-    PixelOutPut Result = (PixelOutPut) 0;
+    PixelOutPut Result = (PixelOutPut)0;
     
     // 내가 원하는 값을 이안에 넣어줄수 있어야 한다.
     
@@ -89,6 +90,7 @@ PixelOutPut TextureShader_VS(GameEngineVertex2D _Input)
 // 사용해주는 용도가 있다.
 
 // 우리 규칙
+
 cbuffer ColorData : register(b1)
 {
     float4 PlusColor; // 최종색상에 더한다.
@@ -96,6 +98,7 @@ cbuffer ColorData : register(b1)
 };
 
 Texture2D DiffuseTex : register(t0);
+Texture2D MaskTex : register(t1);
 SamplerState DiffuseTexSampler : register(s0);
 
 float4 TextureShader_PS(PixelOutPut _Input) : SV_Target0
@@ -104,6 +107,13 @@ float4 TextureShader_PS(PixelOutPut _Input) : SV_Target0
     float4 Color = DiffuseTex.Sample(DiffuseTexSampler, _Input.TEXCOORD.xy);
     // 블랜드라는 작업을 해줘야 한다.
     
+    int2 ScreenPos = int2(_Input.POSITION.x, _Input.POSITION.y);
+    
+    if (IsMask == 1 && MaskTex[ScreenPos].r <= 0.0f)
+    {
+        clip(-1);
+    }
+    
     if (0.0f >= Color.a)
     {
         clip(-1);
@@ -111,11 +121,6 @@ float4 TextureShader_PS(PixelOutPut _Input) : SV_Target0
     
     Color += PlusColor;
     Color *= MulColor;
-    
-    if (0 >= Color.a)
-    {
-        Color.a = 0.0f;
-    }
     
     return Color;
 }

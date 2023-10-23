@@ -28,7 +28,7 @@ void NinjaUlt::Start()
 		MainSpriteRenderer->CreateAnimation("Ninja_Ult", "NinjaAni", 0.2f, 44, 49, false);
 		MainSpriteRenderer->CreateAnimation("Ninja_Die", "NinjaAni", 0.1f, 18, 27, false);
 
-		MainSpriteRenderer->FindAnimation("Ninja_Skill2")->Inter[2] = 0.2;
+		MainSpriteRenderer->FindAnimation("Ninja_Skill2")->Inter[2] = 0.2f;
 		MainSpriteRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
 
 		SkillEffectRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
