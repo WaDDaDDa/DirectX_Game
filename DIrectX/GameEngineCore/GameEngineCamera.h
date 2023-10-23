@@ -3,6 +3,7 @@
 #include <map>
 #include <list>
 #include <memory>
+#include <set>
 
 
 // Ό³Έν :
@@ -69,6 +70,10 @@ public:
 	float4 GetScreenMouseDir() { return ScreenMouseDir; }
 	float4 GetScreenMouseDirNormal() { return ScreenMouseDirNormal; }
 
+	int SetZSort(int _SortOrder)
+	{
+		ZSortMap.insert(_SortOrder);
+	}
 
 protected:
 	void Start() override;
@@ -102,6 +107,8 @@ private:
 	float4 ScreenMouseDir;
 	float4 ScreenMouseDirNormal;
 	TransformData OriginData;
+
+	std::set<int> ZSortMap;
 
 	void CameraUpdate(float _DeltaTime);
 };
