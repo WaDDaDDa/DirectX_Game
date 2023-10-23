@@ -33,10 +33,12 @@ public:
 
 class MapEditorTab : public Tab
 {
-	void OnGUI(GameEngineLevel* _Level, float _DeltaTime)
-	{
+public:
+	std::string SavePath;
+	std::string InputPath;
 
-	}
+	void Start();
+	void OnGUI(GameEngineLevel* _Level, float _DeltaTime);
 
 public:
 	MapEditorTab(std::string_view _Name)
