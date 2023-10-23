@@ -51,6 +51,12 @@ enum class PivotType
 	Top,
 };
 
+enum class MaskMode
+{
+	StaticMask, // 스크린 좌표계로 마스크를 
+	DynamicMask, // 스크린좌표계인데 랜더러의 위치에 따라서 마스크 위치를 변경한다.
+};
+
 struct SpriteRendererInfo
 {
 	int FlipLeft = 0;
@@ -208,7 +214,7 @@ public:
 		return ColorDataValue;
 	}
 
-	void SetMaskTexture(std::string_view _Texture);
+	void SetMaskTexture(std::string_view _Texture, MaskMode _Mask = MaskMode::StaticMask);
 
 protected:
 	void Start() override;
