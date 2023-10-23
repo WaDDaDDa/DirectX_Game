@@ -137,7 +137,8 @@ void BanPickCard::Init()
 
 	// Unit¿ÃπÃ¡ˆ
 	UnitImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
-	//UnitImage->SetMaskTexture("TestMask.png");
+	UnitImage->SetMaskTexture("TestMask.png", MaskMode::DynamicMask);
+	//UnitImage->RenderBaseInfoValue.MaskPivot = { -20.0f, -35.0f };
 	UnitImage->CreateAnimation(GetUnitNameToString() += "_Idle", GetUnitNameToString() += "CardAni", 0.1f, 0, 0, false);
 	UnitImage->CreateAnimation(GetUnitNameToString() += "_Stay", GetUnitNameToString() += "CardAni", 0.1f, 0, 4, true);
 	UnitImage->CreateAnimation(GetUnitNameToString() += "_Att", GetUnitNameToString() += "CardAni", 0.1f, 13, 16, false);

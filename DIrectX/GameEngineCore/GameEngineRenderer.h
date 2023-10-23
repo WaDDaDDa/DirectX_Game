@@ -73,6 +73,8 @@ public:
 
 	GameEngineShaderResHelper& GetShaderResHelper(int _Index = 0);
 
+	RenderBaseInfo RenderBaseInfoValue;
+
 	float4 GetScreenPosition();
 
 protected:
@@ -86,8 +88,6 @@ protected:
 	//GameEngineShaderResHelper ShaderResHelper;
 
 	std::vector<std::shared_ptr<GameEngineRenderUnit>> Units;
-
-	RenderBaseInfo RenderBaseInfoValue;
 
 private:
 	class GameEngineCamera* Camera = nullptr;

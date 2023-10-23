@@ -115,7 +115,7 @@ void GameEngineSpriteRenderer::Update(float _Delta)
 	}
 	// 스케일 받을때 ratio 곱해지게
 	RenderBaseInfoValue.RenderScreenScale = CurSprite.GetScale();
-	// 
+	
 }
 
 void GameEngineSpriteRenderer::SetImageScale(const float4& _Scale)
