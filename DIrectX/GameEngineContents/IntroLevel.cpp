@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "IntroLevel.h"
 #include "IntroCut.h"
-
+#include "UI_Mouse.h"
 
 IntroLevel::IntroLevel()
 {
@@ -59,11 +59,30 @@ void IntroLevel::Start()
 		GameEngineSprite::CreateCut("TestPlayer.png", 6, 6);
 	}
 
+	{
+		// 폴더 로드
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("GameEngineResources");
+		Dir.MoveChild("ContentsResources\\NewGame\\Logo\\");
+		std::vector<GameEngineDirectory> Directorys = Dir.GetAllDirectory();
+
+		for (size_t i = 0; i < Directorys.size(); i++)
+		{
+			GameEngineDirectory& Dir = Directorys[i];
+
+			GameEngineSprite::CreateFolder(Dir.GetStringPath());
+		}
+	}
+
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 
 	// 카메라의 위치를 화면의 왼쪽맨위에 0,0이 위치하도록 자리를 잡는다.
 	GetMainCamera()->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Orthographic);
+
+	GetCamera(static_cast<int>(ECAMERAORDER::UI))->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
+
+	CreateActor<UI_Mouse>();
 
 	std::shared_ptr<IntroCut> NewIntro = CreateActor<IntroCut>();
 }

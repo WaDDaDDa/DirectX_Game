@@ -18,8 +18,6 @@ void Player::Start()
 	{
 		MainSpriteRenderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
 		MainSpriteRenderer->SetMaskTexture("TestMask.png");
-		std::shared_ptr<GameEngineTexture> Tex = GameEngineTexture::Find("TestMask.png");
-		Tex->SetScaleRatio(2.0f);
 		MainSpriteRenderer->CreateAnimation("TestAni", "ArcherCardAni", 0.1f, 0, 4, false);
 		MainSpriteRenderer->ChangeAnimation("TestAni");
 		MainSpriteRenderer->AutoSpriteSizeOn();

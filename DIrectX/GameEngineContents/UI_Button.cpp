@@ -74,6 +74,8 @@ void UI_Button::LevelEnd(GameEngineLevel* _NextLevel)
 
 void UI_Button::Update(float _Delta)
 {
+	IsClick = false;
+
 	//이벤트 사용.
 	ButtonCol->CollisionEvent(CollisionOrder::Mouse, ColEvent);
 	StateUpdate(_Delta);
@@ -187,7 +189,7 @@ void UI_Button::EndUpdate(float _Delta)
 
 void UI_Button::ClickStart()
 {
-
+	IsClick = true;
 }
 
 void UI_Button::ClickUpdate(float _Delta)

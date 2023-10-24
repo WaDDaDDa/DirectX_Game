@@ -182,8 +182,6 @@ public:
 		return Group;
 	}
 
-
-
 	template<typename ObjectType, typename EnumType>
 	std::list<std::shared_ptr<ObjectType>> GetObjectGroupConvert(EnumType _GroupIndex)
 	{

@@ -19,7 +19,19 @@ protected:
 private:
     // NewGame UI юс╫ц
     std::shared_ptr<class GameEngineSpriteRenderer> NewGameBoxRenderer;
-    std::vector<std::shared_ptr<class UI_Button>> TeamLogo;
+
+    std::vector<std::shared_ptr<class GameEngineSpriteRenderer>> TeamLogoRenderer;
+    std::vector<std::shared_ptr<class SlotButton>> TeamLogoButton;
+    float4 TeamLogoStartPos = { -365.0f , -70.0f };
+    float4 TeamLogoStartPos2 = { -365.0f , -140.0f };
+    float4 XInter = { 70.0f };
+
+    size_t TeamLogoPage = 0;
+    size_t LogoSlot = 10;
+
+    std::shared_ptr<class GreenArrow> TeamLogoNextArrow;
+
+
     std::vector<std::shared_ptr<class UI_Button>> CoachHair;
 };
 

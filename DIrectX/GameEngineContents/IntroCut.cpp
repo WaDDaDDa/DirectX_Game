@@ -21,7 +21,7 @@ IntroCut::~IntroCut()
 void IntroCut::Start()
 {
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
-	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, 0.0f });
+	Transform.AddLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, 200.0f });
 	MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::BackGround);
 	MainSpriteRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackGround) });
 	TextBoxRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::UI);
@@ -167,6 +167,8 @@ void IntroCut::CutScene1Start()
 {
 	MainSpriteRenderer->SetSprite("cutscene1.png");
 	Arrow = GetLevel()->CreateActor<TextArrow>();
+	GetLevel()->CreateActor<NewGame_UI>();
+
 }
 
 void IntroCut::CutScene1Update(float _Delta)

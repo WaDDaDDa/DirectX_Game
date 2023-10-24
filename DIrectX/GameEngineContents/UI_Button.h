@@ -33,6 +33,13 @@ public:
         return State;
     }
 
+    bool GetIsClick()
+    {
+        return IsClick;
+    }
+
+    std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
+
 protected:
     EventParameter ColEvent;
 
@@ -64,9 +71,12 @@ protected:
     virtual void ClickUpdate(float _Delta);
 
     UI_ButtonState State = UI_ButtonState::Max;
+
 private:
     std::shared_ptr<GameEngineCollision> ButtonCol;
     float4 ButtonColScale = { 200.0f, 100.0f };
+
+    bool IsClick = false;
 
 };
 

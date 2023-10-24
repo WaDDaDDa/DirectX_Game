@@ -178,7 +178,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Bird.cpp" />
-    <ClCompile Include="CharacterCard.cpp" />
     <ClCompile Include="ContentsControlWindow.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="FireSpirit.cpp" />
@@ -195,6 +194,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameUnitUI.cpp" />
+    <ClCompile Include="GreenArrow.cpp" />
     <ClCompile Include="IntroCut.cpp">
       <SubType>
       </SubType>
@@ -241,6 +241,7 @@
     <ClCompile Include="PythonessSkill.cpp" />
     <ClCompile Include="PythonessSkillBomb.cpp" />
     <ClCompile Include="PythonessUlt.cpp" />
+    <ClCompile Include="SlotButton.cpp" />
     <ClCompile Include="StadiumBoard.cpp" />
     <ClCompile Include="Swordman.cpp" />
     <ClCompile Include="SwordmanUltEffect.cpp" />
@@ -273,7 +274,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Bird.h" />
-    <ClInclude Include="CharacterCard.h" />
     <ClInclude Include="ContentsControlWindow.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsEnum.h" />
@@ -291,6 +291,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="GameUnitUI.h" />
+    <ClInclude Include="GreenArrow.h" />
     <ClInclude Include="IntroCut.h">
       <SubType>
       </SubType>
@@ -332,6 +333,7 @@
     <ClInclude Include="PythonessSkill.h" />
     <ClInclude Include="PythonessSkillBomb.h" />
     <ClInclude Include="PythonessUlt.h" />
+    <ClInclude Include="SlotButton.h" />
     <ClInclude Include="StadiumBoard.h" />
     <ClInclude Include="Swordman.h" />
     <ClInclude Include="SwordmanUltEffect.h" />

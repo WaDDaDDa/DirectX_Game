@@ -1,7 +1,6 @@
 #include "PreCompile.h"
 #include "BanPickManager.h"
 #include "GameUnit.h"
-#include "CharacterCard.h"
 
 // UI
 #include "BanPickBoard.h"
@@ -218,6 +217,8 @@ void BanPickManager::Start()
 
 	// ∫Ì∑Á∆¿ ¿Ø¥÷
 	BlueBanUnit = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	BlueBanUnit->SetMaskTexture("TestMask.png", MaskMode::DynamicMask);
+	BlueBanUnit->RenderBaseInfoValue.MaskPivot = { 0.0f, 35.0f };
 	for (size_t i = 0; i < UnitCount; i++)
 	{
 		BlueBanUnit->CreateAnimation(Card[i]->GetUnitNameToString() += "_Idle", Card[i]->GetUnitNameToString() += "CardAni", 0.1f, 0, 0, false);
@@ -248,6 +249,8 @@ void BanPickManager::Start()
 
 	// ∑πµÂ∆¿ ¿Ø¥÷
 	RedBanUnit = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	RedBanUnit->SetMaskTexture("TestMask.png", MaskMode::DynamicMask);
+	RedBanUnit->RenderBaseInfoValue.MaskPivot = { 0.0f, 35.0f };
 	for (size_t i = 0; i < UnitCount; i++)
 	{
 		RedBanUnit->CreateAnimation(Card[i]->GetUnitNameToString() += "_Idle", Card[i]->GetUnitNameToString() += "CardAni", 0.1f, 0, 0, false);
@@ -294,12 +297,10 @@ void BanPickManager::Update(float _Delta)
 	if (TeamType::Blue == UI_Mouse::GameMouse->GetPlayerTeam())
 	{
 		TurnColor->ChangeAnimation("Blue");
-
 	}
 	else if (TeamType::Red == UI_Mouse::GameMouse->GetPlayerTeam())
 	{
 		TurnColor->ChangeAnimation("Red");
-
 	}
 
 	UnitImage->ChangeAnimation(CurCard->GetUnitNameToString() += "_Idle");

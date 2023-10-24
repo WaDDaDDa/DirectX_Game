@@ -29,8 +29,6 @@ void BanPickLevel::Start()
 	GetCamera(static_cast<int>(ECAMERAORDER::UI))->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 
 	GameEngineInput::AddInputObject(this);
-
-	CreateActor<UI_Mouse>();
 }
 
 void BanPickLevel::Update(float _Delta)

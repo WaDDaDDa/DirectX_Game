@@ -84,12 +84,6 @@ public:
 		return { static_cast<float>(Desc.Width), static_cast<float>(Desc.Height), 1.0f, 0.0f };
 	}
 
-	inline void SetScaleRatio(float _Value)
-	{
-		Desc.Width *= _Value;
-		Desc.Height *= _Value;
-	}
-
 	inline ID3D11ShaderResourceView* GetSRV()
 	{
 		return SRV;
