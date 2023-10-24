@@ -63,6 +63,7 @@ void NewGame_UI::Start()
 	TeamLogoNextArrow->DirChange();
 	TeamLogoNextArrow->Transform.AddLocalPosition(TeamLogoNextArrowPos);
 
+	// 내가 선택한 로고
 	MyTeamLogoBg = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
 	MyTeamLogoBg->CreateAnimation("Null", "ButtonSlot", 0.1f, 0, 0, false);
 	MyTeamLogoBg->ChangeAnimation("Null");
@@ -78,6 +79,67 @@ void NewGame_UI::Start()
 	MyTeamLogo->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
 	MyTeamLogo->Transform.AddLocalPosition(MyTeamLogoPos);
 
+	// 코치 마네킹
+	MyCoachHairBg = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	MyCoachHairBg->CreateAnimation("Null", "ButtonSlot", 0.1f, 0, 0, false);
+	MyCoachHairBg->ChangeAnimation("Null");
+	MyCoachHairBg->AutoSpriteSizeOn();
+	MyCoachHairBg->SetAutoScaleRatio(2.0f);
+	MyCoachHairBg->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
+	MyCoachHairBg->Transform.AddLocalPosition(MyCoachPos);
+
+	MyCoach = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UILayer1);
+	MyCoach->SetSprite("Character_Coach");
+	MyCoach->AutoSpriteSizeOn();
+	MyCoach->SetAutoScaleRatio(2.0f);
+	MyCoach->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UILayer1) });
+	MyCoach->Transform.AddLocalPosition(MyCoachPos);
+
+	// 내 코치 머리
+	MyCoachHair = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	MyCoachHair->SetSprite("Coach_Hair");
+	MyCoachHair->AutoSpriteSizeOn();
+	MyCoachHair->SetAutoScaleRatio(2.0f);
+	MyCoachHair->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	MyCoachHair->Transform.AddLocalPosition(MyCoachHairPos);
+	//MyCoachHair->SetPivotType(PivotType::LeftTop);
+
+	// 헤어 30개
+	for (size_t i = 0; i < 30; i++)
+	{
+		CoachHair.push_back(GetLevel()->CreateActor<SlotButton>());
+
+		CoachHairRenderer.push_back(CoachHair[i]->CreateRenderer("Coach_Hair", static_cast<unsigned int>(i), ContentsOrder::UIImage));
+		CoachHairRenderer[i]->SetSprite("Coach_Hair", static_cast<unsigned int>(i));
+
+		if (5 > HairCount)
+		{
+			CoachHair[i]->Transform.AddLocalPosition(CoachHairStartPos + (XInter * static_cast<float>(HairCount)));
+		}
+		else if (5 <= HairCount)
+		{
+			CoachHair[i]->Transform.AddLocalPosition(CoachHairStartPos2 + (XInter * static_cast<float>(HairCount - 5)));
+		}
+
+		HairCount++;
+
+		if (10 == HairCount)
+		{
+			HairCount = 0;
+		}
+
+		CoachHair[i]->Off();
+	}
+
+	CurHair = CoachHair[CurNum];
+
+	// 헤어 페이지 화살표
+	HairPrevArrow = GetLevel()->CreateActor<GreenArrow>();
+	HairPrevArrow->Transform.AddLocalPosition(HairPrevArrowPos);
+	
+	HairNextArrow = GetLevel()->CreateActor<GreenArrow>();
+	HairNextArrow->DirChange();
+	HairNextArrow->Transform.AddLocalPosition(HairNextArrowPos);
 }
 
 void NewGame_UI::AllButtonOff()
@@ -88,8 +150,18 @@ void NewGame_UI::AllButtonOff()
 	}
 }
 
+void NewGame_UI::AllHairButtonOff()
+{
+	for (size_t i = 0; i < 30; i++)
+	{
+		CoachHair[i]->Off();
+	}
+}
+
+
 void NewGame_UI::Update(float _Delta)
 {
+	// 팀 로고 페이지 변경
 	if (0 == TeamLogoPage)
 	{
 		TeamLogoPrevArrow->Off();
@@ -120,7 +192,38 @@ void NewGame_UI::Update(float _Delta)
 		TeamLogoPage += 1;
 	}
 
+	// 헤어 페이지 변경
+	if (0 == HairPage)
+	{
+		HairPrevArrow->Off();
+	}
+	else
+	{
+		HairPrevArrow->On();
+	}
 
+	if (2 == HairPage)
+	{
+		HairNextArrow->Off();
+	}
+	else
+	{
+		HairNextArrow->On();
+	}
+
+	if (HairPrevArrow->GetIsClick())
+	{
+		AllHairButtonOff();
+		HairPage -= 1;
+	}
+
+	if (HairNextArrow->GetIsClick())
+	{
+		AllHairButtonOff();
+		HairPage += 1;
+	}
+
+	// 팀로고 온오프
 	for (size_t i = 0; i < LogoSlot; i++)
 	{
 		CurNum = i + (TeamLogoPage * LogoSlot);
@@ -142,5 +245,25 @@ void NewGame_UI::Update(float _Delta)
 		}
 	}
 
+	// 헤어 온오프
+	for (size_t i = 0; i < HairSlot; i++)
+	{
+		CurHairNum = i + (HairPage * HairSlot);
 
+		CoachHair[CurHairNum]->On();
+
+		if (CoachHair[CurHairNum]->GetIsClick())
+		{
+			// 로고 70개
+			for (size_t i = 0; i < 30; i++)
+			{
+				CoachHair[i]->IsSelectFalse();
+			}
+
+			CoachHair[CurHairNum]->IsSelectTrue();
+
+			CurHair = CoachHair[CurHairNum];
+			MyCoachHair->SetSprite("Coach_Hair", static_cast<unsigned int>(CurHairNum));
+		}
+	}
 }

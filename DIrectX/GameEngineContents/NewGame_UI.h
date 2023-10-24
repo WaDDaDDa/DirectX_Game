@@ -13,6 +13,7 @@ public:
     NewGame_UI& operator=(NewGame_UI&& _Other) noexcept = delete;
 
     void AllButtonOff();
+    void AllHairButtonOff();
 
 protected:
     void Start();
@@ -21,6 +22,8 @@ protected:
 private:
     // NewGame UI 임시
     std::shared_ptr<class GameEngineSpriteRenderer> NewGameBoxRenderer;
+
+    // 로고 관련
     std::shared_ptr<class GameEngineSpriteRenderer> MyTeamLogoBg;
     std::shared_ptr<class GameEngineSpriteRenderer> MyTeamLogo;
     float4 MyTeamLogoPos = {-390.0f , 84.0f};
@@ -44,6 +47,29 @@ private:
     float4 TeamLogoPrevArrowPos = { -415.0f , -100.0f };
     float4 TeamLogoNextArrowPos = { -35.0f , -100.0f };
 
-    std::vector<std::shared_ptr<class UI_Button>> CoachHair;
+    // 감독 헤어 관련
+    std::shared_ptr<class GameEngineSpriteRenderer> MyCoachHairBg;
+    std::shared_ptr<class GameEngineSpriteRenderer> MyCoach;
+    std::shared_ptr<class GameEngineSpriteRenderer> MyCoachHair;
+    float4 MyCoachPos = { 60.0f , 84.0f };
+    float4 MyCoachHairPos = { 60.0f , 99.0f };
+
+    std::shared_ptr<class SlotButton> CurHair;
+    std::vector<std::shared_ptr<class GameEngineSpriteRenderer>> CoachHairRenderer;
+    std::vector<std::shared_ptr<class SlotButton>> CoachHair;
+
+    float4 CoachHairStartPos = { 80.0f , -65.0f };
+    float4 CoachHairStartPos2 = { 80.0f , -135.0f };
+
+    size_t HairPage = 0;
+    size_t HairSlot = 10;
+    size_t HairCount = 0;
+    size_t CurHairNum = 0;
+
+    std::shared_ptr<class GreenArrow> HairPrevArrow;
+    std::shared_ptr<class GreenArrow> HairNextArrow;
+
+    float4 HairPrevArrowPos = { 30.0f , -100.0f };
+    float4 HairNextArrowPos = { 410.0f , -100.0f };
 };
 
