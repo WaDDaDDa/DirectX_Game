@@ -66,8 +66,3 @@ void GreenArrow::EndStart()
 		Renderer->ChangeAnimation("Right_Null");
 	}
 }
-
-void GreenArrow::ClickStart()
-{
-
-}

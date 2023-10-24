@@ -12,6 +12,21 @@ public:
     SlotButton& operator=(const SlotButton& _Other) = delete;
     SlotButton& operator=(SlotButton&& _Other) noexcept = delete;
 
+    void IsSelectFalse()
+    {
+        IsSelect = false;
+
+        if (false == IsSelect)
+        {
+            Renderer->ChangeAnimation("Null");
+        }
+    }
+
+    void IsSelectTrue()
+    {
+        IsSelect = true;
+    }
+
 protected:
 
     void Start() override;

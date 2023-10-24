@@ -36,8 +36,6 @@ protected:
 
 	void EndStart() override;
 
-	void ClickStart() override;
-
     bool IsSelect = false;
     // false  ¿ÞÂÊ
     bool Dir = false;

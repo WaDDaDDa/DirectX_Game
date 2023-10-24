@@ -70,6 +70,8 @@ void SlotButton::EndStart()
 
 void SlotButton::ClickStart()
 {
+	UI_Button::ClickStart();
+
 	if (false == IsSelect)
 	{
 		IsSelect = true;
