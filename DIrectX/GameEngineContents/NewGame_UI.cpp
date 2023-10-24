@@ -19,12 +19,14 @@ void NewGame_UI::Start()
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	Transform.AddLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, 100.0f });
 
+	// UI 전체창
 	NewGameBoxRenderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::BackUI);
 	NewGameBoxRenderer->SetSprite("new_game_ui_bg.png");
 	NewGameBoxRenderer->AutoSpriteSizeOn();
 	NewGameBoxRenderer->SetAutoScaleRatio(2.0f);
 	NewGameBoxRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackUI) });
 
+	// 로고 70개
 	for (size_t i = 0; i < 70; i++)
 	{
 		TeamLogoButton.push_back(GetLevel()->CreateActor<SlotButton>());
@@ -51,12 +53,30 @@ void NewGame_UI::Start()
 		TeamLogoButton[i]->Off();
 	}
 
+	CurLogo = TeamLogoButton[CurNum];
+
+	// 로고 페이지 화살표
 	TeamLogoPrevArrow = GetLevel()->CreateActor<GreenArrow>();
 	TeamLogoPrevArrow->Transform.AddLocalPosition(TeamLogoPrevArrowPos);
 
 	TeamLogoNextArrow = GetLevel()->CreateActor<GreenArrow>();
 	TeamLogoNextArrow->DirChange();
 	TeamLogoNextArrow->Transform.AddLocalPosition(TeamLogoNextArrowPos);
+
+	MyTeamLogoBg = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	MyTeamLogoBg->CreateAnimation("Null", "ButtonSlot", 0.1f, 0, 0, false);
+	MyTeamLogoBg->ChangeAnimation("Null");
+	MyTeamLogoBg->AutoSpriteSizeOn();
+	MyTeamLogoBg->SetAutoScaleRatio(2.0f);
+	MyTeamLogoBg->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
+	MyTeamLogoBg->Transform.AddLocalPosition(MyTeamLogoPos);
+
+	MyTeamLogo = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	MyTeamLogo->SetSprite("TeamLogo");
+	MyTeamLogo->AutoSpriteSizeOn();
+	MyTeamLogo->SetAutoScaleRatio(2.0f);
+	MyTeamLogo->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	MyTeamLogo->Transform.AddLocalPosition(MyTeamLogoPos);
 
 }
 
@@ -109,6 +129,7 @@ void NewGame_UI::Update(float _Delta)
 
 		if (TeamLogoButton[CurNum]->GetIsClick())
 		{
+			// 로고 70개
 			for (size_t i = 0; i < 70; i++)
 			{
 				TeamLogoButton[i]->IsSelectFalse();
@@ -117,6 +138,7 @@ void NewGame_UI::Update(float _Delta)
 			TeamLogoButton[CurNum]->IsSelectTrue();
 
 			CurLogo = TeamLogoButton[CurNum];
+			MyTeamLogo->SetSprite("TeamLogo", static_cast<unsigned int>(CurNum));
 		}
 	}
 

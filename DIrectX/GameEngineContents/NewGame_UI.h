@@ -21,6 +21,9 @@ protected:
 private:
     // NewGame UI юс╫ц
     std::shared_ptr<class GameEngineSpriteRenderer> NewGameBoxRenderer;
+    std::shared_ptr<class GameEngineSpriteRenderer> MyTeamLogoBg;
+    std::shared_ptr<class GameEngineSpriteRenderer> MyTeamLogo;
+    float4 MyTeamLogoPos = {-390.0f , 84.0f};
 
     std::shared_ptr<class SlotButton> CurLogo;
     std::vector<std::shared_ptr<class GameEngineSpriteRenderer>> TeamLogoRenderer;
