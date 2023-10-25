@@ -61,7 +61,11 @@ void GameEnginePath::MoveParentToExistsChild(std::string_view _ChildPath)
 		}
 	}
 
+}
 
+bool GameEnginePath::IsExits()
+{
+	return std::filesystem::exists(Path);
 }
 
 void GameEnginePath::MoveChild(std::string_view _ChildPath)
