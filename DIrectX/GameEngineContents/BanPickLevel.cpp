@@ -141,6 +141,7 @@ void BanPickLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		GameEngineSprite::CreateSingle("swordman_skill.png");
 
 	}
+	CreateActor<UI_Mouse>();
 
 	CreateActor<BanPickManager>();
 

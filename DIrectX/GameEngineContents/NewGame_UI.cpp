@@ -54,6 +54,7 @@ void NewGame_UI::Start()
 	}
 
 	CurLogo = TeamLogoButton[CurNum];
+	CurLogo->IsSelectTrue();
 
 	// 로고 페이지 화살표
 	TeamLogoPrevArrow = GetLevel()->CreateActor<GreenArrow>();
@@ -132,6 +133,7 @@ void NewGame_UI::Start()
 	}
 
 	CurHair = CoachHair[CurNum];
+	CurHair->IsSelectTrue();
 
 	// 헤어 페이지 화살표
 	HairPrevArrow = GetLevel()->CreateActor<GreenArrow>();

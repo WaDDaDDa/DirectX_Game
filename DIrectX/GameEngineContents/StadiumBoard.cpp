@@ -87,7 +87,7 @@ void StadiumBoard::Update(float _Delta)
 
 	if (0.0f >= GameTime)
 	{
-		GameEngineCore::ChangeLevel("IntroLevel");
+		GameEngineCore::ChangeLevel("BanPickLevel");
 	}
 
 }

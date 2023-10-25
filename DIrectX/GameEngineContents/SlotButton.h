@@ -25,6 +25,11 @@ public:
     void IsSelectTrue()
     {
         IsSelect = true;
+
+        if (true == IsSelect)
+        {
+            Renderer->ChangeAnimation("Slect");
+        }
     }
 
 protected:
