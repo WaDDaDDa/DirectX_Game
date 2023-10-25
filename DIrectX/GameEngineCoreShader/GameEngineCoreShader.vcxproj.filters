@@ -4,13 +4,25 @@
     <Filter Include="DOC">
       <UniqueIdentifier>{fb89e198-a781-41e5-abb7-56cee3666663}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2D">
+      <UniqueIdentifier>{848b3a25-0b5c-4c9c-960e-5018c682661b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{aa56755d-f18d-412a-a07d-e1844ea81cf2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ColorShader.fx" />
-    <FxCompile Include="TextureShader.fx" />
-    <FxCompile Include="Transform.fx" />
-    <FxCompile Include="RenderBase.fx" />
     <FxCompile Include="DebugColorShader.fx" />
+    <FxCompile Include="TextureShader.fx">
+      <Filter>2D</Filter>
+    </FxCompile>
+    <FxCompile Include="Transform.fx">
+      <Filter>Header</Filter>
+    </FxCompile>
+    <FxCompile Include="RenderBase.fx">
+      <Filter>Header</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ShaderRule.txt">

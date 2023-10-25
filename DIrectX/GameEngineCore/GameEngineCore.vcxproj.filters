@@ -52,8 +52,23 @@
     <Filter Include="Rendering\Contents">
       <UniqueIdentifier>{6e85ea32-cbb5-4280-b524-f39ddecd81de}</UniqueIdentifier>
     </Filter>
-    <Filter Include="IMGUI">
+    <Filter Include="Contents">
+      <UniqueIdentifier>{ca8ef543-b1a6-4602-b79d-7bcf0002149a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{99e1672c-a2e8-4827-a21d-a896a29f6a67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
       <UniqueIdentifier>{9f173843-cd2e-4a25-8d00-c83c76a52618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{37856d69-836d-4d4f-a64b-36f283ab15aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Meterial">
+      <UniqueIdentifier>{0f0b75da-d6a3-4ae1-a37e-72030f9d8f52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Mesh">
+      <UniqueIdentifier>{0cf5278f-a25f-4d25-9e5b-33729b14b1f8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -130,9 +145,6 @@
     <ClInclude Include="GameEngineSprite.h">
       <Filter>Resources\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineSpriteRenderer.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="ThirdParty\DirectXTex\inc\DirectXTex.h">
       <Filter>ThirdParty\inc</Filter>
     </ClInclude>
@@ -154,39 +166,59 @@
     <ClInclude Include="GameEngineShaderResHelper.h">
       <Filter>Resources\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineMaterial.h" />
-    <ClInclude Include="GameEngineMesh.h" />
-    <ClInclude Include="GameEngineDebugCore.h" />
-    <ClInclude Include="EngineEnum.h" />
-    <ClInclude Include="GameEngineUIRenderer.h" />
-    <ClInclude Include="GameEngineRenderUnit.h" />
-    <ClInclude Include="GameEngineDepthStencil.h" />
     <ClInclude Include="imstb_truetype.h">
-      <Filter>IMGUI</Filter>
+      <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="imconfig.h">
-      <Filter>IMGUI</Filter>
+      <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="imgui.h">
-      <Filter>IMGUI</Filter>
+      <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="imgui_impl_dx11.h">
-      <Filter>IMGUI</Filter>
+      <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="imgui_impl_win32.h">
-      <Filter>IMGUI</Filter>
+      <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="imgui_internal.h">
-      <Filter>IMGUI</Filter>
+      <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="imstb_rectpack.h">
-      <Filter>IMGUI</Filter>
+      <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="imstb_textedit.h">
-      <Filter>IMGUI</Filter>
+      <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineGUI.h">
-      <Filter>IMGUI</Filter>
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineState.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineDebugCore.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineEnum.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineSpriteRenderer.h">
+      <Filter>Rendering\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineUIRenderer.h">
+      <Filter>Rendering\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineRenderUnit.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineDepthStencil.h">
+      <Filter>Resources\RenderingSetting</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineMaterial.h">
+      <Filter>Resources\Meterial</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineMesh.h">
+      <Filter>Resources\Mesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -266,9 +298,6 @@
     <ClCompile Include="GameEngineSprite.cpp">
       <Filter>Resources\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineSpriteRenderer.cpp">
-      <Filter>Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="GameEngineCollision.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
@@ -287,32 +316,50 @@
     <ClCompile Include="GameEngineShaderResHelper.cpp">
       <Filter>Resources\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineMaterial.cpp" />
-    <ClCompile Include="GameEngineMesh.cpp" />
-    <ClCompile Include="GameEngineDebugCore.cpp" />
-    <ClCompile Include="GameEngineUIRenderer.cpp" />
-    <ClCompile Include="GameEngineRenderUnit.cpp" />
-    <ClCompile Include="GameEngineDepthStencil.cpp" />
     <ClCompile Include="imgui.cpp">
-      <Filter>IMGUI</Filter>
+      <Filter>GUI</Filter>
     </ClCompile>
     <ClCompile Include="imgui_draw.cpp">
-      <Filter>IMGUI</Filter>
+      <Filter>GUI</Filter>
     </ClCompile>
     <ClCompile Include="imgui_impl_dx11.cpp">
-      <Filter>IMGUI</Filter>
+      <Filter>GUI</Filter>
     </ClCompile>
     <ClCompile Include="imgui_impl_win32.cpp">
-      <Filter>IMGUI</Filter>
+      <Filter>GUI</Filter>
     </ClCompile>
     <ClCompile Include="imgui_tables.cpp">
-      <Filter>IMGUI</Filter>
+      <Filter>GUI</Filter>
     </ClCompile>
     <ClCompile Include="imgui_widgets.cpp">
-      <Filter>IMGUI</Filter>
+      <Filter>GUI</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineGUI.cpp">
-      <Filter>IMGUI</Filter>
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineState.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineDebugCore.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineSpriteRenderer.cpp">
+      <Filter>Rendering\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineUIRenderer.cpp">
+      <Filter>Rendering\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineRenderUnit.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineDepthStencil.cpp">
+      <Filter>Resources\RenderingSetting</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineMaterial.cpp">
+      <Filter>Resources\Meterial</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineMesh.cpp">
+      <Filter>Resources\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
