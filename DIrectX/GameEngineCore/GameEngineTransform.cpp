@@ -37,7 +37,7 @@ public:
 				Direction.Normalize();
 
 				float Dist = 0.0f;
-				return Right.Intersects(Start.DirectXVector, End.DirectXVector, Dist);
+				return Right.Intersects(Start.DirectXVector, Direction.DirectXVector, Dist);
 			};
 
 		ArrColFunction[static_cast<int>(ColType::LINE2D)][static_cast<int>(ColType::SPHERE2D)] = [](const CollisionParameter& _Data)
@@ -54,7 +54,7 @@ public:
 				Direction.Normalize();
 
 				float Dist = 0.0f;
-				return Right.Intersects(Start.DirectXVector, End.DirectXVector, Dist);
+				return Right.Intersects(Start.DirectXVector, Direction.DirectXVector, Dist);
 			};
 
 		ArrColFunction[static_cast<int>(ColType::LINE2D)][static_cast<int>(ColType::OBBBOX2D)] = [](const CollisionParameter& _Data)
@@ -71,7 +71,7 @@ public:
 				Direction.Normalize();
 
 				float Dist = 0.0f;
-				return Right.Intersects(Start.DirectXVector, End.DirectXVector, Dist);
+				return Right.Intersects(Start.DirectXVector, Direction.DirectXVector, Dist);
 			};
 
 		ArrColFunction[static_cast<int>(ColType::AABBBOX2D)][static_cast<int>(ColType::AABBBOX2D)] = [](const CollisionParameter& _Data)
