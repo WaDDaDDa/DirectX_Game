@@ -12,7 +12,6 @@ SlotButton::~SlotButton()
 
 }
 
-
 void SlotButton::Start()
 {
 	UI_Button::Start();

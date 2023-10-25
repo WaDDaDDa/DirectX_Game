@@ -180,6 +180,7 @@
     <ClCompile Include="Bird.cpp" />
     <ClCompile Include="ContentsControlWindow.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
+    <ClCompile Include="Default_Button.cpp" />
     <ClCompile Include="FireSpirit.cpp" />
     <ClCompile Include="FireSpiritAttack.cpp" />
     <ClCompile Include="FlameAttack.cpp" />
@@ -277,6 +278,7 @@
     <ClInclude Include="ContentsControlWindow.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsEnum.h" />
+    <ClInclude Include="Default_Button.h" />
     <ClInclude Include="FireSpirit.h" />
     <ClInclude Include="FireSpiritAttack.h" />
     <ClInclude Include="FlameAttack.h" />

@@ -71,5 +71,12 @@ private:
 
     float4 HairPrevArrowPos = { 30.0f , -100.0f };
     float4 HairNextArrowPos = { 410.0f , -100.0f };
+
+
+    std::shared_ptr<class Default_Button> StartButton;
+    std::shared_ptr<class Default_Button> ExitButton;
+
+    float4 StartButtonPos = { -80.0f , -220.0f };
+    float4 ExitButtonPos = { 80.0f , -220.0f };
 };
 

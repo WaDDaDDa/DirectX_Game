@@ -158,6 +158,9 @@
     <ClCompile Include="GreenArrow.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="Default_Button.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -318,6 +321,9 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="GreenArrow.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Default_Button.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>

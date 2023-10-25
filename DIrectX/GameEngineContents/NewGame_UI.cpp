@@ -142,6 +142,14 @@ void NewGame_UI::Start()
 	HairNextArrow = GetLevel()->CreateActor<GreenArrow>();
 	HairNextArrow->DirChange();
 	HairNextArrow->Transform.AddLocalPosition(HairNextArrowPos);
+
+	StartButton = GetLevel()->CreateActor<Default_Button>();
+	StartButton->Transform.AddLocalPosition(StartButtonPos);
+	StartButton->IsImportantTrue();
+
+	ExitButton = GetLevel()->CreateActor<Default_Button>();
+	ExitButton->Transform.AddLocalPosition(ExitButtonPos);
+
 }
 
 void NewGame_UI::AllButtonOff()
@@ -187,11 +195,20 @@ void NewGame_UI::Update(float _Delta)
 		AllButtonOff();
 		TeamLogoPage -= 1;
 	}
-
-	if (TeamLogoNextArrow->GetIsClick())
+	else if (TeamLogoNextArrow->GetIsClick())
 	{
 		AllButtonOff();
 		TeamLogoPage += 1;
+	}
+	else if (StartButton->GetIsClick())
+	{
+		GameEngineCore::ChangeLevel("BanPickLevel");
+		return;
+	}
+	else if (ExitButton->GetIsClick())
+	{
+		GameEngineCore::ChangeLevel("IntroLevel");
+		return;
 	}
 
 	// 헤어 페이지 변경

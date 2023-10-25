@@ -51,13 +51,6 @@ void IntroCut::LevelEnd(GameEngineLevel* _NextLevel)
 
 void IntroCut::Update(float _Delta)
 {
-
-	if (GameEngineInput::IsDown('P', this))
-	{
-		GameEngineCore::ChangeLevel("BattleLevel");
-		return;
-	}
-
 	StateUpdate(_Delta);
 }
 
@@ -167,7 +160,6 @@ void IntroCut::CutScene1Start()
 {
 	MainSpriteRenderer->SetSprite("cutscene1.png");
 	Arrow = GetLevel()->CreateActor<TextArrow>();
-	GetLevel()->CreateActor<NewGame_UI>();
 
 }
 
@@ -277,16 +269,15 @@ void IntroCut::NewGameStart()
 		Arrow = nullptr;
 	}
 
+	// 페이드 효과
+	MainSpriteRenderer->GetColorData().MulColor.W -= 0.8f;
+
 	GetLevel()->CreateActor<NewGame_UI>();
 }
 
 void IntroCut::NewGameUpdate(float _Delta)
 {
-	if (GameEngineInput::IsDown(VK_SPACE, this))
-	{
-		GameEngineCore::ChangeLevel("BattleLevel");
-		return;
-	}
+
 }
 
 void IntroCut::MaxStart()

@@ -25,3 +25,6 @@
 #include "ContentsEnum.h"
 
 #include "GameUnitStatus.h"
+
+#include "Default_Button.h"
+#include "SlotButton.h"
