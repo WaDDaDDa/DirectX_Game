@@ -13,7 +13,6 @@ NewGame_UI::~NewGame_UI()
 
 }
 
-
 void NewGame_UI::Start()
 {
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();

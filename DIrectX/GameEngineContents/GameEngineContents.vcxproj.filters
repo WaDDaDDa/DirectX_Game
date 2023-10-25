@@ -161,6 +161,16 @@
     <ClCompile Include="Default_Button.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="MainLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="HouseBackGround.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="House.cpp" />
+    <ClCompile Include="House_UI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -324,6 +334,16 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Default_Button.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MainLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="HouseBackGround.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="House.h" />
+    <ClInclude Include="House_UI.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>

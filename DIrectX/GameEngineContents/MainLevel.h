@@ -1,0 +1,27 @@
+#pragma once
+#include <GameEngineCore/GameEngineLevel.h>
+
+
+class MainLevel : public GameEngineLevel
+{
+public:
+    MainLevel();
+    ~MainLevel();
+
+    MainLevel(const MainLevel& _Other) = delete;
+    MainLevel(MainLevel&& _Other) noexcept = delete;
+    MainLevel& operator=(const MainLevel& _Other) = delete;
+    MainLevel& operator=(MainLevel&& _Other) noexcept = delete;
+
+protected:
+    void Start() override;
+
+    void Update(float _Delta) override;
+
+    void LevelStart(GameEngineLevel* _PrevLevel) override;
+    void LevelEnd(GameEngineLevel* _NextLevel) override;
+
+private:
+
+};
+

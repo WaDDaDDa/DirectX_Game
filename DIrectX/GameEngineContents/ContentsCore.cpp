@@ -7,6 +7,7 @@
 #include "PlayLevel.h"
 #include "BanPickLevel.h"
 #include "BattleLevel.h"
+#include "MainLevel.h"
 
 ContentsCore::ContentsCore()
 {
@@ -21,6 +22,7 @@ void ContentsCore::Start()
 	GameEngineGUI::CreateGUIWindow<ContentsControlWindow>("ContentsControlWindow");
 
 	GameEngineCore::CreateLevel<IntroLevel>("IntroLevel");
+	GameEngineCore::CreateLevel<MainLevel>("MainLevel");
 	GameEngineCore::CreateLevel<PlayLevel>("PlayLevel");
 	GameEngineCore::CreateLevel<BanPickLevel>("BanPickLevel");
 	GameEngineCore::CreateLevel<BattleLevel>("BattleLevel");

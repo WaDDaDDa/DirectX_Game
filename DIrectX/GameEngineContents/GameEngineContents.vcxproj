@@ -196,6 +196,9 @@
     </ClCompile>
     <ClCompile Include="GameUnitUI.cpp" />
     <ClCompile Include="GreenArrow.cpp" />
+    <ClCompile Include="House.cpp" />
+    <ClCompile Include="HouseBackGround.cpp" />
+    <ClCompile Include="House_UI.cpp" />
     <ClCompile Include="IntroCut.cpp">
       <SubType>
       </SubType>
@@ -210,6 +213,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="MainLevel.cpp" />
     <ClCompile Include="Monk.cpp" />
     <ClCompile Include="MonkShield.cpp" />
     <ClCompile Include="MonkUlt.cpp" />
@@ -294,6 +298,9 @@
     </ClInclude>
     <ClInclude Include="GameUnitUI.h" />
     <ClInclude Include="GreenArrow.h" />
+    <ClInclude Include="House.h" />
+    <ClInclude Include="HouseBackGround.h" />
+    <ClInclude Include="House_UI.h" />
     <ClInclude Include="IntroCut.h">
       <SubType>
       </SubType>
@@ -308,6 +315,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="MainLevel.h" />
     <ClInclude Include="Monk.h" />
     <ClInclude Include="MonkShield.h" />
     <ClInclude Include="MonkUlt.h" />

@@ -373,7 +373,7 @@ void BanPickManager::LevelEnd(GameEngineLevel* _NextLevel)
 
 void BanPickManager::IdleStart()
 {
-
+	UI_Mouse::GameMouse->MouseCol->Off();
 }
 
 void BanPickManager::IdleUpdate(float _Delta)
@@ -387,6 +387,7 @@ void BanPickManager::IdleUpdate(float _Delta)
 
 void BanPickManager::ChangeBanStart()
 {
+	UI_Mouse::GameMouse->MouseCol->Off();
 
 }
 
@@ -401,6 +402,7 @@ void BanPickManager::ChangeBanUpdate(float _Delta)
 
 void BanPickManager::BanStart()
 {
+	UI_Mouse::GameMouse->MouseCol->On();
 
 }
 
@@ -442,6 +444,7 @@ void BanPickManager::BanUpdate(float _Delta)
 
 void BanPickManager::ChangePickStart()
 {
+	UI_Mouse::GameMouse->MouseCol->Off();
 
 }
 
@@ -456,6 +459,7 @@ void BanPickManager::ChangePickUpdate(float _Delta)
 
 void BanPickManager::PickStart()
 {
+	UI_Mouse::GameMouse->MouseCol->On();
 
 }
 

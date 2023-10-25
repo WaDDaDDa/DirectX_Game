@@ -49,6 +49,7 @@ public:
         }
     }
 
+    std::shared_ptr<GameEngineCollision> MouseCol;
 
 protected:
     EventParameter ColEvent;
@@ -78,7 +79,6 @@ protected:
 private:
     TeamType PlayerTeam = TeamType::Blue;
 
-    std::shared_ptr<GameEngineCollision> MouseCol;
     float4 MouseColScale = { 2.0f, 2.0f };
 };
 
