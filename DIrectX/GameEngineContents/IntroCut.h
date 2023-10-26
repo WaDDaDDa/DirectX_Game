@@ -80,8 +80,11 @@ private:
     std::shared_ptr<class TextArrow> Arrow = nullptr;
  
     int Scene = 0;
+    float SceneTime = 0.0f;
+    size_t CurTextNum = 0;
 
     IntroCutState State = IntroCutState::Max;
-
+    std::string CurText = "1";
+    std::string Scene1Text = "20xx년, Teamfight Arena는 출시되자마자 전세계적으로 \n선풍적인 인기를 끌었다.";
 };
 
