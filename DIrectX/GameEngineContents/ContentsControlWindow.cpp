@@ -135,7 +135,6 @@ void ContentsControlWindow::Start()
 	Tabs.push_back(std::make_shared<LevelChangeTab>("LevelChangeTab"));
 	CurTab = Tabs[0];
 	Tabs.push_back(std::make_shared<TestTab>("Debug"));
-	Tabs.push_back(std::make_shared<MapEditorTab>("MapEditor"));
 
 }
 
