@@ -358,6 +358,24 @@ void BanPickManager::Start()
 	BlueBanUnit->Off();
 	RedBanUnit->Off();
 
+	// 블루벤 유닛이름
+	BlueBanUnitText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	BlueBanUnitText->Transform.AddLocalPosition(BlueBanUnitTextPos);
+	BlueBanUnitText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
+	BlueBanUnitText->Off();
+
+	// 레드벤 유닛이름
+	RedBanUnitText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	RedBanUnitText->Transform.AddLocalPosition(RedBanUnitTextPos);
+	RedBanUnitText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
+	RedBanUnitText->Off();
+	
+	BansText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	BansText->Transform.AddLocalPosition(BansTextPos);
+	BansText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
+	BansText->SetText("Galmuri14", "BANS", 40.0f, float4::WHITE, FW1_CENTER);
+
+
 	// 현재 턴 컬러.
 	TurnColor = CreateComponent<GameEngineUIRenderer>(ContentsOrder::BackUI);
 	TurnColor->CreateAnimation("Blue", "BanPick", 0.1f, 30, 30, false);
@@ -526,12 +544,16 @@ void BanPickManager::BanUpdate(float _Delta)
 			{
 				BlueBanUnit->ChangeAnimation(CurCard->GetUnitNameToString() += "_Idle");
 				BlueBanUnit->On();
+				BlueBanUnitText->SetText("Galmuri14", CurCard->UnitStat.KoreaName.data(), 12.0f, float4::WHITE, FW1_CENTER);
+				BlueBanUnitText->On();
 			}
 
 			if (1 == BanCount)
 			{
 				RedBanUnit->ChangeAnimation(CurCard->GetUnitNameToString() += "_Idle");
 				RedBanUnit->On();
+				RedBanUnitText->SetText("Galmuri14", CurCard->UnitStat.KoreaName.data(), 12.0f, float4::WHITE, FW1_CENTER);
+				RedBanUnitText->On();
 			}
 			BanCount++;
 			UI_Mouse::GameMouse->TeamSwitch();

@@ -92,6 +92,7 @@ public:
         Renderer4->ChangeAnimation("Ban");
         Renderer4->On();
         UnitImage->ChangeAnimation(GetUnitNameToString() += "_Idle");
+        UnitText->SetText("Galmuri14", UnitStat.KoreaName.data(), 12.0f, float4::ZERO, FW1_CENTER);
         IsBan = true;
     }
 

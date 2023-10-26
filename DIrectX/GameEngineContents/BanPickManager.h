@@ -170,6 +170,12 @@ private:
     std::shared_ptr<class GameEngineSpriteRenderer> BlueBanUnit;
     float4 BlueBanUnitPos = { 360.0f, -667.0f };
 
+    std::shared_ptr<class GameEngineSpriteRenderer> BlueBanUnitText;
+    float4 BlueBanUnitTextPos = { 360.0f, -690.0f };
+
+    std::shared_ptr<class GameEngineSpriteRenderer> RedBanUnitText;
+    float4 RedBanUnitTextPos = { 920.0f, -690.0f };
+
     std::shared_ptr<class GameEngineSpriteRenderer> RedBan;
     float4 RedBanPos = { 920.0f, -662.0f };
     std::shared_ptr<class GameEngineSpriteRenderer> RedBanIcon;
@@ -179,6 +185,9 @@ private:
 
     std::shared_ptr<class GameEngineSpriteRenderer> TurnColor;
     float4 TurnColorPos = { 640.0f, -125.0f };
+
+    std::shared_ptr<class GameEngineSpriteRenderer> BansText;
+    float4 BansTextPos = { 640.0f, -650.0f };
 
     size_t UnitCount = 8;
     std::shared_ptr<class BanPickCard> CurCard;
