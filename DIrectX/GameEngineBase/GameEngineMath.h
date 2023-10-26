@@ -57,6 +57,14 @@ public:
 
 		struct
 		{
+			float R;
+			float G;
+			float B;
+			float A;
+		};
+
+		struct
+		{
 			float Pos2DX;
 			float Pos2DY;
 			float Scale2DX;
@@ -85,6 +93,21 @@ public:
 		: X(_X), Y(_Y), Z(_Z), W(_W)
 	{
 
+	}
+
+	UINT ColorToUint() const
+	{
+		UINT Return;
+
+		char* Ptr = reinterpret_cast<char*>(&Return);
+
+		// 0~1
+		Ptr[0] = static_cast<int>(R * 255.0f);
+		Ptr[1] = static_cast<int>(G * 255.0f);
+		Ptr[2] = static_cast<int>(B * 255.0f);
+		Ptr[3] = static_cast<int>(A * 255.0f);
+
+		return Return;
 	}
 
 	inline int iX() const

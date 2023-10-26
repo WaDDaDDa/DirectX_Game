@@ -3,10 +3,12 @@
 
 GameEngineObject::GameEngineObject()
 {
+
 }
 
 GameEngineObject::~GameEngineObject()
 {
+
 }
 
 void GameEngineObject::AllLevelStart(class GameEngineLevel* _PrevLevel)

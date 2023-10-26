@@ -34,7 +34,7 @@ void Player::Update(float _Delta)
 	// 페이드 예제
 	// Renderer->GetColorData().MulColor.A -= _DeltaTime;
 	float Speed = 100.0f;
-
+	
 	float4 WPos = Transform.GetWorldPosition();
 
 	if (GameEngineInput::IsPress('A', this))

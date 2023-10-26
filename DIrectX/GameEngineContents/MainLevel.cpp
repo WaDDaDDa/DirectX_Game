@@ -8,6 +8,7 @@
 
 #include "HouseBackGround.h"
 #include "House.h"
+#include "House_UI.h"
 
 MainLevel::MainLevel()
 {
@@ -49,6 +50,7 @@ void MainLevel::Start()
 
 	CreateActor<HouseBackGround>();
 	CreateActor<House>();
+	CreateActor<House_UI>();
 
 }
 

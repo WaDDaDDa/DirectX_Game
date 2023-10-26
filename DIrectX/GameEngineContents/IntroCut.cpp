@@ -26,7 +26,8 @@ void IntroCut::Start()
 	MainSpriteRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackGround) });
 	TextBoxRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::UI);
 
-	TextBoxRenderer->SetSprite("equipment_slot_bg_0.png");
+	//TextBoxRenderer->SetSprite("equipment_slot_bg_0.png");
+	TextBoxRenderer->SetText("돋움", "안녕하세요", 50.0f, float4::BLUE, FW1_CENTER);
 	TextBoxRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 
 	// 텍스트 출력 위치.
