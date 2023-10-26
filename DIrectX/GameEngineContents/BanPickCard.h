@@ -128,6 +128,8 @@ private:
 
     std::shared_ptr<class GameEngineSpriteRenderer> UnitImage;
     float4 UnitImagePos = { 0.0f, -10.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitText;
+    float4 UnitTextPos = { 0.0f, -45.0f };
 
     float4 ColScale = { 76.0f, 104.0f };
 

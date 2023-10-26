@@ -22,14 +22,15 @@ public:
         float _SkillCooltime,
         float _UltCooltime,
         std::string_view _SkillText,
-        std::string_view _UltText
+        std::string_view _UltText,
+        std::string_view _KoreaName
     )
         : UnitName(_Name), AttackRange(_AttRange), SkillRange(_SkillRange), SkillColRange(_SkillColRange),
         UltRange(_UltRange), UnitSpeed(_UnitSpeed), UnitHP(_UnitHP), UnitMaxHP(_UnitMaxHP),
         UnitDef(_UnitDef),
         UnitAbsoluteDef(_UnitAbsoluteDef), UnitAtt(_UnitAtt), AttackSpeed(_AttackSpeed),
         SkillCooltime(_SkillCooltime), UltCooltime(_UltCooltime),
-        SkillText(_SkillText), UltText(_UltText)
+        SkillText(_SkillText), UltText(_UltText), KoreaName(_KoreaName)
     {
 
     }
@@ -53,7 +54,7 @@ public:
     float UltCooltime = 0.0f;
     std::string_view SkillText = "";
     std::string_view UltText = "";
-
+    std::string_view KoreaName = "";
 
     static GameUnitStatus KnightStat;
     static GameUnitStatus ArcherStat;

@@ -79,42 +79,90 @@ private:
     std::shared_ptr<class GameEngineSpriteRenderer> UnitImage;
     float4 UnitImagePos = { 285.0f, -505.0f };
 
+    // 글자 기술 궁극기...
+    std::shared_ptr<class GameEngineSpriteRenderer> SkillText;
+    float4 SkillTextPos = { 660.0f, -440.0f };
+
+    std::shared_ptr<class GameEngineSpriteRenderer> UltText;
+    float4 UltTextPos = { 660.0f, -510.0f };
+
     std::shared_ptr<class GameEngineSpriteRenderer> UnitSkillImage;
     float4 UnitSkillImagePos = { 582.0f, -460.0f };
-
     std::shared_ptr<class GameEngineSpriteRenderer> UnitUltImage;
     float4 UnitUltImagePos = { 582.0f, -530.0f };
+
+    // 유닛 스킬 텍스트 , 텍스트 설명
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitSkillText;
+    float4 UnitSkillTextPos = { 720.0f, -435.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitUltText;
+    float4 UnitUltTextPos = { 720.0f, -505.0f };
+
     // box
-    std::shared_ptr<class GameEngineSpriteRenderer> UniAttBox;
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitAttBox;
     float4 UnitAttBoxPos = { 336.0f, -428.0f };
-    std::shared_ptr<class GameEngineSpriteRenderer> UniAttSpeedBox;
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitAttSpeedBox;
     float4 UnitAttSpeedBoxPos = { 336.0f, -474.0f };
-    std::shared_ptr<class GameEngineSpriteRenderer> UniAttRangeBox;
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitAttRangeBox;
     float4 UnitAttRangeBoxPos = { 336.0f, -520.0f };
-    std::shared_ptr<class GameEngineSpriteRenderer> UniDefBox;
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitDefBox;
     float4 UnitDefBoxPos = { 445.0f, -428.0f };
-    std::shared_ptr<class GameEngineSpriteRenderer> UniHpBox;
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitHpBox;
     float4 UnitHpBoxPos = { 445.0f, -474.0f };
-    std::shared_ptr<class GameEngineSpriteRenderer> UniSpeedBox;
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitSpeedBox;
     float4 UnitSpeedBoxPos = { 445.0f, -520.0f };
+
     // icon
-    std::shared_ptr<class GameEngineSpriteRenderer> UniAttIcon;
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitAttIcon;
     float4 UnitAttIconPos = { 338.0f, -430.0f };
-    std::shared_ptr<class GameEngineSpriteRenderer> UniAttSpeedIcon;
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitAttSpeedIcon;
     float4 UnitAttSpeedIconPos = { 338.0f, -476.0f };
-    std::shared_ptr<class GameEngineSpriteRenderer> UniAttRangeIcon;
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitAttRangeIcon;
     float4 UnitAttRangeIconPos = { 338.0f, -522.0f };
-    std::shared_ptr<class GameEngineSpriteRenderer> UniDefIcon;
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitDefIcon;
     float4 UnitDefIconPos = { 447.0f, -430.0f };
-    std::shared_ptr<class GameEngineSpriteRenderer> UniHpIcon;
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitHpIcon;
     float4 UnitHpIconPos = { 447.0f, -476.0f };
-    std::shared_ptr<class GameEngineSpriteRenderer> UniSpeedIcon;
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitSpeedIcon;
     float4 UnitSpeedIconPos = { 447.0f, -522.0f };
     std::shared_ptr<class GameEngineSpriteRenderer> SkillTimeIcon;
     float4 SkillTimeIconPos = { 622.0f, -472.0f };
     std::shared_ptr<class GameEngineSpriteRenderer> UltTimeIcon;
     float4 UltTimeIconPos = { 622.0f, -542.0f };
 
+    // Text제목
+    std::shared_ptr<class GameEngineSpriteRenderer> AttText;
+    float4 AttTextPos = { 365.0f, -432.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> AttSpeedText;
+    float4 AttSpeedTextPos = { 365.0f, -478.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> AttRangeText;
+    float4 AttRangeTextPos = { 365.0f, -524.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> DefText;
+    float4 DefTextPos = { 474.0f, -432.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> HpText;
+    float4 HpTextPos = { 474.0f, -478.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> SpeedText;
+    float4 SpeedTextPos = { 474.0f, -524.0f };
+
+    // UnitStat Text
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitAttText;
+    float4 UnitAttTextPos = { 385.0f, -452.0f };        
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitAttSpeedText;
+    float4 UnitAttSpeedTextPos = { 385.0f, -498.0f };   
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitAttRangeText;
+    float4 UnitAttRangeTextPos = { 385.0f, -544.0f };   
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitDefText;
+    float4 UnitDefTextPos = { 494.0f, -452.0f };        
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitHpText;
+    float4 UnitHpTextPos = { 494.0f, -498.0f };         
+    std::shared_ptr<class GameEngineSpriteRenderer> UnitSpeedText;
+    float4 UnitSpeedTextPos = { 494.0f, -544.0f };
+
+    std::shared_ptr<class GameEngineSpriteRenderer> SkillTimeText;
+    float4 SkillTimeTextPos = { 638.0f, -465.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> UltTimeText;
+    float4 UltTimeTextPos = { 638.0f, -535.0f };
+
+    // 벤 영역
     std::shared_ptr<class GameEngineSpriteRenderer> BlueBan;
     float4 BlueBanPos = { 360.0f, -662.0f };
     std::shared_ptr<class GameEngineSpriteRenderer> BlueBanIcon;

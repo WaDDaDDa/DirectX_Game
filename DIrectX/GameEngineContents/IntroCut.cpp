@@ -24,11 +24,12 @@ void IntroCut::Start()
 	Transform.AddLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, 200.0f });
 	MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::BackGround);
 	MainSpriteRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackGround) });
-	TextBoxRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::UI);
 
+	TextBoxRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::UI);
 	//TextBoxRenderer->SetSprite("equipment_slot_bg_0.png");
-	TextBoxRenderer->SetText("돋움", "안녕하세요", 50.0f, float4::BLUE, FW1_CENTER);
+	TextBoxRenderer->SetText("Galmuri14", "20xx년, Teamfight Arena는 출시되자마자 전세계적으로 선풍적인 인기를 끌었다.", 40.0f, float4::WHITE, FW1_LEFT);
 	TextBoxRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
+	TextBoxRenderer->Transform.AddLocalPosition({ -600.0f, 50.0f });
 
 	// 텍스트 출력 위치.
 	TextBoxRenderer->SetImageScale(TextBoxScale);

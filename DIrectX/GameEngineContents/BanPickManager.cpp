@@ -73,6 +73,28 @@ void BanPickManager::Start()
 	UnitSkillImage->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
 	UnitSkillImage->SetSprite(CurCard->GetUnitNameToString() += "_skill.png");
 
+	// SkillText
+	SkillText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	SkillText->SetText("Galmuri14", "기술", 16.0f, float4::WHITE, FW1_CENTER);
+	SkillText->Transform.AddLocalPosition(SkillTextPos);
+	SkillText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+	
+	UnitSkillText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	//UnitSkillText->SetText("Galmuri14", CurCard->UnitStat.SkillText.data(), 12.0f, float4::WHITE, FW1_LEFT);
+	UnitSkillText->Transform.AddLocalPosition(UnitSkillTextPos);
+	UnitSkillText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	// UltText
+	UltText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	UltText->SetText("Galmuri14", "궁극기", 16.0f, float4::WHITE, FW1_CENTER);
+	UltText->Transform.AddLocalPosition(UltTextPos);
+	UltText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	UnitUltText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	//UnitUltText->SetText("Galmuri14", CurCard->UnitStat.UltText.data(), 12.0f, float4::WHITE, FW1_LEFT);
+	UnitUltText->Transform.AddLocalPosition(UnitUltTextPos);
+	UnitUltText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
 	UnitUltImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
 	UnitUltImage->AutoSpriteSizeOn();
 	UnitUltImage->SetAutoScaleRatio(2.0f);
@@ -80,108 +102,108 @@ void BanPickManager::Start()
 	UnitUltImage->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
 	UnitUltImage->SetSprite(CurCard->GetUnitNameToString() += "_ult.png");
 
-	UniAttBox = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
-	UniAttBox->CreateAnimation("AttBox", "BanPick", 0.1f, 14, 14, false);
-	UniAttBox->AutoSpriteSizeOn();
-	UniAttBox->SetAutoScaleRatio(2.0f);
-	UniAttBox->Transform.AddLocalPosition(UnitAttBoxPos);
-	UniAttBox->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UI) });
-	UniAttBox->ChangeAnimation("AttBox");
-	UniAttBox->SetPivotType(PivotType::LeftTop);
+	UnitAttBox = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	UnitAttBox->CreateAnimation("AttBox", "BanPick", 0.1f, 14, 14, false);
+	UnitAttBox->AutoSpriteSizeOn();
+	UnitAttBox->SetAutoScaleRatio(2.0f);
+	UnitAttBox->Transform.AddLocalPosition(UnitAttBoxPos);
+	UnitAttBox->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UI) });
+	UnitAttBox->ChangeAnimation("AttBox");
+	UnitAttBox->SetPivotType(PivotType::LeftTop);
 
-	UniAttSpeedBox = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
-	UniAttSpeedBox->CreateAnimation("AttSpeedBox", "BanPick", 0.1f, 14, 14, false);
-	UniAttSpeedBox->AutoSpriteSizeOn();
-	UniAttSpeedBox->SetAutoScaleRatio(2.0f);
-	UniAttSpeedBox->Transform.AddLocalPosition(UnitAttSpeedBoxPos);
-	UniAttSpeedBox->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UI) });
-	UniAttSpeedBox->ChangeAnimation("AttSpeedBox");
-	UniAttSpeedBox->SetPivotType(PivotType::LeftTop);
+	UnitAttSpeedBox = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	UnitAttSpeedBox->CreateAnimation("AttSpeedBox", "BanPick", 0.1f, 14, 14, false);
+	UnitAttSpeedBox->AutoSpriteSizeOn();
+	UnitAttSpeedBox->SetAutoScaleRatio(2.0f);
+	UnitAttSpeedBox->Transform.AddLocalPosition(UnitAttSpeedBoxPos);
+	UnitAttSpeedBox->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UI) });
+	UnitAttSpeedBox->ChangeAnimation("AttSpeedBox");
+	UnitAttSpeedBox->SetPivotType(PivotType::LeftTop);
 
-	UniAttRangeBox = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
-	UniAttRangeBox->CreateAnimation("AttRangeBox", "BanPick", 0.1f, 14, 14, false);
-	UniAttRangeBox->AutoSpriteSizeOn();
-	UniAttRangeBox->SetAutoScaleRatio(2.0f);
-	UniAttRangeBox->Transform.AddLocalPosition(UnitAttRangeBoxPos);
-	UniAttRangeBox->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UI) });
-	UniAttRangeBox->ChangeAnimation("AttRangeBox");
-	UniAttRangeBox->SetPivotType(PivotType::LeftTop);
+	UnitAttRangeBox = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	UnitAttRangeBox->CreateAnimation("AttRangeBox", "BanPick", 0.1f, 14, 14, false);
+	UnitAttRangeBox->AutoSpriteSizeOn();
+	UnitAttRangeBox->SetAutoScaleRatio(2.0f);
+	UnitAttRangeBox->Transform.AddLocalPosition(UnitAttRangeBoxPos);
+	UnitAttRangeBox->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UI) });
+	UnitAttRangeBox->ChangeAnimation("AttRangeBox");
+	UnitAttRangeBox->SetPivotType(PivotType::LeftTop);
 
-	UniDefBox = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
-	UniDefBox->CreateAnimation("DefBox", "BanPick", 0.1f, 14, 14, false);
-	UniDefBox->AutoSpriteSizeOn();
-	UniDefBox->SetAutoScaleRatio(2.0f);
-	UniDefBox->Transform.AddLocalPosition(UnitDefBoxPos);
-	UniDefBox->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UI) });
-	UniDefBox->ChangeAnimation("DefBox");
-	UniDefBox->SetPivotType(PivotType::LeftTop);
+	UnitDefBox = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	UnitDefBox->CreateAnimation("DefBox", "BanPick", 0.1f, 14, 14, false);
+	UnitDefBox->AutoSpriteSizeOn();
+	UnitDefBox->SetAutoScaleRatio(2.0f);
+	UnitDefBox->Transform.AddLocalPosition(UnitDefBoxPos);
+	UnitDefBox->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UI) });
+	UnitDefBox->ChangeAnimation("DefBox");
+	UnitDefBox->SetPivotType(PivotType::LeftTop);
 
-	UniHpBox = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
-	UniHpBox->CreateAnimation("HpBox", "BanPick", 0.1f, 14, 14, false);
-	UniHpBox->AutoSpriteSizeOn();
-	UniHpBox->SetAutoScaleRatio(2.0f);
-	UniHpBox->Transform.AddLocalPosition(UnitHpBoxPos);
-	UniHpBox->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UI) });
-	UniHpBox->ChangeAnimation("HpBox");
-	UniHpBox->SetPivotType(PivotType::LeftTop);
+	UnitHpBox = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	UnitHpBox->CreateAnimation("HpBox", "BanPick", 0.1f, 14, 14, false);
+	UnitHpBox->AutoSpriteSizeOn();
+	UnitHpBox->SetAutoScaleRatio(2.0f);
+	UnitHpBox->Transform.AddLocalPosition(UnitHpBoxPos);
+	UnitHpBox->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UI) });
+	UnitHpBox->ChangeAnimation("HpBox");
+	UnitHpBox->SetPivotType(PivotType::LeftTop);
 
-	UniSpeedBox = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
-	UniSpeedBox->CreateAnimation("SpeedBox", "BanPick", 0.1f, 14, 14, false);
-	UniSpeedBox->AutoSpriteSizeOn();
-	UniSpeedBox->SetAutoScaleRatio(2.0f);
-	UniSpeedBox->Transform.AddLocalPosition(UnitSpeedBoxPos);
-	UniSpeedBox->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UI) });
-	UniSpeedBox->ChangeAnimation("SpeedBox");
-	UniSpeedBox->SetPivotType(PivotType::LeftTop);
+	UnitSpeedBox = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	UnitSpeedBox->CreateAnimation("SpeedBox", "BanPick", 0.1f, 14, 14, false);
+	UnitSpeedBox->AutoSpriteSizeOn();
+	UnitSpeedBox->SetAutoScaleRatio(2.0f);
+	UnitSpeedBox->Transform.AddLocalPosition(UnitSpeedBoxPos);
+	UnitSpeedBox->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UI) });
+	UnitSpeedBox->ChangeAnimation("SpeedBox");
+	UnitSpeedBox->SetPivotType(PivotType::LeftTop);
 
 	// 아이콘
-	UniAttIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
-	UniAttIcon->SetSprite("ingame_stat_icon_0.png");
-	UniAttIcon->AutoSpriteSizeOn();
-	UniAttIcon->SetAutoScaleRatio(2.0f);
-	UniAttIcon->Transform.AddLocalPosition(UnitAttIconPos);
-	UniAttIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
-	UniAttIcon->SetPivotType(PivotType::LeftTop);
+	UnitAttIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	UnitAttIcon->SetSprite("ingame_stat_icon_0.png");
+	UnitAttIcon->AutoSpriteSizeOn();
+	UnitAttIcon->SetAutoScaleRatio(2.0f);
+	UnitAttIcon->Transform.AddLocalPosition(UnitAttIconPos);
+	UnitAttIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+	UnitAttIcon->SetPivotType(PivotType::LeftTop);
 
-	UniAttSpeedIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
-	UniAttSpeedIcon->SetSprite("ingame_stat_icon_5.png");
-	UniAttSpeedIcon->AutoSpriteSizeOn();
-	UniAttSpeedIcon->SetAutoScaleRatio(2.0f);
-	UniAttSpeedIcon->Transform.AddLocalPosition(UnitAttSpeedIconPos);
-	UniAttSpeedIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
-	UniAttSpeedIcon->SetPivotType(PivotType::LeftTop);
+	UnitAttSpeedIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	UnitAttSpeedIcon->SetSprite("ingame_stat_icon_5.png");
+	UnitAttSpeedIcon->AutoSpriteSizeOn();
+	UnitAttSpeedIcon->SetAutoScaleRatio(2.0f);
+	UnitAttSpeedIcon->Transform.AddLocalPosition(UnitAttSpeedIconPos);
+	UnitAttSpeedIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+	UnitAttSpeedIcon->SetPivotType(PivotType::LeftTop);
 
-	UniAttRangeIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
-	UniAttRangeIcon->SetSprite("ingame_stat_icon_3.png");
-	UniAttRangeIcon->AutoSpriteSizeOn();
-	UniAttRangeIcon->SetAutoScaleRatio(2.0f);
-	UniAttRangeIcon->Transform.AddLocalPosition(UnitAttRangeIconPos);
-	UniAttRangeIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
-	UniAttRangeIcon->SetPivotType(PivotType::LeftTop);
+	UnitAttRangeIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	UnitAttRangeIcon->SetSprite("ingame_stat_icon_3.png");
+	UnitAttRangeIcon->AutoSpriteSizeOn();
+	UnitAttRangeIcon->SetAutoScaleRatio(2.0f);
+	UnitAttRangeIcon->Transform.AddLocalPosition(UnitAttRangeIconPos);
+	UnitAttRangeIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+	UnitAttRangeIcon->SetPivotType(PivotType::LeftTop);
 
-	UniDefIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
-	UniDefIcon->SetSprite("ingame_stat_icon_1.png");
-	UniDefIcon->AutoSpriteSizeOn();
-	UniDefIcon->SetAutoScaleRatio(2.0f);
-	UniDefIcon->Transform.AddLocalPosition(UnitDefIconPos);
-	UniDefIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
-	UniDefIcon->SetPivotType(PivotType::LeftTop);
+	UnitDefIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	UnitDefIcon->SetSprite("ingame_stat_icon_1.png");
+	UnitDefIcon->AutoSpriteSizeOn();
+	UnitDefIcon->SetAutoScaleRatio(2.0f);
+	UnitDefIcon->Transform.AddLocalPosition(UnitDefIconPos);
+	UnitDefIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+	UnitDefIcon->SetPivotType(PivotType::LeftTop);
 
-	UniHpIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
-	UniHpIcon->SetSprite("ingame_stat_icon_2.png");
-	UniHpIcon->AutoSpriteSizeOn();
-	UniHpIcon->SetAutoScaleRatio(2.0f);
-	UniHpIcon->Transform.AddLocalPosition(UnitHpIconPos);
-	UniHpIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
-	UniHpIcon->SetPivotType(PivotType::LeftTop);
+	UnitHpIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	UnitHpIcon->SetSprite("ingame_stat_icon_2.png");
+	UnitHpIcon->AutoSpriteSizeOn();
+	UnitHpIcon->SetAutoScaleRatio(2.0f);
+	UnitHpIcon->Transform.AddLocalPosition(UnitHpIconPos);
+	UnitHpIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+	UnitHpIcon->SetPivotType(PivotType::LeftTop);
 
-	UniSpeedIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
-	UniSpeedIcon->SetSprite("ingame_stat_icon_4.png");
-	UniSpeedIcon->AutoSpriteSizeOn();
-	UniSpeedIcon->SetAutoScaleRatio(2.0f);
-	UniSpeedIcon->Transform.AddLocalPosition(UnitSpeedIconPos);
-	UniSpeedIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
-	UniSpeedIcon->SetPivotType(PivotType::LeftTop);
+	UnitSpeedIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	UnitSpeedIcon->SetSprite("ingame_stat_icon_4.png");
+	UnitSpeedIcon->AutoSpriteSizeOn();
+	UnitSpeedIcon->SetAutoScaleRatio(2.0f);
+	UnitSpeedIcon->Transform.AddLocalPosition(UnitSpeedIconPos);
+	UnitSpeedIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+	UnitSpeedIcon->SetPivotType(PivotType::LeftTop);
 
 	SkillTimeIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
 	SkillTimeIcon->SetSprite("patch_icons_1.png");
@@ -196,6 +218,78 @@ void BanPickManager::Start()
 	UltTimeIcon->SetAutoScaleRatio(2.0f);
 	UltTimeIcon->Transform.AddLocalPosition(UltTimeIconPos);
 	UltTimeIcon->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	// 스탯 제목
+	AttText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	AttText->SetText("Galmuri14", "공격력", 16.0f, float4::WHITE, FW1_LEFT);
+	AttText->Transform.AddLocalPosition(AttTextPos);
+	AttText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	AttSpeedText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	AttSpeedText->SetText("Galmuri14", "공격 속도", 16.0f, float4::WHITE, FW1_LEFT);
+	AttSpeedText->Transform.AddLocalPosition(AttSpeedTextPos);
+	AttSpeedText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	AttRangeText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	AttRangeText->SetText("Galmuri14", "사거리", 16.0f, float4::WHITE, FW1_LEFT);
+	AttRangeText->Transform.AddLocalPosition(AttRangeTextPos);
+	AttRangeText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	DefText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	DefText->SetText("Galmuri14", "방어력", 16.0f, float4::WHITE, FW1_LEFT);
+	DefText->Transform.AddLocalPosition(DefTextPos);
+	DefText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	HpText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	HpText->SetText("Galmuri14", "체력", 16.0f, float4::WHITE, FW1_LEFT);
+	HpText->Transform.AddLocalPosition(HpTextPos);
+	HpText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	SpeedText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	SpeedText->SetText("Galmuri14", "이동 속도", 16.0f, float4::WHITE, FW1_LEFT);
+	SpeedText->Transform.AddLocalPosition(SpeedTextPos);
+	SpeedText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	// 유닛 스탯 제목
+	UnitAttText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	UnitAttText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitAtt), 16.0f, float4::WHITE, FW1_CENTER);
+	UnitAttText->Transform.AddLocalPosition(UnitAttTextPos);
+	UnitAttText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	UnitAttSpeedText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	UnitAttSpeedText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.AttackSpeed), 16.0f, float4::WHITE, FW1_CENTER);
+	UnitAttSpeedText->Transform.AddLocalPosition(UnitAttSpeedTextPos);
+	UnitAttSpeedText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	UnitAttRangeText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	UnitAttRangeText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.AttackRange.X), 16.0f, float4::WHITE, FW1_CENTER);
+	UnitAttRangeText->Transform.AddLocalPosition(UnitAttRangeTextPos);
+	UnitAttRangeText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	UnitDefText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	UnitDefText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitDef), 16.0f, float4::WHITE, FW1_CENTER);
+	UnitDefText->Transform.AddLocalPosition(UnitDefTextPos);
+	UnitDefText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	UnitHpText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	UnitHpText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitHP), 16.0f, float4::WHITE, FW1_CENTER);
+	UnitHpText->Transform.AddLocalPosition(UnitHpTextPos);
+	UnitHpText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	UnitSpeedText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	UnitSpeedText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitSpeed), 16.0f, float4::WHITE, FW1_CENTER);
+	UnitSpeedText->Transform.AddLocalPosition(UnitSpeedTextPos);
+	UnitSpeedText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	SkillTimeText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	SkillTimeText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.SkillCooltime) += "초", 16.0f, float4::WHITE, FW1_LEFT);
+	SkillTimeText->Transform.AddLocalPosition(SkillTimeTextPos);
+	SkillTimeText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	UltTimeText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	UltTimeText->SetText("Galmuri14", "1회/SET", 16.0f, float4::WHITE, FW1_LEFT);
+	UltTimeText->Transform.AddLocalPosition(UltTimeTextPos);
+	UltTimeText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
 
 	// 블루팀 벤 틀
 	BlueBan = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
@@ -306,6 +400,17 @@ void BanPickManager::Update(float _Delta)
 	UnitImage->ChangeAnimation(CurCard->GetUnitNameToString() += "_Idle");
 	UnitSkillImage->SetSprite(CurCard->GetUnitNameToString() += "_skill.png");
 	UnitUltImage->SetSprite(CurCard->GetUnitNameToString() += "_ult.png");
+
+	UnitSkillText->SetText("Galmuri14", CurCard->UnitStat.SkillText.data(), 12.0f, float4::WHITE, FW1_LEFT);
+	UnitUltText->SetText("Galmuri14", CurCard->UnitStat.UltText.data(), 12.0f, float4::WHITE, FW1_LEFT);
+	// 유닛 스탯 제목
+	UnitAttText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitAtt), 16.0f, float4::WHITE, FW1_CENTER);
+	UnitAttSpeedText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.AttackSpeed), 16.0f, float4::WHITE, FW1_CENTER);
+	UnitAttRangeText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.AttackRange.X), 16.0f, float4::WHITE, FW1_CENTER);
+	UnitDefText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitDef), 16.0f, float4::WHITE, FW1_CENTER);
+	UnitHpText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitHP), 16.0f, float4::WHITE, FW1_CENTER);
+	UnitSpeedText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitSpeed), 16.0f, float4::WHITE, FW1_CENTER);
+	SkillTimeText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.SkillCooltime) += "초", 16.0f, float4::WHITE, FW1_LEFT);
 
 	StateUpdate(_Delta);
 }

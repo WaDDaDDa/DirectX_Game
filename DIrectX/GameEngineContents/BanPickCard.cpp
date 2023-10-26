@@ -148,6 +148,13 @@ void BanPickCard::Init()
 	UnitImage->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::UIImage) });
 	UnitImage->ChangeAnimation(GetUnitNameToString() += "_Idle");
 
+	// Unit Text
+	UnitText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	UnitText->SetText("Galmuri14", UnitStat.KoreaName.data(), 12.0f, float4::WHITE, FW1_CENTER);
+	UnitText->Transform.AddLocalPosition(UnitTextPos);
+	UnitText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
+
+
 	Transform.AddLocalPosition({ XInter, 0.0f });
 
 	XInter += 80.0f;

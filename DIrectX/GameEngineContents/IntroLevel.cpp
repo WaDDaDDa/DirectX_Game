@@ -3,6 +3,7 @@
 #include "IntroCut.h"
 #include "UI_Mouse.h"
 
+
 IntroLevel::IntroLevel()
 {
 
@@ -17,10 +18,12 @@ void IntroLevel::Start()
 {
 	GameEngineCore::GetBackBufferRenderTarget()->SetClearColor({ 0, 0, 0, 1 });
 
+	GameEngineFont::Load("Galmuri14");
+
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExistsChild("GameEngineResources");
-		Dir.MoveChild("ContentsResources\\Intro");
+		Dir.MoveChild("ContentsResources\\Intro\\");
 
 		std::vector<GameEngineFile> Files = Dir.GetAllFile();
 
@@ -39,6 +42,7 @@ void IntroLevel::Start()
 		GameEngineSprite::CreateSingle("equipment_slot_bg_0.png");
 		GameEngineSprite::CreateSingle("new_game_ui_bg.png");
 		GameEngineSprite::CreateSingle("Black_0.png");
+		GameEngineSprite::CreateSingle("IntroMask.png");
 	}
 
 	{

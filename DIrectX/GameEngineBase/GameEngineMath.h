@@ -95,6 +95,29 @@ public:
 
 	}
 
+	// 기본 소수점 1자리 출력
+	static std::string FloatToString(float _Num, int pos = 1)
+	{
+		if (0 == pos)
+		{
+			std::string Num = std::to_string(static_cast<int>(_Num));
+
+			return Num;
+		}
+
+		std::string Num = std::to_string(_Num);
+
+		return Num.substr(0, Num.find('.') + pos + 1);
+	}
+
+	//static std::string FloatToString(float _Value)
+	//{
+	//	int Front = static_cast<int>(_Value);
+	//	int Back = static_cast<int>((_Value - Front) * 100);
+
+	//	return std::to_string(Front) += std::string(".") += std::to_string(Back);
+	//}
+
 	UINT ColorToUint() const
 	{
 		UINT Return;
