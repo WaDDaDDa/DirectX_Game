@@ -27,9 +27,10 @@ void IntroCut::Start()
 
 	TextBoxRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::UI);
 	//TextBoxRenderer->SetSprite("equipment_slot_bg_0.png");
-	std::string TEXT = GameEngineString::UnicodeToAnsi(CurText);
 
-	TextBoxRenderer->SetText("Galmuri14", TEXT, 40.0f, float4::WHITE, FW1_LEFT);
+	PrintText = GameEngineString::UnicodeToAnsi(CurText);
+
+	TextBoxRenderer->SetText("Galmuri14", PrintText, 40.0f, float4::WHITE, FW1_LEFT);
 	TextBoxRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 	TextBoxRenderer->Transform.AddLocalPosition({ -600.0f, 50.0f });
 
@@ -171,19 +172,26 @@ void IntroCut::CutScene1Update(float _Delta)
 {
 	SceneTime += _Delta;
 
-	if (GameEngineInput::IsDown(VK_SPACE, this))
+	if (GameEngineInput::IsDown(VK_SPACE, this) && false == TextSkip)
 	{
-		ChangeState(IntroCutState::Black);
+		TextSkip = true;
 		return;
 	}
 
-	//CurText.resize(1);
-	if (CurText.size() > Scene1Text.size())
+	if (CurText.size() > Scene1Text.size() || true == TextSkip)
 	{
+		if (GameEngineInput::IsDown(VK_SPACE, this))
+		{
+			ChangeState(IntroCutState::Black);
+			return;
+		}
+		PrintText = GameEngineString::UnicodeToAnsi(Scene1Text);
+
+		TextBoxRenderer->SetText("Galmuri14", PrintText, 40.0f, float4::WHITE, FW1_LEFT);
 		return;
 	}
 
-	if (0.1f <= SceneTime)
+	if (0.01f <= SceneTime)
 	{
 		SceneTime = 0.0f;
 
@@ -191,9 +199,9 @@ void IntroCut::CutScene1Update(float _Delta)
 		CurTextNum++;
 
 
-		std::string TEXT = GameEngineString::UnicodeToAnsi(CurText);
+		PrintText = GameEngineString::UnicodeToAnsi(CurText);
 
-		TextBoxRenderer->SetText("Galmuri14", TEXT, 40.0f, float4::WHITE, FW1_LEFT);
+		TextBoxRenderer->SetText("Galmuri14", PrintText, 40.0f, float4::WHITE, FW1_LEFT);
 	}
 
 }
