@@ -27,7 +27,9 @@ void IntroCut::Start()
 
 	TextBoxRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::UI);
 	//TextBoxRenderer->SetSprite("equipment_slot_bg_0.png");
-	TextBoxRenderer->SetText("Galmuri14", CurText, 40.0f, float4::WHITE, FW1_LEFT);
+	std::string TEXT = GameEngineString::UnicodeToAnsi(CurText);
+
+	TextBoxRenderer->SetText("Galmuri14", TEXT, 40.0f, float4::WHITE, FW1_LEFT);
 	TextBoxRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 	TextBoxRenderer->Transform.AddLocalPosition({ -600.0f, 50.0f });
 
@@ -175,16 +177,23 @@ void IntroCut::CutScene1Update(float _Delta)
 		return;
 	}
 
-	CurText.resize(Scene1Text.size());
+	//CurText.resize(1);
+	if (CurText.size() > Scene1Text.size())
+	{
+		return;
+	}
 
 	if (0.1f <= SceneTime)
 	{
 		SceneTime = 0.0f;
-		CurText[CurTextNum] = Scene1Text[CurTextNum];
+
+		CurText.push_back(Scene1Text[CurTextNum]);
 		CurTextNum++;
-		CurText[CurTextNum] = Scene1Text[CurTextNum];
-		CurTextNum++;
-		TextBoxRenderer->SetText("Galmuri14", CurText, 40.0f, float4::WHITE, FW1_LEFT);
+
+
+		std::string TEXT = GameEngineString::UnicodeToAnsi(CurText);
+
+		TextBoxRenderer->SetText("Galmuri14", TEXT, 40.0f, float4::WHITE, FW1_LEFT);
 	}
 
 }
@@ -193,7 +202,6 @@ void IntroCut::CutScene2Start()
 {
 	MainSpriteRenderer->SetSprite("cutscene2.png");
 	Arrow = GetLevel()->CreateActor<TextArrow>();
-
 }
 
 void IntroCut::CutScene2Update(float _Delta)

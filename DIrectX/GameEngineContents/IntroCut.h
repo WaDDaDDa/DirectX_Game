@@ -84,7 +84,7 @@ private:
     size_t CurTextNum = 0;
 
     IntroCutState State = IntroCutState::Max;
-    std::string CurText = "1";
-    std::string Scene1Text = "20xx년, Teamfight Arena는 출시되자마자 전세계적으로 \n선풍적인 인기를 끌었다.";
+    std::wstring CurText = L"";
+    std::wstring Scene1Text = L"20xx년, Teamfight Arena는 출시되자마자 전세계적으로 \n선풍적인 인기를 끌었다.";
 };
 
