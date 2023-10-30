@@ -78,15 +78,29 @@ void TestTab::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 	{
 
 	}
-
-	if (ImGui::Button("Speed X2"))
+	std::string GameSpeed = "GameSpeed : ";
+	GameSpeed += std::to_string(GameEngineCore::MainTime.GetTimeScale(0));
+	if (ImGui::Button(GameSpeed.c_str()))
 	{
-		GameEngineCore::MainTime.SetAllTimeScale(2.0f);
+		
+	}
+
+	if (ImGui::Button("Speed++ "))
+	{
+		Speed += 1.0f;
+		GameEngineCore::MainTime.SetAllTimeScale(Speed);
+	}
+
+	if (ImGui::Button("Speed-- "))
+	{
+		Speed -= 1.0f;
+		GameEngineCore::MainTime.SetAllTimeScale(Speed);
 	}
 
 	if (ImGui::Button("Normal Speed"))
 	{
-		GameEngineCore::MainTime.SetAllTimeScale(1.0f);
+		Speed = 1.0f;
+		GameEngineCore::MainTime.SetAllTimeScale(Speed);
 	}
 
 	if (ImGui::Button("Collision OnOff"))
@@ -94,49 +108,49 @@ void TestTab::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 		GameEngineLevel::IsDebug = !GameEngineLevel::IsDebug;
 	}
 
-	std::list<std::shared_ptr<GameEngineObject>> ObjectLists = _Level->GetObjectGroupInt(0);
+	//std::list<std::shared_ptr<GameEngineObject>> ObjectLists = _Level->GetObjectGroupInt(0);
 
-	std::vector<std::shared_ptr<GameEngineObject>> Objects;
+	//std::vector<std::shared_ptr<GameEngineObject>> Objects;
 
-	for (std::shared_ptr<GameEngineObject> Ptr : ObjectLists)
-	{
-		Objects.push_back(Ptr);
-	}
+	//for (std::shared_ptr<GameEngineObject> Ptr : ObjectLists)
+	//{
+	//	Objects.push_back(Ptr);
+	//}
 
 
-	if (Objects.size())
-	{
-		std::vector<std::string> Names;
+	//if (Objects.size())
+	//{
+	//	std::vector<std::string> Names;
 
-		for (std::shared_ptr<GameEngineObject> Ptr : Objects)
-		{
-			Names.push_back(Ptr->GetName());
-		}
+	//	for (std::shared_ptr<GameEngineObject> Ptr : Objects)
+	//	{
+	//		Names.push_back(Ptr->GetName());
+	//	}
 
-		//Names.push_back("aaaa");
-		//Names.push_back("bbbb");
+	//	//Names.push_back("aaaa");
+	//	//Names.push_back("bbbb");
 
-		std::vector<const char*> CNames;
+	//	std::vector<const char*> CNames;
 
-		for (size_t i = 0; i < Names.size(); i++)
-		{
-			CNames.push_back(Names[i].c_str());
-		}
+	//	for (size_t i = 0; i < Names.size(); i++)
+	//	{
+	//		CNames.push_back(Names[i].c_str());
+	//	}
 
-		if (ImGui::ListBox("ObjectList", &Select, &CNames[0], static_cast<int>(Names.size())))
-		{
-			SelectObject = Objects[Select];
-		}
+	//	if (ImGui::ListBox("ObjectList", &Select, &CNames[0], static_cast<int>(Names.size())))
+	//	{
+	//		SelectObject = Objects[Select];
+	//	}
 
-		if (nullptr != SelectObject)
-		{
-			if (ImGui::Button("Select Object Off"))
-			{
-				SelectObject->Off();
-			}
+	//	if (nullptr != SelectObject)
+	//	{
+	//		if (ImGui::Button("Select Object Off"))
+	//		{
+	//			SelectObject->Off();
+	//		}
 
-		}
-	}
+	//	}
+	//}
 }
 
 

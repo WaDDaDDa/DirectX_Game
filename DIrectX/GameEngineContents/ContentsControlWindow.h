@@ -23,7 +23,7 @@ class TestTab : public Tab
 	std::shared_ptr<GameEngineObject> SelectObject = nullptr;
 
 	void OnGUI(GameEngineLevel* _Level, float _DeltaTime);
-
+	float Speed = 1.0f;
 public:
 	TestTab(std::string_view _Name)
 		: Tab(_Name)
