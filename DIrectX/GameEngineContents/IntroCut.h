@@ -9,6 +9,7 @@ enum class IntroCutState
     CutScene4,
     CutScene5,
     CutScene6,
+    CutScene7,
     NewGame,
     Black,
     Max,
@@ -63,6 +64,9 @@ protected:
     void CutScene6Start();
     void CutScene6Update(float _Delta);
 
+    void CutScene7Start();
+    void CutScene7Update(float _Delta);
+
     void NewGameStart();
     void NewGameUpdate(float _Delta);
 
@@ -89,5 +93,11 @@ private:
     std::string PrintText = "";
     std::wstring CurText = L"";
     std::wstring Scene1Text = L"20xx년, Teamfight Arena는 출시되자마자 전세계적으로 \n선풍적인 인기를 끌었다.";
+    std::wstring Scene2Text = L"당연하게도 프로스포츠로서의 인기 또한 대단했고, 나는 \n18살에 이 게임의 프로게이머로 데뷔했다."; 
+    std::wstring Scene3Text = L"그 이후로 10년, 나는 프로게이머 생활을 하는 동안 단 \n한 번도 월드 챔피언십 우승 타이틀을 놓치지 않았다."; 
+    std::wstring Scene4Text = L"프로 선수를 은퇴하고 감독 생활을 시작한 지 10년. 여전히 \n나는 월드 챔피언십 우승 타이틀을 놓치지 않았다."; 
+    std::wstring Scene5Text = L"이렇게 선수 생활, 감독 생활을 하며 쌓인 트로피를 \n보고 있자면 가슴이 웅장해지곤 했다."; 
+    std::wstring Scene6Text = L"하지만 내가 정말 천재인걸까? 좋은 동료와 환경 덕분에 이룬 \n결과인 건 아닐까? 나는 새로운 도전을 하고 싶엇다."; 
+    std::wstring Scene7Text = L"아마추어 최하위 팀을 키워서 월드 챔피언십을 우승해보자. \n그땐 만족할 수 있겠지. 그리고 내가 맡게 된 팀은..."; 
 };
 

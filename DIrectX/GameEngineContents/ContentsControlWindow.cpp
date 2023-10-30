@@ -79,6 +79,16 @@ void TestTab::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 
 	}
 
+	if (ImGui::Button("Speed X2"))
+	{
+		GameEngineCore::MainTime.SetAllTimeScale(2.0f);
+	}
+
+	if (ImGui::Button("Normal Speed"))
+	{
+		GameEngineCore::MainTime.SetAllTimeScale(1.0f);
+	}
+
 	if (ImGui::Button("Collision OnOff"))
 	{
 		GameEngineLevel::IsDebug = !GameEngineLevel::IsDebug;

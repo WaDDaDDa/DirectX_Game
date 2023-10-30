@@ -303,6 +303,7 @@ void GameUnit::MapOverCheck()
 
 void GameUnit::Update(float _Delta)
 {
+
 	DieCheck();
 
 

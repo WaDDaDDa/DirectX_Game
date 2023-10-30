@@ -42,7 +42,6 @@ void BattleLevel::Start()
 	GetCamera(static_cast<int>(ECAMERAORDER::UI))->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 
 	GameEngineInput::AddInputObject(this);
-
 }
 
 void BattleLevel::Update(float _Delta)
@@ -50,12 +49,13 @@ void BattleLevel::Update(float _Delta)
 	if (GameEngineInput::IsDown('1', this))
 	{
 		GameEngineLevel::DebugSwitch();
+		//GameEngineCore::MainTime.SetAllTimeScale(5.0f);
+		//SetAllTimeScale
 	}
 }
 
 void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
-
 	GameEngineRandom NewRandom;
 
 	std::shared_ptr<BattleField> BF = CreateActor<BattleField>();
