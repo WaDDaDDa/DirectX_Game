@@ -19,6 +19,11 @@ protected:
     void Start();
     void Update(float _Delta);
 
+
+    void LevelStart(GameEngineLevel* _PrevLevel);
+
+    void LevelEnd(GameEngineLevel* _NextLevel);
+
 private:
     // NewGame UI 임시
     std::shared_ptr<class GameEngineSpriteRenderer> NewGameBoxRenderer;
@@ -78,5 +83,15 @@ private:
 
     float4 StartButtonPos = { -80.0f , -220.0f };
     float4 ExitButtonPos = { 80.0f , -220.0f };
+
+    // 텍스트 관련
+
+    std::shared_ptr<class GameEngineSpriteRenderer> NewGameText;
+    std::shared_ptr<class GameEngineSpriteRenderer> TeamNameText;
+    std::shared_ptr<class GameEngineSpriteRenderer> CoachNameText;
+    std::shared_ptr<class GameEngineSpriteRenderer> TeamLogoText;
+    std::shared_ptr<class GameEngineSpriteRenderer> CoachHairText;
+    
+
 };
 

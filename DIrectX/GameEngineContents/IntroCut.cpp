@@ -35,9 +35,7 @@ void IntroCut::Start()
 	TextBoxRenderer->Transform.AddLocalPosition({ -600.0f, 50.0f });
 
 	// 텍스트 출력 위치.
-	TextBoxRenderer->SetImageScale(TextBoxScale);
 	TextBoxRenderer->Transform.AddLocalPosition(TextBoxPos);
-	// MainSpriteRenderer->SetPivotType(PivotType::Bottom);
 
 	ChangeState(IntroCutState::CutScene1);
 

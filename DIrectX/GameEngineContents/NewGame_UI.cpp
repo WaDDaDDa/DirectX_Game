@@ -145,10 +145,48 @@ void NewGame_UI::Start()
 	StartButton = GetLevel()->CreateActor<Default_Button>();
 	StartButton->Transform.AddLocalPosition(StartButtonPos);
 	StartButton->IsImportantTrue();
+	StartButton->SetButtonText("게임 시작");
 
 	ExitButton = GetLevel()->CreateActor<Default_Button>();
 	ExitButton->Transform.AddLocalPosition(ExitButtonPos);
+	ExitButton->SetButtonText("취소");
 
+	// Text
+	NewGameText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	NewGameText->SetText("Galmuri14", "새 게임", 35.0f, float4::WHITE, FW1_CENTER);
+	NewGameText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
+	NewGameText->Transform.AddLocalPosition({ 0.0f, 232.0f});
+
+	TeamNameText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	TeamNameText->SetText("Galmuri14", "팀 이름", 25.0f, float4::WHITE, FW1_CENTER);
+	TeamNameText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
+	TeamNameText->Transform.AddLocalPosition({ -220.0f, 165.0f });
+
+	CoachNameText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	CoachNameText->SetText("Galmuri14", "감독 이름", 25.0f, float4::WHITE, FW1_CENTER);
+	CoachNameText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
+	CoachNameText->Transform.AddLocalPosition({ 220.0f, 165.0f });
+
+	TeamLogoText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	TeamLogoText->SetText("Galmuri14", "팀 로고", 25.0f, float4::WHITE, FW1_CENTER);
+	TeamLogoText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
+	TeamLogoText->Transform.AddLocalPosition({ -220.0f, 18.0f });
+
+	CoachHairText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	CoachHairText->SetText("Galmuri14", "감독 외형", 25.0f, float4::WHITE, FW1_CENTER);
+	CoachHairText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
+	CoachHairText->Transform.AddLocalPosition({ 220.0f, 18.0f });
+
+}
+
+void NewGame_UI::LevelStart(GameEngineLevel* _PrevLevel)
+{
+
+}
+
+void NewGame_UI::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
 }
 
 void NewGame_UI::AllButtonOff()
