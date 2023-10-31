@@ -23,7 +23,7 @@ private:
     std::shared_ptr<class BundleButton> Squad;
 
     float4 ButtonPos = { -550.0f, -250.0f };
-    float4 ButtonYInter = { 0.0f, -60.0f };
+    float4 ButtonYInter = { 0.0f, 55.0f };
 
 };
 

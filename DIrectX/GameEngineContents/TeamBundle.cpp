@@ -23,8 +23,20 @@ void TeamBundle::Start()
 	Recruitment = GetLevel()->CreateActor<BundleButton>();
 	Recruitment->SetButtonText("선수 영입");
 	Recruitment->Transform.AddLocalPosition(ButtonPos);
-	ButtonPos += ButtonYInter;
 	Recruitment->SetParent<TeamBundle>(GetDynamic_Cast_This<TeamBundle>());
+	ButtonPos += ButtonYInter;
+
+	Traning = GetLevel()->CreateActor<BundleButton>();
+	Traning->SetButtonText("선수 영입");
+	Traning->Transform.AddLocalPosition(ButtonPos);
+	Traning->SetParent<TeamBundle>(GetDynamic_Cast_This<TeamBundle>());
+	ButtonPos += ButtonYInter;
+
+	Squad = GetLevel()->CreateActor<BundleButton>();
+	Squad->SetButtonText("선수 영입");
+	Squad->Transform.AddLocalPosition(ButtonPos);
+	Squad->SetParent<TeamBundle>(GetDynamic_Cast_This<TeamBundle>());
+	ButtonPos += ButtonYInter;
 
 }
 

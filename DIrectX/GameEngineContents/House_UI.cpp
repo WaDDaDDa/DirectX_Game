@@ -28,6 +28,14 @@ void House_UI::Start()
 	HeaderRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackUI) });
 	HeaderRenderer->Transform.AddLocalPosition({ 0.0f, 325.0f });
 
+	// ¹Ù´Ú°¡¸²¸·
+	GroundRenderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::BackUI);
+	GroundRenderer->SetSprite("House", 8);
+	GroundRenderer->AutoSpriteSizeOn();
+	GroundRenderer->SetAutoScaleRatio(3.0f);
+	GroundRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackUI) });
+	GroundRenderer->Transform.AddLocalPosition({ 0.0f, -335.0f , -200.0f});
+
 	TeamButton = GetLevel()->CreateActor<MenuButton>();
 	TeamButton->SetButtonText("ÆÀ °ü¸®");
 	TeamButton->SetIcon("MainUI", 3);
