@@ -212,7 +212,6 @@ void IntroCut::CutScene1Update(float _Delta)
 		CurText.push_back(Scene1Text[CurTextNum]);
 		CurTextNum++;
 
-
 		PrintText = GameEngineString::UnicodeToAnsi(CurText);
 
 		TextBoxRenderer->SetText("Galmuri14", PrintText, 45.0f, float4::WHITE, FW1_LEFT);

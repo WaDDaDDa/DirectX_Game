@@ -214,6 +214,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="MainLevel.cpp" />
+    <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="Monk.cpp" />
     <ClCompile Include="MonkShield.cpp" />
     <ClCompile Include="MonkUlt.cpp" />
@@ -316,6 +317,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="MainLevel.h" />
+    <ClInclude Include="MenuButton.h" />
     <ClInclude Include="Monk.h" />
     <ClInclude Include="MonkShield.h" />
     <ClInclude Include="MonkUlt.h" />

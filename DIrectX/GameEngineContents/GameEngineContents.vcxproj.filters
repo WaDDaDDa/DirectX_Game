@@ -171,6 +171,9 @@
     <ClCompile Include="House_UI.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="MenuButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -344,6 +347,9 @@
     </ClInclude>
     <ClInclude Include="House.h" />
     <ClInclude Include="House_UI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuButton.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
