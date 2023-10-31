@@ -1,25 +1,25 @@
 #include "PreCompile.h"
-#include "MenuButton.h"
+#include "BundleButton.h"
 
 
-MenuButton::MenuButton()
+BundleButton::BundleButton()
 {
 
 }
 
-MenuButton::~MenuButton()
+BundleButton::~BundleButton()
 {
 
 }
 
-void MenuButton::Start()
+void BundleButton::Start()
 {
 	UI_Button::Start();
 	float4 TeamLogoColScale = { 120.0f , 40.0f };
 	SetButtonColScale(TeamLogoColScale);
-	//Transform.AddLocalPosition({ 0.0f, 0.0f, 100.0f });
+	Transform.AddLocalPosition({ 0.0f, 0.0f, 100.0f });
 
-	Renderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	Renderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::UI);
 	Renderer->CreateAnimation("Null", "MainUI", 0.1f, 9, 9, false);
 	Renderer->CreateAnimation("Null_Stay", "MainUI", 0.1f, 10, 10, false);
 	Renderer->CreateAnimation("Slect", "MainUI", 0.1f,11, 11, false);
@@ -30,26 +30,24 @@ void MenuButton::Start()
 	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 }
 
-void MenuButton::IdleStart()
+void BundleButton::IdleStart()
 {
 	Renderer->ChangeAnimation("Null");
 	ButtonText->SetText("Galmuri14", ButtonName, 15.0f, float4::WHITE, Flag);
-	IconRenderer->GetColorData().MulColor = { 255.0f / 204.0f, 1.0f, 255.0f / 58.0f };
 }
 
-void MenuButton::StayStart()
+void BundleButton::StayStart()
 {
 	Renderer->ChangeAnimation("Null_Stay");
 	ButtonText->SetText("Galmuri14", ButtonName, 15.0f, { 204.0f / 255.0f, 1.0f, 58.0f / 255.0f }, Flag);
-	IconRenderer->GetColorData().MulColor = { 204.0f / 255.0f, 1.0f, 58.0f / 255.0f };
+
 }
 
-void MenuButton::EndStart()
+void BundleButton::EndStart()
 {
+	ButtonText->SetText("Galmuri14", ButtonName, 15.0f, float4::WHITE, Flag);
 
 	Renderer->ChangeAnimation("Null");
-	ButtonText->SetText("Galmuri14", ButtonName, 15.0f, float4::WHITE, Flag);
-	IconRenderer->GetColorData().MulColor = { 255.0f / 204.0f, 1.0f, 255.0f / 58.0f };
 
 
 	//if (false == IsSelect)
@@ -62,12 +60,12 @@ void MenuButton::EndStart()
 	//}
 }
 
-void MenuButton::ClickStart()
+void BundleButton::ClickStart()
 {
 	UI_Button::ClickStart();
-	ButtonText->SetText("Galmuri14", ButtonName, 15.0f, float4::WHITE, Flag);
 
 	Renderer->ChangeAnimation("Slect");
+	ButtonText->SetText("Galmuri14", ButtonName, 15.0f, float4::WHITE, Flag);
 
 	if (false == IsSelect)
 	{

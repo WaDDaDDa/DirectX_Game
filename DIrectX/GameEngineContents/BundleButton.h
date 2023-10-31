@@ -1,16 +1,16 @@
 #pragma once
 #include "UI_Button.h"
 
-class MenuButton : public UI_Button
+class BundleButton : public UI_Button
 {
 public:
-    MenuButton();
-    ~MenuButton();
+    BundleButton();
+    ~BundleButton();
 
-    MenuButton(const MenuButton& _Other) = delete;
-    MenuButton(MenuButton&& _Other) noexcept = delete;
-    MenuButton& operator=(const MenuButton& _Other) = delete;
-    MenuButton& operator=(MenuButton&& _Other) noexcept = delete;
+    BundleButton(const BundleButton& _Other) = delete;
+    BundleButton(BundleButton&& _Other) noexcept = delete;
+    BundleButton& operator=(const BundleButton& _Other) = delete;
+    BundleButton& operator=(BundleButton&& _Other) noexcept = delete;
 
     void IsSelectFalse()
     {
@@ -34,7 +34,7 @@ public:
 
     void SetButtonText(const std::string& _Text, float4 _Pos = float4::ZERO, FW1_TEXT_FLAG _Flag = FW1_LEFT)
     {
-        ButtonText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+        ButtonText = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Text);
         ButtonText->SetText("Galmuri14", _Text, 15.0f, float4::WHITE, _Flag);
         ButtonText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
         ButtonText->Transform.AddLocalPosition({ -30.0f, 7.0f });
@@ -45,7 +45,7 @@ public:
 
     void SetIcon(std::string_view _Name, unsigned int _Index /*= 0*/)
     {
-        IconRenderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+        std::shared_ptr<class GameEngineSpriteRenderer> IconRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::UIImage);
         IconRenderer->SetSprite(_Name, _Index);
         IconRenderer->AutoSpriteSizeOn();
         IconRenderer->SetAutoScaleRatio(2.0f);
@@ -65,12 +65,9 @@ protected:
 	void ClickStart() override;
 
     bool IsSelect = false;
-
     std::shared_ptr<class GameEngineSpriteRenderer> ButtonText = nullptr;
-    std::shared_ptr<class GameEngineSpriteRenderer> IconRenderer = nullptr;
     std::string ButtonName = "";
     FW1_TEXT_FLAG Flag = FW1_LEFT;
-
 private:
 
 };

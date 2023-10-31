@@ -178,6 +178,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Bird.cpp" />
+    <ClCompile Include="BundleButton.cpp" />
     <ClCompile Include="ContentsControlWindow.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="Default_Button.cpp" />
@@ -251,6 +252,7 @@
     <ClCompile Include="StadiumBoard.cpp" />
     <ClCompile Include="Swordman.cpp" />
     <ClCompile Include="SwordmanUltEffect.cpp" />
+    <ClCompile Include="TeamBundle.cpp" />
     <ClCompile Include="TextArrow.cpp">
       <SubType>
       </SubType>
@@ -280,6 +282,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Bird.h" />
+    <ClInclude Include="BundleButton.h" />
     <ClInclude Include="ContentsControlWindow.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsEnum.h" />
@@ -349,6 +352,7 @@
     <ClInclude Include="StadiumBoard.h" />
     <ClInclude Include="Swordman.h" />
     <ClInclude Include="SwordmanUltEffect.h" />
+    <ClInclude Include="TeamBundle.h" />
     <ClInclude Include="TextArrow.h">
       <SubType>
       </SubType>

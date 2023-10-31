@@ -3,6 +3,7 @@
 #include "SlotButton.h"
 #include "GreenArrow.h"
 #include "MenuButton.h"
+#include "TeamBundle.h"
 
 House_UI::House_UI()
 {
@@ -34,32 +35,33 @@ void House_UI::Start()
 	TeamButtonPos += ButtonXInter;
 
 	ManagerButton = GetLevel()->CreateActor<MenuButton>();
-	ManagerButton->SetButtonText("评 包府");
-	ManagerButton->SetIcon("MainUI", 3);
+	ManagerButton->SetButtonText("款康");
+	ManagerButton->SetIcon("MainUI", 4);
 	ManagerButton->Transform.AddLocalPosition(TeamButtonPos);
 	TeamButtonPos += ButtonXInter;
 
 	BattleButton = GetLevel()->CreateActor<MenuButton>();
-	BattleButton->SetButtonText("评 包府");
-	BattleButton->SetIcon("MainUI", 3);
+	BattleButton->SetButtonText("措雀");
+	BattleButton->SetIcon("MainUI", 5);
 	BattleButton->Transform.AddLocalPosition(TeamButtonPos);
 	TeamButtonPos += ButtonXInter;
 
 	GameButton = GetLevel()->CreateActor<MenuButton>();
-	GameButton->SetButtonText("评 包府");
-	GameButton->SetIcon("MainUI", 3);
+	GameButton->SetButtonText("霸烙");
+	GameButton->SetIcon("MainUI", 6);
 	GameButton->Transform.AddLocalPosition(TeamButtonPos);
 	TeamButtonPos += ButtonXInter;
 
 	SystemButton = GetLevel()->CreateActor<MenuButton>();
-	SystemButton->SetButtonText("评 包府");
-	SystemButton->SetIcon("MainUI", 3);
+	SystemButton->SetButtonText("矫胶袍");
+	SystemButton->SetIcon("MainUI", 7);
 	SystemButton->Transform.AddLocalPosition(TeamButtonPos);
 	TeamButtonPos += ButtonXInter;
 
+	TeamPopMenu = GetLevel()->CreateActor<TeamBundle>();
 }
 
 void House_UI::Update(float _Delta)
 {
-	
+	//TeamPopMenu->Transform.AddLocalPosition(float4::RIGHT * _Delta * 100.0f);
 }

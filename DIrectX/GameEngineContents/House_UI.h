@@ -27,5 +27,7 @@ private:
     float4 TeamButtonPos = { -550.0f, -310.0f };
     float4 ButtonXInter = { 160.0f };
 
+    std::shared_ptr<class TeamBundle> TeamPopMenu;
+
 };
 
