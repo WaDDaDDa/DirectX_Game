@@ -67,9 +67,19 @@ void House_UI::Start()
 	TeamButtonPos += ButtonXInter;
 
 	TeamPopMenu = GetLevel()->CreateActor<TeamBundle>();
+	TeamPopMenu->Transform.AddLocalPosition({0.0f, -170.0f});
 }
 
 void House_UI::Update(float _Delta)
 {
+	if (true == TeamButton->GetIsClick() && true == TeamPopMenu->IsPopUp)
+	{
+		TeamPopMenu->State.ChangeState(BundleState::PopDown);
+	}
+	else if (true == TeamButton->GetIsClick() && false == TeamPopMenu->IsPopUp)
+	{
+		TeamPopMenu->State.ChangeState(BundleState::PopUp);
+
+	}
 	//TeamPopMenu->Transform.AddLocalPosition(float4::RIGHT * _Delta * 100.0f);
 }

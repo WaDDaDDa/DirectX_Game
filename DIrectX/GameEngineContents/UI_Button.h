@@ -42,6 +42,17 @@ public:
 
     std::shared_ptr<class GameEngineSpriteRenderer> CreateRenderer(std::string_view _Name, unsigned int index, ContentsOrder _Order);
 
+    void ButtonColOff()
+    {
+        ButtonCol->Off();
+    }
+
+    void ButtonColOn()
+    {
+        ButtonCol->On();
+    }
+
+
 protected:
     EventParameter ColEvent;
 

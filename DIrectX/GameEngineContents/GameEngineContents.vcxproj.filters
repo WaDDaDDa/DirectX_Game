@@ -180,6 +180,7 @@
     <ClCompile Include="BundleButton.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="easing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -364,6 +365,7 @@
     <ClInclude Include="BundleButton.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="easing.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
