@@ -30,6 +30,12 @@ void MenuButton::Start()
 	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 }
 
+
+void MenuButton::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	
+}
+
 void MenuButton::IdleStart()
 {
 	Renderer->ChangeAnimation("Null");

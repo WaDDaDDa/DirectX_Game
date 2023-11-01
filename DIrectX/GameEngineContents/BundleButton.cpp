@@ -30,6 +30,12 @@ void BundleButton::Start()
 	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 }
 
+void BundleButton::LevelEnd(GameEngineLevel* _NextLevel)
+{
+
+}
+
+
 void BundleButton::IdleStart()
 {
 	Renderer->ChangeAnimation("Null");

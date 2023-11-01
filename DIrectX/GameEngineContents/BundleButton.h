@@ -55,6 +55,7 @@ public:
 
 protected:
     void Start() override;
+    void LevelEnd(GameEngineLevel* _NextLevel) override;
 
     void IdleStart() override;
 
