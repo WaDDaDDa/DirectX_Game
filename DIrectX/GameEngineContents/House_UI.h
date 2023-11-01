@@ -16,6 +16,8 @@ protected:
     void Start();
     void Update(float _Delta);
 
+    void PopBundle(std::shared_ptr<class MenuButton> _Menu, std::shared_ptr<class ButtonBundle> _Bundle);
+
 private:
     std::shared_ptr<class GameEngineSpriteRenderer> HeaderRenderer;
     std::shared_ptr<class GameEngineSpriteRenderer> GroundRenderer;
@@ -28,7 +30,11 @@ private:
     float4 TeamButtonPos = { -550.0f, -310.0f };
     float4 ButtonXInter = { 160.0f };
 
-    std::shared_ptr<class TeamBundle> TeamPopMenu;
+    std::shared_ptr<class ButtonBundle> TeamPopMenu;
+    std::shared_ptr<class ButtonBundle> ManagerPopMenu;
+    std::shared_ptr<class ButtonBundle> BattlePopMenu;
+    std::shared_ptr<class ButtonBundle> GamePopMenu;
+    std::shared_ptr<class ButtonBundle> SystemPopMenu;
 
 };
 

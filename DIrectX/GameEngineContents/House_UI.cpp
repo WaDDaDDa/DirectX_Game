@@ -3,7 +3,12 @@
 #include "SlotButton.h"
 #include "GreenArrow.h"
 #include "MenuButton.h"
+#include "ButtonBundle.h"
 #include "TeamBundle.h"
+#include "ManagerBundle.h"
+#include "BattleBundle.h"
+#include "GameBundle.h"
+#include "SystemBundle.h"
 
 House_UI::House_UI()
 {
@@ -35,51 +40,95 @@ void House_UI::Start()
 	GroundRenderer->SetAutoScaleRatio(3.0f);
 	GroundRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackUI) });
 	GroundRenderer->Transform.AddLocalPosition({ 0.0f, -335.0f , -200.0f});
+	{
+		TeamButton = GetLevel()->CreateActor<MenuButton>();
+		TeamButton->SetButtonText("팀 관리");
+		TeamButton->SetIcon("MainUI", 3);
+		TeamButton->Transform.AddLocalPosition(TeamButtonPos);
 
-	TeamButton = GetLevel()->CreateActor<MenuButton>();
-	TeamButton->SetButtonText("팀 관리");
-	TeamButton->SetIcon("MainUI", 3);
-	TeamButton->Transform.AddLocalPosition(TeamButtonPos);
-	TeamButtonPos += ButtonXInter;
+		TeamPopMenu = GetLevel()->CreateActor<TeamBundle>();
+		TeamButtonPos += ButtonXInter;
+	}
+	{
+		ManagerButton = GetLevel()->CreateActor<MenuButton>();
+		ManagerButton->SetButtonText("운영");
+		ManagerButton->SetIcon("MainUI", 4);
+		ManagerButton->Transform.AddLocalPosition(TeamButtonPos);
 
-	ManagerButton = GetLevel()->CreateActor<MenuButton>();
-	ManagerButton->SetButtonText("운영");
-	ManagerButton->SetIcon("MainUI", 4);
-	ManagerButton->Transform.AddLocalPosition(TeamButtonPos);
-	TeamButtonPos += ButtonXInter;
+		ManagerPopMenu = GetLevel()->CreateActor<ManagerBundle>();
+		ManagerPopMenu->Transform.AddLocalPosition(ButtonXInter);
+		TeamButtonPos += ButtonXInter;
+	}
+	{
+		BattleButton = GetLevel()->CreateActor<MenuButton>();
+		BattleButton->SetButtonText("대회");
+		BattleButton->SetIcon("MainUI", 5);
+		BattleButton->Transform.AddLocalPosition(TeamButtonPos);
 
-	BattleButton = GetLevel()->CreateActor<MenuButton>();
-	BattleButton->SetButtonText("대회");
-	BattleButton->SetIcon("MainUI", 5);
-	BattleButton->Transform.AddLocalPosition(TeamButtonPos);
-	TeamButtonPos += ButtonXInter;
+		BattlePopMenu = GetLevel()->CreateActor<BattleBundle>();
+		BattlePopMenu->Transform.AddLocalPosition(ButtonXInter * 2.0f);
 
-	GameButton = GetLevel()->CreateActor<MenuButton>();
-	GameButton->SetButtonText("게임");
-	GameButton->SetIcon("MainUI", 6);
-	GameButton->Transform.AddLocalPosition(TeamButtonPos);
-	TeamButtonPos += ButtonXInter;
+		TeamButtonPos += ButtonXInter;
+	}
+	{
+		GameButton = GetLevel()->CreateActor<MenuButton>();
+		GameButton->SetButtonText("게임");
+		GameButton->SetIcon("MainUI", 6);
+		GameButton->Transform.AddLocalPosition(TeamButtonPos);
 
-	SystemButton = GetLevel()->CreateActor<MenuButton>();
-	SystemButton->SetButtonText("시스템");
-	SystemButton->SetIcon("MainUI", 7);
-	SystemButton->Transform.AddLocalPosition(TeamButtonPos);
-	TeamButtonPos += ButtonXInter;
+		GamePopMenu = GetLevel()->CreateActor<GameBundle>();
+		GamePopMenu->Transform.AddLocalPosition(ButtonXInter * 3.0f);
 
-	TeamPopMenu = GetLevel()->CreateActor<TeamBundle>();
-	TeamPopMenu->Transform.AddLocalPosition({0.0f, -170.0f});
+		TeamButtonPos += ButtonXInter;
+	}
+	{
+		SystemButton = GetLevel()->CreateActor<MenuButton>();
+		SystemButton->SetButtonText("시스템");
+		SystemButton->SetIcon("MainUI", 7);
+		SystemButton->Transform.AddLocalPosition(TeamButtonPos);
+		SystemPopMenu = GetLevel()->CreateActor<SystemBundle>();
+		SystemPopMenu->Transform.AddLocalPosition(ButtonXInter * 4.0f);
+		TeamButtonPos += ButtonXInter;
+	}
+
+	GameEngineInput::AddInputObject(this);
+
 }
+
+void House_UI::PopBundle(std::shared_ptr<class MenuButton> _Menu, std::shared_ptr<class ButtonBundle> _Bundle)
+{
+	if (true == _Menu->GetIsClick() && true == _Bundle->IsPopUp)
+	{
+		_Bundle->State.ChangeState(BundleState::PopDown);
+		_Menu->IsSelectFalse();
+	}
+	else if (true == _Menu->GetIsClick() && false == _Bundle->IsPopUp)
+	{
+		_Bundle->State.ChangeState(BundleState::PopUp);
+		_Menu->IsSelectTrue();
+	}
+	//else if (true == _Bundle->IsPopUp && true == GameEngineInput::IsDown(VK_LBUTTON, this))
+	//{
+	//	if (true == _Bundle->IsButtonsClick())
+	//	{
+	//		return;
+	//	}
+	//	_Bundle->State.ChangeState(BundleState::PopDown);
+	//	_Menu->IsSelectFalse();
+	//}
+	//else if (true == _Bundle->IsPopUp && true == GameEngineInput::IsDown(VK_LBUTTON, this))
+	//{
+	//	//_Bundle->State.ChangeState(BundleState::PopDown);
+	//	//_Menu->IsSelectFalse();
+	//}
+}
+
 
 void House_UI::Update(float _Delta)
 {
-	if (true == TeamButton->GetIsClick() && true == TeamPopMenu->IsPopUp)
-	{
-		TeamPopMenu->State.ChangeState(BundleState::PopDown);
-	}
-	else if (true == TeamButton->GetIsClick() && false == TeamPopMenu->IsPopUp)
-	{
-		TeamPopMenu->State.ChangeState(BundleState::PopUp);
-
-	}
-	//TeamPopMenu->Transform.AddLocalPosition(float4::RIGHT * _Delta * 100.0f);
+	PopBundle(TeamButton, TeamPopMenu);
+	PopBundle(ManagerButton, ManagerPopMenu);
+	PopBundle(BattleButton, BattlePopMenu);
+	PopBundle(GameButton, GamePopMenu);
+	PopBundle(SystemButton, SystemPopMenu);
 }

@@ -26,12 +26,14 @@ void ButtonBundle::CreateButton(const std::string& _Text)
 	Buttons.push_back(NewButton);
 	CreateCount++;
 	MovePos = ButtonYInter.Y * CreateCount + 10.0f;
+	Transform.AddLocalPosition(-ButtonYInter);
 }
 
 
 void ButtonBundle::Start()
 {
-	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
+	// float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
+	Transform.AddLocalPosition({ 0.0f, -10.0f});
 
 	State.CreateState(BundleState::PopDown, {
 				.Start =
@@ -40,7 +42,7 @@ void ButtonBundle::Start()
 					// 콜리젼 다끄고
 					AllButtonColOff();
 					PopDownDelta = 0.0f;
-					Transform.SetLocalPosition(float4::ZERO);
+					Transform.SetLocalPosition({ Transform.GetLocalPosition().X, 0.0f, Transform.GetLocalPosition().Z });
 				},
 				.Stay =
 				[=](float _Delta, class GameEngineState* _Parent)
@@ -120,7 +122,7 @@ void ButtonBundle::Start()
 			.End =
 			[=](class GameEngineState* _Parent)
 			{
-				Transform.SetLocalPosition(float4::ZERO);
+				Transform.SetLocalPosition({ Transform.GetLocalPosition().X, 0.0f, Transform.GetLocalPosition().Z });
 				// 콜리젼 다 켜고
 				AllButtonColOn();
 				IsPopUp = true;
@@ -154,4 +156,19 @@ void ButtonBundle::AllButtonColOff()
 	{
 		Buttons[i]->ButtonColOff();
 	}
+}
+
+bool ButtonBundle::IsButtonsClick()
+{
+	size_t Count = Buttons.size();
+
+	for (size_t i = 0; i < Count; i++)
+	{
+		if (true == Buttons[i]->GetIsClick())
+		{
+			return true;
+		}
+	}
+
+	return false;
 }

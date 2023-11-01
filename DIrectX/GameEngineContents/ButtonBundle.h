@@ -21,6 +21,9 @@ public:
 
     GameEngineState State;
     bool IsPopUp = false;
+
+    bool IsButtonsClick();
+
 protected:
     void Start();
     void Update(float _Delta);
@@ -31,7 +34,6 @@ protected:
     void CreateButton(const std::string& _Text);
 
     std::vector<std::shared_ptr<class BundleButton>> Buttons;
-
 
     float4 ButtonPos = { -550.0f, -250.0f };
     float4 ButtonYInter = { 0.0f, 55.0f };

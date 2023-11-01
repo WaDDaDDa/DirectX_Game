@@ -169,6 +169,7 @@
     <ClCompile Include="BanPickCard.cpp" />
     <ClCompile Include="BanPickLevel.cpp" />
     <ClCompile Include="BanPickManager.cpp" />
+    <ClCompile Include="BattleBundle.cpp" />
     <ClCompile Include="BattleField.cpp">
       <SubType>
       </SubType>
@@ -189,6 +190,7 @@
     <ClCompile Include="FlameAttack.cpp" />
     <ClCompile Include="FlameEffect.cpp" />
     <ClCompile Include="FlameUlt.cpp" />
+    <ClCompile Include="GameBundle.cpp" />
     <ClCompile Include="GameUnit.cpp">
       <SubType>
       </SubType>
@@ -217,6 +219,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="MainLevel.cpp" />
+    <ClCompile Include="ManagerBundle.cpp" />
     <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="Monk.cpp" />
     <ClCompile Include="MonkShield.cpp" />
@@ -254,6 +257,7 @@
     <ClCompile Include="StadiumBoard.cpp" />
     <ClCompile Include="Swordman.cpp" />
     <ClCompile Include="SwordmanUltEffect.cpp" />
+    <ClCompile Include="SystemBundle.cpp" />
     <ClCompile Include="TeamBundle.cpp" />
     <ClCompile Include="TextArrow.cpp">
       <SubType>
@@ -275,6 +279,7 @@
     <ClInclude Include="BanPickCard.h" />
     <ClInclude Include="BanPickLevel.h" />
     <ClInclude Include="BanPickManager.h" />
+    <ClInclude Include="BattleBundle.h" />
     <ClInclude Include="BattleField.h">
       <SubType>
       </SubType>
@@ -296,6 +301,7 @@
     <ClInclude Include="FlameAttack.h" />
     <ClInclude Include="FlameEffect.h" />
     <ClInclude Include="FlameUlt.h" />
+    <ClInclude Include="GameBundle.h" />
     <ClInclude Include="GameUnit.h">
       <SubType>
       </SubType>
@@ -324,6 +330,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="MainLevel.h" />
+    <ClInclude Include="ManagerBundle.h" />
     <ClInclude Include="MenuButton.h" />
     <ClInclude Include="Monk.h" />
     <ClInclude Include="MonkShield.h" />
@@ -356,6 +363,7 @@
     <ClInclude Include="StadiumBoard.h" />
     <ClInclude Include="Swordman.h" />
     <ClInclude Include="SwordmanUltEffect.h" />
+    <ClInclude Include="SystemBundle.h" />
     <ClInclude Include="TeamBundle.h" />
     <ClInclude Include="TextArrow.h">
       <SubType>

@@ -17,9 +17,6 @@
     <ClCompile Include="IntroCut.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="NewGame_UI.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="TextArrow.cpp">
       <Filter>Global</Filter>
     </ClCompile>
@@ -119,20 +116,8 @@
     <ClCompile Include="PriestHealEffect.cpp">
       <Filter>GameUnit\Priest</Filter>
     </ClCompile>
-    <ClCompile Include="StadiumBoard.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerCard.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerCard_Status.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="BanPickLevel.cpp">
       <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="BanPickBoard.cpp">
-      <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="GameUnitStatus.cpp">
       <Filter>GameUnit\Status</Filter>
@@ -140,26 +125,11 @@
     <ClCompile Include="BanPickCard.cpp">
       <Filter>UI\UnitCard</Filter>
     </ClCompile>
-    <ClCompile Include="UI_Button.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="UI_Mouse.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="BanPickManager.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="ContentsControlWindow.cpp">
       <Filter>Global</Filter>
-    </ClCompile>
-    <ClCompile Include="SlotButton.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="GreenArrow.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Default_Button.cpp">
-      <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="MainLevel.cpp">
       <Filter>Level</Filter>
@@ -167,22 +137,66 @@
     <ClCompile Include="HouseBackGround.cpp">
       <Filter>Global</Filter>
     </ClCompile>
-    <ClCompile Include="House.cpp" />
-    <ClCompile Include="House_UI.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuButton.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="TeamBundle.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="BundleButton.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="easing.cpp" />
     <ClCompile Include="ButtonBundle.cpp">
-      <Filter>UI</Filter>
+      <Filter>UI\Bundle</Filter>
+    </ClCompile>
+    <ClCompile Include="BundleButton.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="TeamBundle.cpp">
+      <Filter>UI\Bundle</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagerBundle.cpp">
+      <Filter>UI\Bundle</Filter>
+    </ClCompile>
+    <ClCompile Include="BanPickBoard.cpp">
+      <Filter>UI\BanPickUI</Filter>
+    </ClCompile>
+    <ClCompile Include="BanPickManager.cpp">
+      <Filter>UI\BanPickUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Default_Button.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenArrow.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuButton.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCard.cpp">
+      <Filter>UI\UnitCard</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCard_Status.cpp">
+      <Filter>UI\UnitCard</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Button.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="SlotButton.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="House_UI.cpp">
+      <Filter>UI\HouseUI</Filter>
+    </ClCompile>
+    <ClCompile Include="House.cpp">
+      <Filter>UI\HouseUI</Filter>
+    </ClCompile>
+    <ClCompile Include="StadiumBoard.cpp">
+      <Filter>UI\BanPickUI</Filter>
+    </ClCompile>
+    <ClCompile Include="NewGame_UI.cpp">
+      <Filter>UI\HouseUI</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleBundle.cpp">
+      <Filter>UI\Bundle</Filter>
+    </ClCompile>
+    <ClCompile Include="GameBundle.cpp">
+      <Filter>UI\Bundle</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemBundle.cpp">
+      <Filter>UI\Bundle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -204,9 +218,6 @@
     </ClInclude>
     <ClInclude Include="ContentsEnum.h">
       <Filter>Global</Filter>
-    </ClInclude>
-    <ClInclude Include="NewGame_UI.h">
-      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="TextArrow.h">
       <Filter>Global</Filter>
@@ -307,31 +318,13 @@
     <ClInclude Include="PriestHealEffect.h">
       <Filter>GameUnit\Priest</Filter>
     </ClInclude>
-    <ClInclude Include="StadiumBoard.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerCard.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerCard_Status.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="BanPickLevel.h">
       <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="BanPickBoard.h">
-      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="GameUnitStatus.h">
       <Filter>GameUnit\Status</Filter>
     </ClInclude>
-    <ClInclude Include="UI_Button.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="UI_Mouse.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="BanPickManager.h">
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="ContentsControlWindow.h">
@@ -340,37 +333,72 @@
     <ClInclude Include="BanPickCard.h">
       <Filter>UI\UnitCard</Filter>
     </ClInclude>
-    <ClInclude Include="SlotButton.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="GreenArrow.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Default_Button.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="MainLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="HouseBackGround.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="House.h" />
-    <ClInclude Include="House_UI.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuButton.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="TeamBundle.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="BundleButton.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="easing.h" />
     <ClInclude Include="ButtonBundle.h">
-      <Filter>UI</Filter>
+      <Filter>UI\Bundle</Filter>
+    </ClInclude>
+    <ClInclude Include="BundleButton.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="TeamBundle.h">
+      <Filter>UI\Bundle</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerBundle.h">
+      <Filter>UI\Bundle</Filter>
+    </ClInclude>
+    <ClInclude Include="BanPickBoard.h">
+      <Filter>UI\BanPickUI</Filter>
+    </ClInclude>
+    <ClInclude Include="BanPickManager.h">
+      <Filter>UI\BanPickUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Default_Button.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="GreenArrow.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuButton.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCard.h">
+      <Filter>UI\UnitCard</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCard_Status.h">
+      <Filter>UI\UnitCard</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Button.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="SlotButton.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="House_UI.h">
+      <Filter>UI\HouseUI</Filter>
+    </ClInclude>
+    <ClInclude Include="House.h">
+      <Filter>UI\HouseUI</Filter>
+    </ClInclude>
+    <ClInclude Include="StadiumBoard.h">
+      <Filter>UI\BanPickUI</Filter>
+    </ClInclude>
+    <ClInclude Include="NewGame_UI.h">
+      <Filter>UI\HouseUI</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleBundle.h">
+      <Filter>UI\Bundle</Filter>
+    </ClInclude>
+    <ClInclude Include="GameBundle.h">
+      <Filter>UI\Bundle</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemBundle.h">
+      <Filter>UI\Bundle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -424,6 +452,18 @@
     </Filter>
     <Filter Include="UI\UnitCard">
       <UniqueIdentifier>{8d514104-6634-420e-aed6-96dce1e0fdea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Bundle">
+      <UniqueIdentifier>{fdd7ddee-2131-4a23-ac4d-5d0049acb9be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Button">
+      <UniqueIdentifier>{68193013-58fe-4db7-84e4-cccb0cb7bfb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\BanPickUI">
+      <UniqueIdentifier>{3b32060a-56c3-49ff-936b-a8957747c878}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\HouseUI">
+      <UniqueIdentifier>{d4abcbcb-3116-43f9-81d0-38a4fa8ea3ee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
