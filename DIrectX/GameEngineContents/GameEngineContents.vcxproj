@@ -246,6 +246,7 @@
     <ClCompile Include="Priest.cpp" />
     <ClCompile Include="PriestHealEffect.cpp" />
     <ClCompile Include="PriestUlt.cpp" />
+    <ClCompile Include="ProceedButton.cpp" />
     <ClCompile Include="Pyromancer.cpp" />
     <ClCompile Include="Pythoness.cpp" />
     <ClCompile Include="PythonessAttack.cpp" />
@@ -352,6 +353,7 @@
     <ClInclude Include="Priest.h" />
     <ClInclude Include="PriestHealEffect.h" />
     <ClInclude Include="PriestUlt.h" />
+    <ClInclude Include="ProceedButton.h" />
     <ClInclude Include="Pyromancer.h" />
     <ClInclude Include="Pythoness.h" />
     <ClInclude Include="PythonessAttack.h" />

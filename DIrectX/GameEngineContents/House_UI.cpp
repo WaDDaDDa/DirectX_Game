@@ -9,6 +9,7 @@
 #include "BattleBundle.h"
 #include "GameBundle.h"
 #include "SystemBundle.h"
+#include "ProceedButton.h"
 
 House_UI::House_UI()
 {
@@ -90,6 +91,10 @@ void House_UI::Start()
 		SystemPopMenu->Transform.AddLocalPosition(ButtonXInter * 4.0f);
 		TeamButtonPos += ButtonXInter;
 	}
+
+	Proceed = GetLevel()->CreateActor<ProceedButton>();
+	Proceed->SetButtonText("경기장으로");
+	Proceed->Transform.AddLocalPosition({480.0f, -290.0f});
 
 	GameEngineInput::AddInputObject(this);
 

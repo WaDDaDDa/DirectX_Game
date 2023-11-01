@@ -198,6 +198,9 @@
     <ClCompile Include="SystemBundle.cpp">
       <Filter>UI\Bundle</Filter>
     </ClCompile>
+    <ClCompile Include="ProceedButton.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -399,6 +402,9 @@
     </ClInclude>
     <ClInclude Include="SystemBundle.h">
       <Filter>UI\Bundle</Filter>
+    </ClInclude>
+    <ClInclude Include="ProceedButton.h">
+      <Filter>UI\Button</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
