@@ -15,7 +15,7 @@ BundleButton::~BundleButton()
 void BundleButton::Start()
 {
 	UI_Button::Start();
-	float4 TeamLogoColScale = { 120.0f , 40.0f };
+	float4 TeamLogoColScale = { 130.0f , 40.0f };
 	SetButtonColScale(TeamLogoColScale);
 	Transform.AddLocalPosition({ 0.0f, 0.0f, 100.0f });
 

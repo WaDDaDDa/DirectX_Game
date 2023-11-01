@@ -179,6 +179,7 @@
     </ClCompile>
     <ClCompile Include="Bird.cpp" />
     <ClCompile Include="BundleButton.cpp" />
+    <ClCompile Include="ButtonBundle.cpp" />
     <ClCompile Include="ContentsControlWindow.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="Default_Button.cpp" />
@@ -284,6 +285,7 @@
     </ClInclude>
     <ClInclude Include="Bird.h" />
     <ClInclude Include="BundleButton.h" />
+    <ClInclude Include="ButtonBundle.h" />
     <ClInclude Include="ContentsControlWindow.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsEnum.h" />

@@ -181,6 +181,9 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="easing.cpp" />
+    <ClCompile Include="ButtonBundle.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -366,6 +369,9 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="easing.h" />
+    <ClInclude Include="ButtonBundle.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
