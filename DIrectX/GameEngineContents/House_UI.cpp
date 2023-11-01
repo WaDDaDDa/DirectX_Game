@@ -10,6 +10,9 @@
 #include "GameBundle.h"
 #include "SystemBundle.h"
 #include "ProceedButton.h"
+#include "HeaderInfo.h"
+#include "TeamInfo.h"
+
 
 House_UI::House_UI()
 {
@@ -96,9 +99,31 @@ void House_UI::Start()
 	Proceed->SetButtonText("경기장으로");
 	Proceed->Transform.AddLocalPosition({480.0f, -290.0f});
 
-	GameEngineInput::AddInputObject(this);
+	Day = GetLevel()->CreateActor<HeaderInfo>();
+	Day->Transform.AddLocalPosition({ 920.0f, -35.0f });
+	Day->SetIcon("MainUI", 1);
+	Day->SetText("2023년 1월 2주차");
 
+	Gold = GetLevel()->CreateActor<HeaderInfo>();
+	Gold->Transform.AddLocalPosition({ 1150.0f, -35.0f });
+	Gold->SetIcon("MainUI", 2);
+	Gold->SetText("200");
+
+	TeamLogo = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	TeamLogo->SetSprite("TeamLogo", TeamInfo::MyInfo.GetIconNum());
+	TeamLogo->AutoSpriteSizeOn();
+	TeamLogo->SetAutoScaleRatio(2.0f);
+	TeamLogo->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	TeamLogo->Transform.AddLocalPosition({-590.0f, 325.0f});
+
+	GameEngineInput::AddInputObject(this);
 }
+
+void House_UI::LevelStart(GameEngineLevel* _PrevLevel)
+{
+	TeamLogo->SetSprite("TeamLogo", static_cast<unsigned int>(TeamInfo::MyInfo.GetIconNum()));
+}
+
 
 void House_UI::PopBundle(std::shared_ptr<class MenuButton> _Menu, std::shared_ptr<class ButtonBundle> _Bundle)
 {
@@ -136,4 +161,10 @@ void House_UI::Update(float _Delta)
 	PopBundle(BattleButton, BattlePopMenu);
 	PopBundle(GameButton, GamePopMenu);
 	PopBundle(SystemButton, SystemPopMenu);
+
+	if (true == Proceed->GetIsClick())
+	{
+		GameEngineCore::ChangeLevel("BanPickLevel");
+		return;
+	}
 }

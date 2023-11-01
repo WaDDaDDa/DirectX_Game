@@ -15,12 +15,14 @@ public:
 protected:
     void Start();
     void Update(float _Delta);
+    void LevelStart(GameEngineLevel* _PrevLevel) override;
 
     void PopBundle(std::shared_ptr<class MenuButton> _Menu, std::shared_ptr<class ButtonBundle> _Bundle);
 
 private:
     std::shared_ptr<class GameEngineSpriteRenderer> HeaderRenderer;
     std::shared_ptr<class GameEngineSpriteRenderer> GroundRenderer;
+    std::shared_ptr<class GameEngineSpriteRenderer> TeamLogo;
 
     std::shared_ptr<class MenuButton> TeamButton;
     std::shared_ptr<class MenuButton> ManagerButton;
@@ -36,6 +38,10 @@ private:
     std::shared_ptr<class ButtonBundle> BattlePopMenu;
     std::shared_ptr<class ButtonBundle> GamePopMenu;
     std::shared_ptr<class ButtonBundle> SystemPopMenu;
+
+
+    std::shared_ptr<class HeaderInfo> Day;
+    std::shared_ptr<class HeaderInfo> Gold;
 
 };
 

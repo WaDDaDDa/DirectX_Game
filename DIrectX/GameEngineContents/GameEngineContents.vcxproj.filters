@@ -201,6 +201,12 @@
     <ClCompile Include="ProceedButton.cpp">
       <Filter>UI\Button</Filter>
     </ClCompile>
+    <ClCompile Include="HeaderInfo.cpp">
+      <Filter>UI\BanPickUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TeamInfo.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -405,6 +411,12 @@
     </ClInclude>
     <ClInclude Include="ProceedButton.h">
       <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="HeaderInfo.h">
+      <Filter>UI\BanPickUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TeamInfo.h">
+      <Filter>Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

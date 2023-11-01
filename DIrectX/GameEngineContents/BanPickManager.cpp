@@ -501,7 +501,7 @@ void BanPickManager::IdleStart()
 
 void BanPickManager::IdleUpdate(float _Delta)
 {
-	if (GetLiveTime() >= 1.0f)
+	if (GetLiveTime() >= 0.5f)
 	{
 		ChangeState(BanPickState::ChangeBan);
 		return;
@@ -516,7 +516,7 @@ void BanPickManager::ChangeBanStart()
 
 void BanPickManager::ChangeBanUpdate(float _Delta)
 {
-	if (GetLiveTime() >= 1.0f)
+	if (GetLiveTime() >= 0.5f)
 	{
 		ChangeState(BanPickState::Ban);
 		return;
@@ -577,7 +577,7 @@ void BanPickManager::ChangePickStart()
 
 void BanPickManager::ChangePickUpdate(float _Delta)
 {
-	if (GetLiveTime() >= 1.0f)
+	if (GetLiveTime() >= 0.5f)
 	{
 		ChangeState(BanPickState::Pick);
 		return;

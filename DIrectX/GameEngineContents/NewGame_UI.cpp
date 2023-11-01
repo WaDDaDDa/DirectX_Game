@@ -2,6 +2,7 @@
 #include "NewGame_UI.h"
 #include "SlotButton.h"
 #include "GreenArrow.h"
+#include "TeamInfo.h"
 
 NewGame_UI::NewGame_UI()
 {
@@ -239,7 +240,9 @@ void NewGame_UI::Update(float _Delta)
 	}
 	else if (StartButton->GetIsClick())
 	{
-		GameEngineCore::ChangeLevel("BanPickLevel");
+		TeamInfo::MyInfo.SetIconNum(static_cast<int>(CurNum));
+		GameEngineCore::ChangeLevel("MainLevel");
+		// 커넘버 넘겨준다.
 		return;
 	}
 	else if (ExitButton->GetIsClick())
@@ -282,17 +285,18 @@ void NewGame_UI::Update(float _Delta)
 	// 팀로고 온오프
 	for (size_t i = 0; i < LogoSlot; i++)
 	{
-		CurNum = i + (TeamLogoPage * LogoSlot);
+		size_t IconNum = i + (TeamLogoPage * LogoSlot);
 
-		TeamLogoButton[CurNum]->On();
+		TeamLogoButton[IconNum]->On();
 
-		if (TeamLogoButton[CurNum]->GetIsClick())
+		if (TeamLogoButton[IconNum]->GetIsClick())
 		{
 			// 로고 70개
 			for (size_t i = 0; i < 70; i++)
 			{
 				TeamLogoButton[i]->IsSelectFalse();
 			}
+			CurNum = IconNum;
 
 			TeamLogoButton[CurNum]->IsSelectTrue();
 

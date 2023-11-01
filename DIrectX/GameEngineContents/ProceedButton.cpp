@@ -103,7 +103,6 @@ void ProceedButton::ClickStart()
 {
 	UI_Button::ClickStart();
 
-	Renderer->ChangeAnimation("Slect");
 	ButtonText->SetText("Galmuri14", ButtonName, 20.0f, float4::WHITE, Flag);
 
 	if (false == IsSelect)
