@@ -5,6 +5,8 @@
 #include "GameEngineCore.h"
 #include "GameEngineRenderTarget.h"
 
+std::shared_ptr<class GameEngineRenderTarget> GameEngineCamera::AllRenderTarget = nullptr;
+
 float GameEngineCamera::FreeRotSpeed = 180.0f;
 float GameEngineCamera::FreeSpeed = 200.0f;
 
@@ -29,6 +31,11 @@ void GameEngineCamera::Start()
 		MsgBoxAssert("Level이 nullptr입니다");
 		return;
 	}
+
+	float4 WindowScale = GameEngineCore::MainWindow.GetScale();
+
+	CameraTarget = GameEngineRenderTarget::Create();
+	CameraTarget->AddNewTexture(DXGI_FORMAT_R32G32B32A32_FLOAT, WindowScale, float4::ZERONULL);
 
 	IsFreeCameraValue = false;
 }

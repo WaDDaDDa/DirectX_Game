@@ -24,6 +24,7 @@
       <Filter>Header</Filter>
     </FxCompile>
     <FxCompile Include="DebugLineShader.fx" />
+    <FxCompile Include="TargetMerge.fx" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ShaderRule.txt">

@@ -5,6 +5,7 @@
 #include "GameEngineCamera.h"
 #include "GameEngineCollision.h"
 #include "GameEngineCollisionGroup.h"
+#include "GameEngineRenderTarget.h"
 
 bool GameEngineLevel::IsDebug = false;
 
@@ -76,8 +77,9 @@ void GameEngineLevel::Render(float _Delta)
 
 	if (true == IsDebug)
 	{
+		// 디버그는 렌더러는 항상위에있어야하니깐 백버퍼의 렌더타겟으로 셋팅을 해준다.
+		GameEngineCore::GetBackBufferRenderTarget()->Setting();
 		GameEngineDebug::GameEngineDebugCore::DebugRender();
-		// 몬가를 한다.
 	}
 }
 
