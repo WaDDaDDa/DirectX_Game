@@ -13,6 +13,7 @@ enum class ContentsOrder
 	HPLayer3,
 	HPLayer4,
 	Unit,
+	Hair,
 	Projectile,  // ≈ıªÁ√º
 	FrontEffect,
 	BackUI,

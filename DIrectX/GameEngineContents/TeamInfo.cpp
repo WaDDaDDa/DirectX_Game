@@ -10,6 +10,6 @@ TeamInfo::TeamInfo()
 
 TeamInfo::~TeamInfo()
 {
-
+	
 }
 

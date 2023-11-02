@@ -241,6 +241,7 @@ void NewGame_UI::Update(float _Delta)
 	else if (StartButton->GetIsClick())
 	{
 		TeamInfo::MyInfo.SetIconNum(static_cast<int>(CurNum));
+		TeamInfo::MyInfo.SetHairNum(static_cast<int>(CurHairNum));
 		GameEngineCore::ChangeLevel("MainLevel");
 		// 커넘버 넘겨준다.
 		return;
@@ -308,17 +309,18 @@ void NewGame_UI::Update(float _Delta)
 	// 헤어 온오프
 	for (size_t i = 0; i < HairSlot; i++)
 	{
-		CurHairNum = i + (HairPage * HairSlot);
+		size_t HairNum = i + (HairPage * HairSlot);
 
-		CoachHair[CurHairNum]->On();
+		CoachHair[HairNum]->On();
 
-		if (CoachHair[CurHairNum]->GetIsClick())
+		if (CoachHair[HairNum]->GetIsClick())
 		{
 			// 로고 70개
 			for (size_t i = 0; i < 30; i++)
 			{
 				CoachHair[i]->IsSelectFalse();
 			}
+			CurHairNum = HairNum;
 
 			CoachHair[CurHairNum]->IsSelectTrue();
 

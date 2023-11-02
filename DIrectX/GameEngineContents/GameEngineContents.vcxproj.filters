@@ -207,6 +207,12 @@
     <ClCompile Include="TeamInfo.cpp">
       <Filter>Global</Filter>
     </ClCompile>
+    <ClCompile Include="HouseUnit.cpp">
+      <Filter>HouseUnit</Filter>
+    </ClCompile>
+    <ClCompile Include="Coach.cpp">
+      <Filter>HouseUnit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -418,6 +424,12 @@
     <ClInclude Include="TeamInfo.h">
       <Filter>Global</Filter>
     </ClInclude>
+    <ClInclude Include="HouseUnit.h">
+      <Filter>HouseUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="Coach.h">
+      <Filter>HouseUnit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -482,6 +494,9 @@
     </Filter>
     <Filter Include="UI\HouseUI">
       <UniqueIdentifier>{d4abcbcb-3116-43f9-81d0-38a4fa8ea3ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HouseUnit">
+      <UniqueIdentifier>{0a2b492c-5cb4-4272-8251-3d80209f73d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

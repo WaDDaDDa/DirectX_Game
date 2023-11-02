@@ -181,6 +181,7 @@
     <ClCompile Include="Bird.cpp" />
     <ClCompile Include="BundleButton.cpp" />
     <ClCompile Include="ButtonBundle.cpp" />
+    <ClCompile Include="Coach.cpp" />
     <ClCompile Include="ContentsControlWindow.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="Default_Button.cpp" />
@@ -204,6 +205,7 @@
     <ClCompile Include="HeaderInfo.cpp" />
     <ClCompile Include="House.cpp" />
     <ClCompile Include="HouseBackGround.cpp" />
+    <ClCompile Include="HouseUnit.cpp" />
     <ClCompile Include="House_UI.cpp" />
     <ClCompile Include="IntroCut.cpp">
       <SubType>
@@ -297,6 +299,7 @@
     <ClInclude Include="Bird.h" />
     <ClInclude Include="BundleButton.h" />
     <ClInclude Include="ButtonBundle.h" />
+    <ClInclude Include="Coach.h" />
     <ClInclude Include="ContentsControlWindow.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsEnum.h" />
@@ -321,6 +324,7 @@
     <ClInclude Include="HeaderInfo.h" />
     <ClInclude Include="House.h" />
     <ClInclude Include="HouseBackGround.h" />
+    <ClInclude Include="HouseUnit.h" />
     <ClInclude Include="House_UI.h" />
     <ClInclude Include="IntroCut.h">
       <SubType>

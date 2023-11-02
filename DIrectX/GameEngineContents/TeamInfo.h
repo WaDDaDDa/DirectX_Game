@@ -19,6 +19,16 @@ public:
         return IconNum;
     }
 
+    void SetHairNum(int _Num)
+    {
+        HairNum = _Num;
+    }
+
+    int GetHairNum()
+    {
+        return HairNum;
+    }
+
     void SetGold(int _Num)
     {
         Gold = _Num;
@@ -50,6 +60,7 @@ protected:
 
 private:
     int IconNum = 0;
+    int HairNum = 0;
     int Gold = 200;
     int Year = 2023;
     int Month = 1;
