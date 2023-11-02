@@ -103,7 +103,9 @@ SamplerState DiffuseTexSampler : register(s0);
 
 float4 TextureShader_PS(PixelOutPut _Input) : SV_Target0
 {
-   
+    _Input.TEXCOORD.x += VertexUVPlus.x;
+    _Input.TEXCOORD.y += VertexUVPlus.y;
+
     float4 Color = DiffuseTex.Sample(DiffuseTexSampler, _Input.TEXCOORD.xy);
     // 블랜드라는 작업을 해줘야 한다.
     

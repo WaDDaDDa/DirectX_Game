@@ -104,6 +104,7 @@ public:
 
 	void SetTexture(std::string_view _Name, std::shared_ptr<GameEngineTexture> _Texture);
 
+	void SetSampler(std::string_view _Name, std::string_view _SamplerName);
 	void SetSampler(std::string_view _Name, std::shared_ptr<GameEngineSampler> _TextureSampler);
 
 	void ResClear();
