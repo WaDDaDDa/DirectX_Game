@@ -181,6 +181,7 @@
     <ClCompile Include="Bird.cpp" />
     <ClCompile Include="BundleButton.cpp" />
     <ClCompile Include="ButtonBundle.cpp" />
+    <ClCompile Include="Cloud.cpp" />
     <ClCompile Include="Coach.cpp" />
     <ClCompile Include="ContentsControlWindow.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
@@ -299,6 +300,7 @@
     <ClInclude Include="Bird.h" />
     <ClInclude Include="BundleButton.h" />
     <ClInclude Include="ButtonBundle.h" />
+    <ClInclude Include="Cloud.h" />
     <ClInclude Include="Coach.h" />
     <ClInclude Include="ContentsControlWindow.h" />
     <ClInclude Include="ContentsCore.h" />

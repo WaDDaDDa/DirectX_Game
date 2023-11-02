@@ -134,9 +134,6 @@
     <ClCompile Include="MainLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="HouseBackGround.cpp">
-      <Filter>Global</Filter>
-    </ClCompile>
     <ClCompile Include="easing.cpp" />
     <ClCompile Include="ButtonBundle.cpp">
       <Filter>UI\Bundle</Filter>
@@ -212,6 +209,12 @@
     </ClCompile>
     <ClCompile Include="Coach.cpp">
       <Filter>HouseUnit</Filter>
+    </ClCompile>
+    <ClCompile Include="Cloud.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="HouseBackGround.cpp">
+      <Filter>BackGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -351,9 +354,6 @@
     <ClInclude Include="MainLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="HouseBackGround.h">
-      <Filter>Global</Filter>
-    </ClInclude>
     <ClInclude Include="easing.h" />
     <ClInclude Include="ButtonBundle.h">
       <Filter>UI\Bundle</Filter>
@@ -429,6 +429,12 @@
     </ClInclude>
     <ClInclude Include="Coach.h">
       <Filter>HouseUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="Cloud.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="HouseBackGround.h">
+      <Filter>BackGround</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

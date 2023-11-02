@@ -21,7 +21,7 @@ protected:
 
 private:
     std::shared_ptr<class GameEngineSpriteRenderer> BackGround;
-
+    float CloudDelta = 0.0f;
 
 };
 
