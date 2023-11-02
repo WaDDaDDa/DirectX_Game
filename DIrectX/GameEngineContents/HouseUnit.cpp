@@ -18,9 +18,11 @@ void HouseUnit::Start()
 
 	BodyRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
 	BodyRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
+	BodyRenderer->SetPivotType(PivotType::Bottom);
 
 	HairRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Hair);
-	HairRenderer->Transform.AddLocalPosition({ 0.0f, 40.0f, -static_cast<float>(ContentsOrder::Hair) });
+	HairRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Hair) });
+	HairRenderer->SetPivotType(PivotType::Bottom);
 
 	GameEngineInput::AddInputObject(this);
 }

@@ -29,4 +29,11 @@ void Coach::LevelStart(GameEngineLevel* _NextLevel)
 	HairRenderer->SetSprite("Coach_Hair", TeamInfo::MyInfo.GetHairNum());
 	HairRenderer->AutoSpriteSizeOn();
 	HairRenderer->SetAutoScaleRatio(3.0f);
+	HairRenderer->Transform.AddLocalPosition({ 0.0f, 100.0f });
 }
+
+void Coach::Update(float _Delta)
+{
+	HouseUnit::Update(_Delta);
+}
+

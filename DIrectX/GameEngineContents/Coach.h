@@ -15,6 +15,7 @@ public:
 protected:
     void Start() override;
     void LevelStart(GameEngineLevel* _NextLevel) override;
+    void Update(float _Delta) override;
 
 private:
 

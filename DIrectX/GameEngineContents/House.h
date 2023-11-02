@@ -23,6 +23,21 @@ private:
     std::shared_ptr<class GameEngineSpriteRenderer> Ground;
     std::shared_ptr<class GameEngineSpriteRenderer> HouseRenderer;
 
+    std::shared_ptr<class GameEngineSpriteRenderer> Table;
+    std::shared_ptr<class GameEngineSpriteRenderer> Cabinet;
+    std::shared_ptr<class GameEngineSpriteRenderer> Bed1;
+    std::shared_ptr<class GameEngineSpriteRenderer> Bed2;
+    std::shared_ptr<class GameEngineSpriteRenderer> Bed3;
+
+    std::shared_ptr<class GameEngineSpriteRenderer> Cpu1;
+    std::shared_ptr<class GameEngineSpriteRenderer> Cpu2;
+    std::shared_ptr<class GameEngineSpriteRenderer> Cpu3;
+    std::shared_ptr<class GameEngineSpriteRenderer> Cpu4;
+    std::shared_ptr<class GameEngineSpriteRenderer> Cpu5;
+    std::shared_ptr<class GameEngineSpriteRenderer> Cpu6;
+
+    std::shared_ptr<class GameEngineSpriteRenderer> Tolilet;
+    std::shared_ptr<class GameEngineSpriteRenderer> ShowerRoom;
 
 };
 

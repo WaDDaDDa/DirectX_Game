@@ -13,8 +13,8 @@ public:
     HouseUnit& operator=(HouseUnit&& _Other) noexcept = delete;
 
 protected:
-    void Start();
-    void Update(float _Delta);
+    void Start() override;
+    void Update(float _Delta) override;
     void LevelStart(GameEngineLevel* _NextLevel) override;
     void LevelEnd(GameEngineLevel* _NextLevel) override;
 
