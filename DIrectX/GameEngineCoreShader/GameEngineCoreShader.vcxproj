@@ -129,6 +129,7 @@
   <ItemGroup>
     <FxCompile Include="ColorShader.fx" />
     <FxCompile Include="DebugColorShader.fx" />
+    <FxCompile Include="DebugLineShader.fx" />
     <FxCompile Include="RenderBase.fx" />
     <FxCompile Include="TextureShader.fx" />
     <FxCompile Include="Transform.fx" />

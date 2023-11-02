@@ -180,12 +180,17 @@ void ContentsControlWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 {
 	for (size_t i = 0; i < Tabs.size(); i++)
 	{
-		ImGui::SameLine();
 		if (ImGui::Button(Tabs[i]->Name.c_str()))
 		{
 			CurTab = Tabs[i];
 			CurTab->Start();
 		}
+		ImGui::SameLine();
+	}
+
+	if (ImGui::Button("Off"))
+	{
+		Off();
 	}
 
 	if (nullptr != CurTab)

@@ -23,6 +23,7 @@
     <FxCompile Include="RenderBase.fx">
       <Filter>Header</Filter>
     </FxCompile>
+    <FxCompile Include="DebugLineShader.fx" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ShaderRule.txt">
