@@ -4,6 +4,7 @@
 #include "GameEngineSampler.h"
 #include "GameEngineConstantBuffer.h"
 
+
 void GameEngineFrameAnimation::EventCall(int _Frame)
 {
 	if (true == FrameEventFunction.contains(Index[_Frame]))
@@ -46,7 +47,7 @@ SpriteData GameEngineFrameAnimation::Update(float _DeltaTime)
 		++CurIndex;
 		EventCheck = true;
 
-		if (CurIndex > End - Start)
+		if (CurIndex > InterIndex)
 		{
 			if (nullptr != EndEvent && false == IsEnd)
 			{
@@ -71,7 +72,6 @@ SpriteData GameEngineFrameAnimation::Update(float _DeltaTime)
 
 GameEngineSpriteRenderer::GameEngineSpriteRenderer()
 {
-
 }
 
 GameEngineSpriteRenderer::~GameEngineSpriteRenderer()
@@ -82,22 +82,13 @@ void GameEngineSpriteRenderer::Start()
 {
 	GameEngineRenderer::Start();
 
-	// DataTransform = &ImageTransform;
-
 	ImageTransform.SetParent(Transform);
 
 	GameEngineRenderer::SetMesh("Rect");
 	GameEngineRenderer::SetMaterial("2DTexture");
-
-	//std::shared_ptr<GameEngineConstantBuffer> Buffer = GameEngineConstantBuffer::CreateAndFind(sizeof(float4), "SpriteData");
-	//if (nullptr != Buffer)
-	//{
-	//	Buffer->ChangeData(CurSprite.SpritePivot);
-	//	Buffer->Setting(1);
-	//}
-	// CurSprite.Texture->PSSetting(0);
 }
 
+// Update Order에 영향을 받는다.
 void GameEngineSpriteRenderer::Update(float _Delta)
 {
 	if (nullptr != CurFrameAnimations)
@@ -113,9 +104,9 @@ void GameEngineSpriteRenderer::Update(float _Delta)
 		Scale.W = 0.0f;
 		SetImageScale(Scale * AutoScaleRatio);
 	}
-	// 스케일 받을때 ratio 곱해지게
+
 	RenderBaseInfoValue.RenderScreenScale = CurSprite.GetScale();
-	
+	// 
 }
 
 void GameEngineSpriteRenderer::SetImageScale(const float4& _Scale)
@@ -128,14 +119,19 @@ void GameEngineSpriteRenderer::AddImageScale(const float4& _Scale)
 	ImageTransform.AddLocalScale(_Scale);
 }
 
+
 void GameEngineSpriteRenderer::Render(GameEngineCamera* _Camera, float _Delta)
 {
 	float4 ParentScale = Transform.GetLocalScale();
 	float4 Scale = ImageTransform.GetLocalScale();
 
+	float4 CalPivot = Pivot;
+	CalPivot.X -= 0.5f;
+	CalPivot.Y -= 0.5f;
+
 	float4 PivotPos;
-	PivotPos.X = Scale.X * Pivot.X;
-	PivotPos.Y = Scale.Y * Pivot.Y;
+	PivotPos.X = Scale.X * CalPivot.X;
+	PivotPos.Y = Scale.Y * CalPivot.Y;
 
 	ImageTransform.SetLocalPosition(PivotPos);
 
@@ -144,7 +140,10 @@ void GameEngineSpriteRenderer::Render(GameEngineCamera* _Camera, float _Delta)
 
 	GetShaderResHelper().SetTexture("DiffuseTex", CurSprite.Texture, IsUserSampler);
 
+
 	GameEngineRenderer::Render(_Camera, _Delta);
+
+
 
 }
 
@@ -194,6 +193,7 @@ void GameEngineSpriteRenderer::CreateAnimation(
 	NewAnimation->SpriteName = _SpriteName;
 	NewAnimation->Sprite = Sprite;
 	NewAnimation->Loop = _Loop;
+
 	NewAnimation->Parent = this;
 
 	if (_Start != -1)
@@ -214,10 +214,29 @@ void GameEngineSpriteRenderer::CreateAnimation(
 		NewAnimation->End = Sprite->GetSpriteCount() - 1;
 	}
 
+	int Plus = 1;
 
-	for (unsigned int i = NewAnimation->Start; i <= NewAnimation->End; i++)
+	if (NewAnimation->Start > NewAnimation->End)
 	{
-		NewAnimation->Index.push_back(i);
+		for (
+			int i = NewAnimation->Start;
+			i >= NewAnimation->End;
+			i--
+			)
+		{
+			NewAnimation->Index.push_back(i);
+		}
+
+		NewAnimation->InterIndex = NewAnimation->Start - NewAnimation->End;
+	}
+	else
+	{
+		for (unsigned int i = NewAnimation->Start; i <= NewAnimation->End; i++)
+		{
+			NewAnimation->Index.push_back(i);
+		}
+
+		NewAnimation->InterIndex = NewAnimation->End - NewAnimation->Start;
 	}
 
 	NewAnimation->Inter.resize(NewAnimation->Index.size());
@@ -225,6 +244,8 @@ void GameEngineSpriteRenderer::CreateAnimation(
 	{
 		NewAnimation->Inter[i] = _Inter;
 	}
+
+
 
 	NewAnimation->CurIndex = 0;
 }
@@ -250,6 +271,7 @@ void GameEngineSpriteRenderer::ChangeAnimation(std::string_view _AnimationName, 
 	CurFrameAnimations = FrameAnimations[UpperName];
 	CurFrameAnimations->Reset();
 	CurFrameAnimations->CurIndex = _FrameIndex;
+	Sprite = CurFrameAnimations->Sprite;
 	CurSprite = CurFrameAnimations->Sprite->GetSpriteData(CurFrameAnimations->CurIndex);
 }
 
@@ -331,25 +353,31 @@ void GameEngineSpriteRenderer::SetPivotType(PivotType _Type)
 	switch (_Type)
 	{
 	case PivotType::Center:
-		Pivot = { 0.0f, 0.0f };
-		break;
-	case PivotType::Bottom:
-		Pivot = { 0.0f, 0.5f };
-		break;
-	case PivotType::Left:
-		Pivot = { 0.5f, 0.0f };
-		break;
-	case PivotType::LeftTop:
-		Pivot = { 0.5f, -0.5f };
-		break;
-	case PivotType::Right:
-		Pivot = { -0.5f, 0.0f };
-		break;
-	case PivotType::RightTop:
-		Pivot = { -0.5f, -0.5f };
+		Pivot = { 0.5f, 0.5f };
 		break;
 	case PivotType::Top:
-		Pivot = { 0.0f, -0.5f };
+		Pivot = { 0.5f, 0.0f };
+		break;
+	case PivotType::RightUp:
+		Pivot = { 0.0f, 0.0f };
+		break;
+	case PivotType::Right:
+		Pivot = { 0.0f, 0.5f };
+		break;
+	case PivotType::RightBottom:
+		Pivot = { 0.0f, 1.0f };
+		break;
+	case PivotType::Bottom:
+		Pivot = { 0.5f, 1.0f };
+		break;
+	case PivotType::LeftBottom:
+		Pivot = { 1.0f, 1.0f };
+		break;
+	case PivotType::Left:
+		Pivot = { 1.0f, 0.5f };
+		break;
+	case PivotType::LeftTop:
+		Pivot = { 1.0f, 0.0f };
 		break;
 	default:
 		break;
@@ -361,10 +389,8 @@ void GameEngineSpriteRenderer::SetMaterialEvent(std::string_view _Name, int _Ind
 	const TransformData& Data = ImageTransform.GetConstTransformDataRef();
 	GetShaderResHelper().SetConstantBufferLink("TransformData", Data);
 	GetShaderResHelper().SetConstantBufferLink("SpriteData", CurSprite.SpritePivot);
-	// ShaderResHelper.SetTexture("DiffuseTex", "NSet.Png");
 	GetShaderResHelper().SetConstantBufferLink("SpriteRendererInfo", SpriteRendererInfoValue);
 	GetShaderResHelper().SetConstantBufferLink("ColorData", ColorDataValue);
-
 	SetSprite("NSet.png");
 }
 

@@ -14,16 +14,18 @@ public:
 
 	std::shared_ptr<GameEngineSprite> Sprite = nullptr;
 
-	//float Inter;
+	// float Inter;
 	bool Loop;
 	bool IsEnd;
 
 	bool EventCheck = false;
 
-	unsigned int Start;
-	unsigned int End;
-	unsigned int CurIndex;
+	int Start;
+	int End;
+	int InterIndex;
+	int CurIndex;
 	float CurTime = 0.0f;
+
 	std::vector<int> Index;
 
 	void Reset();
@@ -43,13 +45,16 @@ public:
 enum class PivotType
 {
 	Center,
+	Top,
+	RightUp,
+	Right,
+	RightBottom,
 	Bottom,
+	LeftBottom,
 	Left,
 	LeftTop,
-	Right,
-	RightTop,
-	Top,
 };
+
 
 enum class MaskMode
 {
@@ -88,6 +93,7 @@ public:
 	GameEngineSpriteRenderer& operator=(GameEngineSpriteRenderer&& _Other) noexcept = delete;
 
 	// 스프라이트는 기본적으로 
+	// 강제로 애니메이션을 정지한다는 뜻으로 받아들이겠다.
 	void SetSprite(std::string_view _Name, unsigned int index = 0);
 
 	void CreateAnimation(
@@ -109,6 +115,7 @@ public:
 		AutoScaleRatio.X = _Ratio;
 		AutoScaleRatio.Y = _Ratio;
 	}
+
 	inline void SetAutoScaleRatio(float4 _Ratio)
 	{
 		AutoScaleRatio = _Ratio;
@@ -169,23 +176,21 @@ public:
 	void SetEndEvent(std::string_view _AnimationName, std::function<void(GameEngineSpriteRenderer*)> _Function);
 	void SetFrameEvent(std::string_view _AnimationName, int _Frame, std::function<void(GameEngineSpriteRenderer*)> _Function);
 
-
 	// "EngineBaseWRAPSampler"
 	void SetSampler(std::string_view _Name);
 
-	void SetPivotType(PivotType _Type);
 	void SetPivotValue(const float4& _Value)
 	{
 		Pivot = _Value;
 	}
+	float4 GetPivotValue()
+	{
+		return Pivot;
+	}
 
+	void SetPivotType(PivotType _Type);
 	void SetImageScale(const float4& _Scale);
 	void AddImageScale(const float4& _Scale);
-
-	float4 GetImageScale()
-	{
-		return ImageTransform.GetLocalScale();
-	}
 
 	std::shared_ptr<GameEngineSprite> GetSprite()
 	{
@@ -202,14 +207,14 @@ public:
 		return CurFrameAnimations->CurIndex;
 	}
 
-	inline GameEngineTransform& GetImageTransform()
-	{
-		return ImageTransform;
-	}
-
 	std::shared_ptr<GameEngineFrameAnimation> CurAnimation()
 	{
 		return CurFrameAnimations;
+	}
+
+	inline GameEngineTransform& GetImageTransform()
+	{
+		return ImageTransform;
 	}
 
 	inline ColorData& GetColorData()
@@ -241,11 +246,12 @@ private:
 	SpriteRendererInfo SpriteRendererInfoValue;
 
 	std::shared_ptr<class GameEngineSampler> Sampler;
+
 	bool IsImageSize = false;
 	float4 AutoScaleRatio = { 1.0f,1.0f,1.0f };
 	bool IsPause = false;
 
-	float4 Pivot = { 0.0f, 0.0f };
+	float4 Pivot = { 0.5f, 0.5f };
 
 	ColorData ColorDataValue;
 
@@ -253,4 +259,3 @@ private:
 
 	bool IsUserSampler = true;
 };
-
