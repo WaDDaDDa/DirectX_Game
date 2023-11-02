@@ -142,7 +142,7 @@ void GameEngineSpriteRenderer::Render(GameEngineCamera* _Camera, float _Delta)
 	ImageTransform.TransformUpdate();
 	ImageTransform.CalculationViewAndProjection(Transform.GetConstTransformDataRef());
 
-	GetShaderResHelper().SetTexture("DiffuseTex", CurSprite.Texture);
+	GetShaderResHelper().SetTexture("DiffuseTex", CurSprite.Texture, IsUserSampler);
 
 	GameEngineRenderer::Render(_Camera, _Delta);
 
@@ -405,4 +405,5 @@ void GameEngineSpriteRenderer::SetSampler(std::string_view _Name)
 {
 	std::shared_ptr<GameEngineRenderUnit> Unit = CreateAndFindRenderUnit(0);
 	Unit->ShaderResHelper.SetSampler("DiffuseTexSampler", _Name);
+	IsUserSampler = false;
 }

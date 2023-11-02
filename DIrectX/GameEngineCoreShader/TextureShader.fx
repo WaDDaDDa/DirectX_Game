@@ -58,6 +58,13 @@ PixelOutPut TextureShader_VS(GameEngineVertex2D _Input)
     
     float4 CalUV = _Input.TEXCOORD;
     
+    CalUV.x *= VertexUVMul.x;
+    CalUV.y *= VertexUVMul.y;
+    
+       
+    CalUV.x += VertexUVPlus.x;
+    CalUV.y += VertexUVPlus.y;
+    
     // hlsl은 사용하지 않은 녀석은 인식하지 못합니다.
     // 결과에 유의미한 영향을 주는 리소스가 아니면 hlsl은 최적화를 통해서 그 리소스를 배제한다.
     // 결과에 영향을 안주는 상수버퍼가 의미가 있어? 그런 상수버퍼는 내가 알아서 삭제할께.
@@ -103,8 +110,6 @@ SamplerState DiffuseTexSampler : register(s0);
 
 float4 TextureShader_PS(PixelOutPut _Input) : SV_Target0
 {
-    _Input.TEXCOORD.x += VertexUVPlus.x;
-    _Input.TEXCOORD.y += VertexUVPlus.y;
 
     float4 Color = DiffuseTex.Sample(DiffuseTexSampler, _Input.TEXCOORD.xy);
     // 블랜드라는 작업을 해줘야 한다.

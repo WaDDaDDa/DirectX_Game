@@ -252,37 +252,37 @@ void BanPickManager::Start()
 
 	// ¿Ø¥÷ Ω∫≈» ¡¶∏Ò
 	UnitAttText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
-	UnitAttText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitAtt), 16.0f, float4::WHITE, FW1_CENTER);
+	//UnitAttText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitAtt), 16.0f, float4::WHITE, FW1_CENTER);
 	UnitAttText->Transform.AddLocalPosition(UnitAttTextPos);
 	UnitAttText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
 
 	UnitAttSpeedText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
-	UnitAttSpeedText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.AttackSpeed), 16.0f, float4::WHITE, FW1_CENTER);
+	//UnitAttSpeedText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.AttackSpeed), 16.0f, float4::WHITE, FW1_CENTER);
 	UnitAttSpeedText->Transform.AddLocalPosition(UnitAttSpeedTextPos);
 	UnitAttSpeedText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
 
 	UnitAttRangeText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
-	UnitAttRangeText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.AttackRange.X), 16.0f, float4::WHITE, FW1_CENTER);
+	//UnitAttRangeText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.AttackRange.X), 16.0f, float4::WHITE, FW1_CENTER);
 	UnitAttRangeText->Transform.AddLocalPosition(UnitAttRangeTextPos);
 	UnitAttRangeText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
 
 	UnitDefText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
-	UnitDefText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitDef), 16.0f, float4::WHITE, FW1_CENTER);
+	//UnitDefText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitDef), 16.0f, float4::WHITE, FW1_CENTER);
 	UnitDefText->Transform.AddLocalPosition(UnitDefTextPos);
 	UnitDefText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
 
 	UnitHpText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
-	UnitHpText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitHP), 16.0f, float4::WHITE, FW1_CENTER);
+	//UnitHpText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitHP), 16.0f, float4::WHITE, FW1_CENTER);
 	UnitHpText->Transform.AddLocalPosition(UnitHpTextPos);
 	UnitHpText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
 
 	UnitSpeedText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
-	UnitSpeedText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitSpeed), 16.0f, float4::WHITE, FW1_CENTER);
+	//UnitSpeedText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitSpeed), 16.0f, float4::WHITE, FW1_CENTER);
 	UnitSpeedText->Transform.AddLocalPosition(UnitSpeedTextPos);
 	UnitSpeedText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
 
 	SkillTimeText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
-	SkillTimeText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.SkillCooltime) += "√ ", 16.0f, float4::WHITE, FW1_LEFT);
+	//SkillTimeText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.SkillCooltime) += "√ ", 16.0f, float4::WHITE, FW1_LEFT);
 	SkillTimeText->Transform.AddLocalPosition(SkillTimeTextPos);
 	SkillTimeText->Transform.AddLocalPosition({ 0.0f, 12.0f, -static_cast<float>(ContentsOrder::Text) });
 
@@ -422,13 +422,21 @@ void BanPickManager::Update(float _Delta)
 	UnitSkillText->SetText("Galmuri14", CurCard->UnitStat.SkillText.data(), 12.0f, float4::WHITE, FW1_LEFT);
 	UnitUltText->SetText("Galmuri14", CurCard->UnitStat.UltText.data(), 12.0f, float4::WHITE, FW1_LEFT);
 	// ¿Ø¥÷ Ω∫≈» ¡¶∏Ò
-	UnitAttText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitAtt), 16.0f, float4::WHITE, FW1_CENTER);
-	UnitAttSpeedText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.AttackSpeed), 16.0f, float4::WHITE, FW1_CENTER);
-	UnitAttRangeText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.AttackRange.X), 16.0f, float4::WHITE, FW1_CENTER);
-	UnitDefText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitDef), 16.0f, float4::WHITE, FW1_CENTER);
-	UnitHpText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitHP), 16.0f, float4::WHITE, FW1_CENTER);
-	UnitSpeedText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.UnitSpeed), 16.0f, float4::WHITE, FW1_CENTER);
-	SkillTimeText->SetText("Galmuri14", float4::FloatToString(CurCard->UnitStat.SkillCooltime) += "√ ", 16.0f, float4::WHITE, FW1_LEFT);
+	std::string AttText = GameEngineString::Format("{:.0f}", CurCard->UnitStat.UnitAtt);
+	std::string AttSpeedText = GameEngineString::Format("{:.1f}", CurCard->UnitStat.AttackSpeed);
+	std::string AttRangeText = GameEngineString::Format("{:.0f}", CurCard->UnitStat.AttackRange.X);
+	std::string DefText = GameEngineString::Format("{:.0f}", CurCard->UnitStat.UnitDef);
+	std::string HpText = GameEngineString::Format("{:.0f}", CurCard->UnitStat.UnitHP);
+	std::string SpeedText = GameEngineString::Format("{:.0f}", CurCard->UnitStat.UnitSpeed);
+	std::string CoolTimeText = GameEngineString::Format("{:.0f}", CurCard->UnitStat.SkillCooltime);
+
+	UnitAttText->SetText("Galmuri14", AttText, 16.0f, float4::WHITE, FW1_CENTER);
+	UnitAttSpeedText->SetText("Galmuri14", AttSpeedText, 16.0f, float4::WHITE, FW1_CENTER);
+	UnitAttRangeText->SetText("Galmuri14", AttRangeText, 16.0f, float4::WHITE, FW1_CENTER);
+	UnitDefText->SetText("Galmuri14", DefText, 16.0f, float4::WHITE, FW1_CENTER);
+	UnitHpText->SetText("Galmuri14", HpText, 16.0f, float4::WHITE, FW1_CENTER);
+	UnitSpeedText->SetText("Galmuri14", SpeedText, 16.0f, float4::WHITE, FW1_CENTER);
+	SkillTimeText->SetText("Galmuri14", CoolTimeText += "√ ", 16.0f, float4::WHITE, FW1_LEFT);
 
 	StateUpdate(_Delta);
 }

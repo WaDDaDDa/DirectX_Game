@@ -250,5 +250,7 @@ private:
 	ColorData ColorDataValue;
 
 	GameEngineTransform ImageTransform;
+
+	bool IsUserSampler = true;
 };
 
