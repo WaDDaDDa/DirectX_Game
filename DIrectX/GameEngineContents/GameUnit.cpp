@@ -303,6 +303,18 @@ void GameUnit::MapOverCheck()
 
 void GameUnit::Update(float _Delta)
 {
+	// 색 원상복구
+	if (true == DamageCheck)
+	{
+		DamageDelta += _Delta;
+
+		if (0.1f <= DamageDelta)
+		{
+			MainSpriteRenderer->GetColorData().PlusColor -= float4::ONE;
+			DamageDelta = 0.0f;
+			DamageCheck = false;
+		}
+	}
 
 	DieCheck();
 
@@ -311,6 +323,7 @@ void GameUnit::Update(float _Delta)
 	AttackValue += _Delta;
 	SkillValue += _Delta;
 	UltValue += _Delta;
+
 
 	if (UnitHP <= 0.0f && ImDie == false)
 	{
@@ -438,6 +451,14 @@ void GameUnit::ChangeState(GameUnitState _State)
 
 void GameUnit::SpwanStart()
 {
+	// 색 원상복구
+	if (true == DamageCheck)
+	{
+		MainSpriteRenderer->GetColorData().PlusColor -= float4::ONE;
+		DamageDelta = 0.0f;
+		DamageCheck = false;
+	}
+
 	SkillEffectRenderer->Off();
 
 	GameEngineRandom NewRandom;

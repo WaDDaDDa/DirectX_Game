@@ -211,6 +211,15 @@ public:
             return;
         }
         UnitHP -= Result;
+
+        if (false == DamageCheck)
+        {
+
+            DamageCheck = true;
+            MainSpriteRenderer->GetColorData().PlusColor += float4::ONE;
+        }
+
+
     }
 
     void HealHP(float _Value)
@@ -223,7 +232,12 @@ public:
         }
 
         UnitHP = Result;
+
     }
+    // 변한 컬러 회복시키는 불값.
+    bool DamageCheck = false;
+    float DamageDelta = 0.0f;
+
 
     void AddDef(float _Value)
     {
