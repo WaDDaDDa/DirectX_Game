@@ -29,6 +29,7 @@ private:
     std::shared_ptr<class MenuButton> BattleButton;
     std::shared_ptr<class MenuButton> GameButton;
     std::shared_ptr<class MenuButton> SystemButton;
+
     std::shared_ptr<class ProceedButton> Proceed;
     float4 TeamButtonPos = { -550.0f, -310.0f };
     float4 ButtonXInter = { 160.0f };

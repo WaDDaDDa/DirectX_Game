@@ -102,12 +102,12 @@ void House_UI::Start()
 	Day = GetLevel()->CreateActor<HeaderInfo>();
 	Day->Transform.AddLocalPosition({ 920.0f, -35.0f });
 	Day->SetIcon("MainUI", 1);
-	Day->SetText("2023년 1월 2주차");
+	Day->SetText(TeamInfo::MyInfo.GetDate());
 
 	Gold = GetLevel()->CreateActor<HeaderInfo>();
 	Gold->Transform.AddLocalPosition({ 1150.0f, -35.0f });
 	Gold->SetIcon("MainUI", 2);
-	Gold->SetText("200");
+	Gold->SetText(std::to_string(TeamInfo::MyInfo.GetGold()));
 
 	TeamLogo = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
 	TeamLogo->SetSprite("TeamLogo", TeamInfo::MyInfo.GetIconNum());
