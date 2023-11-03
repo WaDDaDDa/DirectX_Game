@@ -24,6 +24,13 @@ void HouseUnit::Start()
 	HairRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Hair) });
 	//HairRenderer->SetPivotType(PivotType::Bottom);
 
+	//Test = [=](const SpriteData& CurSprite, int _SpriteIndex)
+	//	{
+	//		// 처음한번 실행.
+	//		HairCheck();
+	//		return;
+	//	};
+
 	GameEngineInput::AddInputObject(this);
 }
 
@@ -77,16 +84,19 @@ void HouseUnit::Update(float _Delta)
 	if (GameEngineInput::IsPress('A', this))
 	{
 		Transform.AddLocalPosition(float4::LEFT * _Delta * Speed);
+		BodyRenderer->ChangeAnimation("Run");
 	}
 
 	if (GameEngineInput::IsPress('D', this))
 	{
 		Transform.AddLocalPosition(float4::RIGHT * _Delta * Speed);
+		BodyRenderer->ChangeAnimation("WHat");
 	}
 
 	if (GameEngineInput::IsPress('W', this))
 	{
 		Transform.AddLocalPosition(float4::UP * _Delta * Speed);
+		BodyRenderer->ChangeAnimation("Eat");
 	}
 
 	if (GameEngineInput::IsPress('S', this))

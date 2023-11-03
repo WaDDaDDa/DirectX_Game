@@ -19,6 +19,8 @@ void GameEngineFrameAnimation::Reset()
 	CurIndex = 0;
 	IsEnd = false;
 	EventCheck = true;
+	Once = false;
+
 }
 
 SpriteData GameEngineFrameAnimation::Update(float _DeltaTime)
@@ -39,12 +41,25 @@ SpriteData GameEngineFrameAnimation::Update(float _DeltaTime)
 		EventCheck = false;
 	}
 
+	if (nullptr != FrameChangeFunction && Once == false)
+	{
+		SpriteData Data = Sprite->GetSpriteData(Index[CurIndex]);
+		FrameChangeFunction(Data, CurIndex);
+		Once = true; 
+	}
+
+
 	CurTime += _DeltaTime;
 
 	if (Inter[CurIndex] <= CurTime)
 	{
 		CurTime -= Inter[CurIndex];
+
+
+
 		++CurIndex;
+
+
 		EventCheck = true;
 
 		if (CurIndex > InterIndex)
@@ -56,6 +71,7 @@ SpriteData GameEngineFrameAnimation::Update(float _DeltaTime)
 
 			IsEnd = true;
 
+
 			if (true == Loop)
 			{
 				CurIndex = 0;
@@ -64,7 +80,14 @@ SpriteData GameEngineFrameAnimation::Update(float _DeltaTime)
 			{
 				--CurIndex;
 			}
+
 		}
+		if (nullptr != FrameChangeFunction)
+		{
+			SpriteData Data = Sprite->GetSpriteData(Index[CurIndex]);
+			FrameChangeFunction(Data, CurIndex);
+		}
+
 	}
 
 	return Sprite->GetSpriteData(Index[CurIndex]);
@@ -86,6 +109,7 @@ void GameEngineSpriteRenderer::Start()
 
 	GameEngineRenderer::SetMesh("Rect");
 	GameEngineRenderer::SetMaterial("2DTexture");
+
 }
 
 // Update Order에 영향을 받는다.
@@ -140,10 +164,7 @@ void GameEngineSpriteRenderer::Render(GameEngineCamera* _Camera, float _Delta)
 
 	GetShaderResHelper().SetTexture("DiffuseTex", CurSprite.Texture, IsUserSampler);
 
-
 	GameEngineRenderer::Render(_Camera, _Delta);
-
-
 
 }
 
@@ -331,6 +352,22 @@ void GameEngineSpriteRenderer::SetEndEvent(std::string_view _AnimationName, std:
 	}
 
 	Animation->EndEvent = _Function;
+}
+
+void GameEngineSpriteRenderer::SetFrameChangeFunction(std::string_view _AnimationName, std::function<void(const SpriteData& CurSprite, int _SpriteIndex)> _Function)
+{
+	std::string UpperName = GameEngineString::ToUpperReturn(_AnimationName);
+
+	std::map<std::string, std::shared_ptr<GameEngineFrameAnimation>>::iterator FindIter = FrameAnimations.find(UpperName);
+
+	std::shared_ptr<GameEngineFrameAnimation> Animation = FindIter->second;
+
+	if (nullptr == Animation)
+	{
+		MsgBoxAssert("존재하지 않는 애니메이션에 이벤트를 만들려고 했습니다.");
+	}
+
+	Animation->FrameChangeFunction = _Function;
 }
 
 void GameEngineSpriteRenderer::AnimationPauseSwitch()

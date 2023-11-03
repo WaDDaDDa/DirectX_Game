@@ -25,10 +25,14 @@ public:
 	int InterIndex;
 	int CurIndex;
 	float CurTime = 0.0f;
+	// 한번만.
+	bool Once = false;
 
 	std::vector<int> Index;
 
 	void Reset();
+
+	std::function<void(const SpriteData& CurSprite, int _SpriteIndex)> FrameChangeFunction;
 
 	std::map<int, std::function<void(GameEngineSpriteRenderer*)>> FrameEventFunction;
 
@@ -176,6 +180,8 @@ public:
 	void SetEndEvent(std::string_view _AnimationName, std::function<void(GameEngineSpriteRenderer*)> _Function);
 	void SetFrameEvent(std::string_view _AnimationName, int _Frame, std::function<void(GameEngineSpriteRenderer*)> _Function);
 
+	void SetFrameChangeFunction(std::string_view _AnimationName, std::function<void(const SpriteData& CurSprite, int _SpriteIndex)> _Function);
+
 	// "EngineBaseWRAPSampler"
 	void SetSampler(std::string_view _Name);
 
@@ -235,6 +241,7 @@ protected:
 	void SetMaterialEvent(std::string_view _Name, int _Index) override;
 
 	int Index = 0;
+	
 
 private:
 	// 부모인 actor를 기준으로한

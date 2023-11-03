@@ -29,7 +29,7 @@ void Cloud::Start()
 	int Num = Rand.RandomInt(0, 7);
 	Renderer->SetSprite("MorningCloud", Num);
 	// ½ºÇÇµå
-	MoveSpeed = Rand.RandomFloat(100.0f, 200.0f);
+	MoveSpeed = Rand.RandomFloat(50.0f, 200.0f);
 
 
 	Renderer->AutoSpriteSizeOn();
