@@ -75,7 +75,12 @@ void GameEngineRenderer::SetViewCameraSelect(int _Order)
 
 	Camera = FindCamera.get();
 	Camera->Renderers[GetOrder()].push_back(GetDynamic_Cast_This<GameEngineRenderer>());
+}
 
+void GameEngineRenderer::Update(float _Delta)
+{
+	RenderBaseInfoValue.DeltaTime = _Delta;
+	RenderBaseInfoValue.AccDeltaTime += _Delta;
 }
 
 void GameEngineRenderer::Render(GameEngineCamera* _Camera, float _Delta)

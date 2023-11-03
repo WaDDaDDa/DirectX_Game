@@ -94,6 +94,7 @@ public:
 		YSortMap.insert(_SortOrder);
 	}
 
+
 protected:
 	void Start() override;
 
@@ -102,6 +103,8 @@ protected:
 	void Render(float _DeltaTime);
 
 	void AllReleaseCheck() override;
+
+
 
 
 private:

@@ -232,6 +232,7 @@
     <ClInclude Include="AStartPathFinder.h">
       <Filter>Contents</Filter>
     </ClInclude>
+    <ClInclude Include="FadePostEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -379,6 +380,7 @@
     <ClCompile Include="AStartPathFinder.cpp">
       <Filter>Contents</Filter>
     </ClCompile>
+    <ClCompile Include="FadePostEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ThirdParty\DirectXTex\inc\DirectXTex.inl">

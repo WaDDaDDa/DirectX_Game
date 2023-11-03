@@ -2,6 +2,7 @@
 #include "IntroLevel.h"
 #include "IntroCut.h"
 #include "UI_Mouse.h"
+#include <GameEngineCore/FadePostEffect.h>
 
 
 IntroLevel::IntroLevel()
@@ -78,6 +79,8 @@ void IntroLevel::Update(float _Delta)
 
 void IntroLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
+	// 포스트이펙트 - 페이드아웃
+	//GetLevelRenderTarget()->CreateEffect<FadePostEffect>();
 	std::shared_ptr<IntroCut> NewIntro = CreateActor<IntroCut>();
 }
 

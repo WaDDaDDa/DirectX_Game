@@ -25,6 +25,7 @@
     </FxCompile>
     <FxCompile Include="DebugLineShader.fx" />
     <FxCompile Include="TargetMerge.fx" />
+    <FxCompile Include="FadePostEffect.fx" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ShaderRule.txt">
