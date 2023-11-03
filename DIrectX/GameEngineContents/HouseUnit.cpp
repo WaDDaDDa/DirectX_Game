@@ -39,6 +39,17 @@ void HouseUnit::LevelEnd(GameEngineLevel* _NextLevel)
 
 void HouseUnit::HairCheck()
 {
+
+	if (true == IsSleep)
+	{
+		HairRenderer->Transform.SetWorldRotation({ 0.0f, 0.0f, 90.0f });
+		HairRenderer->Transform.SetLocalPosition({ -25.0f, 100.0f, HairRenderer->Transform.GetLocalPosition().Z });
+		return;
+	}
+
+	HairRenderer->Transform.SetWorldRotation(float4::ZERO);
+
+
 	// 헤어위치 잡는 작업.
 	GameEngineColor Test = GameEngineColor::RED;
 	float4 ColorCheck = CheckPos;
@@ -85,11 +96,13 @@ void HouseUnit::Update(float _Delta)
 
 	if (GameEngineInput::IsPress('Q', this))
 	{
+		IsSleep = false;
 		BodyRenderer->ChangeAnimation("Idle");
 	}
 
 	if (GameEngineInput::IsPress('E', this))
 	{
+		IsSleep = true;
 		BodyRenderer->ChangeAnimation("Sleep");
 	}
 }

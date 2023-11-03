@@ -24,6 +24,7 @@ protected:
     std::shared_ptr<class GameEngineSpriteRenderer> HairRenderer;
 
     float4 CheckPos = { 32.0f, 0.0f };
+    bool IsSleep = false;
 
 private:
 
