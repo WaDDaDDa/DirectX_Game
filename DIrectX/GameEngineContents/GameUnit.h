@@ -216,7 +216,7 @@ public:
         {
 
             DamageCheck = true;
-            MainSpriteRenderer->GetColorData().PlusColor += float4::ONE;
+            MainSpriteRenderer->GetColorData().PlusColor += float4::ONENULL;
         }
 
 

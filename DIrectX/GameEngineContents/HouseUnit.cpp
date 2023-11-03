@@ -22,7 +22,7 @@ void HouseUnit::Start()
 
 	HairRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Hair);
 	HairRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Hair) });
-	HairRenderer->SetPivotType(PivotType::Bottom);
+	//HairRenderer->SetPivotType(PivotType::Bottom);
 
 	GameEngineInput::AddInputObject(this);
 }
@@ -37,8 +37,30 @@ void HouseUnit::LevelEnd(GameEngineLevel* _NextLevel)
 	
 }
 
+void HouseUnit::HairCheck()
+{
+	// 헤어위치 잡는 작업.
+	GameEngineColor Test = GameEngineColor::RED;
+	float4 ColorCheck = CheckPos;
+
+	while (GameEngineColor::BLACK != Test)
+	{
+
+		Test = BodyRenderer->GetCurSprite().Texture->GetColor(ColorCheck, GameEngineColor::RED);
+		ColorCheck.Y += 1.0f;
+
+	}
+
+	float ResultY = (62.0f - ColorCheck.Y) * 3.0f;
+	HairRenderer->Transform.SetLocalPosition({ 0.0f, ResultY, HairRenderer->Transform.GetLocalPosition().Z });
+
+
+}
+
 void HouseUnit::Update(float _Delta)
 {
+	HairCheck();
+
 	float Speed = 100.0f;
 
 	if (GameEngineInput::IsPress('A', this))

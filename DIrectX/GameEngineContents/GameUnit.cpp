@@ -300,7 +300,6 @@ void GameUnit::MapOverCheck()
 	}
 }
 
-
 void GameUnit::Update(float _Delta)
 {
 	// 색 원상복구
@@ -310,7 +309,7 @@ void GameUnit::Update(float _Delta)
 
 		if (0.1f <= DamageDelta)
 		{
-			MainSpriteRenderer->GetColorData().PlusColor -= float4::ONE;
+			MainSpriteRenderer->GetColorData().PlusColor -= float4::ONENULL;
 			DamageDelta = 0.0f;
 			DamageCheck = false;
 		}

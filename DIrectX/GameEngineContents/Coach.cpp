@@ -22,6 +22,10 @@ void Coach::Start()
 	BodyRenderer->AutoSpriteSizeOn();
 	BodyRenderer->SetAutoScaleRatio(3.0f);
 
+
+	// 프레임이 바뀔때 호출되는 함수에 헤어위치를 캐릭터의 머리위치에 옮겨질수 있게하는 함수를 만든다.
+	// 엔딩레벨도 만들어야함.
+
 }
 
 void Coach::LevelStart(GameEngineLevel* _NextLevel)
@@ -29,11 +33,13 @@ void Coach::LevelStart(GameEngineLevel* _NextLevel)
 	HairRenderer->SetSprite("Coach_Hair", TeamInfo::MyInfo.GetHairNum());
 	HairRenderer->AutoSpriteSizeOn();
 	HairRenderer->SetAutoScaleRatio(3.0f);
-	HairRenderer->Transform.AddLocalPosition({ 0.0f, 100.0f });
+	HairRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f });
 }
 
 void Coach::Update(float _Delta)
 {
 	HouseUnit::Update(_Delta);
+
+
 }
 

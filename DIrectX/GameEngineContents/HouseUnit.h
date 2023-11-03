@@ -18,8 +18,13 @@ protected:
     void LevelStart(GameEngineLevel* _NextLevel) override;
     void LevelEnd(GameEngineLevel* _NextLevel) override;
 
+    void HairCheck();
+
     std::shared_ptr<class GameEngineSpriteRenderer> BodyRenderer;
     std::shared_ptr<class GameEngineSpriteRenderer> HairRenderer;
+
+    float4 CheckPos = { 32.0f, 0.0f };
+
 private:
 
 };
