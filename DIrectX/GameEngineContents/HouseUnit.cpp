@@ -14,7 +14,23 @@ HouseUnit::~HouseUnit()
 
 void HouseUnit::Start()
 {
-	Transform.SetLocalPosition({640.0f, -380.0f, 200.0f});
+	float4 WindowScale = GameEngineCore::MainWindow.GetScale();
+
+	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
+	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, 200.0f });
+
+	GameEngineRandom Rand;
+	int Floar = Rand.RandomInt(0, 1);
+	if (0 == Floar)
+	{
+		IsFirstFloar = true;
+	}
+	else
+	{
+		IsScendFloar = true;
+	}
+
+	FloarCheck();
 
 	BodyRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
 	BodyRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
@@ -24,6 +40,7 @@ void HouseUnit::Start()
 	HairRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Hair) });
 	//HairRenderer->SetPivotType(PivotType::Bottom);
 
+	// 프레임펑션
 	FrameFunction = [=](const SpriteData& CurSprite, int _SpriteIndex)
 		{
 			// 처음한번 실행.
@@ -31,11 +48,78 @@ void HouseUnit::Start()
 			return;
 		};
 
+
 	GameEngineInput::AddInputObject(this);
 }
 
 void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 {
+
+
+	// 스테이트 Idle
+	State.CreateState(HouseUnitEnum::Idle,
+		{
+		.Start =
+		[=](class GameEngineState* _Parent)
+		{
+			Reset();
+			BodyRenderer->ChangeAnimation("Idle");
+		},
+		.Stay =
+		[=](float _Delta, class GameEngineState* _Parent)
+		{
+			if (3.0f <= State.GetStateTime())
+			{
+				State.ChangeState(HouseUnitEnum::Run);
+				return;
+			}
+
+		},
+		.End =
+		[=](class GameEngineState* _Parent)
+		{
+
+		},
+		});
+	// Run
+	State.CreateState(HouseUnitEnum::Run,
+		{
+		.Start =
+		[=](class GameEngineState* _Parent)
+		{
+			BodyRenderer->ChangeAnimation("Run");
+		},
+		.Stay =
+		[=](float _Delta, class GameEngineState* _Parent)
+		{
+			float Xpos = Transform.GetLocalPosition().X;
+			if (840.0f <= Xpos)
+			{
+				BodyRenderer->LeftFlip();
+				HairRenderer->LeftFlip();
+				Transform.SetLocalPositionX(839.9f);
+				MoveDir *= -1.0f;
+			}
+			else if (445.0f >= Xpos)
+			{
+				BodyRenderer->RightFlip();
+				HairRenderer->RightFlip();
+				Transform.SetLocalPositionX(445.1f);
+				MoveDir *= -1.0f;
+			}
+
+			Transform.AddLocalPosition({ MoveDir * _Delta});
+
+		},
+		.End =
+		[=](class GameEngineState* _Parent)
+		{
+
+		},
+		});
+
+
+	State.ChangeState(HouseUnitEnum::Idle);
 
 }
 
@@ -80,7 +164,8 @@ void HouseUnit::HairCheck(const SpriteData& _CurSprite)
 
 void HouseUnit::Update(float _Delta)
 {
-	//	HairCheck();
+	State.Update(_Delta);
+	FloarCheck();
 
 	float Speed = 100.0f;
 

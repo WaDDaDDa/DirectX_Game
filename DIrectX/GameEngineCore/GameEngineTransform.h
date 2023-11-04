@@ -200,6 +200,24 @@ public:
 		TransformUpdate();
 	}
 
+	void SetLocalPositionY(const float _Value)
+	{
+		TransData.Position.Y = _Value;
+		TransformUpdate();
+	}
+
+	void SetLocalPositionZ(const float _Value)
+	{
+		TransData.Position.Z = _Value;
+		TransformUpdate();
+	}
+
+	void SetLocalPositionX(const float _Value)
+	{
+		TransData.Position.X = _Value;
+		TransformUpdate();
+	}
+
 	void AddLocalPosition(const float4& _Value)
 	{
 		TransData.Position += _Value;

@@ -1,6 +1,15 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 
+enum class HouseUnitEnum
+{
+    Idle,
+    Run,
+    Eat,
+    PlayGame,
+
+};
+
 class HouseUnit : public GameEngineActor
 {
 public:
@@ -24,10 +33,46 @@ protected:
     std::shared_ptr<class GameEngineSpriteRenderer> HairRenderer;
 
     float4 CheckPos = { 32.0f, 0.0f };
+
+    void Reset()
+    {
+        IsSleep = false;
+        IsCpuPlay = false;
+    }
+
     bool IsSleep = false;
     bool IsCpuPlay = false;
 
     std::function<void(const SpriteData& CurSprite, int _SpriteIndex)> FrameFunction;
+    GameEngineState State;
+
+    float FirstFloarY = -470.0f;
+    float ScendFloarY = -615.0f;
+    bool IsFirstFloar = false;
+    bool IsScendFloar = false;
+
+    void FloarCheck()
+    {
+        if (true == IsFirstFloar)
+        {
+            Transform.SetLocalPositionY(FirstFloarY);
+        }
+
+        if (true == IsScendFloar)
+        {
+            Transform.SetLocalPositionY(ScendFloarY);
+        }
+    }
+
+    void FlipReset()
+    {
+        BodyRenderer->RightFlip();
+        HairRenderer->RightFlip();
+    }
+
+    // ¿À¸¥ÂÊ
+    float MoveDir = 100.0f;
+
 private:
 
 };
