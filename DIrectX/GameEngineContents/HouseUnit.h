@@ -25,6 +25,7 @@ protected:
 
     float4 CheckPos = { 32.0f, 0.0f };
     bool IsSleep = false;
+    bool IsCpuPlay = false;
 
     //std::function<void(const SpriteData& CurSprite, int _SpriteIndex)> Test;
 private:
