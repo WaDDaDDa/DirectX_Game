@@ -24,12 +24,12 @@ void HouseUnit::Start()
 	HairRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Hair) });
 	//HairRenderer->SetPivotType(PivotType::Bottom);
 
-	//Test = [=](const SpriteData& CurSprite, int _SpriteIndex)
-	//	{
-	//		// 처음한번 실행.
-	//		HairCheck();
-	//		return;
-	//	};
+	Test = [=](const SpriteData& CurSprite, int _SpriteIndex)
+		{
+			// 처음한번 실행.
+			HairCheck();
+			return;
+		};
 
 	GameEngineInput::AddInputObject(this);
 }
@@ -80,7 +80,7 @@ void HouseUnit::HairCheck()
 
 void HouseUnit::Update(float _Delta)
 {
-	HairCheck();
+	//	HairCheck();
 
 	float Speed = 100.0f;
 

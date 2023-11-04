@@ -22,7 +22,6 @@ void Coach::Start()
 	BodyRenderer->CreateAnimation("WHat", "Character_Coach", 0.2f, 16, 22);
 	BodyRenderer->CreateAnimation("Eat", "Character_Coach", 0.2f, 23, 25);
 	BodyRenderer->CreateAnimation("Cpu", "Character_Coach", 0.2f, 31, 32);
-	BodyRenderer->ChangeAnimation("Cpu");
 	BodyRenderer->AutoSpriteSizeOn();
 	BodyRenderer->SetAutoScaleRatio(3.0f);
 
@@ -39,8 +38,11 @@ void Coach::LevelStart(GameEngineLevel* _NextLevel)
 	HairRenderer->SetAutoScaleRatio(3.0f);
 	HairRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f });
 
-	//BodyRenderer->SetFrameChangeFunction("Idle", Test);
-	//BodyRenderer->SetFrameChangeFunction("Sleep", Test);
+	BodyRenderer->SetFrameChangeFunction("Idle", Test);
+	BodyRenderer->SetFrameChangeFunction("Sleep", Test);
+
+	BodyRenderer->ChangeAnimation("Idle");
+
 }
 
 void Coach::Update(float _Delta)

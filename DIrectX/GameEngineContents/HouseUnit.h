@@ -27,7 +27,7 @@ protected:
     bool IsSleep = false;
     bool IsCpuPlay = false;
 
-    //std::function<void(const SpriteData& CurSprite, int _SpriteIndex)> Test;
+    std::function<void(const SpriteData& CurSprite, int _SpriteIndex)> Test;
 private:
 
 };

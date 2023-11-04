@@ -41,12 +41,12 @@ SpriteData GameEngineFrameAnimation::Update(float _DeltaTime)
 		EventCheck = false;
 	}
 
-	if (nullptr != FrameChangeFunction && Once == false)
-	{
-		SpriteData Data = Sprite->GetSpriteData(Index[CurIndex]);
-		FrameChangeFunction(Data, CurIndex);
-		Once = true; 
-	}
+	//if (nullptr != FrameChangeFunction && Once == false)
+	//{
+	//	SpriteData Data = Sprite->GetSpriteData(Index[CurIndex]);
+	//	FrameChangeFunction(Data, CurIndex);
+	//	Once = true; 
+	//}
 
 
 	CurTime += _DeltaTime;
@@ -82,6 +82,7 @@ SpriteData GameEngineFrameAnimation::Update(float _DeltaTime)
 			}
 
 		}
+
 		if (nullptr != FrameChangeFunction)
 		{
 			SpriteData Data = Sprite->GetSpriteData(Index[CurIndex]);
@@ -130,7 +131,6 @@ void GameEngineSpriteRenderer::Update(float _Delta)
 	}
 
 	RenderBaseInfoValue.RenderScreenScale = CurSprite.GetScale();
-	// 
 }
 
 void GameEngineSpriteRenderer::SetImageScale(const float4& _Scale)
