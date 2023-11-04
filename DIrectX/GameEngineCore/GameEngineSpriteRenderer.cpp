@@ -19,7 +19,6 @@ void GameEngineFrameAnimation::Reset()
 	CurIndex = 0;
 	IsEnd = false;
 	EventCheck = true;
-	Once = false;
 
 }
 
@@ -41,21 +40,11 @@ SpriteData GameEngineFrameAnimation::Update(float _DeltaTime)
 		EventCheck = false;
 	}
 
-	//if (nullptr != FrameChangeFunction && Once == false)
-	//{
-	//	SpriteData Data = Sprite->GetSpriteData(Index[CurIndex]);
-	//	FrameChangeFunction(Data, CurIndex);
-	//	Once = true; 
-	//}
-
-
 	CurTime += _DeltaTime;
 
 	if (Inter[CurIndex] <= CurTime)
 	{
 		CurTime -= Inter[CurIndex];
-
-
 
 		++CurIndex;
 
@@ -294,6 +283,14 @@ void GameEngineSpriteRenderer::ChangeAnimation(std::string_view _AnimationName, 
 	CurFrameAnimations->CurIndex = _FrameIndex;
 	Sprite = CurFrameAnimations->Sprite;
 	CurSprite = CurFrameAnimations->Sprite->GetSpriteData(CurFrameAnimations->CurIndex);
+
+	if (nullptr != CurFrameAnimations->FrameChangeFunction)
+	{
+		int StartIndex = CurFrameAnimations->Index[CurFrameAnimations->CurIndex];
+		SpriteData Data = Sprite->GetSpriteData(StartIndex);
+		CurFrameAnimations->FrameChangeFunction(Data, StartIndex);
+
+	}
 }
 
 void GameEngineSpriteRenderer::AutoSpriteSizeOn()
@@ -368,6 +365,14 @@ void GameEngineSpriteRenderer::SetFrameChangeFunction(std::string_view _Animatio
 	}
 
 	Animation->FrameChangeFunction = _Function;
+}
+
+void GameEngineSpriteRenderer::SetFrameChangeFunctionAll(std::function<void(const SpriteData& CurSprite, int _SpriteIndex)> _Function)
+{
+	for (std::pair<const std::string, std::shared_ptr<GameEngineFrameAnimation>>& _Pair : FrameAnimations)
+	{
+		_Pair.second->FrameChangeFunction = _Function;
+	}
 }
 
 void GameEngineSpriteRenderer::AnimationPauseSwitch()

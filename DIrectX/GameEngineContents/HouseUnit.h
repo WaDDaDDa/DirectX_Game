@@ -18,7 +18,7 @@ protected:
     void LevelStart(GameEngineLevel* _NextLevel) override;
     void LevelEnd(GameEngineLevel* _NextLevel) override;
 
-    void HairCheck();
+    void HairCheck(const SpriteData& _CurSprite);
 
     std::shared_ptr<class GameEngineSpriteRenderer> BodyRenderer;
     std::shared_ptr<class GameEngineSpriteRenderer> HairRenderer;
@@ -27,7 +27,7 @@ protected:
     bool IsSleep = false;
     bool IsCpuPlay = false;
 
-    std::function<void(const SpriteData& CurSprite, int _SpriteIndex)> Test;
+    std::function<void(const SpriteData& CurSprite, int _SpriteIndex)> FrameFunction;
 private:
 
 };

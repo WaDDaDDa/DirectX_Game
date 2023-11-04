@@ -38,8 +38,7 @@ void Coach::LevelStart(GameEngineLevel* _NextLevel)
 	HairRenderer->SetAutoScaleRatio(3.0f);
 	HairRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f });
 
-	BodyRenderer->SetFrameChangeFunction("Idle", Test);
-	BodyRenderer->SetFrameChangeFunction("Sleep", Test);
+	BodyRenderer->SetFrameChangeFunctionAll (FrameFunction);
 
 	BodyRenderer->ChangeAnimation("Idle");
 
@@ -48,7 +47,6 @@ void Coach::LevelStart(GameEngineLevel* _NextLevel)
 void Coach::Update(float _Delta)
 {
 	HouseUnit::Update(_Delta);
-
 
 }
 

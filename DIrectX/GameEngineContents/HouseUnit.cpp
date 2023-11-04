@@ -24,10 +24,10 @@ void HouseUnit::Start()
 	HairRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Hair) });
 	//HairRenderer->SetPivotType(PivotType::Bottom);
 
-	Test = [=](const SpriteData& CurSprite, int _SpriteIndex)
+	FrameFunction = [=](const SpriteData& CurSprite, int _SpriteIndex)
 		{
 			// 처음한번 실행.
-			HairCheck();
+			HairCheck(CurSprite);
 			return;
 		};
 
@@ -44,7 +44,7 @@ void HouseUnit::LevelEnd(GameEngineLevel* _NextLevel)
 	
 }
 
-void HouseUnit::HairCheck()
+void HouseUnit::HairCheck(const SpriteData& _CurSprite)
 {
 	HairRenderer->Transform.SetWorldRotation(float4::ZERO);
 
@@ -62,17 +62,17 @@ void HouseUnit::HairCheck()
 	}
 
 	// 헤어위치 잡는 작업.
-	GameEngineColor Test = GameEngineColor::RED;
-	float4 ColorCheck = CheckPos;
+	GameEngineColor CurColor = GameEngineColor::RED;
+	float4 ColorCheckPos = CheckPos;
 
-	while (GameEngineColor::BLACK != Test)
+	while (GameEngineColor::BLACK != CurColor)
 	{
 
-		Test = BodyRenderer->GetCurSprite().Texture->GetColor(ColorCheck, GameEngineColor::RED);
-		ColorCheck.Y += 1.0f;
+		CurColor = _CurSprite.Texture->GetColor(ColorCheckPos, GameEngineColor::RED);
+		ColorCheckPos.Y += 1.0f;
 	}
 
-	float ResultY = (62.0f - ColorCheck.Y) * 3.0f;
+	float ResultY = (62.0f - ColorCheckPos.Y) * 3.0f;
 	HairRenderer->Transform.SetLocalPosition({ 0.0f, ResultY, HairRenderer->Transform.GetLocalPosition().Z });
 
 
