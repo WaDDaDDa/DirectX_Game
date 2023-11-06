@@ -1,6 +1,15 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 
+class Furniture
+{
+public:
+    float4 Pos = float4::ZERO;
+    std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
+    bool IsFirstFloor = true;
+    bool IsUse = false;
+};
+
 class House : public GameEngineActor
 {
 public:
@@ -20,6 +29,16 @@ protected:
     void LevelEnd(GameEngineLevel* _NextLevel) override;
 
 private:
+    //std::shared_ptr<class Furniture> CreateFurniture(float4 _Pos, bool _IsFirstFloor)
+    //{
+    //    std::shared_ptr<class Furniture> Gagoo;
+    //    Gagoo->Pos = _Pos;
+    //    Gagoo->IsFirstFloor = _IsFirstFloor;
+    //    Gagoo->Renderer = CreateComponent<GameEngineSpriteRenderer>();
+    //    Gagoo->Renderer->Transform.SetLocalPosition
+    //    return Gagoo;
+    //}
+
     std::shared_ptr<class GameEngineSpriteRenderer> Ground;
     std::shared_ptr<class GameEngineSpriteRenderer> HouseRenderer;
 
@@ -38,6 +57,9 @@ private:
 
     std::shared_ptr<class GameEngineSpriteRenderer> Tolilet;
     std::shared_ptr<class GameEngineSpriteRenderer> ShowerRoom;
+
+    std::vector<std::shared_ptr<class Furniture>> FirstFloorFurniture;
+    std::vector<std::shared_ptr<class Furniture>> ScendFloorFurniture;
 
 };
 

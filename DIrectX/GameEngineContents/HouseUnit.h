@@ -46,21 +46,21 @@ protected:
     std::function<void(const SpriteData& CurSprite, int _SpriteIndex)> FrameFunction;
     GameEngineState State;
 
-    float FirstFloarY = -470.0f;
-    float ScendFloarY = -615.0f;
-    bool IsFirstFloar = false;
-    bool IsScendFloar = false;
+    float FirstFloorY = -470.0f;
+    float ScendFloorY = -615.0f;
+    bool IsFirstFloor = false;
+    bool IsScendFloor = false;
 
-    void FloarCheck()
+    void FloorCheck()
     {
-        if (true == IsFirstFloar)
+        if (true == IsFirstFloor)
         {
-            Transform.SetLocalPositionY(FirstFloarY);
+            Transform.SetLocalPositionY(FirstFloorY);
         }
 
-        if (true == IsScendFloar)
+        if (true == IsScendFloor)
         {
-            Transform.SetLocalPositionY(ScendFloarY);
+            Transform.SetLocalPositionY(ScendFloorY);
         }
     }
 

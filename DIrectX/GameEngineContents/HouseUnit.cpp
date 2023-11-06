@@ -20,17 +20,17 @@ void HouseUnit::Start()
 	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, 200.0f });
 
 	GameEngineRandom Rand;
-	int Floar = Rand.RandomInt(0, 1);
-	if (0 == Floar)
+	int Floor = Rand.RandomInt(0, 1);
+	if (0 == Floor)
 	{
-		IsFirstFloar = true;
+		IsFirstFloor = true;
 	}
 	else
 	{
-		IsScendFloar = true;
+		IsScendFloor = true;
 	}
 
-	FloarCheck();
+	FloorCheck();
 
 	BodyRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
 	BodyRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
@@ -165,7 +165,7 @@ void HouseUnit::HairCheck(const SpriteData& _CurSprite)
 void HouseUnit::Update(float _Delta)
 {
 	State.Update(_Delta);
-	FloarCheck();
+	FloorCheck();
 
 	float Speed = 100.0f;
 
