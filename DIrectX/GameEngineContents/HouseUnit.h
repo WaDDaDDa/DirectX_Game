@@ -7,7 +7,12 @@ enum class HouseUnitEnum
     Run,
     Eat,
     PlayGame,
-
+    Toilet,
+    HandWash,
+    Shower,
+    ToFurniture,
+    ToStairs,
+    UseStairs,
 };
 
 class HouseUnit : public GameEngineActor
@@ -21,6 +26,9 @@ public:
     HouseUnit& operator=(const HouseUnit& _Other) = delete;
     HouseUnit& operator=(HouseUnit&& _Other) noexcept = delete;
 
+    bool Arrive(const std::shared_ptr<class Furniture>& _Furniture);
+    bool Arrive(float4 _Pos);
+
 protected:
     void Start() override;
     void Update(float _Delta) override;
@@ -31,9 +39,10 @@ protected:
 
     std::shared_ptr<class GameEngineSpriteRenderer> BodyRenderer;
     std::shared_ptr<class GameEngineSpriteRenderer> HairRenderer;
+    std::shared_ptr<class GameEngineSpriteRenderer> ShowerRenderer;
 
     float4 CheckPos = { 32.0f, 0.0f };
-
+    HouseUnitEnum PrevState = HouseUnitEnum::Idle;
     void Reset()
     {
         IsSleep = false;
@@ -45,11 +54,16 @@ protected:
 
     std::function<void(const SpriteData& CurSprite, int _SpriteIndex)> FrameFunction;
     GameEngineState State;
+    int FurnitureNum = 0;
 
-    float FirstFloorY = -470.0f;
-    float ScendFloorY = -615.0f;
+    float FirstFloorY = -615.0f;
+    float ScendFloorY = -470.0f;
     bool IsFirstFloor = false;
     bool IsScendFloor = false;
+
+
+    float4 FirstStairsPos = { 450.0f, -615.0f };
+    float4 ScendStairsPos = { 710.0f, -470.0f };
 
     void FloorCheck()
     {
@@ -70,8 +84,23 @@ protected:
         HairRenderer->RightFlip();
     }
 
+    void DirCheck()
+    {
+        if (0 <= MoveDir.X)
+        {
+            BodyRenderer->RightFlip();
+            HairRenderer->RightFlip();
+        }
+        else
+        {
+            BodyRenderer->LeftFlip();
+            HairRenderer->LeftFlip();
+        }
+    }
+
     // ¿À¸¥ÂÊ
-    float MoveDir = 100.0f;
+    float4 MoveDir = { 1.0f };
+    float MoveSpeed = 100.0f;
 
 private:
 

@@ -21,6 +21,8 @@ void Coach::Start()
 	BodyRenderer->CreateAnimation("Sleep", "Character_Coach", 0.2f, 12, 15);
 	BodyRenderer->CreateAnimation("WHat", "Character_Coach", 0.2f, 16, 22);
 	BodyRenderer->CreateAnimation("Eat", "Character_Coach", 0.2f, 23, 25);
+	BodyRenderer->CreateAnimation("Toilet", "Character_Coach", 0.2f, 26, 26);
+	BodyRenderer->CreateAnimation("HandWash", "Character_Coach", 0.2f, 27, 30);
 	BodyRenderer->CreateAnimation("Cpu", "Character_Coach", 0.2f, 31, 32);
 	BodyRenderer->AutoSpriteSizeOn();
 	BodyRenderer->SetAutoScaleRatio(3.0f);
