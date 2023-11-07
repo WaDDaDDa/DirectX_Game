@@ -233,6 +233,9 @@
       <Filter>Contents</Filter>
     </ClInclude>
     <ClInclude Include="FadePostEffect.h" />
+    <ClInclude Include="GameEngineCoreWindow.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -381,6 +384,9 @@
       <Filter>Contents</Filter>
     </ClCompile>
     <ClCompile Include="FadePostEffect.cpp" />
+    <ClCompile Include="GameEngineCoreWindow.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ThirdParty\DirectXTex\inc\DirectXTex.inl">

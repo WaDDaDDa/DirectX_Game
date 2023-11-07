@@ -123,8 +123,8 @@ private:
 	ID3D11Texture2D* Texture2D = nullptr;
 
 	ID3D11RenderTargetView* RTV = nullptr; // 이 텍스처를 수정대상으로 삼거나 수정할수 있는 권한.
-	ID3D11ShaderResourceView* SRV = nullptr; // 쉐이더에 세팅해줄수 있는 권한다.
-	ID3D11DepthStencilView* DSV = nullptr; // 쉐이더에 세팅해줄수 있는 권한다.
+	ID3D11ShaderResourceView* SRV = nullptr; // 쉐이더에 세팅해줄수 있는 권한이다.
+	ID3D11DepthStencilView* DSV = nullptr; // 깊이버퍼에 세팅해줄수 있는 권한이다.
 
 	DirectX::TexMetadata Data;
 	DirectX::ScratchImage Image;

@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "ContentsCore.h"
 #include "ContentsControlWindow.h"
+#include <GameEngineCore/GameEngineCoreWindow.h>
 
 // ·¹º§
 #include "IntroLevel.h"
@@ -20,6 +21,7 @@ ContentsCore::~ContentsCore()
 void ContentsCore::Start()
 {
 	GameEngineGUI::CreateGUIWindow<ContentsControlWindow>("ContentsControlWindow");
+	GameEngineGUI::CreateGUIWindow<GameEngineCoreWindow>("GameEngineCoreWindow");
 
 	GameEngineCore::CreateLevel<IntroLevel>("IntroLevel");
 	GameEngineCore::CreateLevel<MainLevel>("MainLevel");

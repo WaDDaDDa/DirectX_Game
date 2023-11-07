@@ -187,6 +187,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="GameEngineCoreObject.h" />
+    <ClInclude Include="GameEngineCoreWindow.h" />
     <ClInclude Include="GameEngineDebugCore.h" />
     <ClInclude Include="GameEngineDepthStencil.h" />
     <ClInclude Include="GameEngineDevice.h" />
@@ -263,6 +264,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEngineCoreObject.cpp" />
+    <ClCompile Include="GameEngineCoreWindow.cpp" />
     <ClCompile Include="GameEngineDebugCore.cpp" />
     <ClCompile Include="GameEngineDepthStencil.cpp" />
     <ClCompile Include="GameEngineDevice.cpp" />

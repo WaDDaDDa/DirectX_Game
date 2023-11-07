@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "MainLevel.h"
+#include <GameEngineCore/GameEngineCoreWindow.h>
 
 #include "GameUnit.h"
 #include "BattleField.h"
@@ -24,6 +25,14 @@ MainLevel::~MainLevel()
 
 void MainLevel::Start()
 {
+
+	std::shared_ptr<GameEngineCoreWindow> Window = GameEngineGUI::FindGUIWindow<GameEngineCoreWindow>("GameEngineCoreWindow");
+
+	if (nullptr != Window)
+	{
+		Window->AddDebugRenderTarget(0, "PlayLevelRenderTarget", GetMainCamera()->GetCameraAllRenderTarget());
+	}
+
 	{
 		// 폴더 로드
 		GameEngineDirectory Dir;

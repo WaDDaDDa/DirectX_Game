@@ -14,6 +14,7 @@ HouseUnit::~HouseUnit()
 
 void HouseUnit::Start()
 {
+
 	float4 WindowScale = GameEngineCore::MainWindow.GetScale();
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
@@ -35,6 +36,7 @@ void HouseUnit::Start()
 	BodyRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
 	BodyRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
 	BodyRenderer->SetPivotType(PivotType::Bottom);
+	//BodyRenderer->RenderBaseInfoValue.Target2 = 1;
 
 	HairRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Hair);
 	HairRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Hair) });
