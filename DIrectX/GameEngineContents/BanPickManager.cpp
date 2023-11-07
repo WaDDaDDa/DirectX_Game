@@ -419,8 +419,8 @@ void BanPickManager::Update(float _Delta)
 	UnitSkillImage->SetSprite(CurCard->GetUnitNameToString() += "_skill.png");
 	UnitUltImage->SetSprite(CurCard->GetUnitNameToString() += "_ult.png");
 
-	UnitSkillText->SetText("Galmuri14", CurCard->UnitStat.SkillText.data(), 12.0f, float4::WHITE, FW1_LEFT);
-	UnitUltText->SetText("Galmuri14", CurCard->UnitStat.UltText.data(), 12.0f, float4::WHITE, FW1_LEFT);
+	UnitSkillText->SetText("Galmuri14", CurCard->UnitStat.SkillText.data(), 16.0f, float4::WHITE, FW1_LEFT);
+	UnitUltText->SetText("Galmuri14", CurCard->UnitStat.UltText.data(), 16.0f, float4::WHITE, FW1_LEFT);
 	// À¯´Ö ½ºÅÈ Á¦¸ñ
 	std::string AttText = GameEngineString::Format("{:.0f}", CurCard->UnitStat.UnitAtt);
 	std::string AttSpeedText = GameEngineString::Format("{:.1f}", CurCard->UnitStat.AttackSpeed);

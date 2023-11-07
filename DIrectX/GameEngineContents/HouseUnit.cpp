@@ -20,8 +20,11 @@ void HouseUnit::Start()
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, 200.0f });
 
-	GameEngineRandom Rand;
-	int Floor = Rand.RandomInt(0,0);
+	long long RandSeed = reinterpret_cast<long long>(this);
+	RandSeed++;
+	Rand.SetSeed(RandSeed);
+
+	int Floor = Rand.RandomInt(0,1);
 	if (0 == Floor)
 	{
 		IsFirstFloor = true;
@@ -31,15 +34,18 @@ void HouseUnit::Start()
 		IsScendFloor = true;
 	}
 
+	float RandX = Rand.RandomFloat(-150.0f, 150.0f);
+	Transform.AddLocalPosition(RandX);
+
 	FloorCheck();
+	HairRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
+	HairRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
 
 	BodyRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
 	BodyRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Unit) });
 	BodyRenderer->SetPivotType(PivotType::Bottom);
 	//BodyRenderer->RenderBaseInfoValue.Target2 = 1;
 
-	HairRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Hair);
-	HairRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Hair) });
 	//HairRenderer->SetPivotType(PivotType::Bottom);
 
 	ShowerRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::FrontEffect);
@@ -68,6 +74,15 @@ void HouseUnit::Start()
 
 void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 {
+	for (size_t i = 0; i < House::FirstFloorFurniture.size(); i++)
+	{
+		House::FirstFloorFurniture[i]->IsUse = false;
+	}
+	for (size_t i = 0; i < House::ScendFloorFurniture.size(); i++)
+	{
+		House::ScendFloorFurniture[i]->IsUse = false;
+	}
+
 	// 스테이트 Idle
 	State.CreateState(HouseUnitEnum::Idle,
 		{
@@ -82,7 +97,6 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 		{
 			if (1.0f <= State.GetStateTime())
 			{
-				GameEngineRandom Rand;
 				int Num = Rand.RandomInt(1, 6);
 				State.ChangeState(Num);
 				return;
@@ -124,7 +138,8 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 
 			if (1.0f <= State.GetStateTime())
 			{
-				State.ChangeState(HouseUnitEnum::Idle);
+				int Num = Rand.RandomInt(1, 6);
+				State.ChangeState(Num);
 				return;
 			}
 
@@ -338,7 +353,6 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 
 			if (PrevState != HouseUnitEnum::PlayGame)
 			{
-				GameEngineRandom Rand;
 				FurnitureNum = Rand.RandomInt(0, 5);
 			}
 
@@ -357,7 +371,8 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 			}
 			else if (true == House::FirstFloorFurniture[FurnitureNum]->IsUse)
 			{
-				State.ChangeState(HouseUnitEnum::Idle);
+				int Num = Rand.RandomInt(1, 6);
+				State.ChangeState(Num);
 				return;
 			}
 		},
@@ -405,7 +420,8 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 			}
 			else if (true == House::FirstFloorFurniture[FurnitureNum]->IsUse)
 			{
-				State.ChangeState(HouseUnitEnum::Idle);
+				int Num = Rand.RandomInt(1, 6);
+				State.ChangeState(Num);
 				return;
 			}
 		},
@@ -426,7 +442,6 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 		.End =
 		[=](class GameEngineState* _Parent)
 		{
-			House::FirstFloorFurniture[FurnitureNum]->IsUse = false;
 
 		},
 		});
@@ -454,6 +469,7 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 		.End =
 		[=](class GameEngineState* _Parent)
 		{
+			House::FirstFloorFurniture[FurnitureNum]->IsUse = false;
 			//House::FirstFloorFurniture[FurnitureNum]->Renderer->ChangeAnimation("Idle");
 		},
 		});
@@ -484,7 +500,8 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 			}
 			else if (true == House::FirstFloorFurniture[FurnitureNum]->IsUse)
 			{
-				State.ChangeState(HouseUnitEnum::Idle);
+				int Num = Rand.RandomInt(1, 6);
+				State.ChangeState(Num);
 				return;
 			}
 		},
@@ -521,7 +538,6 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 		[=](class GameEngineState* _Parent)
 		{
 			BodyRenderer->ChangeAnimation("Eat");
-			GameEngineRandom Rand;
 			EatRight = Rand.RandomInt(0, 1);
 			FurnitureNum = 0;
 			// 이용할 가구와 캐릭터의 층수가 같지않다면 계단을 이용하러 가야한다.
@@ -539,7 +555,8 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 			}
 			else if (true == House::ScendFloorFurniture[FurnitureNum]->IsUse)
 			{
-				State.ChangeState(HouseUnitEnum::Idle);
+				int Num = Rand.RandomInt(1, 6);
+				State.ChangeState(Num);
 				return;
 			}
 		},
@@ -588,7 +605,6 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 
 			if (PrevState != HouseUnitEnum::Sleep)
 			{
-				GameEngineRandom Rand;
 				FurnitureNum = Rand.RandomInt(2, 4);
 			}
 
@@ -608,7 +624,8 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 			}
 			else if (true == House::ScendFloorFurniture[FurnitureNum]->IsUse)
 			{
-				State.ChangeState(HouseUnitEnum::Idle);
+				int Num = Rand.RandomInt(1, 6);
+				State.ChangeState(Num);
 				return;
 			}
 		},

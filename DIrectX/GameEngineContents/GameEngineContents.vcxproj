@@ -193,6 +193,7 @@
     <ClCompile Include="FlameEffect.cpp" />
     <ClCompile Include="FlameUlt.cpp" />
     <ClCompile Include="GameBundle.cpp" />
+    <ClCompile Include="GamePlayer.cpp" />
     <ClCompile Include="GameUnit.cpp">
       <SubType>
       </SubType>
@@ -313,6 +314,7 @@
     <ClInclude Include="FlameEffect.h" />
     <ClInclude Include="FlameUlt.h" />
     <ClInclude Include="GameBundle.h" />
+    <ClInclude Include="GamePlayer.h" />
     <ClInclude Include="GameUnit.h">
       <SubType>
       </SubType>

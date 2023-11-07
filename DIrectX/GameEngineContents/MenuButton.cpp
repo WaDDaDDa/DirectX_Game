@@ -41,13 +41,13 @@ void MenuButton::IdleStart()
 	if (false == IsSelect)
 	{
 		Renderer->ChangeAnimation("Null");
-		ButtonText->SetText("Galmuri14", ButtonName, 15.0f, float4::WHITE, Flag);
+		ButtonText->SetText("Galmuri14", ButtonName, 16.0f, float4::WHITE, Flag);
 		IconRenderer->GetColorData().MulColor = { 255.0f / 204.0f, 1.0f, 255.0f / 58.0f };
 	}
 	else if (true == IsSelect)
 	{
 		Renderer->ChangeAnimation("Slect");
-		ButtonText->SetText("Galmuri14", ButtonName, 15.0f, float4::ZERO, Flag);
+		ButtonText->SetText("Galmuri14", ButtonName, 16.0f, float4::ZERO, Flag);
 		IconRenderer->GetColorData().MulColor = float4::ZERO;
 	}
 }
@@ -61,13 +61,13 @@ void MenuButton::StayStart()
 	if (false == IsSelect)
 	{
 		Renderer->ChangeAnimation("Null_Stay");
-		ButtonText->SetText("Galmuri14", ButtonName, 15.0f, { 204.0f / 255.0f, 1.0f, 58.0f / 255.0f }, Flag);
+		ButtonText->SetText("Galmuri14", ButtonName, 16.0f, { 204.0f / 255.0f, 1.0f, 58.0f / 255.0f }, Flag);
 		IconRenderer->GetColorData().MulColor = { 204.0f / 255.0f, 1.0f, 58.0f / 255.0f };
 	}
 	else if (true == IsSelect)
 	{
 		Renderer->ChangeAnimation("Slect");
-		ButtonText->SetText("Galmuri14", ButtonName, 15.0f, float4::ZERO, Flag);
+		ButtonText->SetText("Galmuri14", ButtonName, 16.0f, float4::ZERO, Flag);
 		IconRenderer->GetColorData().MulColor = float4::ZERO;
 	}
 }
@@ -77,13 +77,13 @@ void MenuButton::EndStart()
 	if (false == IsSelect)
 	{
 		Renderer->ChangeAnimation("Null");
-		ButtonText->SetText("Galmuri14", ButtonName, 15.0f, float4::WHITE, Flag);
+		ButtonText->SetText("Galmuri14", ButtonName, 16.0f, float4::WHITE, Flag);
 		IconRenderer->GetColorData().MulColor = { 255.0f / 204.0f, 1.0f, 255.0f / 58.0f };
 	}
 	else if (true == IsSelect)
 	{
 		Renderer->ChangeAnimation("Slect");
-		ButtonText->SetText("Galmuri14", ButtonName, 15.0f, float4::ZERO , Flag);
+		ButtonText->SetText("Galmuri14", ButtonName, 16.0f, float4::ZERO , Flag);
 		IconRenderer->GetColorData().MulColor = float4::ZERO;
 	}
 }
@@ -91,7 +91,7 @@ void MenuButton::EndStart()
 void MenuButton::ClickStart()
 {
 	UI_Button::ClickStart();
-	ButtonText->SetText("Galmuri14", ButtonName, 15.0f, float4::WHITE, Flag);
+	ButtonText->SetText("Galmuri14", ButtonName, 16.0f, float4::WHITE, Flag);
 	Renderer->ChangeAnimation("Slect");
 
 	if (false == IsSelect)

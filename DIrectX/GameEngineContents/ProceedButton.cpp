@@ -46,14 +46,14 @@ void ProceedButton::LevelEnd(GameEngineLevel* _NextLevel)
 void ProceedButton::IdleStart()
 {
 	Renderer->ChangeAnimation("Null");
-	ButtonText->SetText("Galmuri14", ButtonName, 20.0f, float4::ZERO, Flag);
+	ButtonText->SetText("Galmuri14", ButtonName, 32.0f, float4::ZERO, Flag);
 
 }
 
 void ProceedButton::StayStart()
 {
 	Renderer->ChangeAnimation("Null_Stay");
-	ButtonText->SetText("Galmuri14", ButtonName, 20.0f, float4::WHITE, Flag);
+	ButtonText->SetText("Galmuri14", ButtonName, 32.0f, float4::WHITE, Flag);
 	Arrow->Transform.AddLocalPosition({ 0.0f });
 	ArrowDelta = 0.0f;
 }
@@ -83,7 +83,7 @@ void ProceedButton::StayUpdate(float _Delta)
 
 void ProceedButton::EndStart()
 {
-	ButtonText->SetText("Galmuri14", ButtonName, 20.0f, float4::ZERO, Flag);
+	ButtonText->SetText("Galmuri14", ButtonName, 32.0f, float4::ZERO, Flag);
 
 	Renderer->ChangeAnimation("Null");
 	Arrow->Transform.SetLocalPosition({ 70.0f, Arrow->Transform.GetLocalPosition().Y, Arrow->Transform.GetLocalPosition().Z });
@@ -103,7 +103,7 @@ void ProceedButton::ClickStart()
 {
 	UI_Button::ClickStart();
 
-	ButtonText->SetText("Galmuri14", ButtonName, 20.0f, float4::WHITE, Flag);
+	ButtonText->SetText("Galmuri14", ButtonName, 32.0f, float4::WHITE, Flag);
 
 	if (false == IsSelect)
 	{

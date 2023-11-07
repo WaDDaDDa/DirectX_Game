@@ -102,8 +102,9 @@ protected:
 
     // ¿À¸¥ÂÊ
     float4 MoveDir = { 1.0f };
-    float MoveSpeed = 100.0f;
+    float MoveSpeed = 200.0f;
 
+    GameEngineRandom Rand;
 private:
 
 };

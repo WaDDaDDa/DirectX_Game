@@ -35,9 +35,9 @@ public:
     void SetButtonText(const std::string& _Text)
     {
         std::shared_ptr<class GameEngineSpriteRenderer> ButtonText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
-        ButtonText->SetText("Galmuri14", _Text, 20.0f, float4::WHITE, FW1_CENTER);
+        ButtonText->SetText("Galmuri14", _Text, 16.0f, float4::WHITE, FW1_CENTER);
         ButtonText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
-        ButtonText->Transform.AddLocalPosition({ 0.0f, 10.0f });
+        ButtonText->Transform.AddLocalPosition({ 0.0f, 5.0f });
     }
 
 protected:

@@ -12,6 +12,7 @@
 #include "House.h"
 #include "House_UI.h"
 #include "Coach.h"
+#include "GamePlayer.h"
 
 MainLevel::MainLevel()
 {
@@ -65,6 +66,9 @@ void MainLevel::Start()
 	CreateActor<House_UI>();
 
 	CreateActor<Coach>();
+	CreateActor<GamePlayer>();
+	CreateActor<GamePlayer>();
+	CreateActor<GamePlayer>();
 }
 
 void MainLevel::Update(float _Delta)

@@ -216,6 +216,9 @@
     <ClCompile Include="HouseBackGround.cpp">
       <Filter>BackGround</Filter>
     </ClCompile>
+    <ClCompile Include="GamePlayer.cpp">
+      <Filter>HouseUnit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -435,6 +438,9 @@
     </ClInclude>
     <ClInclude Include="HouseBackGround.h">
       <Filter>BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePlayer.h">
+      <Filter>HouseUnit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

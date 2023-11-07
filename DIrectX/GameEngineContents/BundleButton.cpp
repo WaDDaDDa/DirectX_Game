@@ -39,19 +39,19 @@ void BundleButton::LevelEnd(GameEngineLevel* _NextLevel)
 void BundleButton::IdleStart()
 {
 	Renderer->ChangeAnimation("Null");
-	ButtonText->SetText("Galmuri14", ButtonName, 15.0f, float4::WHITE, Flag);
+	ButtonText->SetText("Galmuri14", ButtonName, 16.0f, float4::WHITE, Flag);
 }
 
 void BundleButton::StayStart()
 {
 	Renderer->ChangeAnimation("Null_Stay");
-	ButtonText->SetText("Galmuri14", ButtonName, 15.0f, { 204.0f / 255.0f, 1.0f, 58.0f / 255.0f }, Flag);
+	ButtonText->SetText("Galmuri14", ButtonName, 16.0f, { 204.0f / 255.0f, 1.0f, 58.0f / 255.0f }, Flag);
 
 }
 
 void BundleButton::EndStart()
 {
-	ButtonText->SetText("Galmuri14", ButtonName, 15.0f, float4::WHITE, Flag);
+	ButtonText->SetText("Galmuri14", ButtonName, 16.0f, float4::WHITE, Flag);
 
 	Renderer->ChangeAnimation("Null");
 
@@ -71,7 +71,7 @@ void BundleButton::ClickStart()
 	UI_Button::ClickStart();
 
 	Renderer->ChangeAnimation("Slect");
-	ButtonText->SetText("Galmuri14", ButtonName, 15.0f, float4::WHITE, Flag);
+	ButtonText->SetText("Galmuri14", ButtonName, 16.0f, float4::WHITE, Flag);
 
 	if (false == IsSelect)
 	{

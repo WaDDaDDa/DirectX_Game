@@ -35,7 +35,7 @@ public:
     void SetButtonText(const std::string& _Text, float4 _Pos = float4::ZERO, FW1_TEXT_FLAG _Flag = FW1_LEFT)
     {
         ButtonText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
-        ButtonText->SetText("Galmuri14", _Text, 20.0f, float4::ZERO, _Flag);
+        ButtonText->SetText("Galmuri14", _Text, 32.0f, float4::ZERO, _Flag);
         ButtonText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
         ButtonText->Transform.AddLocalPosition({ -120.0f, 30.0f });
         ButtonText->Transform.AddLocalPosition(_Pos);
