@@ -8,8 +8,9 @@ enum class HouseUnitEnum
     Eat,
     PlayGame,
     Toilet,
-    HandWash,
     Shower,
+    Sleep,
+    HandWash,
     ToFurniture,
     ToStairs,
     UseStairs,
@@ -60,6 +61,7 @@ protected:
     float ScendFloorY = -470.0f;
     bool IsFirstFloor = false;
     bool IsScendFloor = false;
+    int EatRight = 0;
 
 
     float4 FirstStairsPos = { 450.0f, -615.0f };

@@ -21,7 +21,7 @@ void HouseUnit::Start()
 	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, 200.0f });
 
 	GameEngineRandom Rand;
-	int Floor = Rand.RandomInt(1,1);
+	int Floor = Rand.RandomInt(0,0);
 	if (0 == Floor)
 	{
 		IsFirstFloor = true;
@@ -82,7 +82,9 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 		{
 			if (1.0f <= State.GetStateTime())
 			{
-				State.ChangeState(HouseUnitEnum::Run);
+				GameEngineRandom Rand;
+				int Num = Rand.RandomInt(1, 6);
+				State.ChangeState(Num);
 				return;
 			}
 
@@ -120,6 +122,12 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 				MoveDir *= -1.0f;
 			}
 
+			if (1.0f <= State.GetStateTime())
+			{
+				State.ChangeState(HouseUnitEnum::Idle);
+				return;
+			}
+
 			Transform.AddLocalPosition({ MoveDir * MoveSpeed * _Delta});
 
 		},
@@ -138,9 +146,18 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 		{
 			BodyRenderer->ChangeAnimation("Run");
 
-			float4 XDir = House::FirstFloorFurniture[FurnitureNum]->Pos.X - Transform.GetWorldPosition().X;
-			XDir.Normalize();
-			MoveDir = XDir.X;
+			if (true == IsFirstFloor)
+			{
+				float4 XDir = House::FirstFloorFurniture[FurnitureNum]->Pos.X - Transform.GetWorldPosition().X;
+				XDir.Normalize();
+				MoveDir = XDir.X;
+			}
+			else if (true == IsScendFloor)
+			{
+				float4 XDir = House::ScendFloorFurniture[FurnitureNum]->Pos.X - Transform.GetWorldPosition().X;
+				XDir.Normalize();
+				MoveDir = XDir.X;
+			}
 
 		},
 		.Stay =
@@ -148,13 +165,41 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 		{
 			DirCheck();
 
+			float Xpos = Transform.GetLocalPosition().X;
+			if (840.0f <= Xpos)
+			{
+				BodyRenderer->LeftFlip();
+				HairRenderer->LeftFlip();
+				Transform.SetLocalPositionX(839.9f);
+				MoveDir *= -1.0f;
+			}
+			else if (445.0f >= Xpos)
+			{
+				BodyRenderer->RightFlip();
+				HairRenderer->RightFlip();
+				Transform.SetLocalPositionX(445.1f);
+				MoveDir *= -1.0f;
+			}
+
 			Transform.AddLocalPosition({ MoveDir * MoveSpeed * _Delta });
 
-			if (Arrive(House::FirstFloorFurniture[FurnitureNum]))
+			if (true == IsFirstFloor)
 			{
-				State.ChangeState(PrevState);
-				return;
+				if (Arrive(House::FirstFloorFurniture[FurnitureNum]))
+				{
+					State.ChangeState(PrevState);
+					return;
+				}
 			}
+			else if (true == IsScendFloor)
+			{
+				if (Arrive(House::ScendFloorFurniture[FurnitureNum]))
+				{
+					State.ChangeState(PrevState);
+					return;
+				}
+			}
+
 		},
 		.End =
 		[=](class GameEngineState* _Parent)
@@ -190,6 +235,22 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 		[=](float _Delta, class GameEngineState* _Parent)
 		{
 			DirCheck();
+
+			float Xpos = Transform.GetLocalPosition().X;
+			if (840.0f <= Xpos)
+			{
+				BodyRenderer->LeftFlip();
+				HairRenderer->LeftFlip();
+				Transform.SetLocalPositionX(839.9f);
+				MoveDir *= -1.0f;
+			}
+			else if (445.0f >= Xpos)
+			{
+				BodyRenderer->RightFlip();
+				HairRenderer->RightFlip();
+				Transform.SetLocalPositionX(445.1f);
+				MoveDir *= -1.0f;
+			}
 			
 			Transform.AddLocalPosition({ MoveDir * MoveSpeed * _Delta});
 
@@ -274,12 +335,13 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 		{
 			IsCpuPlay = true;
 			BodyRenderer->ChangeAnimation("Cpu");
-			GameEngineRandom Rand;
-			FurnitureNum = Rand.RandomInt(0, 5);
-		},
-		.Stay =
-		[=](float _Delta, class GameEngineState* _Parent)
-		{
+
+			if (PrevState != HouseUnitEnum::PlayGame)
+			{
+				GameEngineRandom Rand;
+				FurnitureNum = Rand.RandomInt(0, 5);
+			}
+
 			// 이용할 가구와 캐릭터의 층수가 같지않다면 계단을 이용하러 가야한다.
 			if (IsFirstFloor != House::FirstFloorFurniture[FurnitureNum]->IsFirstFloor)
 			{
@@ -293,6 +355,16 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 				State.ChangeState(HouseUnitEnum::ToFurniture);
 				return;
 			}
+			else if (true == House::FirstFloorFurniture[FurnitureNum]->IsUse)
+			{
+				State.ChangeState(HouseUnitEnum::Idle);
+				return;
+			}
+		},
+		.Stay =
+		[=](float _Delta, class GameEngineState* _Parent)
+		{
+			House::FirstFloorFurniture[FurnitureNum]->IsUse = true;
 
 			if (2.0f <= State.GetStateTime())
 			{
@@ -304,6 +376,7 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 		.End =
 		[=](class GameEngineState* _Parent)
 		{
+			House::FirstFloorFurniture[FurnitureNum]->IsUse = false;
 			Reset();
 		},
 		});
@@ -330,12 +403,18 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 				State.ChangeState(HouseUnitEnum::ToFurniture);
 				return;
 			}
+			else if (true == House::FirstFloorFurniture[FurnitureNum]->IsUse)
+			{
+				State.ChangeState(HouseUnitEnum::Idle);
+				return;
+			}
 		},
 		.Stay =
 		[=](float _Delta, class GameEngineState* _Parent)
 		{
 
 			Transform.SetLocalPositionX(House::FirstFloorFurniture[FurnitureNum]->Pos.X - 20.0f );
+			House::FirstFloorFurniture[FurnitureNum]->IsUse = true;
 
 			if (3.0f <= State.GetStateTime())
 			{
@@ -347,6 +426,7 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 		.End =
 		[=](class GameEngineState* _Parent)
 		{
+			House::FirstFloorFurniture[FurnitureNum]->IsUse = false;
 
 		},
 		});
@@ -402,6 +482,11 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 				State.ChangeState(HouseUnitEnum::ToFurniture);
 				return;
 			}
+			else if (true == House::FirstFloorFurniture[FurnitureNum]->IsUse)
+			{
+				State.ChangeState(HouseUnitEnum::Idle);
+				return;
+			}
 		},
 		.Stay =
 		[=](float _Delta, class GameEngineState* _Parent)
@@ -411,6 +496,7 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 				ShowerRenderer->ChangeAnimation("ShowerEnd");
 				return;
 			}
+			House::FirstFloorFurniture[FurnitureNum]->IsUse = true;
 
 			if (ShowerRenderer->CurAnimation() == ShowerRenderer->FindAnimation("ShowerEnd") && true == ShowerRenderer->IsCurAnimationEnd())
 			{
@@ -422,8 +508,128 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 		.End =
 		[=](class GameEngineState* _Parent)
 		{
+			House::FirstFloorFurniture[FurnitureNum]->IsUse = false;
 			ShowerRenderer->Off();
 			ShowerRenderer->ChangeAnimation("ShowerOff");
+		},
+		});
+
+	// Eat
+	State.CreateState(HouseUnitEnum::Eat,
+		{
+		.Start =
+		[=](class GameEngineState* _Parent)
+		{
+			BodyRenderer->ChangeAnimation("Eat");
+			GameEngineRandom Rand;
+			EatRight = Rand.RandomInt(0, 1);
+			FurnitureNum = 0;
+			// 이용할 가구와 캐릭터의 층수가 같지않다면 계단을 이용하러 가야한다.
+			if (IsScendFloor == House::ScendFloorFurniture[FurnitureNum]->IsFirstFloor)
+			{
+				PrevState = HouseUnitEnum::Eat;
+				State.ChangeState(HouseUnitEnum::ToStairs);
+				return;
+			}
+			else if (IsScendFloor != House::ScendFloorFurniture[FurnitureNum]->IsFirstFloor && false == Arrive(House::ScendFloorFurniture[FurnitureNum]))
+			{
+				PrevState = HouseUnitEnum::Eat;
+				State.ChangeState(HouseUnitEnum::ToFurniture);
+				return;
+			}
+			else if (true == House::ScendFloorFurniture[FurnitureNum]->IsUse)
+			{
+				State.ChangeState(HouseUnitEnum::Idle);
+				return;
+			}
+		},
+		.Stay =
+		[=](float _Delta, class GameEngineState* _Parent)
+		{
+			if (0 == EatRight)
+			{
+				Transform.SetLocalPositionX(House::FirstFloorFurniture[FurnitureNum]->Pos.X + 10.0f);
+			}
+			else if (1 == EatRight)
+			{
+				Transform.SetLocalPositionX(House::FirstFloorFurniture[FurnitureNum]->Pos.X + 50.0f);
+			}
+
+			if (BodyRenderer->CurAnimation() == BodyRenderer->FindAnimation("Eat") && true == BodyRenderer->IsCurAnimationEnd())
+			{
+				BodyRenderer->ChangeAnimation("Eatting");
+			}
+
+			House::ScendFloorFurniture[FurnitureNum]->IsUse = true;
+
+			if (4.0f <= State.GetStateTime())
+			{
+				State.ChangeState(HouseUnitEnum::Idle);
+				return;
+			}
+
+		},
+		.End =
+		[=](class GameEngineState* _Parent)
+		{
+			House::ScendFloorFurniture[FurnitureNum]->IsUse = false;
+			Reset();
+		},
+		});
+
+	// Sleep
+	State.CreateState(HouseUnitEnum::Sleep,
+		{
+		.Start =
+		[=](class GameEngineState* _Parent)
+		{
+			IsSleep = true;
+			BodyRenderer->ChangeAnimation("Sleep");
+
+			if (PrevState != HouseUnitEnum::Sleep)
+			{
+				GameEngineRandom Rand;
+				FurnitureNum = Rand.RandomInt(2, 4);
+			}
+
+			Transform.SetLocalPositionY(House::FirstFloorFurniture[FurnitureNum]->Pos.Y + 140.0f);
+			// 이용할 가구와 캐릭터의 층수가 같지않다면 계단을 이용하러 가야한다.
+			if (IsScendFloor == House::ScendFloorFurniture[FurnitureNum]->IsFirstFloor)
+			{
+				PrevState = HouseUnitEnum::Sleep;
+				State.ChangeState(HouseUnitEnum::ToStairs);
+				return;
+			}
+			else if (IsScendFloor != House::ScendFloorFurniture[FurnitureNum]->IsFirstFloor && false == Arrive(House::ScendFloorFurniture[FurnitureNum]))
+			{
+				PrevState = HouseUnitEnum::Sleep;
+				State.ChangeState(HouseUnitEnum::ToFurniture);
+				return;
+			}
+			else if (true == House::ScendFloorFurniture[FurnitureNum]->IsUse)
+			{
+				State.ChangeState(HouseUnitEnum::Idle);
+				return;
+			}
+		},
+		.Stay =
+		[=](float _Delta, class GameEngineState* _Parent)
+		{
+			House::ScendFloorFurniture[FurnitureNum]->IsUse = true;
+
+			if (4.0f <= State.GetStateTime())
+			{
+				State.ChangeState(HouseUnitEnum::Idle);
+				return;
+			}
+
+		},
+		.End =
+		[=](class GameEngineState* _Parent)
+		{
+			Reset();
+			House::ScendFloorFurniture[FurnitureNum]->IsUse = false;
+			FloorCheck();
 		},
 		});
 
@@ -440,7 +646,7 @@ void HouseUnit::LevelEnd(GameEngineLevel* _NextLevel)
 bool HouseUnit::Arrive(const std::shared_ptr<class Furniture>& _Furniture)
 {
 	float Test = _Furniture->Pos.X - Transform.GetWorldPosition().X;
-	if (Test <= 1.0f && Test >= -1.0f)
+	if (Test <= 1.5f && Test >= -1.5f)
 	{
 		return true;
 	}
@@ -451,7 +657,7 @@ bool HouseUnit::Arrive(const std::shared_ptr<class Furniture>& _Furniture)
 bool HouseUnit::Arrive(float4 _Pos)
 {
 	float Test = _Pos.X - Transform.GetWorldPosition().X;
-	if (Test <= 1.0f && Test >= -1.0f)
+	if (Test <= 3.0f && Test >= -3.0f)
 	{
 		return true;
 	}
@@ -520,7 +726,7 @@ void HouseUnit::Update(float _Delta)
 
 	if (GameEngineInput::IsDown('S', this))
 	{
-		State.ChangeState(HouseUnitEnum::Shower);
+		State.ChangeState(HouseUnitEnum::Sleep);
 	}
 
 	if (GameEngineInput::IsPress('Q', this))
