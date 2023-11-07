@@ -16,15 +16,10 @@ House::~House()
 
 void House::Start()
 {
-
-}
-
-void House::LevelStart(GameEngineLevel* _PrevLevel)
-{
 	float4 WindowScale = GameEngineCore::MainWindow.GetScale();
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
-	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, 300.0f});
+	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, 300.0f });
 
 	Ground = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::BackGround);
 	Ground->SetSprite("House", 0);
@@ -57,6 +52,11 @@ void House::LevelStart(GameEngineLevel* _PrevLevel)
 
 	FirstFloorFurniture[6]->Renderer->CreateAnimation("Idle", "furniture", 0.1f, 21, 21);
 	FirstFloorFurniture[6]->Renderer->CreateAnimation("Use", "furniture", 0.1f, 22, 22);
+}
+
+void House::LevelStart(GameEngineLevel* _PrevLevel)
+{
+
 }
 
 void House::Update(float _Delta)

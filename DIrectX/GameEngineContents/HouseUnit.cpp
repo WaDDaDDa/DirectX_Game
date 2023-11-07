@@ -78,7 +78,7 @@ void HouseUnit::LevelStart(GameEngineLevel* _NextLevel)
 		.Stay =
 		[=](float _Delta, class GameEngineState* _Parent)
 		{
-			if (3.0f <= State.GetStateTime())
+			if (1.0f <= State.GetStateTime())
 			{
 				State.ChangeState(HouseUnitEnum::Run);
 				return;

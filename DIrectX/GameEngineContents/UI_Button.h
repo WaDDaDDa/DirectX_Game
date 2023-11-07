@@ -40,7 +40,7 @@ public:
 
     std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
 
-    std::shared_ptr<class GameEngineSpriteRenderer> CreateRenderer(std::string_view _Name, unsigned int index, ContentsOrder _Order);
+    std::shared_ptr<class GameEngineUIRenderer> CreateRenderer(std::string_view _Name, unsigned int index, ContentsOrder _Order);
 
     void ButtonColOff()
     {

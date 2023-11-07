@@ -197,10 +197,10 @@ void UI_Button::ClickUpdate(float _Delta)
 
 }
 
-std::shared_ptr<class GameEngineSpriteRenderer> UI_Button::CreateRenderer(std::string_view _Name, unsigned int _index, ContentsOrder _Order)
+std::shared_ptr<class GameEngineUIRenderer> UI_Button::CreateRenderer(std::string_view _Name, unsigned int _index, ContentsOrder _Order)
 {
-	std::shared_ptr<class GameEngineSpriteRenderer> TestRenderer =
-		CreateComponent<GameEngineSpriteRenderer>(_Order);
+	std::shared_ptr<class GameEngineUIRenderer> TestRenderer =
+		CreateComponent<GameEngineUIRenderer>(_Order);
 
 	TestRenderer->SetSprite(_Name, _index);
 	TestRenderer->AutoSpriteSizeOn();
