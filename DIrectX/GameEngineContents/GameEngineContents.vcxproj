@@ -241,6 +241,10 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCard_Status.cpp" />
     <ClCompile Include="PlayerCard.cpp" />
+    <ClCompile Include="PlayerRecruitmentUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="PlayLevel.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -259,6 +263,10 @@
     <ClCompile Include="PythonessSkill.cpp" />
     <ClCompile Include="PythonessSkillBomb.cpp" />
     <ClCompile Include="PythonessUlt.cpp" />
+    <ClCompile Include="RecruitCard.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="SlotButton.cpp" />
     <ClCompile Include="StadiumBoard.cpp" />
     <ClCompile Include="Swordman.cpp" />
@@ -362,6 +370,10 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerCard_Status.h" />
     <ClInclude Include="PlayerCard.h" />
+    <ClInclude Include="PlayerRecruitmentUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="PlayLevel.h" />
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="Priest.h" />
@@ -375,6 +387,10 @@
     <ClInclude Include="PythonessSkill.h" />
     <ClInclude Include="PythonessSkillBomb.h" />
     <ClInclude Include="PythonessUlt.h" />
+    <ClInclude Include="RecruitCard.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="SlotButton.h" />
     <ClInclude Include="StadiumBoard.h" />
     <ClInclude Include="Swordman.h" />

@@ -52,6 +52,5 @@ void GamePlayer::LevelStart(GameEngineLevel* _NextLevel)
 void GamePlayer::Update(float _Delta)
 {
 	HouseUnit::Update(_Delta);
-
 }
 

@@ -219,6 +219,12 @@
     <ClCompile Include="GamePlayer.cpp">
       <Filter>HouseUnit</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerRecruitmentUI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="RecruitCard.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -441,6 +447,12 @@
     </ClInclude>
     <ClInclude Include="GamePlayer.h">
       <Filter>HouseUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRecruitmentUI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="RecruitCard.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

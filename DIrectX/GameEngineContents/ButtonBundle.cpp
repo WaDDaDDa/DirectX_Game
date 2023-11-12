@@ -16,7 +16,7 @@ ButtonBundle::~ButtonBundle()
 
 }
 
-void ButtonBundle::CreateButton(const std::string& _Text)
+std::shared_ptr<class BundleButton> ButtonBundle::CreateButton(const std::string& _Text)
 {
 	std::shared_ptr<class BundleButton> NewButton = GetLevel()->CreateActor<BundleButton>();
 	NewButton->SetButtonText(_Text);
@@ -27,6 +27,8 @@ void ButtonBundle::CreateButton(const std::string& _Text)
 	CreateCount++;
 	MovePos = ButtonYInter.Y * CreateCount + 10.0f;
 	Transform.AddLocalPosition(-ButtonYInter);
+
+	return NewButton;
 }
 
 
@@ -135,7 +137,6 @@ void ButtonBundle::Start()
 void ButtonBundle::Update(float _Delta)
 {
 	State.Update(_Delta);
-
 }
 
 void ButtonBundle::AllButtonColOn()

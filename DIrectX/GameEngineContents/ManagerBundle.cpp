@@ -26,3 +26,9 @@ void ManagerBundle::Start()
 	AllButtonColOff();
 
 }
+
+void ManagerBundle::Update(float _Delta)
+{
+	ButtonBundle::Update(_Delta);
+
+}

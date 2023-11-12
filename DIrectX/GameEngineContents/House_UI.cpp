@@ -162,9 +162,15 @@ void House_UI::Update(float _Delta)
 	PopBundle(GameButton, GamePopMenu);
 	PopBundle(SystemButton, SystemPopMenu);
 
-	if (true == Proceed->GetIsClick())
+	if (true == Proceed->GetIsClick() && true == BattlePhase)
 	{
 		GameEngineCore::ChangeLevel("BanPickLevel");
+		return;
+	}
+	else if (true == Proceed->GetIsClick() && false == BattlePhase)
+	{
+		BattlePhase = true;
+		GameEngineCore::ChangeLevel("MainLevel");
 		return;
 	}
 }

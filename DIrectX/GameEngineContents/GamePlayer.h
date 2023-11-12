@@ -1,6 +1,16 @@
 #pragma once
 #include "HouseUnit.h"
 
+class GamePlayerInfo
+{
+public:
+    float Att = 0.0f;
+    float Def = 0.0f;
+    int Cost = 0;
+
+    std::string Name = "";
+};
+
 class GamePlayer : public HouseUnit
 {
 public:

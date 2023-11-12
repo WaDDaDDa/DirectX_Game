@@ -1,6 +1,5 @@
 #pragma once
 
-
 class TeamInfo :public std::enable_shared_from_this<TeamInfo>
 {
 public:
@@ -56,6 +55,16 @@ public:
         return Date;
     }
 
+    void SetCoach(std::shared_ptr<class Coach> _Coach)
+    {
+        MyCoach = _Coach;
+    }
+
+    void AddPlayer(std::shared_ptr<class GamePlayer> _Player)
+    {
+        MyPlayer.push_back(_Player);
+    }
+
 protected:
 
 private:
@@ -65,5 +74,8 @@ private:
     int Year = 2023;
     int Month = 1;
     int Week = 1;
+
+    std::shared_ptr<class Coach> MyCoach;
+    std::list<std::shared_ptr<class GamePlayer>> MyPlayer;
 };
 

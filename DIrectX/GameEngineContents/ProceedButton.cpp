@@ -17,7 +17,7 @@ void ProceedButton::Start()
 	UI_Button::Start();
 	float4 TeamLogoColScale = { 280.0f , 90.0f };
 	SetButtonColScale(TeamLogoColScale);
-	//Transform.AddLocalPosition({ 0.0f, 0.0f, 100.0f });
+	//Transform.AddLocalPosition({ 0.0f, 0.0f, 50.0f });
 
 	Renderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
 	Renderer->CreateAnimation("Null", "MainUI", 0.1f, 12, 12, false);

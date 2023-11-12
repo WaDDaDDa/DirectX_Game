@@ -14,7 +14,11 @@ public:
 
 protected:
     void Start() override;
+    void Update(float _Delta) override;
 
+    std::shared_ptr<class BundleButton> Button1;
+    std::shared_ptr<class BundleButton> Button2;
+    std::shared_ptr<class BundleButton> Button3;
 private:
 
 };

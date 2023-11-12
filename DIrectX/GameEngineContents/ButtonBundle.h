@@ -26,12 +26,12 @@ public:
 
 protected:
     void Start();
-    void Update(float _Delta);
+    void Update(float _Delta) override;
 
     void AllButtonColOn();
     void AllButtonColOff();
 
-    void CreateButton(const std::string& _Text);
+    std::shared_ptr<class BundleButton> CreateButton(const std::string& _Text);
 
     std::vector<std::shared_ptr<class BundleButton>> Buttons;
 

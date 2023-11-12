@@ -13,8 +13,8 @@ public:
     House_UI& operator=(House_UI&& _Other) noexcept = delete;
 
 protected:
-    void Start();
-    void Update(float _Delta);
+    void Start() override;
+    void Update(float _Delta) override;
     void LevelStart(GameEngineLevel* _PrevLevel) override;
 
     void PopBundle(std::shared_ptr<class MenuButton> _Menu, std::shared_ptr<class ButtonBundle> _Bundle);
@@ -44,5 +44,6 @@ private:
     std::shared_ptr<class HeaderInfo> Day;
     std::shared_ptr<class HeaderInfo> Gold;
 
+    bool BattlePhase = false;
 };
 

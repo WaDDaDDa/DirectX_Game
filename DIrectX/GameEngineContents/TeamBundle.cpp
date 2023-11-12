@@ -5,6 +5,7 @@
 #include "MenuButton.h"
 #include "BundleButton.h"
 #include "easing.h"
+#include "PlayerRecruitmentUI.h"
 
 TeamBundle::TeamBundle()
 {
@@ -20,10 +21,21 @@ void TeamBundle::Start()
 {
 	ButtonBundle::Start();
 
-	CreateButton("선수 영입");
-	CreateButton("훈련");
-	CreateButton("선수단");
+	Button1 = CreateButton("선수 영입");
+	Button2 = CreateButton("훈련");
+	Button3 = CreateButton("선수단");
 
 	AllButtonColOff();
 
+}
+
+void TeamBundle::Update(float _Delta)
+{
+	ButtonBundle::Update(_Delta);
+
+	if (true == Button1->GetIsClick())
+	{
+		GetLevel()->CreateActor<PlayerRecruitmentUI>();
+	}
+	
 }

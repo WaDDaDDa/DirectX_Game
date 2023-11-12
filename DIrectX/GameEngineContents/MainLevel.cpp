@@ -8,6 +8,7 @@
 #include "BanPickManager.h"
 #include "UI_Mouse.h"
 
+#include "TeamInfo.h"
 #include "HouseBackGround.h"
 #include "House.h"
 #include "House_UI.h"
@@ -65,10 +66,10 @@ void MainLevel::Start()
 	CreateActor<House>();
 	CreateActor<House_UI>();
 
-	CreateActor<Coach>();
-	CreateActor<GamePlayer>();
-	CreateActor<GamePlayer>();
-	CreateActor<GamePlayer>();
+	TeamInfo::MyInfo.SetCoach(CreateActor<Coach>());
+	TeamInfo::MyInfo.AddPlayer(CreateActor<GamePlayer>());
+	TeamInfo::MyInfo.AddPlayer(CreateActor<GamePlayer>());
+	TeamInfo::MyInfo.AddPlayer(CreateActor<GamePlayer>());
 }
 
 void MainLevel::Update(float _Delta)

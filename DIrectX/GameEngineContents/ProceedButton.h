@@ -37,7 +37,7 @@ public:
         ButtonText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
         ButtonText->SetText("Galmuri14", _Text, 32.0f, float4::ZERO, _Flag);
         ButtonText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
-        ButtonText->Transform.AddLocalPosition({ -120.0f, 30.0f });
+        ButtonText->Transform.AddLocalPosition({ -120.0f, 0.0f });
         ButtonText->Transform.AddLocalPosition(_Pos);
         ButtonName = _Text;
         Flag = _Flag;
