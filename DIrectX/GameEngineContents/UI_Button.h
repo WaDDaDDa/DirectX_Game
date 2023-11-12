@@ -52,9 +52,14 @@ public:
         ButtonCol->On();
     }
 
+    void On() override;
+    void Off() override;
 
 protected:
     EventParameter ColEvent;
+
+
+
 
     void Start() override;
     void Update(float _Delta) override;

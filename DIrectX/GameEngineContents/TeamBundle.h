@@ -19,6 +19,8 @@ protected:
     std::shared_ptr<class BundleButton> Button1;
     std::shared_ptr<class BundleButton> Button2;
     std::shared_ptr<class BundleButton> Button3;
+
+    std::shared_ptr<class PlayerRecruitmentUI> PUI = nullptr;
 private:
 
 };

@@ -74,6 +74,6 @@ void Default_Button::ClickStart()
 
 	if (false == IsImportant)
 	{
-		IsImportant = true;
+		//IsImportant = true;
 	}
 }

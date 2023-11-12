@@ -35,7 +35,12 @@ void TeamBundle::Update(float _Delta)
 
 	if (true == Button1->GetIsClick())
 	{
-		GetLevel()->CreateActor<PlayerRecruitmentUI>();
+		if (nullptr == PUI)
+		{
+			PUI = GetLevel()->CreateActor<PlayerRecruitmentUI>();
+		}
+
+		PUI->AllOn();
 	}
 	
 }

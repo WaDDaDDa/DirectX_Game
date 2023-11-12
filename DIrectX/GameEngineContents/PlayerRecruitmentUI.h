@@ -12,6 +12,10 @@ public:
     PlayerRecruitmentUI& operator=(const PlayerRecruitmentUI& _Other) = delete;
     PlayerRecruitmentUI& operator=(PlayerRecruitmentUI&& _Other) noexcept = delete;
 
+    void AllOn();
+
+    void AllOff();
+
 protected:
     std::shared_ptr<class GameEngineSpriteRenderer> BoxRenderer;
 
@@ -20,6 +24,7 @@ protected:
     void LevelStart(GameEngineLevel* _PrevLevel) override;
     
     std::shared_ptr<class RecruitCard> Card;
+    std::shared_ptr<class Default_Button> CancelButton = nullptr;
 private:
 
 };

@@ -194,7 +194,7 @@ void UI_Button::ClickStart()
 
 void UI_Button::ClickUpdate(float _Delta)
 {
-
+	
 }
 
 std::shared_ptr<class GameEngineUIRenderer> UI_Button::CreateRenderer(std::string_view _Name, unsigned int _index, ContentsOrder _Order)
@@ -208,4 +208,17 @@ std::shared_ptr<class GameEngineUIRenderer> UI_Button::CreateRenderer(std::strin
 	TestRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(_Order) });
 
 	return TestRenderer;
+}
+
+
+void UI_Button::On()
+{
+	IsUpdateValue = true;
+}
+
+void UI_Button::Off()
+{
+	IsClick = false;
+
+	IsUpdateValue = false;
 }

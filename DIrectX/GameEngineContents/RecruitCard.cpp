@@ -51,7 +51,7 @@ void RecruitCard::Start()
 	DateText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
 	DateText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 	DateText->Transform.AddLocalPosition({ -110.0f, -40.0f });
-	DateText->SetText("Galmuri14", "소요 시간:         2주", 20.0f, float4::WHITE, FW1_LEFT);
+	DateText->SetText("Galmuri14", "소요 시간:         1주", 20.0f, float4::WHITE, FW1_LEFT);
 
 	CostText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
 	CostText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
@@ -77,28 +77,113 @@ void RecruitCard::Start()
 	CostIcon->SetAutoScaleRatio(2.0f);
 	CostIcon->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
 	CostIcon->Transform.AddLocalPosition({ 110.0f , -80.0f });
+
+	Button2 = GetLevel()->CreateActor<Default_Button>();
+	Button2->Transform.SetLocalPositionZ({ -100.0f });
+	Button2->SetButtonText("취소");
+	Button2->Transform.AddLocalPosition({ -460.0f, -120.0f });
+	Button2->Off();
+
+	SearchText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	SearchText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
+	SearchText->Transform.AddLocalPosition({ 0.0f, 100.0f });
+	SearchText->SetText("Galmuri14", "선수 탐색중...", 30.0f, float4::WHITE, FW1_CENTER);
+	SearchText->Off();
+
+	SearchText2 = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	SearchText2->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
+	SearchText2->Transform.AddLocalPosition({ 0.0f, 20.0f });
+	SearchText2->SetText("Galmuri14", "지역 인재를 탐색하고 있습니다.", 16.0f, float4::WHITE, FW1_CENTER);
+	SearchText2->Off();
+
 }
+
+void RecruitCard::Update(float _Delta)
+{
+	UI_Button::Update(_Delta);
+	
+	if (true == Button->GetIsClick())
+	{
+		SearchValue = true;
+		Searching();
+	}
+	
+	if (true == Button2->GetIsClick())
+	{
+		SearchValue = false;
+		SearchingCancel();
+	}
+}
+
 
 void RecruitCard::IdleStart()
 {
 	Renderer->ChangeAnimation("Null");
-
 }
 
 void RecruitCard::StayStart()
 {
 	Renderer->ChangeAnimation("Null_Stay");
-
 }
 
 void RecruitCard::EndStart()
 {
 	Renderer->ChangeAnimation("Null");
-
 }
 
 void RecruitCard::ClickStart()
 {
 	UI_Button::ClickStart();
+}
 
+void RecruitCard::Searching()
+{
+	CostText->Off();
+	CostIcon->Off();
+	InText->Off();
+	InText2->Off();
+	Button->Off();
+
+	SearchText->On();
+	SearchText2->On();
+	Button2->On();
+
+	DateText->SetText("Galmuri14", "남은 시간:         1주", 20.0f, float4::WHITE, FW1_LEFT);
+
+}
+
+void RecruitCard::SearchingCancel()
+{
+	SearchText->Off();
+	SearchText2->Off();
+	Button2->Off();
+
+	CostText->On();
+	CostIcon->On();
+	InText->On();
+	InText2->On();
+	Button->On();
+
+	DateText->SetText("Galmuri14", "소요 시간:         1주", 20.0f, float4::WHITE, FW1_LEFT);
+}
+
+void RecruitCard::AllOff()
+{
+	Off();
+	Button->Off();
+	Button2->Off();
+}
+
+void RecruitCard::AllOn()
+{
+	On();
+
+	if (true == SearchValue)
+	{
+		Searching();
+	}
+	else if (false == SearchValue)
+	{
+		SearchingCancel();
+	}
 }
