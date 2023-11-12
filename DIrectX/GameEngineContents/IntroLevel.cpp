@@ -20,6 +20,7 @@ void IntroLevel::Start()
 	GameEngineCore::GetBackBufferRenderTarget()->SetClearColor({ 0, 0, 0, 1 });
 
 	GameEngineFont::Load("Galmuri14");
+	GameEngineFont::Load("Galmuri9");
 
 	{
 		GameEngineDirectory Dir;

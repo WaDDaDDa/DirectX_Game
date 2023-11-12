@@ -24,12 +24,8 @@ public:
 
     void SetText(const std::string& _Text)
     {
-        Text = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
         Text->SetText("Galmuri14", _Text, 20.0f, float4::WHITE, FW1_RIGHT);
-        Text->Transform.AddLocalPosition({ 105.0f });
-        Text->Transform.AddLocalPosition({ 0.0f, 10.0f, -static_cast<float>(ContentsOrder::Text) });
     }
-
 
 protected:
     void Start() override;

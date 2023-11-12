@@ -156,21 +156,28 @@ void House_UI::PopBundle(std::shared_ptr<class MenuButton> _Menu, std::shared_pt
 
 void House_UI::Update(float _Delta)
 {
+	Day->SetText(TeamInfo::MyInfo.GetDate());
+	Gold->SetText(std::to_string(TeamInfo::MyInfo.GetGold()));
+
+
 	PopBundle(TeamButton, TeamPopMenu);
 	PopBundle(ManagerButton, ManagerPopMenu);
 	PopBundle(BattleButton, BattlePopMenu);
 	PopBundle(GameButton, GamePopMenu);
 	PopBundle(SystemButton, SystemPopMenu);
 
-	if (true == Proceed->GetIsClick() && true == BattlePhase)
+	
+
+	if (true == Proceed->GetIsClick() && (1 == TeamInfo::MyInfo.GetWeek() || 2 == TeamInfo::MyInfo.GetWeek()))
 	{
-		GameEngineCore::ChangeLevel("BanPickLevel");
+		TeamInfo::MyInfo.AddWeek(1);
+		GameEngineCore::ChangeLevel("MainLevel");
 		return;
 	}
-	else if (true == Proceed->GetIsClick() && false == BattlePhase)
+	else if (true == Proceed->GetIsClick() && (3 == TeamInfo::MyInfo.GetWeek() || 4 == TeamInfo::MyInfo.GetWeek()))
 	{
-		BattlePhase = true;
-		GameEngineCore::ChangeLevel("MainLevel");
+		TeamInfo::MyInfo.AddWeek(1);
+		GameEngineCore::ChangeLevel("BanPickLevel");
 		return;
 	}
 }

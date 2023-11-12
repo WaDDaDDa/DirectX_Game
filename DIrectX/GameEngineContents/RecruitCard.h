@@ -15,6 +15,9 @@ public:
     void Searching();
     void SearchingCancel();
 
+    void RecruitResult();
+
+
     void AllOff();
     void AllOn();
 
@@ -30,6 +33,10 @@ protected:
     void ClickStart() override;
 
     bool SearchValue = false;
+    // true 되면 영입할 선수 정보 보여지는.
+    bool SearchEnd = false;
+
+    int EndWeek = 0;
 
     std::shared_ptr<class GameEngineSpriteRenderer> HeadText = nullptr;
     std::shared_ptr<class GameEngineSpriteRenderer> InText = nullptr;

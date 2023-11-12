@@ -1,5 +1,7 @@
 #include "PreCompile.h"
 #include "RecruitCard.h"
+#include "TeamInfo.h"
+#include "GamePlayer.h"
 
 
 RecruitCard::RecruitCard()
@@ -26,8 +28,8 @@ void RecruitCard::Start()
 	Renderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
 	Renderer->CreateAnimation("Null", "PlayerRecruitment", 0.1f, 3, 3, false);
 	Renderer->CreateAnimation("Null_Stay", "PlayerRecruitment", 0.1f, 4, 4, false);
-	Renderer->CreateAnimation("Slect", "PlayerRecruitment", 0.1f, 2, 2, false);
-	Renderer->CreateAnimation("Slect_Stay", "PlayerRecruitment", 0.1f, 3, 3, false);
+	Renderer->CreateAnimation("Search", "PlayerRecruitment", 0.1f, 0, 0, false);
+	Renderer->CreateAnimation("Search_Stay", "PlayerRecruitment", 0.1f, 1, 1, false);
 	Renderer->ChangeAnimation("Null");
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(2.0f);
@@ -102,33 +104,73 @@ void RecruitCard::Update(float _Delta)
 {
 	UI_Button::Update(_Delta);
 	
-	if (true == Button->GetIsClick())
+	if (true == Button->GetIsClick() && false == SearchEnd)
 	{
 		SearchValue = true;
+		TeamInfo::MyInfo.AddGold(-10);
+		EndWeek = TeamInfo::MyInfo.GetWeek() + 1;
+		if (5 <= EndWeek)
+		{
+			EndWeek = EndWeek - 4;
+		}
 		Searching();
 	}
-	
-	if (true == Button2->GetIsClick())
+	if (true == Button2->GetIsClick() && false == SearchEnd)
 	{
 		SearchValue = false;
 		SearchingCancel();
+	}
+
+	if (TeamInfo::MyInfo.GetWeek() == EndWeek && false == SearchEnd)
+	{
+		SearchEnd = true;
+		Renderer->ChangeAnimation("Search");
+		RecruitResult();
+	}
+
+	if (true == SearchEnd)
+	{
 	}
 }
 
 
 void RecruitCard::IdleStart()
 {
-	Renderer->ChangeAnimation("Null");
+	if (false == SearchEnd)
+	{
+		Renderer->ChangeAnimation("Null");
+	}
+	else if (true == SearchEnd)
+	{
+		Renderer->ChangeAnimation("Search");
+
+	}
 }
 
 void RecruitCard::StayStart()
 {
-	Renderer->ChangeAnimation("Null_Stay");
+	if (false == SearchEnd)
+	{
+		Renderer->ChangeAnimation("Null_Stay");
+	}
+	else if (true == SearchEnd)
+	{
+		Renderer->ChangeAnimation("Search_Stay");
+
+	}
 }
 
 void RecruitCard::EndStart()
 {
-	Renderer->ChangeAnimation("Null");
+	if (false == SearchEnd)
+	{
+		Renderer->ChangeAnimation("Null");
+	}
+	else if (true == SearchEnd)
+	{
+		Renderer->ChangeAnimation("Search");
+
+	}
 }
 
 void RecruitCard::ClickStart()
@@ -178,12 +220,34 @@ void RecruitCard::AllOn()
 {
 	On();
 
-	if (true == SearchValue)
+	if (true == SearchValue && false == SearchEnd)
 	{
 		Searching();
 	}
-	else if (false == SearchValue)
+	else if (false == SearchValue && false == SearchEnd)
 	{
 		SearchingCancel();
 	}
+}
+
+void RecruitCard::RecruitResult()
+{
+	Button->Off();
+	Button2->Off();
+	SearchText->Off();
+	SearchText2->Off();
+
+	CostText->Off();
+	CostIcon->Off();
+	InText->Off();
+	InText2->Off();
+	Button->Off();
+	DateText->Off();
+	DateIcon->Off();
+	HeadText->Off();
+
+	GamePlayerInfo Info;
+	Info.Random();
+
+
 }

@@ -24,6 +24,10 @@ void HeaderInfo::Start()
 	BackGround->SetImageScale({220.0f, 50.0f});
 
 	BackGround->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
+
+	Text = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	Text->Transform.AddLocalPosition({ 105.0f });
+	Text->Transform.AddLocalPosition({ 0.0f, 10.0f, -static_cast<float>(ContentsOrder::Text) });
 }
 
 void HeaderInfo::Update(float _Delta)

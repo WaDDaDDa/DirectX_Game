@@ -65,6 +65,28 @@ public:
         MyPlayer.push_back(_Player);
     }
 
+    void AddWeek(int _Week)
+    {
+        Week += _Week;
+
+        if (5 <= Week)
+        {
+            Week = 1;
+            Month += 1;
+        }
+
+        if (13 <= Month)
+        {
+            Month = 1;
+            Year += 1;
+        }
+    }
+
+    int GetWeek()
+    {
+        return Week;
+    }
+
 protected:
 
 private:

@@ -44,6 +44,5 @@ private:
     std::shared_ptr<class HeaderInfo> Day;
     std::shared_ptr<class HeaderInfo> Gold;
 
-    bool BattlePhase = false;
 };
 
