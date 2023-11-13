@@ -508,7 +508,7 @@ void IntroCut::NewGameStart()
 	TextBoxRenderer->SetText("Galmuri14", PrintText, 45.0f, float4::WHITE, FW1_LEFT);
 
 	// 페이드 효과
-	MainSpriteRenderer->GetColorData().MulColor.W -= 0.8f;
+	MainSpriteRenderer->GetColorData().MulColor.W -= 0.2f;
 
 	GetLevel()->CreateActor<NewGame_UI>();
 }

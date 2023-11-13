@@ -98,6 +98,98 @@ void RecruitCard::Start()
 	SearchText2->SetText("Galmuri14", "지역 인재를 탐색하고 있습니다.", 16.0f, float4::WHITE, FW1_CENTER);
 	SearchText2->Off();
 
+	NameText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	NameText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
+	NameText->Transform.AddLocalPosition({ -60.0f, 175.0f });
+	NameText->SetText("Galmuri14", "", 16.0f, float4::WHITE, FW1_LEFT);
+	NameText->Off();
+
+	PlayerFaceBG = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UILayer1);
+	PlayerFaceBG->SetSprite("CardUI", 0);
+	PlayerFaceBG->AutoSpriteSizeOn();
+	PlayerFaceBG->SetAutoScaleRatio(2.5f);
+	PlayerFaceBG->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UILayer1) });
+	PlayerFaceBG->Transform.AddLocalPosition({ -105.0f, 150.0f });
+	PlayerFaceBG->Off();
+
+	BodyRenderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UILayer2);
+	BodyRenderer->SetSprite("GamePlayer", 0);
+	BodyRenderer->AutoSpriteSizeOn();
+	BodyRenderer->SetAutoScaleRatio(2.0f);
+	BodyRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UILayer2) });
+	BodyRenderer->Transform.AddLocalPosition({ -105.0f, 140.0f });
+	BodyRenderer->Off();
+
+	HairRenderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	HairRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	HairRenderer->SetSprite("Coach_Hair", 0);
+	HairRenderer->AutoSpriteSizeOn();
+	HairRenderer->SetAutoScaleRatio(2.0f);
+	HairRenderer->Transform.AddLocalPosition({ -105.0f, 155.0f });
+	HairRenderer->Off();
+
+	PlayerFaceFG = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	PlayerFaceFG->SetSprite("CardUI", 2);
+	PlayerFaceFG->AutoSpriteSizeOn();
+	PlayerFaceFG->SetAutoScaleRatio(2.5f);
+	PlayerFaceFG->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
+	PlayerFaceFG->Transform.AddLocalPosition({ -105.0f, 150.0f });
+	PlayerFaceFG->Off();
+
+	AttIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UILayer1);
+	AttIcon->SetSprite("attack_icon.png");
+	AttIcon->AutoSpriteSizeOn();
+	AttIcon->SetAutoScaleRatio(2.0f);
+	AttIcon->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UILayer1) });
+	AttIcon->Transform.AddLocalPosition({ -50.0f, 135.0f });
+	AttIcon->Off();
+
+	AttText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	AttText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
+	AttText->Transform.AddLocalPosition({ -32.0f, 142.0f });
+	AttText->SetText("Galmuri14", "0", 16.0f, float4::WHITE, FW1_LEFT);
+	AttText->Off();
+
+	DefIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UILayer1);
+	DefIcon->SetSprite("armor_icon.png");
+	DefIcon->AutoSpriteSizeOn();
+	DefIcon->SetAutoScaleRatio(2.0f);
+	DefIcon->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UILayer1) });
+	DefIcon->Transform.AddLocalPosition({ 40.0f, 135.0f });
+	DefIcon->Off();
+
+	DefText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	DefText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
+	DefText->Transform.AddLocalPosition({ 58.0f, 142.0f });
+	DefText->SetText("Galmuri14", "0", 16.0f, float4::WHITE, FW1_LEFT);
+	DefText->Off();
+
+	PayText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	PayText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
+	PayText->Transform.AddLocalPosition({ -120.0f, -90.0f });
+	PayText->SetText("Galmuri14", "계약금:         ", 24.0f, float4::WHITE, FW1_LEFT);
+	PayText->Off();
+
+	PayIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	PayIcon->SetSprite("MainUI", 2);
+	PayIcon->AutoSpriteSizeOn();
+	PayIcon->SetAutoScaleRatio(2.0f);
+	PayIcon->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	PayIcon->Transform.AddLocalPosition({ 115.0f , -100.0f });
+	PayIcon->Off();
+
+	Button3 = GetLevel()->CreateActor<Default_Button>();
+	Button3->Transform.SetLocalPositionZ({ -100.0f });
+	Button3->IsImportantTrue();
+	Button3->SetButtonText("영입하기");
+	Button3->Transform.AddLocalPosition({ -535.0f, -135.0f });
+	Button3->Off();
+
+	Button4 = GetLevel()->CreateActor<Default_Button>();
+	Button4->Transform.SetLocalPositionZ({ -100.0f });
+	Button4->SetButtonText("삭제");
+	Button4->Transform.AddLocalPosition({ -385.0f, -135.0f });
+	Button4->Off();
 }
 
 void RecruitCard::Update(float _Delta)
@@ -128,9 +220,14 @@ void RecruitCard::Update(float _Delta)
 		RecruitResult();
 	}
 
-	if (true == SearchEnd)
+	if (true == Button3->GetIsClick())
 	{
+		std::shared_ptr<GamePlayer> NewPlayer = GetLevel()->CreateActor<GamePlayer>();
+		NewPlayer->Init(GetLevel());
+		NewPlayer->SpecInit(Info);
+		TeamInfo::MyInfo.AddPlayer(NewPlayer);
 	}
+
 }
 
 
@@ -214,6 +311,8 @@ void RecruitCard::AllOff()
 	Off();
 	Button->Off();
 	Button2->Off();
+	Button3->Off();
+	Button4->Off();
 }
 
 void RecruitCard::AllOn()
@@ -227,6 +326,12 @@ void RecruitCard::AllOn()
 	else if (false == SearchValue && false == SearchEnd)
 	{
 		SearchingCancel();
+	}
+
+	if (true == SearchEnd)
+	{
+		Button3->On();
+		Button4->On();
 	}
 }
 
@@ -246,8 +351,29 @@ void RecruitCard::RecruitResult()
 	DateIcon->Off();
 	HeadText->Off();
 
-	GamePlayerInfo Info;
 	Info.Random();
 
+	NameText->On();
+	NameText->SetText("Galmuri14", Info.Name, 16.0f, float4::WHITE, FW1_LEFT);
+	PlayerFaceBG->On();
+	BodyRenderer->On();
+	HairRenderer->On();
+	HairRenderer->SetSprite("Coach_Hair", Info.HairNum);
+	PlayerFaceFG->On();
+	AttIcon->On();
+	AttText->On();
+	DefIcon->On();
+	DefText->On();
+	std::string AttString = GameEngineString::Format("{:.0f}", Info.Att);
+	std::string DefString = GameEngineString::Format("{:.0f}", Info.Def);
+
+	AttText->SetText("Galmuri14", AttString, 16.0f, float4::WHITE, FW1_LEFT);
+	DefText->SetText("Galmuri14", DefString, 16.0f, float4::WHITE, FW1_LEFT);
+	PayText->On();
+
+	PayText->SetText("Galmuri14", "계약금:         " + std::to_string(Info.Cost), 24.0f, float4::WHITE, FW1_LEFT);
+	PayIcon->On();
+	Button3->On();
+	Button4->On();
 
 }

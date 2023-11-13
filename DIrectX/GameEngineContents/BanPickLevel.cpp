@@ -93,54 +93,7 @@ void BanPickLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		GameEngineSprite::CreateSingle("banpick_ui_bg.png");
 	}
 
-	{
-		// 싱글 스프라이트 아이콘
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistsChild("GameEngineResources");
-		Dir.MoveChild("ContentsResources\\Icon");
 
-		std::vector<GameEngineFile> Files = Dir.GetAllFile();
-
-		for (size_t i = 0; i < Files.size(); i++)
-		{
-			GameEngineFile& File = Files[i];
-			GameEngineTexture::Load(File.GetStringPath());
-		}
-		// 스탯관련 아이콘들(흑백)
-		GameEngineSprite::CreateSingle("ingame_stat_icon_0.png");
-		GameEngineSprite::CreateSingle("ingame_stat_icon_1.png");
-		GameEngineSprite::CreateSingle("ingame_stat_icon_2.png");
-		GameEngineSprite::CreateSingle("ingame_stat_icon_3.png");
-		GameEngineSprite::CreateSingle("ingame_stat_icon_4.png");
-		GameEngineSprite::CreateSingle("ingame_stat_icon_5.png");
-		GameEngineSprite::CreateSingle("patch_icons_1.png");
-		GameEngineSprite::CreateSingle("TestMask.png");
-
-
-		// 공격방어 아이콘들
-		GameEngineSprite::CreateSingle("armor_icon.png");
-		GameEngineSprite::CreateSingle("attack_icon.png");
-
-		// 유닛 아이콘들
-		GameEngineSprite::CreateSingle("Archer_ult.png");
-		GameEngineSprite::CreateSingle("Archer_skill.png");
-		GameEngineSprite::CreateSingle("arrow.png");
-		GameEngineSprite::CreateSingle("knight_ult.png");
-		GameEngineSprite::CreateSingle("knight_skill.png");
-		GameEngineSprite::CreateSingle("Monk_ult.png");
-		GameEngineSprite::CreateSingle("Monk_skill.png");
-		GameEngineSprite::CreateSingle("Ninja_ult.png");
-		GameEngineSprite::CreateSingle("Ninja_skill.png");
-		GameEngineSprite::CreateSingle("Priest_ult.png");
-		GameEngineSprite::CreateSingle("Priest_skill.png");
-		GameEngineSprite::CreateSingle("Pyromancer_ult.png");
-		GameEngineSprite::CreateSingle("Pyromancer_skill.png");
-		GameEngineSprite::CreateSingle("Pythoness_ult.png");
-		GameEngineSprite::CreateSingle("Pythoness_skill.png");
-		GameEngineSprite::CreateSingle("swordman_ult.png");
-		GameEngineSprite::CreateSingle("swordman_skill.png");
-
-	}
 	CreateActor<UI_Mouse>();
 
 	CreateActor<BanPickManager>();

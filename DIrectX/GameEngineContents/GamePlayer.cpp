@@ -28,15 +28,12 @@ void GamePlayer::Start()
 	BodyRenderer->SetAutoScaleRatio(3.0f);
 
 	BodyRenderer->SetFrameChangeFunctionAll (FrameFunction);
+	Spec.Random();
 
-	int HairNum = Rand.RandomInt(1, 29);
-
-	HairRenderer->SetSprite("Coach_Hair", HairNum);
+	HairRenderer->SetSprite("Coach_Hair", Spec.HairNum);
 	HairRenderer->AutoSpriteSizeOn();
 	HairRenderer->SetAutoScaleRatio(3.0f);
 	HairRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f });
-
-	Spec.Random();
 
 	NameText = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Text);
 	NameText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
@@ -53,6 +50,20 @@ void GamePlayer::LevelStart(GameEngineLevel* _NextLevel)
 	//BodyRenderer->ChangeAnimation("Idle");
 
 }
+
+void GamePlayer::Init(GameEngineLevel* _NextLevel)
+{
+	HouseUnit::LevelStart(_NextLevel);
+}
+
+void GamePlayer::SpecInit(GamePlayerInfo _Spec)
+{
+	Spec = _Spec;
+	HairRenderer->SetSprite("Coach_Hair", Spec.HairNum);
+	NameText->SetText("Galmuri14", Spec.Name, 20.0f, float4::WHITE, FW1_CENTER);
+
+}
+
 
 void GamePlayer::Update(float _Delta)
 {

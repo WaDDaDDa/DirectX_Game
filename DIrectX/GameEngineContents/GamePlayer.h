@@ -59,13 +59,17 @@ public:
         Att = static_cast<float>(Rand.RandomInt(3, 6));
         Def = static_cast<float>(Rand.RandomInt(3, 6));
         Cost = Rand.RandomInt(90, 140);
-        int i = Rand.RandomInt(0, Namelist.size());
+        size_t i = static_cast<size_t>(Rand.RandomInt(0, Namelist.size() - 1));
+
         Name = Namelist[i];
+
+        HairNum = Rand.RandomInt(1, 29);
     }
 
     float Att = 0.0f;
     float Def = 0.0f;
     int Cost = 0;
+    int HairNum = 0;
 
     std::string Name = "";
 private:
@@ -82,6 +86,9 @@ public:
     GamePlayer(GamePlayer&& _Other) noexcept = delete;
     GamePlayer& operator=(const GamePlayer& _Other) = delete;
     GamePlayer& operator=(GamePlayer&& _Other) noexcept = delete;
+
+    void Init(GameEngineLevel* _NextLevel);
+    void SpecInit(GamePlayerInfo _Spec);
 
 protected:
     void Start() override;
