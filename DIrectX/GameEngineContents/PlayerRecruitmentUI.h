@@ -18,6 +18,22 @@ public:
 
 protected:
     std::shared_ptr<class GameEngineSpriteRenderer> BoxRenderer;
+    std::shared_ptr<class GameEngineSpriteRenderer> CostIcon;
+    std::shared_ptr<class GameEngineSpriteRenderer> CostText;
+    std::shared_ptr<class GameEngineSpriteRenderer> MainText;
+
+    std::shared_ptr<class GameEngineSpriteRenderer> RockBox;
+    std::shared_ptr<class GameEngineSpriteRenderer> RockIcon;
+    std::shared_ptr<class GameEngineSpriteRenderer> RockText;
+
+    std::shared_ptr<class GameEngineSpriteRenderer> RockBox2;
+    std::shared_ptr<class GameEngineSpriteRenderer> RockIcon2;
+    std::shared_ptr<class GameEngineSpriteRenderer> RockText2;
+
+    std::shared_ptr<class GameEngineSpriteRenderer> RockBox3;
+    std::shared_ptr<class GameEngineSpriteRenderer> RockIcon3;
+    std::shared_ptr<class GameEngineSpriteRenderer> RockText3;
+
 
     void Start() override;
     void Update(float _Delta) override;

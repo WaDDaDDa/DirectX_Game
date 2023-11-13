@@ -54,7 +54,7 @@ public:
 
         GameEngineRandom Rand;
         long long RandSeed = reinterpret_cast<long long>(this);
-        RandSeed++;
+        RandSeed += Rand.RandomInt(0, 1000);
         Rand.SetSeed(RandSeed);
         Att = static_cast<float>(Rand.RandomInt(3, 6));
         Def = static_cast<float>(Rand.RandomInt(3, 6));

@@ -4,6 +4,7 @@
 
 class RecruitCard : public UI_Button
 {
+    friend class PlayerRecruitmentUI;
 public:
     RecruitCard();
     ~RecruitCard();
@@ -21,6 +22,9 @@ public:
 
     void AllOff();
     void AllOn();
+
+    void AllDeath();
+    void CreatePlayer();
 
 protected:
     void Start() override;

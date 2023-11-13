@@ -220,14 +220,16 @@ void RecruitCard::Update(float _Delta)
 		RecruitResult();
 	}
 
-	if (true == Button3->GetIsClick())
-	{
-		std::shared_ptr<GamePlayer> NewPlayer = GetLevel()->CreateActor<GamePlayer>();
-		NewPlayer->Init(GetLevel());
-		NewPlayer->SpecInit(Info);
-		TeamInfo::MyInfo.AddPlayer(NewPlayer);
-	}
+}
 
+void RecruitCard::CreatePlayer()
+{
+	std::shared_ptr<GamePlayer> NewPlayer = GetLevel()->CreateActor<GamePlayer>();
+	NewPlayer->Init(GetLevel());
+	NewPlayer->SpecInit(Info);
+	TeamInfo::MyInfo.AddPlayer(NewPlayer);
+
+	TeamInfo::MyInfo.AddGold(-Info.Cost);
 }
 
 
@@ -334,6 +336,16 @@ void RecruitCard::AllOn()
 		Button4->On();
 	}
 }
+
+void RecruitCard::AllDeath()
+{
+	Button->Death();
+	Button2->Death();
+	Button3->Death();
+	Button4->Death();
+	Death();
+}
+
 
 void RecruitCard::RecruitResult()
 {
