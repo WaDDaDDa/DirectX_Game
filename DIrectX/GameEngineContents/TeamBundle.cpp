@@ -40,13 +40,17 @@ void TeamBundle::Update(float _Delta)
 		{
 			PRUI = GetLevel()->CreateActor<PlayerRecruitmentUI>();
 		}
-
 		PRUI->AllOn();
+		State.ChangeState(BundleState::PopDown);
+		MainMenuButton->IsSelectFalse();
 	}
 
 	if (true == Button3->GetIsClick())
 	{
 		PSUI = GetLevel()->CreateActor<PlayerSquadUI>();
+		State.ChangeState(BundleState::PopDown);
+		MainMenuButton->IsSelectFalse();
+
 	}
 	
 }

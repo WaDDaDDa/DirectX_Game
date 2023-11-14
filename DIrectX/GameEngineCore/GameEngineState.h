@@ -92,6 +92,11 @@ public:
 		return StateTime;
 	}
 
+	State* GetCurState()
+	{
+		return CurState;
+	}
+
 protected:
 
 private:

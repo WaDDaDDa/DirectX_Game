@@ -127,6 +127,8 @@ void House_UI::LevelStart(GameEngineLevel* _PrevLevel)
 
 void House_UI::PopBundle(std::shared_ptr<class MenuButton> _Menu, std::shared_ptr<class ButtonBundle> _Bundle)
 {
+	_Bundle->MainMenuButton = _Menu;
+
 	if (true == _Menu->GetIsClick() && true == _Bundle->IsPopUp)
 	{
 		_Bundle->State.ChangeState(BundleState::PopDown);
@@ -137,7 +139,8 @@ void House_UI::PopBundle(std::shared_ptr<class MenuButton> _Menu, std::shared_pt
 		_Bundle->State.ChangeState(BundleState::PopUp);
 		_Menu->IsSelectTrue();
 	}
-	//else if (true == _Bundle->IsPopUp && true == GameEngineInput::IsDown(VK_LBUTTON, this))
+
+	//else if (true == _Bundle->IsPopUp && true == _Menu->GetIsClick())
 	//{
 	//	if (true == _Bundle->IsButtonsClick())
 	//	{

@@ -24,6 +24,9 @@ public:
 
     bool IsButtonsClick();
 
+    std::shared_ptr<class MenuButton> MainMenuButton;
+
+
 protected:
     void Start();
     void Update(float _Delta) override;

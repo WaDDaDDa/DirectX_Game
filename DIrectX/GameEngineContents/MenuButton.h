@@ -19,7 +19,7 @@ public:
         if (false == IsSelect)
         {
             Renderer->ChangeAnimation("Null");
-            ButtonText->SetText("Galmuri14", ButtonName, 15.0f, float4::WHITE, Flag);
+            ButtonText->SetText("Galmuri14", ButtonName, 16.0f, float4::WHITE, Flag);
             IconRenderer->GetColorData().MulColor = { 255.0f / 204.0f, 1.0f, 255.0f / 58.0f };
         }
     }
@@ -31,7 +31,7 @@ public:
         if (true == IsSelect)
         {
             Renderer->ChangeAnimation("Slect");
-            ButtonText->SetText("Galmuri14", ButtonName, 15.0f, float4::ZERO, Flag);
+            ButtonText->SetText("Galmuri14", ButtonName, 16.0f, float4::ZERO, Flag);
             IconRenderer->GetColorData().MulColor = float4::ZERO;
         }
     }

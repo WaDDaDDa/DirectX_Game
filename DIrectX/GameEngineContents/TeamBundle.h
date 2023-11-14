@@ -20,6 +20,7 @@ protected:
     std::shared_ptr<class BundleButton> Button2;
     std::shared_ptr<class BundleButton> Button3;
 
+
     std::shared_ptr<class PlayerRecruitmentUI> PRUI = nullptr;
     std::shared_ptr<class PlayerSquadUI> PSUI = nullptr;
 private:
