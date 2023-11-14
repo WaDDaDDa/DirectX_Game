@@ -276,7 +276,9 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="SlotButton.cpp" />
+    <ClCompile Include="Stadium.cpp" />
     <ClCompile Include="StadiumBoard.cpp" />
+    <ClCompile Include="StadiumLevel.cpp" />
     <ClCompile Include="Swordman.cpp" />
     <ClCompile Include="SwordmanUltEffect.cpp" />
     <ClCompile Include="SystemBundle.cpp" />
@@ -408,7 +410,9 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="SlotButton.h" />
+    <ClInclude Include="Stadium.h" />
     <ClInclude Include="StadiumBoard.h" />
+    <ClInclude Include="StadiumLevel.h" />
     <ClInclude Include="Swordman.h" />
     <ClInclude Include="SwordmanUltEffect.h" />
     <ClInclude Include="SystemBundle.h" />

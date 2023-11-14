@@ -180,7 +180,7 @@ void House_UI::Update(float _Delta)
 	else if (true == Proceed->GetIsClick() && (3 == TeamInfo::MyInfo.GetWeek() || 4 == TeamInfo::MyInfo.GetWeek()))
 	{
 		TeamInfo::MyInfo.AddWeek(1);
-		GameEngineCore::ChangeLevel("BanPickLevel");
+		GameEngineCore::ChangeLevel("StadiumLevel");
 		return;
 	}
 }

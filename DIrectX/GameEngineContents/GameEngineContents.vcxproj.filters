@@ -231,6 +231,12 @@
     <ClCompile Include="PlayerSquadCard.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="StadiumLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Stadium.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -464,6 +470,12 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="PlayerSquadCard.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="StadiumLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Stadium.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>

@@ -9,6 +9,7 @@
 #include "BanPickLevel.h"
 #include "BattleLevel.h"
 #include "MainLevel.h"
+#include "StadiumLevel.h"
 
 ContentsCore::ContentsCore()
 {
@@ -28,7 +29,8 @@ void ContentsCore::Start()
 	GameEngineCore::CreateLevel<PlayLevel>("PlayLevel");
 	GameEngineCore::CreateLevel<BanPickLevel>("BanPickLevel");
 	GameEngineCore::CreateLevel<BattleLevel>("BattleLevel");
-	GameEngineCore::ChangeLevel("MainLevel");
+	GameEngineCore::CreateLevel<StadiumLevel>("StadiumLevel");
+	GameEngineCore::ChangeLevel("StadiumLevel");
 
 }
 

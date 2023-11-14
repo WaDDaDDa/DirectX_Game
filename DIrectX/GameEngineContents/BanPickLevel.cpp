@@ -71,28 +71,6 @@ void BanPickLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		}
 	}
 
-	{
-		// 싱글 스프라이트 로드
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistsChild("GameEngineResources");
-		Dir.MoveChild("ContentsResources\\Stadium");
-
-		std::vector<GameEngineFile> Files = Dir.GetAllFile();
-
-		for (size_t i = 0; i < Files.size(); i++)
-		{
-			GameEngineFile& File = Files[i];
-			GameEngineTexture::Load(File.GetStringPath());
-		}
-
-		GameEngineSprite::CreateSingle("stadium.png");
-		GameEngineSprite::CreateSingle("stadium_sky_bg.png");
-		GameEngineSprite::CreateSingle("stadium_VS.png");
-		GameEngineSprite::CreateSingle("win_indicator_0.png");
-		GameEngineSprite::CreateSingle("win_indicator_1.png");
-		GameEngineSprite::CreateSingle("banpick_ui_bg.png");
-	}
-
 
 	CreateActor<UI_Mouse>();
 
