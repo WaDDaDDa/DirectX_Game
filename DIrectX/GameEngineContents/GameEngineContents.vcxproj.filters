@@ -225,6 +225,12 @@
     <ClCompile Include="RecruitCard.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerSquadUI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSquadCard.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -452,6 +458,12 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="RecruitCard.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSquadUI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSquadCard.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>

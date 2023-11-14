@@ -245,6 +245,14 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="PlayerSquadCard.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="PlayerSquadUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="PlayLevel.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -371,6 +379,14 @@
     <ClInclude Include="PlayerCard_Status.h" />
     <ClInclude Include="PlayerCard.h" />
     <ClInclude Include="PlayerRecruitmentUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="PlayerSquadCard.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="PlayerSquadUI.h">
       <SubType>
       </SubType>
     </ClInclude>

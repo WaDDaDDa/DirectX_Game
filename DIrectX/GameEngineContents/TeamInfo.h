@@ -87,6 +87,23 @@ public:
         return Week;
     }
 
+    std::list<std::shared_ptr<class GamePlayer>>& GetMyPlayer()
+    {
+        return MyPlayer;
+    }
+
+    //void Resize()
+    //{
+    //    for (std::shared_ptr<GamePlayer>& Player : MyPlayer)
+    //    {
+    //        if (true == Player->IsDeath())
+    //        {
+    //            Player.reset();
+    //        }
+    //    }
+    //}
+
+
 protected:
 
 private:

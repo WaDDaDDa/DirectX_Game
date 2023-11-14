@@ -124,8 +124,13 @@ void PlayerRecruitmentUI::Update(float _Delta)
 		Card->Transform.AddLocalPosition({ -460.0f, 20.0f });
 	}
 
+	if (true == Card->Button2->GetIsClick())
+	{
+		Card->AllDeath();
+		Card = nullptr;
+	}
 	// 영입 확인.
-	if (true == Card->Button3->GetIsClick())
+	else if (true == Card->Button3->GetIsClick())
 	{
 		Card->CreatePlayer();
 

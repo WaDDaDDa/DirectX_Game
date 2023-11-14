@@ -207,11 +207,7 @@ void RecruitCard::Update(float _Delta)
 		}
 		Searching();
 	}
-	if (true == Button2->GetIsClick() && false == SearchEnd)
-	{
-		SearchValue = false;
-		SearchingCancel();
-	}
+
 
 	if (TeamInfo::MyInfo.GetWeek() == EndWeek && false == SearchEnd)
 	{

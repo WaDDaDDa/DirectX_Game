@@ -6,6 +6,7 @@
 #include "BundleButton.h"
 #include "easing.h"
 #include "PlayerRecruitmentUI.h"
+#include "PlayerSquadUI.h"
 
 TeamBundle::TeamBundle()
 {
@@ -35,12 +36,17 @@ void TeamBundle::Update(float _Delta)
 
 	if (true == Button1->GetIsClick())
 	{
-		if (nullptr == PUI)
+		if (nullptr == PRUI)
 		{
-			PUI = GetLevel()->CreateActor<PlayerRecruitmentUI>();
+			PRUI = GetLevel()->CreateActor<PlayerRecruitmentUI>();
 		}
 
-		PUI->AllOn();
+		PRUI->AllOn();
+	}
+
+	if (true == Button3->GetIsClick())
+	{
+		PSUI = GetLevel()->CreateActor<PlayerSquadUI>();
 	}
 	
 }

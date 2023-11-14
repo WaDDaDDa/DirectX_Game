@@ -255,7 +255,6 @@ public:
 		TransformUpdate();
 	}
 
-
 	void AddWorldScale(const float4& _Value)
 	{
 		SetWorldScale(GetWorldScale() + _Value);

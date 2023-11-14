@@ -59,7 +59,7 @@ public:
         Att = static_cast<float>(Rand.RandomInt(3, 6));
         Def = static_cast<float>(Rand.RandomInt(3, 6));
         Cost = Rand.RandomInt(90, 140);
-        size_t i = static_cast<size_t>(Rand.RandomInt(0, Namelist.size() - 1));
+        size_t i = static_cast<size_t>(Rand.RandomInt(0, static_cast<int>(Namelist.size()) - 1));
 
         Name = Namelist[i];
 
@@ -89,6 +89,11 @@ public:
 
     void Init(GameEngineLevel* _NextLevel);
     void SpecInit(GamePlayerInfo _Spec);
+
+    GamePlayerInfo GetSpec()
+    {
+        return Spec;
+    }
 
 protected:
     void Start() override;
