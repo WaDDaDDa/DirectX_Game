@@ -15,6 +15,7 @@
 #include "Coach.h"
 #include "GamePlayer.h"
 #include "Stadium.h"
+#include "Audience.h"
 
 StadiumLevel::StadiumLevel()
 {
@@ -63,6 +64,22 @@ void StadiumLevel::Start()
 		GameEngineSprite::CreateSingle("stadium_frame_front.png");
 	}
 
+	{
+		// 폴더 로드
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("GameEngineResources");
+		Dir.MoveChild("ContentsResources\\Stadium\\");
+		std::vector<GameEngineDirectory> Directorys = Dir.GetAllDirectory();
+
+		for (size_t i = 0; i < Directorys.size(); i++)
+		{
+			GameEngineDirectory& Dir = Directorys[i];
+
+			GameEngineSprite::CreateFolder(Dir.GetStringPath());
+		}
+	}
+
+
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	// 카메라의 위치를 화면의 왼쪽맨위에 0,0이 위치하도록 자리를 잡는다.
 	GetMainCamera()->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
@@ -71,6 +88,7 @@ void StadiumLevel::Start()
 	GetCamera(static_cast<int>(ECAMERAORDER::UI))->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 
 	CreateActor<Stadium>();
+
 }
 
 void StadiumLevel::Update(float _Delta)
@@ -80,6 +98,11 @@ void StadiumLevel::Update(float _Delta)
 
 void StadiumLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
+	for (size_t i = 0; i < 300; i++)
+	{
+		CreateActor<Audience>();
+
+	}
 }
 
 void StadiumLevel::LevelEnd(GameEngineLevel* _NextLevel)

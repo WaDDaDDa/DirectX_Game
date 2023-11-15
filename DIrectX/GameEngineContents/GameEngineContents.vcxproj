@@ -165,6 +165,10 @@
   <ItemGroup>
     <ClCompile Include="Archer.cpp" />
     <ClCompile Include="Arrow.cpp" />
+    <ClCompile Include="Audience.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="BanPickBoard.cpp" />
     <ClCompile Include="BanPickCard.cpp" />
     <ClCompile Include="BanPickLevel.cpp" />
@@ -303,6 +307,10 @@
   <ItemGroup>
     <ClInclude Include="Archer.h" />
     <ClInclude Include="Arrow.h" />
+    <ClInclude Include="Audience.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="BanPickBoard.h" />
     <ClInclude Include="BanPickCard.h" />
     <ClInclude Include="BanPickLevel.h" />

@@ -237,6 +237,9 @@
     <ClCompile Include="Stadium.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="Audience.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -476,6 +479,9 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="Stadium.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Audience.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
