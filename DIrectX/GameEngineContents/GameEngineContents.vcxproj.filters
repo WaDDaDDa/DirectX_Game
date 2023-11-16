@@ -240,6 +240,9 @@
     <ClCompile Include="Audience.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyInfo.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -483,6 +486,9 @@
     </ClInclude>
     <ClInclude Include="Audience.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyInfo.h">
+      <Filter>Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

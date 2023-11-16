@@ -26,5 +26,19 @@ private:
     std::shared_ptr<class GameEngineSpriteRenderer> Desk;
     std::shared_ptr<class GameEngineSpriteRenderer> Frame;
 
+    std::shared_ptr<class GameEngineSpriteRenderer> BlueTeamName;
+    std::shared_ptr<class GameEngineSpriteRenderer> BlueTeamLogo;
+    std::shared_ptr<class GameEngineSpriteRenderer> BigBlueTeamLogoBg;
+    std::shared_ptr<class GameEngineSpriteRenderer> BigBlueTeamLogo;
+    std::shared_ptr<class GameEngineSpriteRenderer> BigBlueTeamName;
+
+    std::shared_ptr<class GameEngineSpriteRenderer> VSText;
+
+    std::shared_ptr<class GameEngineSpriteRenderer> RedTeamName;
+    std::shared_ptr<class GameEngineSpriteRenderer> RedTeamLogo;
+    std::shared_ptr<class GameEngineSpriteRenderer> BigRedTeamLogoBg;
+    std::shared_ptr<class GameEngineSpriteRenderer> BigRedTeamLogo;
+    std::shared_ptr<class GameEngineSpriteRenderer> BigRedTeamName;
+
 };
 

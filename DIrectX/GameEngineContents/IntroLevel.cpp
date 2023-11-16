@@ -3,6 +3,7 @@
 #include "IntroCut.h"
 #include "UI_Mouse.h"
 #include <GameEngineCore/FadePostEffect.h>
+#include "EnemyInfo.h"
 
 
 IntroLevel::IntroLevel()
@@ -108,10 +109,12 @@ void IntroLevel::Start()
 		GameEngineSprite::CreateSingle("Pythoness_skill.png");
 		GameEngineSprite::CreateSingle("swordman_ult.png");
 		GameEngineSprite::CreateSingle("swordman_skill.png");
-
 	}
 
+	EnemyInfo::Info.Init();
+
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
+
 
 	// 카메라의 위치를 화면의 왼쪽맨위에 0,0이 위치하도록 자리를 잡는다.
 	GetMainCamera()->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });

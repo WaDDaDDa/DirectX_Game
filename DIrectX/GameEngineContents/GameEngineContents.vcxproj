@@ -191,6 +191,10 @@
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="Default_Button.cpp" />
     <ClCompile Include="easing.cpp" />
+    <ClCompile Include="EnemyInfo.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="FireSpirit.cpp" />
     <ClCompile Include="FireSpiritAttack.cpp" />
     <ClCompile Include="FlameAttack.cpp" />
@@ -334,6 +338,10 @@
     <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="Default_Button.h" />
     <ClInclude Include="easing.h" />
+    <ClInclude Include="EnemyInfo.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="FireSpirit.h" />
     <ClInclude Include="FireSpiritAttack.h" />
     <ClInclude Include="FlameAttack.h" />

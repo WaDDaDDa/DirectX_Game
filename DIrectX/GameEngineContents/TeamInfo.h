@@ -103,6 +103,15 @@ public:
     //    }
     //}
 
+    std::string GetTeamName()
+    {
+        return TeamName;
+    }
+
+    std::string GetCoachName()
+    {
+        return CoachName;
+    }
 
 protected:
 
@@ -113,6 +122,9 @@ private:
     int Year = 2023;
     int Month = 1;
     int Week = 1;
+    
+    std::string TeamName = "ASSR";
+    std::string CoachName = "AR47";
 
     std::shared_ptr<class Coach> MyCoach;
     std::list<std::shared_ptr<class GamePlayer>> MyPlayer;
