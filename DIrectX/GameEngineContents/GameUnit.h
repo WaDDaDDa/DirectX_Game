@@ -2,6 +2,7 @@
 #include <GameEngineCore/GameEngineActor.h>
 #include <vector>
 #include "GameUnitStatus.h"
+#include "GamePlayer.h"
 
 enum class GameUnitState
 {
@@ -301,8 +302,18 @@ public:
         return AggroUnit;
     }
 
-    
+    void SetPlayerName(const std::string& _PlayerName)
+    {
+        PlayerName = _PlayerName;
+    }
 
+    void SetPlayerSpec(const GamePlayerInfo& _PlayerSpec)
+    {
+        PlayerSpec = _PlayerSpec;
+    }
+
+    GamePlayerInfo PlayerSpec;
+    std::string PlayerName = "Faker";
     TeamType MyTeam = TeamType::Blue;
     bool PlayerTeam = false;
     std::vector<GameUnit*> EnemyGroup;

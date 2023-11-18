@@ -2,6 +2,8 @@
 #include "PlayerCard.h"
 #include "GameUnit.h"
 #include "PlayerCard_Status.h"
+#include "TeamInfo.h"
+#include "EnemyInfo.h"
 
 float PlayerCard::BlueYInter = 0.0f;
 float PlayerCard::RedYInter = 0.0f;
@@ -88,6 +90,11 @@ void PlayerCard::Init()
 	AttIcon->SetPivotType(PivotType::Bottom);
 	AttIcon->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
 
+	AttText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	AttText->SetText("Galmuri14", std::to_string(static_cast<int>(Unit->PlayerSpec.Att)), 16.0f, float4::WHITE, FW1_LEFT);
+	AttText->Transform.AddLocalPosition({ -45.0f, -15.0f, -static_cast<float>(ContentsOrder::Text) });
+
+
 	// deficon
 	DefIcon = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
 	DefIcon->SetSprite("armor_icon.png");
@@ -97,11 +104,19 @@ void PlayerCard::Init()
 	DefIcon->SetPivotType(PivotType::Bottom);
 	DefIcon->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
 
+	DefText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	DefText->SetText("Galmuri14", std::to_string(static_cast<int>(Unit->PlayerSpec.Def)), 16.0f, float4::WHITE, FW1_LEFT);
+	DefText->Transform.AddLocalPosition({ 30.0f, -15.0f, -static_cast<float>(ContentsOrder::Text) });
+
+	PlayerName = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	PlayerName->SetText("Galmuri14", Unit->PlayerSpec.Name, 16.0f, float4::WHITE, FW1_LEFT);
+	PlayerName->Transform.AddLocalPosition({ -75.0f, 70.0f, -static_cast<float>(ContentsOrder::Text) });
 
 	float4 WindowScale = GameEngineCore::MainWindow.GetScale();
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 
+	// ºí·çÆÀ (³ª)
 	if (TeamType::Blue == Unit->MyTeam)
 	{
 		Transform.AddLocalPosition({ -HalfWindowScale.X + 79.0f, StartY + BlueYInter });

@@ -33,7 +33,7 @@ void ContentsCore::Start()
 	GameEngineCore::CreateLevel<BanPickLevel>("BanPickLevel");
 	GameEngineCore::CreateLevel<BattleLevel>("BattleLevel");
 	GameEngineCore::CreateLevel<StadiumLevel>("StadiumLevel");
-	GameEngineCore::ChangeLevel("IntroLevel");
+	GameEngineCore::ChangeLevel("BanPickLevel");
 
 }
 

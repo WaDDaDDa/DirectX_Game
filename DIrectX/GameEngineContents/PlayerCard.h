@@ -47,9 +47,14 @@ private:
 
     std::shared_ptr<class GameEngineSpriteRenderer> AttIcon;
     float4 AttIconPos = { -65.0f, -32.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> AttText;
+
 
     std::shared_ptr<class GameEngineSpriteRenderer> DefIcon;
     float4 DefIconPos = { 10.0f, -32.0f };
+    std::shared_ptr<class GameEngineSpriteRenderer> DefText;
+
+    std::shared_ptr<class GameEngineSpriteRenderer> PlayerName;
 
 
 

@@ -18,6 +18,8 @@
 #include "Pyromancer.h"
 #include "Pythoness.h"
 #include "Priest.h"
+#include "TeamInfo.h"
+#include "EnemyInfo.h"
 
 
 BattleLevel::BattleLevel()
@@ -60,7 +62,6 @@ void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 	std::shared_ptr<BattleField> BF = CreateActor<BattleField>();
 
-	
 	UnitSetting();
 
 	CreateActor<Bird>();
@@ -92,16 +93,34 @@ void BattleLevel::UnitSetting()
 {
 	size_t BSize = BanPickInfo::Info.BlueTeamPick.size();
 	size_t RSize = BanPickInfo::Info.BlueTeamPick.size();
-
 	
 	for (size_t i = 0; i < BSize; i++)
 	{
 		std::shared_ptr<GameUnit> Unit = CrateUnit(BanPickInfo::Info.BlueTeamPick[static_cast<int>(i)]);
+
+		if (0 == i)
+		{
+			Unit->SetPlayerSpec(TeamInfo::MyInfo.OnePlayer->GetSpec());
+		}
+		if (1 == i)
+		{
+			Unit->SetPlayerSpec(TeamInfo::MyInfo.TwoPlayer->GetSpec());
+		}
+
 		BlueTeam.push_back(Unit->GetPointer());
 	}
 	for (size_t i = 0; i < RSize; i++)
 	{
 		std::shared_ptr<GameUnit> Unit = CrateUnit(BanPickInfo::Info.RedTeamPick[static_cast<int>(i)]);
+		
+		if (0 == i)
+		{
+			Unit->SetPlayerSpec(EnemyInfo::Info.GetOnePlayer());
+		}
+		if (1 == i)
+		{
+			Unit->SetPlayerSpec(EnemyInfo::Info.GetTwoPlayer());
+		}
 		RedTeam.push_back(Unit->GetPointer());
 	}
 

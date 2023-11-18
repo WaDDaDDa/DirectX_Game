@@ -1,6 +1,8 @@
 #include "PreCompile.h"
 #include "BanPickBoard.h"
 #include "GameUnit.h"
+#include "TeamInfo.h"
+#include "EnemyInfo.h"
 
 BanPickBoard::BanPickBoard()
 {
@@ -59,10 +61,40 @@ void BanPickBoard::Start()
 	RedWin2->SetAutoScaleRatio(2.0f);
 	RedWin2->Transform.AddLocalPosition({ 135.0f,-65.0f });
 	RedWin2->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
+
+	BlueLogo = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	BlueLogo->SetSprite("TeamLogo", static_cast<unsigned int>(TeamInfo::MyInfo.GetIconNum()));
+	BlueLogo->AutoSpriteSizeOn();
+	BlueLogo->SetAutoScaleRatio(2.0f);
+	BlueLogo->Transform.AddLocalPosition({ -600.0f, -35.0f, -static_cast<float>(ContentsOrder::UIImage) });
+
+	BlueTeamName = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	BlueTeamName->SetText("Galmuri14", TeamInfo::MyInfo.GetTeamName(), 32.0f, float4::WHITE, FW1_CENTER);
+	BlueTeamName->Transform.AddLocalPosition({ -400.0f, -20.0f, -static_cast<float>(ContentsOrder::UIImage) });
+
+	BlueTeamWinCount = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	BlueTeamWinCount->SetText("Galmuri14", "0", 32.0f, float4::WHITE, FW1_CENTER);
+	BlueTeamWinCount->Transform.AddLocalPosition({ -90.0f, -15.0f, -static_cast<float>(ContentsOrder::UIImage) });
+
+	RedLogo = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	RedLogo->SetSprite("TeamLogo", static_cast<unsigned int>(EnemyInfo::Info.GetIconNum()));
+	RedLogo->AutoSpriteSizeOn();
+	RedLogo->SetAutoScaleRatio(2.0f);
+	RedLogo->Transform.AddLocalPosition({ 600.0f, -35.0f, -static_cast<float>(ContentsOrder::UIImage) });
+
+	RedTeamName = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	RedTeamName->SetText("Galmuri14", EnemyInfo::Info.GetTeamName(), 32.0f, float4::WHITE, FW1_CENTER);
+	RedTeamName->Transform.AddLocalPosition({ 400.0f, -20.0f, -static_cast<float>(ContentsOrder::UIImage) });
+
+	RedTeamWinCount = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
+	RedTeamWinCount->SetText("Galmuri14", "0", 32.0f, float4::WHITE, FW1_CENTER);
+	RedTeamWinCount->Transform.AddLocalPosition({ 90.0f, -15.0f, -static_cast<float>(ContentsOrder::UIImage) });
 }
 
 void BanPickBoard::LevelStart(GameEngineLevel* _PrevLevel)
 {
+	BlueLogo->SetSprite("TeamLogo", static_cast<unsigned int>(TeamInfo::MyInfo.GetIconNum()));
+	BlueTeamName->SetText("Galmuri14", TeamInfo::MyInfo.GetTeamName(), 32.0f, float4::WHITE, FW1_CENTER);
 
 }
 
