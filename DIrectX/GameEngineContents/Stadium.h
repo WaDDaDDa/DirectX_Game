@@ -70,6 +70,7 @@ private:
     std::shared_ptr<class GameEngineSpriteRenderer> RedPlayerBody2;
     std::shared_ptr<class GameEngineSpriteRenderer> RedPlayerHair2;
 
+    std::shared_ptr<class FadeEffect> FadeOutEffect = nullptr;
 
 };
 

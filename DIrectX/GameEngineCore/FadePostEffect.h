@@ -20,5 +20,6 @@ protected:
 private:
 	void Start() override;
 	void EffectProcess(float _DeltaTime) override;
+	float LiveTime = 0.0f;
 };
 

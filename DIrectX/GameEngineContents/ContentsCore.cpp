@@ -10,6 +10,7 @@
 #include "BattleLevel.h"
 #include "MainLevel.h"
 #include "StadiumLevel.h"
+#include "ContentResources.h"
 
 ContentsCore::ContentsCore()
 {
@@ -21,6 +22,8 @@ ContentsCore::~ContentsCore()
 
 void ContentsCore::Start()
 {
+	ContentResources::ContentResourcesInit();
+
 	GameEngineGUI::CreateGUIWindow<ContentsControlWindow>("ContentsControlWindow");
 	GameEngineGUI::CreateGUIWindow<GameEngineCoreWindow>("GameEngineCoreWindow");
 
@@ -30,7 +33,7 @@ void ContentsCore::Start()
 	GameEngineCore::CreateLevel<BanPickLevel>("BanPickLevel");
 	GameEngineCore::CreateLevel<BattleLevel>("BattleLevel");
 	GameEngineCore::CreateLevel<StadiumLevel>("StadiumLevel");
-	GameEngineCore::ChangeLevel("StadiumLevel");
+	GameEngineCore::ChangeLevel("IntroLevel");
 
 }
 

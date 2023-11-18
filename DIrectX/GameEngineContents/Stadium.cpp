@@ -274,10 +274,19 @@ void Stadium::LevelStart(GameEngineLevel* _PrevLevel)
 
 void Stadium::Update(float _Delta)
 {
-
+	if (5.0f <= GetLiveTime())
+	{
+		FadeOutEffect = GetLevel()->GetLevelRenderTarget()->CreateEffect<FadeEffect>();
+		FadeOutEffect->SetChangeLevelName("BanPickLevel");
+		ResetLiveTime();
+	}
 }
 
 void Stadium::LevelEnd(GameEngineLevel* _NextLevel)
 {
-
+	if (nullptr != FadeOutEffect)
+	{
+		FadeOutEffect->Death();
+		FadeOutEffect = nullptr;
+	}
 }

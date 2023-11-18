@@ -100,11 +100,20 @@ void StadiumLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	for (size_t i = 0; i < 300; i++)
 	{
 		CreateActor<Audience>();
+	}
 
+	if (nullptr == FadeInEffect)
+	{
+		FadeInEffect = GetLevelRenderTarget()->CreateEffect<FadeEffect>();
+		FadeInEffect->SetFadeIn();
 	}
 }
 
 void StadiumLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
-
+	if (nullptr != FadeInEffect)
+	{
+		FadeInEffect->Death();
+		FadeInEffect = nullptr;
+	}
 }

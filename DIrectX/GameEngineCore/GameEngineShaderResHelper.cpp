@@ -55,7 +55,20 @@ void GameEngineTextureSetter::Setting()
 
 void GameEngineTextureSetter::Reset()
 {
+	ShaderType Type = ParentShader->GetShaderType();
 
+	switch (Type)
+	{
+	case ShaderType::Vertex:
+		Res->VSReset(BindPoint);
+		break;
+	case ShaderType::Pixel:
+		Res->PSReset(BindPoint);
+		break;
+	default:
+		MsgBoxAssert("처리할수 없는 쉐이더 세팅 유형입니다.");
+		break;
+	}
 }
 
 void GameEngineSamplerSetter::Setting()

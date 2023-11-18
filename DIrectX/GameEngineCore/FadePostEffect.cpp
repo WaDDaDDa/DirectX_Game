@@ -24,6 +24,12 @@ void FadePostEffect::Start()
 }
 void FadePostEffect::EffectProcess(float _DeltaTime)
 {
+	LiveTime += _DeltaTime;
+	if (1.0f <= LiveTime)
+	{
+		Death();
+		return;
+	}
 	ResultTarget->Setting();
 	EffectUnit.Render();
 	EffectUnit.ShaderResHelper.AllShaderResourcesReset();

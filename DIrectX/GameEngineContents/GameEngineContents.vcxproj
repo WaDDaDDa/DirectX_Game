@@ -187,6 +187,7 @@
     <ClCompile Include="ButtonBundle.cpp" />
     <ClCompile Include="Cloud.cpp" />
     <ClCompile Include="Coach.cpp" />
+    <ClCompile Include="ContentResources.cpp" />
     <ClCompile Include="ContentsControlWindow.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="Default_Button.cpp" />
@@ -195,6 +196,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="FadeEffect.cpp" />
     <ClCompile Include="FireSpirit.cpp" />
     <ClCompile Include="FireSpiritAttack.cpp" />
     <ClCompile Include="FlameAttack.cpp" />
@@ -333,6 +335,7 @@
     <ClInclude Include="ButtonBundle.h" />
     <ClInclude Include="Cloud.h" />
     <ClInclude Include="Coach.h" />
+    <ClInclude Include="ContentResources.h" />
     <ClInclude Include="ContentsControlWindow.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsEnum.h" />
@@ -342,6 +345,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="FadeEffect.h" />
     <ClInclude Include="FireSpirit.h" />
     <ClInclude Include="FireSpiritAttack.h" />
     <ClInclude Include="FlameAttack.h" />

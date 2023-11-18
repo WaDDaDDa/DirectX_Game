@@ -12,6 +12,8 @@
 #include "ProceedButton.h"
 #include "HeaderInfo.h"
 #include "TeamInfo.h"
+#include <GameEngineCore/FadePostEffect.h>
+#include "FadeEffect.h"
 
 
 House_UI::House_UI()
@@ -169,18 +171,29 @@ void House_UI::Update(float _Delta)
 	PopBundle(GameButton, GamePopMenu);
 	PopBundle(SystemButton, SystemPopMenu);
 
-	
-
 	if (true == Proceed->GetIsClick() && (1 == TeamInfo::MyInfo.GetWeek() || 2 == TeamInfo::MyInfo.GetWeek()))
 	{
-		TeamInfo::MyInfo.AddWeek(1);
-		GameEngineCore::ChangeLevel("MainLevel");
+		FadeOutEffect = GetLevel()->GetLevelRenderTarget()->CreateEffect<FadeEffect>();
+		FadeOutEffect->SetChangeLevelName("MainLevel");
 		return;
 	}
 	else if (true == Proceed->GetIsClick() && (3 == TeamInfo::MyInfo.GetWeek() || 4 == TeamInfo::MyInfo.GetWeek()))
 	{
-		TeamInfo::MyInfo.AddWeek(1);
-		GameEngineCore::ChangeLevel("StadiumLevel");
+		FadeOutEffect = GetLevel()->GetLevelRenderTarget()->CreateEffect<FadeEffect>();
+		FadeOutEffect->SetChangeLevelName("StadiumLevel");
 		return;
 	}
+
 }
+
+void House_UI::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	TeamInfo::MyInfo.AddWeek(1);
+
+	if (nullptr != FadeOutEffect)
+	{
+		FadeOutEffect->Death();
+		FadeOutEffect = nullptr;
+	}
+}
+

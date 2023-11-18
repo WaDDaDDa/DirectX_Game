@@ -111,6 +111,8 @@ void MainLevel::Update(float _Delta)
 
 void MainLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
+	std::shared_ptr<class FadeEffect> FadeInEffect = GetLevelRenderTarget()->CreateEffect<FadeEffect>();
+	FadeInEffect->SetFadeIn();
 }
 
 void MainLevel::LevelEnd(GameEngineLevel* _NextLevel)

@@ -243,6 +243,10 @@
     <ClCompile Include="EnemyInfo.cpp">
       <Filter>Global</Filter>
     </ClCompile>
+    <ClCompile Include="FadeEffect.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentResources.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -490,6 +494,10 @@
     <ClInclude Include="EnemyInfo.h">
       <Filter>Global</Filter>
     </ClInclude>
+    <ClInclude Include="FadeEffect.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentResources.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">

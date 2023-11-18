@@ -76,6 +76,9 @@ void BanPickLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 	CreateActor<BanPickManager>();
 
+	std::shared_ptr<class FadeEffect> FadeInEffect = GetLevelRenderTarget()->CreateEffect<FadeEffect>();
+	FadeInEffect->SetFadeIn();
+
 }
 
 void BanPickLevel::LevelEnd(GameEngineLevel* _NextLevel)

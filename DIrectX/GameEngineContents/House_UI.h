@@ -16,6 +16,7 @@ protected:
     void Start() override;
     void Update(float _Delta) override;
     void LevelStart(GameEngineLevel* _PrevLevel) override;
+    void LevelEnd(GameEngineLevel* _NextLevel) override;
 
     void PopBundle(std::shared_ptr<class MenuButton> _Menu, std::shared_ptr<class ButtonBundle> _Bundle);
 
@@ -43,6 +44,10 @@ private:
 
     std::shared_ptr<class HeaderInfo> Day;
     std::shared_ptr<class HeaderInfo> Gold;
+
+    std::shared_ptr<class FadeEffect> FadeInEffect = nullptr;
+    std::shared_ptr<class FadeEffect> FadeOutEffect = nullptr;
+
 
 };
 

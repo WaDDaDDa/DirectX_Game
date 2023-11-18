@@ -29,3 +29,4 @@
 
 #include "Default_Button.h"
 #include "SlotButton.h"
+#include "FadeEffect.h"

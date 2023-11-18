@@ -61,6 +61,11 @@ public:
 		return Cameras[static_cast<int>(ECAMERAORDER::Main)];
 	}
 
+	std::shared_ptr<GameEngineCamera> GetUICamera()
+	{
+		return Cameras[static_cast<int>(ECAMERAORDER::UI)];
+	}
+
 	std::shared_ptr<GameEngineCamera> GetCamera(int _Select)
 	{
 		return Cameras[_Select];
