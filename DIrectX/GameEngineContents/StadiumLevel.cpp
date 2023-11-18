@@ -88,7 +88,6 @@ void StadiumLevel::Start()
 	GetCamera(static_cast<int>(ECAMERAORDER::UI))->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 
 	CreateActor<Stadium>();
-
 }
 
 void StadiumLevel::Update(float _Delta)

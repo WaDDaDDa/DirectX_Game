@@ -16,10 +16,13 @@ public:
 
     void Init()
     {
+        class GamePlayerInfo NewInfo;
+        GameEngineRandom Rand;
+
         for (size_t i = 0; i < 2; i++)
         {
-            class GamePlayerInfo NewInfo;
             NewInfo.Random();
+            NewInfo.HairNum = Rand.RandomInt(1, 29);
             EnemyPlayer.push_back(NewInfo);
         }
     }
@@ -33,6 +36,17 @@ public:
     {
         return TeamName;
     }
+
+    GamePlayerInfo GetOnePlayer()
+    {
+        return EnemyPlayer[0];
+    }
+
+    GamePlayerInfo GetTwoPlayer()
+    {
+        return EnemyPlayer[1];
+    }
+
 
 protected:
 

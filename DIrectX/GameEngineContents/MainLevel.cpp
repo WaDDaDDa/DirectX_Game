@@ -92,6 +92,16 @@ void MainLevel::Start()
 	TeamInfo::MyInfo.AddPlayer(CreateActor<GamePlayer>());
 	TeamInfo::MyInfo.AddPlayer(CreateActor<GamePlayer>());
 	TeamInfo::MyInfo.AddPlayer(CreateActor<GamePlayer>());
+
+	std::list<std::shared_ptr<class GamePlayer>>& PlayerGroup = TeamInfo::MyInfo.GetMyPlayer();
+
+	std::list<std::shared_ptr<GamePlayer>>::iterator Start = PlayerGroup.begin();
+	std::list<std::shared_ptr<GamePlayer>>::iterator End = PlayerGroup.end();
+
+	TeamInfo::MyInfo.OnePlayer = (*Start);
+	Start++;
+	TeamInfo::MyInfo.TwoPlayer = (*Start);
+
 }
 
 void MainLevel::Update(float _Delta)
