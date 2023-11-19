@@ -96,6 +96,26 @@ void BanPickBoard::LevelStart(GameEngineLevel* _PrevLevel)
 	BlueLogo->SetSprite("TeamLogo", static_cast<unsigned int>(TeamInfo::MyInfo.GetIconNum()));
 	BlueTeamName->SetText("Galmuri14", TeamInfo::MyInfo.GetTeamName(), 32.0f, float4::WHITE, FW1_CENTER);
 
+	if (1 <= TeamInfo::MyInfo.WinCount)
+	{
+		BlueWin->SetSprite("win_indicator_1.png");
+	}
+
+	if (2 <= TeamInfo::MyInfo.WinCount)
+	{
+		BlueWin2->SetSprite("win_indicator_1.png");
+	}
+
+	if (1 <= EnemyInfo::Info.WinCount)
+	{
+		RedWin->SetSprite("win_indicator_1.png");
+	}
+
+	if (2 <= EnemyInfo::Info.WinCount)
+	{
+		RedWin2->SetSprite("win_indicator_1.png");
+	}
+
 }
 
 void BanPickBoard::Update(float _Delta)

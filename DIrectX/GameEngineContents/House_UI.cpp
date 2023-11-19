@@ -14,6 +14,7 @@
 #include "TeamInfo.h"
 #include <GameEngineCore/FadePostEffect.h>
 #include "FadeEffect.h"
+#include "EnemyInfo.h"
 
 
 House_UI::House_UI()
@@ -124,6 +125,9 @@ void House_UI::Start()
 void House_UI::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	TeamLogo->SetSprite("TeamLogo", static_cast<unsigned int>(TeamInfo::MyInfo.GetIconNum()));
+
+	TeamInfo::MyInfo.WinCount = 0;
+	EnemyInfo::Info.WinCount = 0;
 }
 
 

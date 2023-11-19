@@ -94,6 +94,26 @@ void StadiumBoard::LevelStart(GameEngineLevel* _PrevLevel)
 
 	BlueLogo->SetSprite("TeamLogo", static_cast<unsigned int>(TeamInfo::MyInfo.GetIconNum()));
 	BlueTeamName->SetText("Galmuri14", TeamInfo::MyInfo.GetTeamName(), 32.0f, float4::WHITE, FW1_CENTER);
+
+	if (1 <= TeamInfo::MyInfo.WinCount)
+	{
+		BlueWin->SetSprite("win_indicator_1.png");
+	}
+
+	if (2 <= TeamInfo::MyInfo.WinCount)
+	{
+		BlueWin2->SetSprite("win_indicator_1.png");
+	}
+
+	if (1 <= EnemyInfo::Info.WinCount)
+	{
+		RedWin->SetSprite("win_indicator_1.png");
+	}
+
+	if (2 <= EnemyInfo::Info.WinCount)
+	{
+		RedWin2->SetSprite("win_indicator_1.png");
+	}
 }
 
 void StadiumBoard::Update(float _Delta)
@@ -117,9 +137,19 @@ void StadiumBoard::Update(float _Delta)
 	BlueKillCount = RedDieCount;
 	RedKillCount = BlueDieCount;
 
+	BlueTeamWinCount->SetText("Galmuri14", std::to_string(BlueKillCount), 32.0f, float4::WHITE, FW1_CENTER);
+	RedTeamWinCount->SetText("Galmuri14", std::to_string(RedKillCount), 32.0f, float4::WHITE, FW1_CENTER);
+
 	if (0.0f >= GameTime)
 	{
+		if (BlueKillCount == RedKillCount)
+		{
+			return;
+		}
+
 		GameEngineCore::ChangeLevel("BanPickLevel");
+		return;
+
 	}
 
 }
@@ -127,5 +157,14 @@ void StadiumBoard::Update(float _Delta)
 void StadiumBoard::LevelEnd(GameEngineLevel* _NextLevel)
 {
 	// if 승패 머시기 해서 값 살려두기
+	if (BlueKillCount > RedKillCount)
+	{
+		TeamInfo::MyInfo.WinCount += 1;
+	}
+	else if (RedKillCount > BlueKillCount)
+	{
+		EnemyInfo::Info.WinCount += 1;
+	}
+
 	Death();
 }

@@ -47,6 +47,7 @@ public:
         return EnemyPlayer[1];
     }
 
+    int WinCount = 0;
 
 protected:
 

@@ -116,6 +116,8 @@ public:
     std::shared_ptr<class GamePlayer> OnePlayer = nullptr;
     std::shared_ptr<class GamePlayer> TwoPlayer = nullptr;
 
+    int WinCount = 0;
+
 protected:
 
 private:
@@ -128,7 +130,6 @@ private:
     
     std::string TeamName = "ASSR";
     std::string CoachName = "AR47";
-
 
     std::shared_ptr<class Coach> MyCoach;
     std::list<std::shared_ptr<class GamePlayer>> MyPlayer;
