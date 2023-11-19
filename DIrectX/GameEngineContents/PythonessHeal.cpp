@@ -43,7 +43,7 @@ void PythonessHeal::Start()
 								AttackOn = true;
 								LifeTime = 2.0f;
 								Renderer->ChangeAnimation("PythonessHeal2");
-								reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->HealHP(Att);
+								reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->HealHP(Att, Unit);
 								Pos = Transform.GetWorldPosition() - HealUnit->Transform.GetWorldPosition();
 								Col->Off();
 							}
@@ -64,7 +64,7 @@ void PythonessHeal::Start()
 								AttackOn = true;
 								LifeTime = 2.0f;
 								Renderer->ChangeAnimation("PythonessHeal2");
-								reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->HealHP(Att);
+								reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->HealHP(Att, Unit);
 								Pos = Transform.GetWorldPosition() - HealUnit->Transform.GetWorldPosition();
 								Col->Off();
 							}

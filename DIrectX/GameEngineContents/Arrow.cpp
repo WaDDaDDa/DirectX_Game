@@ -36,7 +36,7 @@ void Arrow::Start()
 						{
 							AttackOn = true;
 							LifeTime = 2.0f;
-							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att);
+							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att, Unit);
 							EnemyUnit = reinterpret_cast<GameUnit*>(_Collision[i]->GetActor());
 							Pos = Transform.GetWorldPosition() - EnemyUnit->Transform.GetWorldPosition();
 							Col->Off();
@@ -51,7 +51,7 @@ void Arrow::Start()
 						{
 							AttackOn = true;
 							LifeTime = 2.0f;
-							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att);
+							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att, Unit);
 							EnemyUnit = reinterpret_cast<GameUnit*>(_Collision[i]->GetActor());
 							Pos = Transform.GetWorldPosition() - EnemyUnit->Transform.GetWorldPosition();
 

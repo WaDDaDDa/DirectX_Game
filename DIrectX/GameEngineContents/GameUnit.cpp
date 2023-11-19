@@ -896,7 +896,7 @@ void GameUnit::Attack2Start()
 				for (size_t i = 0; i < _Collision.size(); i++)
 				{
 					// 공격대미지 공식
-					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt);
+					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt, GetDynamic_Cast_This<GameUnit>());
 					return;
 				}
 			});
@@ -909,7 +909,7 @@ void GameUnit::Attack2Start()
 				for (size_t i = 0; i < _Collision.size(); i++)
 				{
 					// 공격대미지 공식
-					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt);
+					reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt, GetDynamic_Cast_This<GameUnit>());
 					return;
 				}
 			});

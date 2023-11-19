@@ -43,7 +43,7 @@ void PythonessSkill::Start()
 								AttackOn = true;
 								LifeTime = 2.0f;
 								//Renderer->ChangeAnimation("PythonessSkill2");
-								reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->HealHP(Att);
+								reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->HealHP(Att, Unit);
 								Pos = Transform.GetWorldPosition() - HealUnit->Transform.GetWorldPosition();
 								Col->Off();
 								HealUnit->HealTarget = false;
@@ -68,7 +68,7 @@ void PythonessSkill::Start()
 								AttackOn = true;
 								LifeTime = 2.0f;
 								//Renderer->ChangeAnimation("PythonessSkill2");
-								reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->HealHP(Att);
+								reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->HealHP(Att, Unit);
 								Pos = Transform.GetWorldPosition() - HealUnit->Transform.GetWorldPosition();
 								Col->Off();
 								HealUnit->HealTarget = false;

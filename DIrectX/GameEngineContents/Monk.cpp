@@ -178,7 +178,7 @@ void Monk::SkillStart()
 			}
 		}
 
-		TeamGroup[TeamNum]->HealHP(UnitAtt * 0.6f);
+		TeamGroup[TeamNum]->HealHP(UnitAtt * 0.6f, GetDynamic_Cast_This<GameUnit>());
 		HealTick -= 1.0f;
 	}
 

@@ -28,6 +28,19 @@ protected:
     void LevelEnd(GameEngineLevel* _NextLevel) override;
     float4 StartPos = float4::ZERO;
 
+    std::shared_ptr<class GameEngineSpriteRenderer> InfoText;
+    std::shared_ptr<class GameEngineSpriteRenderer> KillText;
+    std::shared_ptr<class GameEngineSpriteRenderer> DeathText;
+    std::shared_ptr<class GameEngineSpriteRenderer> AsistText;
+    std::shared_ptr<class GameEngineSpriteRenderer> KillInfo;
+    std::shared_ptr<class GameEngineSpriteRenderer> DeathInfo;
+    std::shared_ptr<class GameEngineSpriteRenderer> AsistInfo;
+
+    std::shared_ptr<class GameEngineSpriteRenderer> AttInfo;
+    std::shared_ptr<class GameEngineSpriteRenderer> DefInfo;
+    std::shared_ptr<class GameEngineSpriteRenderer> HealInfo;
+
+
 private:
     std::shared_ptr<class PlayerCard> PCard;
     std::shared_ptr<class GameEngineSpriteRenderer> Renderer;

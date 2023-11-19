@@ -33,7 +33,7 @@ void FlameAttack::Start()
 					{
 						for (size_t i = 0; i < _Collision.size(); i++)
 						{
-							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att);
+							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att, Unit);
 						}
 					});
 			}
@@ -43,7 +43,7 @@ void FlameAttack::Start()
 					{
 						for (size_t i = 0; i < _Collision.size(); i++)
 						{
-							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att);
+							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att, Unit);
 						}
 					});
 			}

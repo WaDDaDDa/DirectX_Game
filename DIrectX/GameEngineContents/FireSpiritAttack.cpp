@@ -38,7 +38,7 @@ void FireSpiritAttack::Start()
 							AttackOn = true;
 							LifeTime = 2.0f;
 							Renderer->ChangeAnimation("FireSpiritAttack2");
-							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att);
+							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att, Unit->Unit);
 							EnemyUnit = reinterpret_cast<GameUnit*>(_Collision[i]->GetActor());
 							Pos = Transform.GetWorldPosition() - EnemyUnit->Transform.GetWorldPosition();
 							Col->Off();
@@ -54,7 +54,7 @@ void FireSpiritAttack::Start()
 							AttackOn = true;
 							LifeTime = 2.0f;
 							Renderer->ChangeAnimation("FireSpiritAttack2");
-							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att);
+							reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(Att, Unit->Unit);
 							EnemyUnit = reinterpret_cast<GameUnit*>(_Collision[i]->GetActor());
 							Pos = Transform.GetWorldPosition() - EnemyUnit->Transform.GetWorldPosition();
 

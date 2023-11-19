@@ -195,7 +195,7 @@ public:
 
     bool Immune = false;
 
-    void DamageHP(float _Value)
+    void DamageHP(float _Value, std::shared_ptr<class GameUnit> _AttUnit)
     {
         if (true == Immune)
         {
@@ -206,24 +206,31 @@ public:
         //float Result = _Value - (UnitDef * 0.4f);
         float DefRate = (UnitDef / (100.0f + UnitDef));
         float Result = _Value - _Value * DefRate;
+
         if (Result <= 0.0f)
         {
             UnitHP = 0.0f;
             return;
         }
+
         UnitHP -= Result;
+        _AttUnit->AddAttDamage(Result);
+        AddDefDamage(Result);
+
+        if (0.0f >= UnitHP)
+        {
+            _AttUnit->AddKillCount();
+        }    
 
         if (false == DamageCheck)
         {
-
             DamageCheck = true;
             MainSpriteRenderer->GetColorData().PlusColor += float4::ONENULL;
         }
 
-
     }
 
-    void HealHP(float _Value)
+    void HealHP(float _Value, std::shared_ptr<class GameUnit> _HealUnit)
     {
         float Result = UnitHP + _Value;
 
@@ -232,9 +239,13 @@ public:
             Result = UnitMaxHP;
         }
 
-        UnitHP = Result;
+        float Healling = Result - UnitHP;
 
+        _HealUnit->AddHealling(Healling);
+
+        UnitHP = Result;
     }
+
     // 변한 컬러 회복시키는 불값.
     bool DamageCheck = false;
     float DamageDelta = 0.0f;
@@ -327,6 +338,46 @@ public:
     int GetDieCount()
     {
         return DieCount;
+    }
+
+    int GetKillCount()
+    {
+        return KillCount;
+    }
+
+    void AddKillCount()
+    {
+        KillCount += 1;
+    }
+
+    float GetAttDamage()
+    {
+        return AttDamage;
+    }
+
+    void AddAttDamage(float _Damage)
+    {
+        AttDamage += _Damage;
+    }
+
+    float GetDefDamage()
+    {
+        return DefDamage;
+    }
+
+    void AddDefDamage(float _Damage)
+    {
+        DefDamage += _Damage;
+    }
+
+    float GetHealling()
+    {
+        return Healling;
+    }
+
+    void AddHealling(float _Heal)
+    {
+        Healling += _Heal;
     }
 
     void ChangeState(GameUnitState _State);
@@ -463,7 +514,10 @@ protected:
     float UltValue = 0.0f;
 
     int DieCount = 0;
-
+    int KillCount = 0;
+    float AttDamage = 0.0f;
+    float DefDamage = 0.0f;
+    float Healling = 0.0f;
 
 private:
     float RespawnTime = 0.0f;
