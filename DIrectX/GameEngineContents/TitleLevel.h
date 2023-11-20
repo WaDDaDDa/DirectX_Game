@@ -16,9 +16,17 @@ public:
     std::vector<class GameUnit*> RedTeam;
     std::vector<class GameUnit*> BlueTeam;
 
-    void UnitSetting();
+    std::vector<std::string> UseUnitName;
+
+    void BlueUnitSetting();
+    void RedUnitSetting();
+
+    std::string CrateUnitName();
 
     std::shared_ptr<GameUnit> CrateUnit(std::string_view _Name);
+
+    GameEngineRandom Rand;
+    long long RandSeed = 0;
 
 protected:
     void Start() override;

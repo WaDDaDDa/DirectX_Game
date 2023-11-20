@@ -54,19 +54,24 @@ void TitleLevel::Update(float _Delta)
 
 void TitleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
-	GameEngineRandom NewRandom;
+	RandSeed = reinterpret_cast<long long>(this);
+	RandSeed += Rand.RandomInt(0, 1000);
+	Rand.SetSeed(RandSeed);
 
 	std::shared_ptr<BattleField> BF = CreateActor<BattleField>();
 
-	BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
-	BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
-	BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
-	BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
+	BlueUnitSetting();
+	RedUnitSetting();
 
-	RedTeam.push_back(CreateActor<Archer>()->GetPointer());
-	RedTeam.push_back(CreateActor<Archer>()->GetPointer());
-	RedTeam.push_back(CreateActor<Archer>()->GetPointer());
-	RedTeam.push_back(CreateActor<Archer>()->GetPointer());
+	//BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
+	//BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
+	//BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
+	//BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
+
+	//RedTeam.push_back(CreateActor<Archer>()->GetPointer());
+	//RedTeam.push_back(CreateActor<Archer>()->GetPointer());
+	//RedTeam.push_back(CreateActor<Archer>()->GetPointer());
+	//RedTeam.push_back(CreateActor<Archer>()->GetPointer());
 
 	// 팀설정
 	for (size_t i = 0; i < BlueTeam.size(); i++)
@@ -109,55 +114,121 @@ void TitleLevel::LevelEnd(GameEngineLevel* _NextLevel)
 	int a = 0;
 }
 
-void TitleLevel::UnitSetting()
+void TitleLevel::BlueUnitSetting()
 {
-	size_t BSize = BanPickInfo::Info.BlueTeamPick.size();
-	size_t RSize = BanPickInfo::Info.BlueTeamPick.size();
-	
-	for (size_t i = 0; i < BSize; i++)
-	{
-		std::shared_ptr<GameUnit> Unit = CrateUnit(BanPickInfo::Info.BlueTeamPick[static_cast<int>(i)]);
+	std::string UnitName = CrateUnitName();
 
-		if (0 == i)
+	BlueTeam.push_back(CrateUnit(UnitName)->GetPointer());
+	UseUnitName.push_back(UnitName);
+
+	for (size_t i = 0; i < 3; i++)
+	{
+		std::string CheckName = "";
+		bool Check = false;
+
+		while (UnitName != CheckName)
 		{
-			Unit->SetPlayerSpec(TeamInfo::MyInfo.OnePlayer->GetSpec());
-		}
-		if (1 == i)
-		{
-			Unit->SetPlayerSpec(TeamInfo::MyInfo.TwoPlayer->GetSpec());
+			UnitName = CrateUnitName();
+			// 이름 을 꺼내.
+			for (size_t i = 0; i < UseUnitName.size(); i++)
+			{
+				// 확인했더니 있어. 다시 이름을꺼내.
+				// 확인했더니 없어. 아래로 내려.
+				if (i == UseUnitName.size() - 1)
+				{
+					CheckName = UnitName;
+				}
+
+				if (UnitName == UseUnitName[static_cast<int>(i)])
+				{
+					CheckName = "";
+					break;
+				}
+			}
+
 		}
 
-		BlueTeam.push_back(Unit->GetPointer());
+		UseUnitName.push_back(UnitName);
+		BlueTeam.push_back(CrateUnit(UnitName)->GetPointer());
 	}
-	for (size_t i = 0; i < RSize; i++)
+}
+
+void TitleLevel::RedUnitSetting()
+{
+	std::string UnitName = CrateUnitName();
+
+	for (size_t i = 0; i < 4; i++)
 	{
-		std::shared_ptr<GameUnit> Unit = CrateUnit(BanPickInfo::Info.RedTeamPick[static_cast<int>(i)]);
-		
-		if (0 == i)
+		std::string CheckName = "";
+		bool Check = false;
+
+		while (UnitName != CheckName)
 		{
-			Unit->SetPlayerSpec(EnemyInfo::Info.GetOnePlayer());
+			UnitName = CrateUnitName();
+			// 이름 을 꺼내.
+			for (size_t i = 0; i < UseUnitName.size(); i++)
+			{
+				// 확인했더니 있어. 다시 이름을꺼내.
+				// 확인했더니 없어. 아래로 내려.
+				if (i == UseUnitName.size() - 1)
+				{
+					CheckName = UnitName;
+				}
+
+				if (UnitName == UseUnitName[static_cast<int>(i)])
+				{
+					CheckName = "";
+					break;
+				}
+			}
+
 		}
-		if (1 == i)
-		{
-			Unit->SetPlayerSpec(EnemyInfo::Info.GetTwoPlayer());
-		}
-		RedTeam.push_back(Unit->GetPointer());
+
+		UseUnitName.push_back(UnitName);
+		RedTeam.push_back(CrateUnit(UnitName)->GetPointer());
+	}
+}
+
+std::string TitleLevel::CrateUnitName()
+{
+	RandSeed++;
+	Rand.SetSeed(RandSeed);
+	int Num = Rand.RandomInt(1, 8);
+
+	if (1 == Num)
+	{
+		return "Archer";
+	}
+	if (2 == Num)
+	{
+		return "Knight";
+	}
+	if (3 == Num)
+	{
+		return  "Monk";
+	}
+	if (4 == Num)
+	{
+		return  "Pyromancer";
+	}
+	if (5 == Num)
+	{
+		return "Pythoness"; 
+	}
+	if (6 == Num)
+	{
+		return "Swordman";
+	}
+	if (7 == Num)
+	{
+		return "Priest";
+	}
+	if (8 == Num)
+	{
+		return "Ninja";
 	}
 
-	// 팀설정
-	for (size_t i = 0; i < BlueTeam.size(); i++)
-	{
-		BlueTeam[static_cast<int>(i)]->EnemyUnitSetting(RedTeam);
-		BlueTeam[static_cast<int>(i)]->TeamUnitSetting(BlueTeam);
-		BlueTeam[static_cast<int>(i)]->TeamSet(TeamType::Blue);
-	}
-
-	for (size_t i = 0; i < RedTeam.size(); i++)
-	{
-		RedTeam[static_cast<int>(i)]->EnemyUnitSetting(BlueTeam);
-		RedTeam[static_cast<int>(i)]->TeamUnitSetting(RedTeam);
-		RedTeam[static_cast<int>(i)]->TeamSet(TeamType::Red);
-	}
+	return "";
 }
 
 std::shared_ptr<GameUnit> TitleLevel::CrateUnit(std::string_view _Name)
