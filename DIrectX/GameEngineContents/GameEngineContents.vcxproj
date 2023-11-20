@@ -305,6 +305,8 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="TitleLevel.cpp" />
+    <ClCompile Include="Title_UI.cpp" />
     <ClCompile Include="UI_Button.cpp">
       <SubType>
       </SubType>
@@ -453,6 +455,8 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="TitleLevel.h" />
+    <ClInclude Include="Title_UI.h" />
     <ClInclude Include="UI_Button.h">
       <SubType>
       </SubType>

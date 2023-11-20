@@ -42,6 +42,8 @@ public:
     GameUnit& operator=(const GameUnit& _Other) = delete;
     GameUnit& operator=(GameUnit&& _Other) noexcept = delete;
 
+    bool IsTitle = false;
+
     GameUnit* GetPointer()
     {
         return this;

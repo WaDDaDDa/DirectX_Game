@@ -129,6 +129,7 @@ private:
     std::shared_ptr<GameEngineSpriteRenderer> WinnerName;
     std::shared_ptr<GameEngineSpriteRenderer> WinnerText;
 
+    std::shared_ptr<class FadeEffect> FadeOutEffect = nullptr;
 
     int Scene = 0;
     float SceneTime = 0.0f;

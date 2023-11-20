@@ -385,6 +385,12 @@ void Awards::CoachHairCheck(const SpriteData& _CurSprite)
 
 void Awards::LevelEnd(GameEngineLevel* _NextLevel)
 {
+	if (nullptr != FadeOutEffect)
+	{
+		FadeOutEffect->Death();
+		FadeOutEffect = nullptr;
+	}
+
 	Death();
 }
 
@@ -1068,7 +1074,8 @@ void Awards::CurtainCloseUpdate(float _Delta)
 		if (GameEngineInput::IsDown(VK_SPACE, this) && 355.0f == XPos)
 		{
 			//레벨 체인지.
-			//ChangeState(AwardsState::CutScene1);
+			FadeOutEffect = GetLevel()->GetLevelRenderTarget()->CreateEffect<FadeEffect>();
+			FadeOutEffect->SetChangeLevelName("TitleLevel");
 			return;
 		}
 

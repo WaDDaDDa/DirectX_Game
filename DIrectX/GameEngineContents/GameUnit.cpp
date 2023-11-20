@@ -79,6 +79,12 @@ void GameUnit::LevelStart(GameEngineLevel* _PrevLevel)
 	ChangeState(GameUnitState::Spwan);
 	// HPUI »ý¼º
 	GetLevel()->CreateActor<GameUnitUI>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
+
+	if (true == IsTitle)
+	{
+		return;
+	}
+
 	GetLevel()->CreateActor<PlayerCard>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
 }
 

@@ -186,12 +186,16 @@ void ResultBoard::Update(float _Delta)
 		if (2 == TeamInfo::MyInfo.WinCount)
 		{
 			TeamInfo::MyInfo.Win = true;
+			GameEngineCore::ChangeLevel("AwardsLevel");
+			return;
 			// 엔딩레벨 진입
 		}
 		else if (2 == EnemyInfo::Info.WinCount)
 		{
 			TeamInfo::MyInfo.Win = false;
 			// 엔딩레벨 진입
+			GameEngineCore::ChangeLevel("AwardsLevel");
+			return;
 		}
 
 		GameEngineCore::ChangeLevel("BanPickLevel");

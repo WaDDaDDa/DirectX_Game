@@ -40,6 +40,9 @@ void AwardsLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	// 포스트이펙트 - 페이드아웃
 	std::shared_ptr<Awards> NewIntro = CreateActor<Awards>();
+
+	std::shared_ptr<class FadeEffect> FadeInEffect = GetLevelRenderTarget()->CreateEffect<FadeEffect>();
+	FadeInEffect->SetFadeIn();
 }
 
 void AwardsLevel::LevelEnd(GameEngineLevel* _NextLevel)

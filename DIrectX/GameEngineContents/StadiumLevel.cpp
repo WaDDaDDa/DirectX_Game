@@ -63,6 +63,8 @@ void StadiumLevel::Start()
 		GameEngineSprite::CreateSingle("stadium_desk.png");
 		GameEngineSprite::CreateSingle("stadium_frame_front.png");
 		GameEngineSprite::CreateSingle("set_result_ui_bg.png");
+		GameEngineSprite::CreateSingle("teamfight_manager_title_bg.png");
+		GameEngineSprite::CreateSingle("logo_tp.png");
 	}
 
 	{

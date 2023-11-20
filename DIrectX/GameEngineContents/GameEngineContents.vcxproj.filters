@@ -259,6 +259,12 @@
     <ClCompile Include="Awards.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="TitleLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Title_UI.cpp">
+      <Filter>UI\HouseUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -521,6 +527,12 @@
     </ClInclude>
     <ClInclude Include="Awards.h">
       <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Title_UI.h">
+      <Filter>UI\HouseUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

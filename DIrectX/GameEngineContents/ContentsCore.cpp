@@ -4,6 +4,7 @@
 #include <GameEngineCore/GameEngineCoreWindow.h>
 
 // ·¹º§
+#include "TitleLevel.h"
 #include "IntroLevel.h"
 #include "PlayLevel.h"
 #include "BanPickLevel.h"
@@ -37,7 +38,8 @@ void ContentsCore::Start()
 	GameEngineCore::CreateLevel<StadiumLevel>("StadiumLevel");
 	GameEngineCore::CreateLevel<ResultLevel>("ResultLevel");
 	GameEngineCore::CreateLevel<AwardsLevel>("AwardsLevel");
-	GameEngineCore::ChangeLevel("AwardsLevel");
+	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
+	GameEngineCore::ChangeLevel("TitleLevel");
 
 }
 
