@@ -62,6 +62,7 @@ void Awards::Start()
 	TextBoxBg->SetImageScale({1260.0f, 150.0f});
 	TextBoxBg->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 	TextBoxBg->Transform.AddLocalPosition({ 0.0f, -270.0f });
+	TextBoxBg->Off();
 
 	TextBoxRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Text);
 	TextBoxRenderer->SetText("Galmuri14", PrintText, 32.0f, float4::WHITE, FW1_LEFT);
@@ -76,7 +77,7 @@ void Awards::Start()
 	ModeratorRenderer->SetAutoScaleRatio(8.0f);
 
 	ModeratorRenderer->CreateAnimation("Idle", "Moderator", 0.1f, 13, 15);
-	ModeratorRenderer->CreateAnimation("Open", "Moderator", 0.1f, 16, 18);
+	ModeratorRenderer->CreateAnimation("Open", "Moderator", 0.1f, 16, 18, false);
 	ModeratorRenderer->CreateAnimation("Clap", "Moderator", 0.1f, 19, 20);
 	ModeratorRenderer->ChangeAnimation("Idle");
 
@@ -177,10 +178,41 @@ void Awards::Start()
 	LightRenderer->GetColorData().MulColor.W -= 0.5f;
 	LightRenderer->Off();
 
+	LeftCurtain = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::UIImage);
+	LeftCurtain->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	LeftCurtain->SetSprite("Awards", 2);
+	LeftCurtain->AutoSpriteSizeOn();
+	LeftCurtain->SetAutoScaleRatio(9.0f);
+	LeftCurtain->Transform.AddLocalPosition({ -355.0f, 50.0f });
+
+	RightCurtain = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::UIImage);
+	RightCurtain->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	RightCurtain->SetSprite("Awards", 3);
+	RightCurtain->AutoSpriteSizeOn();
+	RightCurtain->SetAutoScaleRatio(9.0f);
+	RightCurtain->Transform.AddLocalPosition({ 355.0f, 50.0f });
+
+	WinnerLogo = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::UI);
+	WinnerLogo->AutoSpriteSizeOn();
+	WinnerLogo->SetAutoScaleRatio(2.0f);
+	WinnerLogo->Transform.AddLocalPosition({ 0.0f, 230.0f, -static_cast<float>(ContentsOrder::UI) });
+	WinnerLogo->SetSprite("TeamLogo", static_cast<unsigned int>(EnemyInfo::Info.GetIconNum()));
+	WinnerLogo->Off();
+
+	WinnerName = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::UIImage);
+	WinnerName->SetText("Galmuri14", EnemyInfo::Info.GetTeamName(), 32.0f, float4::WHITE, FW1_CENTER);
+	WinnerName->Transform.AddLocalPosition({ 0.0f, 200.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	WinnerName->Off();
+
+	WinnerText = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::UIImage);
+	WinnerText->SetText("Galmuri14", "", 32.0f, float4::WHITE, FW1_CENTER);
+	WinnerText->Transform.AddLocalPosition({ 0.0f, 300.0f, -static_cast<float>(ContentsOrder::UIImage) });
+	WinnerText->Off();
+
 	// 텍스트 출력 위치.
 	TextBoxRenderer->Transform.AddLocalPosition(TextBoxPos);
 
-	ChangeState(AwardsState::CutScene1);
+	ChangeState(AwardsState::CurtainOpen);
 
 	GameEngineInput::AddInputObject(this);
 }
@@ -365,8 +397,8 @@ void Awards::StateUpdate(float _Delta)
 {
 	switch (State)
 	{
-	case AwardsState::Black:
-		return BlackUpdate(_Delta);
+	case AwardsState::CurtainOpen:
+		return CurtainOpenUpdate(_Delta);
 	case AwardsState::CutScene1:
 		return CutScene1Update(_Delta);
 	case AwardsState::CutScene2:
@@ -381,8 +413,10 @@ void Awards::StateUpdate(float _Delta)
 		return CutScene6Update(_Delta);
 	case AwardsState::CutScene7:
 		return CutScene7Update(_Delta);
-	case AwardsState::NewGame:
-		return NewGameUpdate(_Delta);
+	case AwardsState::CutScene8:
+		return CutScene8Update(_Delta);
+	case AwardsState::CurtainClose:
+		return CurtainCloseUpdate(_Delta);
 	case AwardsState::Max:
 		return MaxUpdate(_Delta);
 	default:
@@ -396,8 +430,8 @@ void Awards::ChangeState(AwardsState _State)
 	{
 		switch (_State)
 		{
-		case AwardsState::Black:
-			BlackStart();
+		case AwardsState::CurtainOpen:
+			CurtainOpenStart();
 			break;
 		case AwardsState::CutScene1:
 			CutScene1Start();
@@ -420,8 +454,11 @@ void Awards::ChangeState(AwardsState _State)
 		case AwardsState::CutScene7:
 			CutScene7Start();
 			break;
-		case AwardsState::NewGame:
-			NewGameStart();
+		case AwardsState::CutScene8:
+			CutScene8Start();
+			break;
+		case AwardsState::CurtainClose :
+			CurtainCloseStart();
 			break;
 		case AwardsState::Max:
 			MaxStart();
@@ -440,41 +477,47 @@ void Awards::ChangeState(AwardsState _State)
 	State = _State;
 }
 
-void Awards::BlackStart()
+void Awards::CurtainOpenStart()
 {
-
-	MainSpriteRenderer->SetSprite("Black_0.png");
-	// 텍스트 초기화
 	TextSkip = false;
-	CurTextNum = 0;
-	if (true != CurText.empty())
-	{
-		CurText.clear();
-	}
-	PrintText = GameEngineString::UnicodeToAnsi(CurText);
-	TextBoxRenderer->SetText("Galmuri14", PrintText, 32.0f, float4::WHITE, FW1_LEFT);
-
-	Scene += 1;
+	CurtainValue = 0.0f;
 }
 
-void Awards::BlackUpdate(float _Delta)
+void Awards::CurtainOpenUpdate(float _Delta)
 {
-
-	if (GetLiveTime() >= 0.2f)
+	if (true == TextSkip)
 	{
-		if (Scene == 6)
+		CurtainValue += _Delta;
+		if (CurtainValue >= 1.0f)
 		{
-			Scene = 0;
+			CurtainValue = 1.0f;
 		}
 
-		ChangeState(Scene);
+		float XPos = std::lerp(355.0f, 1000.0f, CurtainValue);
+		float YPos = LeftCurtain->Transform.GetLocalPosition().Y;
+		float ZPos = LeftCurtain->Transform.GetLocalPosition().Z;
+		LeftCurtain->Transform.SetLocalPosition({ -XPos , YPos , ZPos });
+		RightCurtain->Transform.SetLocalPosition({ XPos , YPos , ZPos });
+
+		if (GameEngineInput::IsDown(VK_SPACE, this) && 1000.0f == XPos)
+		{
+			ChangeState(AwardsState::CutScene1);
+			return;
+		}
+
+	}
+
+	if (GameEngineInput::IsDown(VK_SPACE, this) && false == TextSkip)
+	{
+		TextSkip = true;
 		return;
 	}
 }
 
 void Awards::CutScene1Start()
 {
-
+	TextSkip = false;
+	TextBoxBg->On();
 }
 
 void Awards::CutScene1Update(float _Delta)
@@ -594,6 +637,8 @@ void Awards::CutScene3Update(float _Delta)
 {
 	SceneTime += _Delta;
 
+	ModeratorRenderer->ChangeAnimation("Open");
+
 	if (CurText.size() > Scene3Text.size() || true == TextSkip)
 	{
 		if (GameEngineInput::IsDown(VK_SPACE, this))
@@ -627,9 +672,12 @@ void Awards::CutScene3Update(float _Delta)
 	}
 }
 
+// 스포트라이트 밝혀지는 순간
 void Awards::CutScene4Start()
 {
 	UnitWhite();
+
+	ModeratorRenderer->ChangeAnimation("Clap");
 
 	// 텍스트 초기화
 	TextSkip = false;
@@ -644,13 +692,26 @@ void Awards::CutScene4Start()
 
 	Scene4Text += Scene3Text;
 
+	WinnerText->SetText("Galmuri14", "아마추어 리그 우승 팀", 32.0f, float4::WHITE, FW1_CENTER);
+	WinnerText->On();
+
 	if (true == TeamInfo::MyInfo.Win)
 	{
 		Scene4Text += GameEngineString::AnsiToUnicode(TeamInfo::MyInfo.GetTeamName());
+
+		WinnerLogo->SetSprite("TeamLogo", static_cast<unsigned int>(TeamInfo::MyInfo.GetIconNum()));
+		WinnerLogo->On();
+		WinnerName->SetText("Galmuri14", TeamInfo::MyInfo.GetTeamName(), 32.0f, float4::WHITE, FW1_CENTER);
+		WinnerName->On();
 	}
 	else if (false == TeamInfo::MyInfo.Win)
 	{
 		Scene4Text += GameEngineString::AnsiToUnicode(EnemyInfo::Info.GetTeamName());
+
+		WinnerLogo->SetSprite("TeamLogo", static_cast<unsigned int>(EnemyInfo::Info.GetIconNum()));
+		WinnerLogo->On();
+		WinnerName->SetText("Galmuri14", EnemyInfo::Info.GetTeamName(), 32.0f, float4::WHITE, FW1_CENTER);
+		WinnerName->On();
 	}
 
 	Scene4Text += Scene3_1Text;
@@ -660,7 +721,6 @@ void Awards::CutScene4Start()
 	UnitWin();
 }
 
-// 스포트라이트 밝혀지는 순간
 void Awards::CutScene4Update(float _Delta)
 {
 	SceneTime += _Delta;
@@ -700,8 +760,15 @@ void Awards::CutScene4Update(float _Delta)
 // 준우승 수상
 void Awards::CutScene5Start()
 {
+	ModeratorRenderer->ChangeAnimation("Idle");
+
 	UnitIdle();
 	UnitOff();
+	WinnerText->Off();
+	WinnerLogo->Off();
+	WinnerName->Off();
+
+	LightRenderer->Off();
 
 	// 텍스트 초기화
 	TextSkip = false;
@@ -722,7 +789,7 @@ void Awards::CutScene5Update(float _Delta)
 	{
 		if (GameEngineInput::IsDown(VK_SPACE, this))
 		{
-			ChangeState(AwardsState::Black);
+			ChangeState(AwardsState::CutScene6);
 			return;
 		}
 		PrintText = GameEngineString::UnicodeToAnsi(Scene5Text);
@@ -751,14 +818,37 @@ void Awards::CutScene5Update(float _Delta)
 	}
 }
 
+// 준우승팀은... 검은 스포트라이트 전
 void Awards::CutScene6Start()
 {
-	MainSpriteRenderer->SetSprite("cutscene6.png");
+	ModeratorRenderer->ChangeAnimation("Open");
+
+	UnitOn();
+	UnitBlack();
+
+	if (false == TeamInfo::MyInfo.Win)
+	{
+		PlayerWinUnit();
+	}
+	else if (true == TeamInfo::MyInfo.Win)
+	{
+		PlayerLoseUnit();
+	}
+
+	// 텍스트 초기화
+	TextSkip = false;
+	CurTextNum = 0;
+
+	if (true != CurText.empty())
+	{
+		CurText.clear();
+	}
+	PrintText = GameEngineString::UnicodeToAnsi(CurText);
+	TextBoxRenderer->SetText("Galmuri14", PrintText, 32.0f, float4::WHITE, FW1_LEFT);
 }
 
 void Awards::CutScene6Update(float _Delta)
 {
-
 	SceneTime += _Delta;
 
 	if (CurText.size() > Scene6Text.size() || true == TextSkip)
@@ -794,16 +884,53 @@ void Awards::CutScene6Update(float _Delta)
 	}
 }
 
+// 스포트라이트
 void Awards::CutScene7Start()
 {
+	ModeratorRenderer->ChangeAnimation("Clap");
+
+	UnitWhite();
+
+	// 텍스트 초기화
 	TextSkip = false;
 	CurTextNum = 0;
 	if (true != CurText.empty())
 	{
 		CurText.clear();
 	}
+
 	PrintText = GameEngineString::UnicodeToAnsi(CurText);
 	TextBoxRenderer->SetText("Galmuri14", PrintText, 32.0f, float4::WHITE, FW1_LEFT);
+
+	Scene7Text += Scene6Text;
+
+	WinnerText->SetText("Galmuri14", "아마추어 리그 준우승 팀", 32.0f, float4::WHITE, FW1_CENTER);
+	WinnerText->On();
+
+	if (false == TeamInfo::MyInfo.Win)
+	{
+		Scene7Text += GameEngineString::AnsiToUnicode(TeamInfo::MyInfo.GetTeamName());
+
+		WinnerLogo->SetSprite("TeamLogo", static_cast<unsigned int>(TeamInfo::MyInfo.GetIconNum()));
+		WinnerLogo->On();
+		WinnerName->SetText("Galmuri14", TeamInfo::MyInfo.GetTeamName(), 32.0f, float4::WHITE, FW1_CENTER);
+		WinnerName->On();
+	}
+	else if (true == TeamInfo::MyInfo.Win)
+	{
+		Scene7Text += GameEngineString::AnsiToUnicode(EnemyInfo::Info.GetTeamName());
+
+		WinnerLogo->SetSprite("TeamLogo", static_cast<unsigned int>(EnemyInfo::Info.GetIconNum()));
+		WinnerLogo->On();
+		WinnerName->SetText("Galmuri14", EnemyInfo::Info.GetTeamName(), 32.0f, float4::WHITE, FW1_CENTER);
+		WinnerName->On();
+	}
+
+	Scene7Text += Scene6_1Text;
+
+	LightRenderer->On();
+
+	UnitWin();
 }
 
 void Awards::CutScene7Update(float _Delta)
@@ -815,7 +942,7 @@ void Awards::CutScene7Update(float _Delta)
 	{
 		if (GameEngineInput::IsDown(VK_SPACE, this))
 		{
-			ChangeState(AwardsState::NewGame);
+			ChangeState(AwardsState::CutScene8);
 			return;
 		}
 		PrintText = GameEngineString::UnicodeToAnsi(Scene7Text);
@@ -844,29 +971,114 @@ void Awards::CutScene7Update(float _Delta)
 	}
 }
 
-
-
-void Awards::NewGameStart()
+void Awards::CutScene8Start()
 {
+	ModeratorRenderer->ChangeAnimation("Idle");
 
+
+	// 텍스트 초기화
 	TextSkip = false;
 	CurTextNum = 0;
 	if (true != CurText.empty())
 	{
 		CurText.clear();
 	}
+
 	PrintText = GameEngineString::UnicodeToAnsi(CurText);
 	TextBoxRenderer->SetText("Galmuri14", PrintText, 32.0f, float4::WHITE, FW1_LEFT);
 
-	// 페이드 효과
-	MainSpriteRenderer->GetColorData().MulColor.W -= 0.2f;
-
-	GetLevel()->CreateActor<NewGame_UI>();
+	LightRenderer->Off();
+	UnitOff();
+	WinnerText->Off();
+	WinnerLogo->Off();
+	WinnerName->Off();
 }
 
-void Awards::NewGameUpdate(float _Delta)
-{
 
+void Awards::CutScene8Update(float _Delta)
+{
+	SceneTime += _Delta;
+
+	if (CurText.size() > Scene8Text.size() || true == TextSkip)
+	{
+		if (GameEngineInput::IsDown(VK_SPACE, this))
+		{
+			ChangeState(AwardsState::CurtainClose);
+			return;
+		}
+		PrintText = GameEngineString::UnicodeToAnsi(Scene8Text);
+
+		TextBoxRenderer->SetText("Galmuri14", PrintText, 32.0f, float4::WHITE, FW1_LEFT);
+		return;
+	}
+
+	if (GameEngineInput::IsDown(VK_SPACE, this) && false == TextSkip)
+	{
+		TextSkip = true;
+		return;
+	}
+
+	if (0.01f <= SceneTime)
+	{
+		SceneTime = 0.0f;
+
+		CurText.push_back(Scene8Text[CurTextNum]);
+		CurTextNum++;
+
+
+		PrintText = GameEngineString::UnicodeToAnsi(CurText);
+
+		TextBoxRenderer->SetText("Galmuri14", PrintText, 32.0f, float4::WHITE, FW1_LEFT);
+	}
+}
+
+void Awards::CurtainCloseStart()
+{
+	CurtainValue = 0.0f;
+	TextBoxBg->Off();
+
+	// 텍스트 초기화
+	TextSkip = false;
+	CurTextNum = 0;
+	if (true != CurText.empty())
+	{
+		CurText.clear();
+	}
+
+	PrintText = GameEngineString::UnicodeToAnsi(CurText);
+	TextBoxRenderer->SetText("Galmuri14", PrintText, 32.0f, float4::WHITE, FW1_LEFT);
+}
+
+void Awards::CurtainCloseUpdate(float _Delta)
+{
+	if (true == TextSkip)
+	{
+		CurtainValue += _Delta;
+		if (CurtainValue >= 1.0f)
+		{
+			CurtainValue = 1.0f;
+		}
+
+		float XPos = std::lerp(1000.0f, 355.0f, CurtainValue);
+		float YPos = LeftCurtain->Transform.GetLocalPosition().Y;
+		float ZPos = LeftCurtain->Transform.GetLocalPosition().Z;
+		LeftCurtain->Transform.SetLocalPosition({ -XPos , YPos , ZPos });
+		RightCurtain->Transform.SetLocalPosition({ XPos , YPos , ZPos });
+
+		if (GameEngineInput::IsDown(VK_SPACE, this) && 355.0f == XPos)
+		{
+			//레벨 체인지.
+			//ChangeState(AwardsState::CutScene1);
+			return;
+		}
+
+	}
+
+	if (GameEngineInput::IsDown(VK_SPACE, this) && false == TextSkip)
+	{
+		TextSkip = true;
+		return;
+	}
 }
 
 void Awards::MaxStart()

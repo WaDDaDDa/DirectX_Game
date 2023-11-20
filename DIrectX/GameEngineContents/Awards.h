@@ -3,6 +3,7 @@
 
 enum class AwardsState
 {
+    CurtainOpen,
     CutScene1,
     CutScene2,
     CutScene3,
@@ -10,8 +11,8 @@ enum class AwardsState
     CutScene5,
     CutScene6,
     CutScene7,
-    NewGame,
-    Black,
+    CutScene8,
+    CurtainClose,
     Max,
 };
 
@@ -34,9 +35,6 @@ protected:
     void LevelStart(GameEngineLevel* _PrevLevel) override;
     void LevelEnd(GameEngineLevel* _NextLevel) override;
 
-    void BlackStart();
-    void BlackUpdate(float _Delta);
-
     void ChangeState(AwardsState _State);
 
     void ChangeState(int _Value)
@@ -45,6 +43,9 @@ protected:
     }
 
     void StateUpdate(float _Delta);
+
+    void CurtainOpenStart();
+    void CurtainOpenUpdate(float _Delta);
 
     void CutScene1Start();
     void CutScene1Update(float _Delta);
@@ -67,8 +68,11 @@ protected:
     void CutScene7Start();
     void CutScene7Update(float _Delta);
 
-    void NewGameStart();
-    void NewGameUpdate(float _Delta);
+    void CutScene8Start();
+    void CutScene8Update(float _Delta);
+
+    void CurtainCloseStart();
+    void CurtainCloseUpdate(float _Delta);
 
     void MaxStart();
     void MaxUpdate(float _Delta);
@@ -88,6 +92,8 @@ protected:
     void UnitWin();
     void PlayerWinUnit();
     void PlayerLoseUnit();
+
+    float CurtainValue = 0.0f;
 
 private:
 	std::shared_ptr<class GameEngineSpriteRenderer> MainSpriteRenderer;
@@ -116,6 +122,13 @@ private:
 
     std::shared_ptr<GameEngineSpriteRenderer> LightRenderer;
 
+    std::shared_ptr<GameEngineSpriteRenderer> LeftCurtain;
+    std::shared_ptr<GameEngineSpriteRenderer> RightCurtain;
+
+    std::shared_ptr<GameEngineSpriteRenderer> WinnerLogo;
+    std::shared_ptr<GameEngineSpriteRenderer> WinnerName;
+    std::shared_ptr<GameEngineSpriteRenderer> WinnerText;
+
 
     int Scene = 0;
     float SceneTime = 0.0f;
@@ -133,7 +146,10 @@ private:
     std::wstring Scene3_1Text = L" 입니다! 축하합니다!\n우승팀에게는 상품으로 아마추어 골든 마우스 및 상금 400G가 수여됩니다."; 
     std::wstring Scene4Text = L""; 
     std::wstring Scene5Text = L"다음으로는 준우승팀 시상이 있겠습니다."; 
-    std::wstring Scene6Text = L"하지만 내가 정말 천재인걸까? 좋은 동료와 환경 덕분에 이룬 \n결과인 건 아닐까? 나는 새로운 도전을 하고 싶었다."; 
-    std::wstring Scene7Text = L"아마추어 최하위 팀을 키워서 월드 챔피언십을 우승해보자. \n그땐 만족할 수 있겠지. 그리고 내가 맡게 된 팀은..."; 
+    // 7Text = 6Text + Winner + 7Text
+    std::wstring Scene6Text = L"아마추어 리그 준우승팀은..."; 
+    std::wstring Scene6_1Text = L" 입니다! 축하합니다!\n준우승팀에게는 상품으로 아마추어 실버 마우스 및 상금 200G가 수여됩니다.";
+    std::wstring Scene7Text = L"";
+    std::wstring Scene8Text = L"이상으로 시즌 2023 아마추어 리그의 시상식을 마치도록 하겠습니다.\n다음 시즌에 다시 만납시다!!"; 
 };
 
