@@ -285,6 +285,8 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="ResultBoard.cpp" />
+    <ClCompile Include="ResultLevel.cpp" />
     <ClCompile Include="SlotButton.cpp" />
     <ClCompile Include="Stadium.cpp" />
     <ClCompile Include="StadiumBoard.cpp" />
@@ -429,6 +431,8 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ResultBoard.h" />
+    <ClInclude Include="ResultLevel.h" />
     <ClInclude Include="SlotButton.h" />
     <ClInclude Include="Stadium.h" />
     <ClInclude Include="StadiumBoard.h" />

@@ -92,6 +92,9 @@ void StadiumBoard::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	GameTime = 60.0f;
 
+	TeamInfo::MyInfo.KillCount = 0;
+	EnemyInfo::Info.KillCount = 0;
+
 	BlueLogo->SetSprite("TeamLogo", static_cast<unsigned int>(TeamInfo::MyInfo.GetIconNum()));
 	BlueTeamName->SetText("Galmuri14", TeamInfo::MyInfo.GetTeamName(), 32.0f, float4::WHITE, FW1_CENTER);
 
@@ -136,6 +139,9 @@ void StadiumBoard::Update(float _Delta)
 
 	BlueKillCount = RedDieCount;
 	RedKillCount = BlueDieCount;
+
+	TeamInfo::MyInfo.KillCount = BlueKillCount;
+	EnemyInfo::Info.KillCount = RedKillCount;
 
 	BlueTeamWinCount->SetText("Galmuri14", std::to_string(BlueKillCount), 32.0f, float4::WHITE, FW1_CENTER);
 	RedTeamWinCount->SetText("Galmuri14", std::to_string(RedKillCount), 32.0f, float4::WHITE, FW1_CENTER);

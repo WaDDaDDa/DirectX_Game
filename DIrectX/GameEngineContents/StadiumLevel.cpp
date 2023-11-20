@@ -62,6 +62,7 @@ void StadiumLevel::Start()
 		GameEngineSprite::CreateSingle("stadium_chair.png");
 		GameEngineSprite::CreateSingle("stadium_desk.png");
 		GameEngineSprite::CreateSingle("stadium_frame_front.png");
+		GameEngineSprite::CreateSingle("set_result_ui_bg.png");
 	}
 
 	{

@@ -117,6 +117,8 @@ public:
     std::shared_ptr<class GamePlayer> TwoPlayer = nullptr;
 
     int WinCount = 0;
+    int KillCount = 0;
+    bool Win = false;
 
 protected:
 

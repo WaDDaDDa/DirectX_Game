@@ -48,6 +48,7 @@ public:
     }
 
     int WinCount = 0;
+    int KillCount = 0;
 
 protected:
 

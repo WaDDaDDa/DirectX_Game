@@ -247,6 +247,12 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="ContentResources.cpp" />
+    <ClCompile Include="ResultLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultBoard.cpp">
+      <Filter>UI\BanPickUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -498,6 +504,12 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="ContentResources.h" />
+    <ClInclude Include="ResultLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultBoard.h">
+      <Filter>UI\BanPickUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
