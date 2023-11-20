@@ -11,6 +11,7 @@
 #include "MainLevel.h"
 #include "StadiumLevel.h"
 #include "ResultLevel.h"
+#include "AwardsLevel.h"
 #include "ContentResources.h"
 
 ContentsCore::ContentsCore()
@@ -35,7 +36,8 @@ void ContentsCore::Start()
 	GameEngineCore::CreateLevel<BattleLevel>("BattleLevel");
 	GameEngineCore::CreateLevel<StadiumLevel>("StadiumLevel");
 	GameEngineCore::CreateLevel<ResultLevel>("ResultLevel");
-	GameEngineCore::ChangeLevel("ResultLevel");
+	GameEngineCore::CreateLevel<AwardsLevel>("AwardsLevel");
+	GameEngineCore::ChangeLevel("AwardsLevel");
 
 }
 

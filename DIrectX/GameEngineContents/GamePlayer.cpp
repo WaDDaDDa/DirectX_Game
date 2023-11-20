@@ -27,7 +27,7 @@ void GamePlayer::Start()
 	BodyRenderer->AutoSpriteSizeOn();
 	BodyRenderer->SetAutoScaleRatio(3.0f);
 
-	BodyRenderer->SetFrameChangeFunctionAll (FrameFunction);
+	BodyRenderer->SetFrameChangeFunctionAll(FrameFunction);
 	Spec.Random();
 
 	HairRenderer->SetSprite("Coach_Hair", Spec.HairNum);

@@ -19,7 +19,7 @@ public:
         class GamePlayerInfo NewInfo;
         GameEngineRandom Rand;
 
-        for (size_t i = 0; i < 2; i++)
+        for (size_t i = 0; i < 3; i++)
         {
             NewInfo.Random();
             NewInfo.HairNum = Rand.RandomInt(1, 29);
@@ -45,6 +45,11 @@ public:
     GamePlayerInfo GetTwoPlayer()
     {
         return EnemyPlayer[1];
+    }
+
+    GamePlayerInfo GetThreePlayer()
+    {
+        return EnemyPlayer[2];
     }
 
     int WinCount = 0;

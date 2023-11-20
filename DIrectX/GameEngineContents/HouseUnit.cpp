@@ -715,7 +715,6 @@ void HouseUnit::HairCheck(const SpriteData& _CurSprite)
 	float ResultY = (62.0f - ColorCheckPos.Y) * 3.0f;
 	HairRenderer->Transform.SetLocalPosition({ 0.0f, ResultY, HairRenderer->Transform.GetLocalPosition().Z });
 
-
 }
 
 void HouseUnit::Update(float _Delta)
