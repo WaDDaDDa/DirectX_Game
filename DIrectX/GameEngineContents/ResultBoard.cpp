@@ -194,7 +194,7 @@ void ResultBoard::Update(float _Delta)
 			// 엔딩레벨 진입
 		}
 
-
+		GameEngineCore::ChangeLevel("BanPickLevel");
 	}
 }
 

@@ -16,8 +16,6 @@ StadiumBoard::~StadiumBoard()
 
 void StadiumBoard::Start()
 {
-
-
 	float4 WindowScale = GameEngineCore::MainWindow.GetScale();
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
@@ -153,9 +151,8 @@ void StadiumBoard::Update(float _Delta)
 			return;
 		}
 
-		GameEngineCore::ChangeLevel("BanPickLevel");
+		GameEngineCore::ChangeLevel("ResultLevel");
 		return;
-
 	}
 
 }
