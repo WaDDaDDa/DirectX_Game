@@ -63,16 +63,6 @@ void TitleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	BlueUnitSetting();
 	RedUnitSetting();
 
-	//BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
-	//BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
-	//BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
-	//BlueTeam.push_back(CreateActor<Archer>()->GetPointer());
-
-	//RedTeam.push_back(CreateActor<Archer>()->GetPointer());
-	//RedTeam.push_back(CreateActor<Archer>()->GetPointer());
-	//RedTeam.push_back(CreateActor<Archer>()->GetPointer());
-	//RedTeam.push_back(CreateActor<Archer>()->GetPointer());
-
 	// ÆÀ¼³Á¤
 	for (size_t i = 0; i < BlueTeam.size(); i++)
 	{
@@ -110,8 +100,8 @@ void TitleLevel::LevelEnd(GameEngineLevel* _NextLevel)
 
 	BlueTeam.clear();
 	RedTeam.clear();
+	UseUnitName.clear();
 
-	int a = 0;
 }
 
 void TitleLevel::BlueUnitSetting()

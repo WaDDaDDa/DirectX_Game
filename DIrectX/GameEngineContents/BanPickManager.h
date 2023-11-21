@@ -5,9 +5,12 @@ enum class BanPickState
 {
     Idle, // 대기 상태
     ChangeBan, // 벤 선택 상태로 가기전
-    Ban, // 벤 선택 상태
+    BlueBan, // 벤 선택 상태
+    RedBan,
     ChangePick, // 픽창으로 가기전
-    Pick, // 픽 선택 상태
+    BluePick, // 픽 선택 상태
+    RedPick,
+    TurnChange,
     Max,
 };
 
@@ -46,7 +49,7 @@ public:
     void CardIntit();
 
     void CardValueReset();
-
+    bool Cputurn = false;
 protected:
     void Start() override;
     void Update(float _Delta) override;
@@ -63,14 +66,23 @@ protected:
     void ChangeBanStart();
     void ChangeBanUpdate(float _Delta);
 
-    void BanStart();
-    void BanUpdate(float _Delta);
+    void BlueBanStart();
+    void BlueBanUpdate(float _Delta);
+
+    void RedBanStart();
+    void RedBanUpdate(float _Delta);
 
     void ChangePickStart();
     void ChangePickUpdate(float _Delta);
 
-    void PickStart();
-    void PickUpdate(float _Delta);
+    void BluePickStart();
+    void BluePickUpdate(float _Delta);
+
+    void RedPickStart();
+    void RedPickUpdate(float _Delta);
+
+    void TurnChangeStart();
+    void TurnChangeUpdate(float _Delta);
 
     void MaxStart() {}
     void MaxUpdate(float _Delta) {}

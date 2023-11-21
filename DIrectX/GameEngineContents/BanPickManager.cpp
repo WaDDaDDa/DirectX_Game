@@ -399,7 +399,7 @@ void BanPickManager::Update(float _Delta)
 	// CurCard셋팅하는거.
 	for (size_t i = 0; i < UnitCount; i++)
 	{
-		if (true == Card[i]->IsStart)
+		if (true == Card[i]->IsStart && false == Cputurn)
 		{
 			CardValueReset();
 			CurCard = Card[i];
@@ -454,14 +454,23 @@ void BanPickManager::ChangeState(BanPickState _State)
 		case BanPickState::ChangeBan:
 			ChangeBanStart();
 			break;
-		case BanPickState::Ban:
-			BanStart();
+		case BanPickState::BlueBan:
+			BlueBanStart();
 			break;
-		case BanPickState::Pick:
-			PickStart();
+		case BanPickState::RedBan:
+			RedBanStart();
+			break;
+		case BanPickState::BluePick:
+			BluePickStart();
+			break;
+		case BanPickState::RedPick:
+			RedPickStart();
 			break;
 		case BanPickState::ChangePick:
 			ChangePickStart();
+			break;
+		case BanPickState::TurnChange:
+			TurnChangeStart();
 			break;
 		case BanPickState::Max:
 			MaxStart();
@@ -484,12 +493,18 @@ void BanPickManager::StateUpdate(float _Delta)
 		return IdleUpdate(_Delta);
 	case BanPickState::ChangeBan:
 		return ChangeBanUpdate(_Delta);
-	case BanPickState::Ban:
-		return BanUpdate(_Delta);
+	case BanPickState::BlueBan:
+		return BlueBanUpdate(_Delta);
+	case BanPickState::RedBan:
+		return RedBanUpdate(_Delta);
 	case BanPickState::ChangePick:
 		return ChangePickUpdate(_Delta);
-	case BanPickState::Pick:
-		return PickUpdate(_Delta);
+	case BanPickState::BluePick:
+		return BluePickUpdate(_Delta);
+	case BanPickState::RedPick:
+		return RedPickUpdate(_Delta);
+	case BanPickState::TurnChange:
+		return TurnChangeUpdate(_Delta);
 	case BanPickState::Max:
 		return MaxUpdate(_Delta);
 	default:
@@ -526,25 +541,25 @@ void BanPickManager::ChangeBanUpdate(float _Delta)
 {
 	if (GetLiveTime() >= 0.5f)
 	{
-		ChangeState(BanPickState::Ban);
+		ChangeState(BanPickState::BlueBan);
 		return;
 	}
 }
 
-void BanPickManager::BanStart()
+void BanPickManager::BlueBanStart()
 {
 	UI_Mouse::GameMouse->MouseCol->On();
+	Cputurn = false;
 
 }
 
-void BanPickManager::BanUpdate(float _Delta)
+void BanPickManager::BlueBanUpdate(float _Delta)
 {
-	// 처음 들어온 카드 설정
+
 	for (size_t i = 0; i < UnitCount; i++)
 	{
-
 		// 벤 구간
-		if (true == Card[i]->IsPick && 2 > BanCount)
+		if (true == Card[i]->IsPick && 1 > BanCount)
 		{
 			CurCard->SetBan();
 
@@ -556,6 +571,50 @@ void BanPickManager::BanUpdate(float _Delta)
 				BlueBanUnitText->On();
 			}
 
+			BanCount++;
+			UI_Mouse::GameMouse->TeamSwitch();
+			Card[i]->IsPick = false;
+		}
+	}
+
+	if (1 == BanCount)
+	{
+		ChangeState(BanPickState::TurnChange);
+		return;
+	}
+
+}
+
+void BanPickManager::RedBanStart()
+{
+	UI_Mouse::GameMouse->MouseCol->Off();
+	Cputurn = true;
+}
+
+void BanPickManager::RedBanUpdate(float _Delta)
+{
+	// 처음 들어온 카드 설정
+
+	if (true == Cputurn)
+	{
+		GameEngineRandom Rand;
+		int CardNum = Rand.RandomInt(0, UnitCount -1);
+		while (false != Card[CardNum]->IsSelect)
+		{
+			CardNum = Rand.RandomInt(0, UnitCount -1);
+		}
+
+		Card[CardNum]->IsPick = true;
+		CurCard = Card[CardNum];
+	}
+
+	for (size_t i = 0; i < UnitCount; i++)
+	{
+		// 벤 구간
+		if (true == Card[i]->IsPick && 2 > BanCount)
+		{
+			CurCard->SetBan();
+
 			if (1 == BanCount)
 			{
 				RedBanUnit->ChangeAnimation(CurCard->GetUnitNameToString() += "_Idle");
@@ -563,15 +622,18 @@ void BanPickManager::BanUpdate(float _Delta)
 				RedBanUnitText->SetText("Galmuri14", CurCard->UnitStat.KoreaName.data(), 12.0f, float4::WHITE, FW1_CENTER);
 				RedBanUnitText->On();
 			}
+
 			BanCount++;
 			UI_Mouse::GameMouse->TeamSwitch();
 			Card[i]->IsPick = false;
+			Card[i]->IsSelect = true;
+
 		}
 	}
 
 	if (2 == BanCount)
 	{
-		ChangeState(BanPickState::ChangePick);
+		ChangeState(BanPickState::TurnChange);
 		return;
 	}
 
@@ -587,23 +649,22 @@ void BanPickManager::ChangePickUpdate(float _Delta)
 {
 	if (GetLiveTime() >= 0.5f)
 	{
-		ChangeState(BanPickState::Pick);
+		ChangeState(BanPickState::BluePick);
 		return;
 	}
 }
 
-void BanPickManager::PickStart()
+void BanPickManager::BluePickStart()
 {
 	UI_Mouse::GameMouse->MouseCol->On();
-
+	Cputurn = false;
 }
 
-void BanPickManager::PickUpdate(float _Delta)
+void BanPickManager::BluePickUpdate(float _Delta)
 {
 	// 처음 들어온 카드 설정
 	for (size_t i = 0; i < UnitCount; i++)
 	{
-		// 챔피언 픽 구간
 		if (true == Card[i]->IsPick)
 		{
 			if (TeamType::Blue == UI_Mouse::GameMouse->GetPlayerTeam())
@@ -612,7 +673,52 @@ void BanPickManager::PickUpdate(float _Delta)
 				CurCard->SetPickNum(BluePickCount);
 				BluePickCount++;
 			}
-			else if (TeamType::Red == UI_Mouse::GameMouse->GetPlayerTeam())
+
+			UI_Mouse::GameMouse->TeamSwitch();
+			Card[i]->IsPick = false;
+
+			if (2 >= BluePickCount)
+			{
+				ChangeState(BanPickState::TurnChange);
+				return;
+			}
+		}
+	}
+
+	//if (2 == BluePickCount && 2 == RedPickCount)
+	//{
+	//	GameEngineCore::ChangeLevel("BattleLevel");
+	//	return;
+	//}
+}
+
+void BanPickManager::RedPickStart()
+{
+	UI_Mouse::GameMouse->MouseCol->Off();
+	Cputurn = true;
+}
+
+void BanPickManager::RedPickUpdate(float _Delta)
+{
+	if (true == Cputurn)
+	{
+		GameEngineRandom Rand;
+		int CardNum = Rand.RandomInt(0, UnitCount - 1);
+		while (false != Card[CardNum]->IsSelect)
+		{
+			CardNum = Rand.RandomInt(0, UnitCount - 1);
+		}
+
+		Card[CardNum]->IsPick = true;
+		CurCard = Card[CardNum]; 
+	}
+
+	// 처음 들어온 카드 설정
+	for (size_t i = 0; i < UnitCount; i++)
+	{
+		if (true == Card[i]->IsPick)
+		{
+			if (TeamType::Red == UI_Mouse::GameMouse->GetPlayerTeam())
 			{
 				BanPickInfo::Info.RedTeamPick[RedPickCount] = CurCard->GetUnitName();
 				CurCard->SetPickNum(RedPickCount);
@@ -621,12 +727,67 @@ void BanPickManager::PickUpdate(float _Delta)
 
 			UI_Mouse::GameMouse->TeamSwitch();
 			Card[i]->IsPick = false;
+			Card[i]->IsSelect = true;
+
+			if (2 >= RedPickCount)
+			{
+				ChangeState(BanPickState::TurnChange);
+				return;
+			}
 		}
 	}
 
-	if (2 == BluePickCount && 2 == RedPickCount)
+	//if (2 == BluePickCount && 2 == RedPickCount)
+	//{
+	//	GameEngineCore::ChangeLevel("BattleLevel");
+	//	return;
+	//}
+}
+
+void BanPickManager::TurnChangeStart()
+{
+	UI_Mouse::GameMouse->MouseCol->Off();
+}
+
+void BanPickManager::TurnChangeUpdate(float _Delta)
+{
+	if (GetLiveTime() >= 1.0f)
 	{
-		GameEngineCore::ChangeLevel("BattleLevel");
-		return;
+		if (1 == BanCount)
+		{
+			ChangeState(BanPickState::RedBan);
+			return;
+		}
+
+		if (2 == BanCount && 0 == BluePickCount)
+		{
+			ChangeState(BanPickState::ChangePick);
+			return;
+		}
+
+		if (1 == BluePickCount && 0 == RedPickCount)
+		{
+			ChangeState(BanPickState::RedPick);
+			return;
+		}
+
+		if (1 == BluePickCount && 1 == RedPickCount)
+		{
+			ChangeState(BanPickState::BluePick);
+			return;
+		}
+
+		if (2 == BluePickCount && 1 == RedPickCount)
+		{
+			ChangeState(BanPickState::RedPick);
+			return;
+		}
+
+		if (2 == BluePickCount && 2 == RedPickCount)
+		{
+			GameEngineCore::ChangeLevel("BattleLevel");
+			return;
+		}
 	}
+	
 }
