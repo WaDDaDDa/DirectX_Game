@@ -108,6 +108,31 @@ void TestTab::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 		GameEngineLevel::IsDebug = !GameEngineLevel::IsDebug;
 	}
 
+	if (ImGui::Button("Sound++ "))
+	{
+		Sound += 0.1f;
+
+		if (Sound >= 1.0f)
+		{
+			Sound = 1.0f;
+		}
+
+		GameEngineSound::SetGlobalVolume(Sound);
+	}
+
+	if (ImGui::Button("Sound-- "))
+	{
+		Sound -= 0.1f;
+
+		if (Sound <= 0.0f)
+		{
+			Sound = 0.0f;
+		}
+
+		GameEngineSound::SetGlobalVolume(Sound);
+	}
+	
+
 	//std::list<std::shared_ptr<GameEngineObject>> ObjectLists = _Level->GetObjectGroupInt(0);
 
 	//std::vector<std::shared_ptr<GameEngineObject>> Objects;

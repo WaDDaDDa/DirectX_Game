@@ -24,6 +24,7 @@ class TestTab : public Tab
 
 	void OnGUI(GameEngineLevel* _Level, float _DeltaTime);
 	float Speed = 1.0f;
+	float Sound = 1.0f;
 public:
 	TestTab(std::string_view _Name)
 		: Tab(_Name)

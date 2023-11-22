@@ -44,7 +44,20 @@ void TitleLevel::Start()
 
 	GetCamera(static_cast<int>(ECAMERAORDER::UI))->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 
+	{
+		if (nullptr == GameEngineSound::FindSound("StreetLove.wav"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("StreetLove.WAV"));
+		}
+	}
+
 	GameEngineInput::AddInputObject(this);
+
 }
 
 void TitleLevel::Update(float _Delta)
@@ -54,6 +67,10 @@ void TitleLevel::Update(float _Delta)
 
 void TitleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
+	//BGMPlayer.Start();
+	BGMPlayer = GameEngineSound::SoundPlay("StreetLove.WAV");
+	BGMPlayer.SetLoop(100);
+
 	RandSeed = reinterpret_cast<long long>(this);
 	RandSeed += Rand.RandomInt(0, 1000);
 	Rand.SetSeed(RandSeed);
@@ -101,6 +118,7 @@ void TitleLevel::LevelEnd(GameEngineLevel* _NextLevel)
 	BlueTeam.clear();
 	RedTeam.clear();
 	UseUnitName.clear();
+	BGMPlayer.Stop();
 
 }
 
