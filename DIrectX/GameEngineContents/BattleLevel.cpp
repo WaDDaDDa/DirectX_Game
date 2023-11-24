@@ -5,6 +5,7 @@
 #include "BattleField.h"
 #include "Bird.h"
 #include "BanPickManager.h"
+#include "StadiumLevel.h"
 
 // UI
 #include "StadiumBoard.h"
@@ -41,6 +42,18 @@ void BattleLevel::Start()
 	GetMainCamera()->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Orthographic);
 
+	{
+		if (nullptr == GameEngineSound::FindSound("Loop_Electronic001.wav"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Loop_Electronic001.WAV"));
+		}
+	}
+
 	GetCamera(static_cast<int>(ECAMERAORDER::UI))->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 
 	GameEngineInput::AddInputObject(this);
@@ -58,7 +71,13 @@ void BattleLevel::Update(float _Delta)
 
 void BattleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
-	GameEngineRandom NewRandom;
+
+	if ("Loop_Electronic001.WAV" != StadiumLevel::BGMPlayer.GetCurSoundName())
+	{
+		StadiumLevel::BGMPlayer.Stop();
+		StadiumLevel::BGMPlayer = GameEngineSound::SoundPlay("Loop_Electronic001.WAV");
+		StadiumLevel::BGMPlayer.SetLoop(100);
+	}
 
 	std::shared_ptr<BattleField> BF = CreateActor<BattleField>();
 
@@ -86,7 +105,6 @@ void BattleLevel::LevelEnd(GameEngineLevel* _NextLevel)
 	BlueTeam.clear();
 	RedTeam.clear();
 
-	int a = 0;
 }
 
 void BattleLevel::UnitSetting()

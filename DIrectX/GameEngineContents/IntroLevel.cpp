@@ -110,6 +110,18 @@ void IntroLevel::Start()
 		GameEngineSprite::CreateSingle("swordman_skill.png");
 	}
 
+	{
+		if (nullptr == GameEngineSound::FindSound("BGM_Chunky_Monkey.wav"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("BGM_Chunky_Monkey.WAV"));
+		}
+	}
+
 	EnemyInfo::Info.Init();
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
@@ -133,10 +145,14 @@ void IntroLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	// 포스트이펙트 - 페이드아웃
 	//GetLevelRenderTarget()->CreateEffect<FadePostEffect>();
+
+	BGMPlayer = GameEngineSound::SoundPlay("BGM_Chunky_Monkey.WAV");
+	BGMPlayer.SetLoop(100);
+
 	std::shared_ptr<IntroCut> NewIntro = CreateActor<IntroCut>();
 }
 
 void IntroLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
-	
+	BGMPlayer.Stop();
 }

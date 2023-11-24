@@ -13,6 +13,8 @@ public:
     StadiumLevel& operator=(const StadiumLevel& _Other) = delete;
     StadiumLevel& operator=(StadiumLevel&& _Other) noexcept = delete;
 
+    static class GameEngineSoundPlayer BGMPlayer;
+
 protected:
     void Start() override;
 

@@ -17,6 +17,9 @@
 #include "Stadium.h"
 #include "Audience.h"
 
+class GameEngineSoundPlayer StadiumLevel::BGMPlayer;
+
+
 StadiumLevel::StadiumLevel()
 {
 
@@ -82,6 +85,18 @@ void StadiumLevel::Start()
 		}
 	}
 
+	{
+		if (nullptr == GameEngineSound::FindSound("Stupid_Dancer.wav"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Stupid_Dancer.WAV"));
+		}
+	}
+
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	// 카메라의 위치를 화면의 왼쪽맨위에 0,0이 위치하도록 자리를 잡는다.
@@ -110,6 +125,9 @@ void StadiumLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		FadeInEffect = GetLevelRenderTarget()->CreateEffect<FadeEffect>();
 		FadeInEffect->SetFadeIn();
 	}
+
+	StadiumLevel::BGMPlayer = GameEngineSound::SoundPlay("Stupid_Dancer.WAV");
+	StadiumLevel::BGMPlayer.SetLoop(100);
 }
 
 void StadiumLevel::LevelEnd(GameEngineLevel* _NextLevel)
@@ -119,4 +137,5 @@ void StadiumLevel::LevelEnd(GameEngineLevel* _NextLevel)
 		FadeInEffect->Death();
 		FadeInEffect = nullptr;
 	}
+
 }

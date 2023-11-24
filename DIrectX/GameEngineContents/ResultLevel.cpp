@@ -7,6 +7,7 @@
 #include "Bird.h"
 #include "BanPickManager.h"
 #include "UI_Mouse.h"
+#include "StadiumLevel.h"
 
 #include "TeamInfo.h"
 #include "HouseBackGround.h"
@@ -53,6 +54,13 @@ void ResultLevel::Update(float _Delta)
 
 void ResultLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
+	if ("Loop_Electronic001.WAV" != StadiumLevel::BGMPlayer.GetCurSoundName())
+	{
+		StadiumLevel::BGMPlayer.Stop();
+		StadiumLevel::BGMPlayer = GameEngineSound::SoundPlay("Loop_Electronic001.WAV");
+		StadiumLevel::BGMPlayer.SetLoop(100);
+	}
+
 	CreateActor<UI_Mouse>();
 
 	CreateActor<ResultBoard>();

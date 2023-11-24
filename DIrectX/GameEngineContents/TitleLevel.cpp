@@ -67,7 +67,6 @@ void TitleLevel::Update(float _Delta)
 
 void TitleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
-	//BGMPlayer.Start();
 	BGMPlayer = GameEngineSound::SoundPlay("StreetLove.WAV");
 	BGMPlayer.SetLoop(100);
 

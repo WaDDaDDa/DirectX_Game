@@ -72,6 +72,18 @@ void MainLevel::Start()
 		GameEngineSprite::CreateSingle("banpick_ui_bg.png");
 	}
 
+	{
+		if (nullptr == GameEngineSound::FindSound("InfiniteDoors.wav"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("InfiniteDoors.WAV"));
+		}
+	}
+
 	//GameEngineRenderTarget::IsDepth = false;
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
@@ -113,9 +125,13 @@ void MainLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	std::shared_ptr<class FadeEffect> FadeInEffect = GetLevelRenderTarget()->CreateEffect<FadeEffect>();
 	FadeInEffect->SetFadeIn();
+
+	BGMPlayer = GameEngineSound::SoundPlay("InfiniteDoors.WAV");
+	BGMPlayer.SetLoop(100);
 }
 
 void MainLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
+	BGMPlayer.Stop();
 
 }

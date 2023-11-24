@@ -2,6 +2,7 @@
 #include "BanPickLevel.h"
 #include "BanPickManager.h"
 #include "UI_Mouse.h"
+#include "StadiumLevel.h"
 // UI
 
 
@@ -69,6 +70,13 @@ void BanPickLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 			GameEngineSprite::CreateFolder(Dir.GetStringPath());
 		}
+	}
+
+	if ("Stupid_Dancer.WAV" != StadiumLevel::BGMPlayer.GetCurSoundName())
+	{
+		StadiumLevel::BGMPlayer.Stop();
+		StadiumLevel::BGMPlayer = GameEngineSound::SoundPlay("Stupid_Dancer.WAV");
+		StadiumLevel::BGMPlayer.SetLoop(100);
 	}
 
 
