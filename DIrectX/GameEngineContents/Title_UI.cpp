@@ -30,7 +30,7 @@ Title_UI::~Title_UI()
 void Title_UI::Start()
 {
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
-	Transform.AddLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, 0.0f });
+	Transform.AddLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y - 90.0f, 0.0f });
 
 	// ∏ﬁ¿Œ
 	Renderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);

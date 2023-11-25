@@ -23,6 +23,9 @@ void FireSpiritAttack::Start()
 	Renderer->SetAutoScaleRatio(1.3f);
 	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Projectile) });
 
+	// 사운드
+	GameEngineSound::SoundPlay("MAGIC_SPELL_Flame_04_mono.WAV");
+
 	// 이벤트 셋팅
 	Event.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
 		{

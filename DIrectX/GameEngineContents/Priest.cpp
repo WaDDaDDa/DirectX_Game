@@ -149,6 +149,9 @@ void Priest::AttackStart()
 	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("PriestAttackEffect");
 
+	// 사운드
+	GameEngineSound::SoundPlay("MAGIC_SPELL_Morphing_Synth_Harp_Scales_Subtle_stereo.WAV");
+
 }
 
 void Priest::AttackUpdate(float _Delta)
@@ -165,6 +168,8 @@ void Priest::Attack2Start()
 	MainSpriteRenderer->ChangeAnimation("Priest_Attack2");
 
 	AttackValue = 0.0f;
+
+
 
 	float CurHpRate = 1.0f;
 	size_t TeamNum = 0;
@@ -217,6 +222,9 @@ void Priest::SkillStart()
 	MainSpriteRenderer->ChangeAnimation("Priest_Skill");
 	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("PriestSkillEffect");
+
+	// 사운드
+	GameEngineSound::SoundPlay("MAGIC_SPELL_Morphing_Synth_Harp_Scales_Subtle_stereo.WAV");
 
 	float CurHpRate = 1.0f;
 	size_t TeamNum = 0;

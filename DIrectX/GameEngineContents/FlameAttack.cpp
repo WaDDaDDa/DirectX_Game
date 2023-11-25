@@ -21,6 +21,9 @@ void FlameAttack::Start()
 	Renderer->AutoSpriteSizeOn();
 	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Projectile) });
 
+	// 사운드
+	GameEngineSound::SoundPlay("Fire bolt 17.WAV");
+
 	// 이벤트 셋팅
 	Event.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
 		{

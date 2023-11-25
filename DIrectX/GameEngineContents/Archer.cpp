@@ -128,6 +128,8 @@ void Archer::AttackStart()
 	SkillEffectRenderer->Off();
 	SkillEffectRenderer->ChangeAnimation("ArcherSkillBlack");
 	MainSpriteRenderer->ChangeAnimation("Archer_Attack");
+
+	GameEngineSound::SoundPlay("Pulling string back (Bow) 2.WAV");
 }
 
 void Archer::AttackUpdate(float _Delta)

@@ -21,6 +21,10 @@ void FlameUlt::Start()
 	AttRangeRenderer->SetImageScale({ 0.0f, 0.0f });
 	AttRangeRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackEffect2) });
 
+	// 사운드
+	Sound = GameEngineSound::SoundPlay("THRUSTER_Flickering_Flame_loop_mono.WAV");
+	Sound.SetLoop(2);
+
 	// 이벤트 셋팅
 	Event.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
 		{
@@ -66,6 +70,7 @@ void FlameUlt::Start()
 
 void FlameUlt::LevelEnd(GameEngineLevel* _NextLevel)
 {
+	Sound.Stop();
 	Death();
 }
 
@@ -106,6 +111,7 @@ void FlameUlt::Update(float _Delta)
 
 	if (LifeTime <= GetLiveTime())
 	{
+		Sound.Stop();
 		Death();
 		return;
 	}

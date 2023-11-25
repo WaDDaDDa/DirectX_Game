@@ -130,6 +130,9 @@ void Monk::Attack2Start()
 {
 	GameUnit::Attack2Start();
 	MainSpriteRenderer->ChangeAnimation("Monk_Attack2");
+
+	// 사운드
+	GameEngineSound::SoundPlay("Swing 1.WAV");
 }
 
 void Monk::Attack2Update(float _Delta)
@@ -157,6 +160,9 @@ void Monk::SkillStart()
 	MainSpriteRenderer->ChangeAnimation("Monk_Skill");
 	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("MonkSkillEffect");
+
+	// 사운드
+	GameEngineSound::SoundPlay("Buff 2.WAV");
 
 	float CurHpRate = 1.0f;
 	size_t TeamNum = 0;
@@ -210,6 +216,9 @@ void Monk::UltStart()
 	GameUnit::UltStart();
 	MainSpriteRenderer->ChangeAnimation("Monk_Ult");
 	GetLevel()->CreateActor<MonkUlt>()->SetUnit(GetDynamic_Cast_This<GameUnit>());
+
+	// 사운드
+	GameEngineSound::SoundPlay("Buff 8.WAV");
 
 	//CreateUltEffect();
 	// 어그로를 자신에게 끌고 자신의 방어력을 증가시킨다.

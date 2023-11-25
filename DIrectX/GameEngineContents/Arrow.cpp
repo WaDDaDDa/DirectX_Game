@@ -21,6 +21,7 @@ void Arrow::Start()
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetAutoScaleRatio(1.3f);
 
+	GameEngineSound::SoundPlay("Arrow_Flying_Past.WAV");
 
 	// 이벤트 셋팅
 	Event.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)

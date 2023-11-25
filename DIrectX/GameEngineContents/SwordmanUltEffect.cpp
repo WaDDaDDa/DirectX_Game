@@ -25,6 +25,9 @@ void SwordmanUltEffect::Start()
 	Renderer->SetPivotType(PivotType::Left);
 	Renderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::FrontEffect) });
 
+	// 사운드
+	GameEngineSound::SoundPlay("Sword Stab (Flesh).WAV");
+
 	// 이벤트 셋팅
 	Event.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
 		{

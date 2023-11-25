@@ -176,6 +176,9 @@ void Swordman::Attack2Start()
 	GameUnit::Attack2Start();
 	SkillEffectRenderer->Off();
 	MainSpriteRenderer->ChangeAnimation("Swordman_Attack2");
+
+	// 사운드
+	GameEngineSound::SoundPlay("Light Sword Swing 3.WAV");
 }
 
 void Swordman::Attack2Update(float _Delta)
@@ -260,7 +263,9 @@ void Swordman::Skill2Update(float _Delta)
 						// 공격대미지 공식
 						reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 0.9f, GetDynamic_Cast_This<GameUnit>());
 						SkillTick -= 1.0f;
-						SkillDamageDeley = 0.1f;
+						SkillDamageDeley = 0.05f;
+						// 사운드
+						GameEngineSound::SoundPlay("Light Sword Swing 3.WAV");
 						return;
 					}
 				});
@@ -275,7 +280,9 @@ void Swordman::Skill2Update(float _Delta)
 						// 공격대미지 공식
 						reinterpret_cast<GameUnit*>(_Collision[i]->GetActor())->DamageHP(UnitAtt * 0.9f, GetDynamic_Cast_This<GameUnit>());
 						SkillTick -= 1.0f;
-						SkillDamageDeley = 0.1f;
+						SkillDamageDeley = 0.05f;
+						// 사운드
+						GameEngineSound::SoundPlay("Light Sword Swing 3.WAV");
 						return;
 					}
 				});

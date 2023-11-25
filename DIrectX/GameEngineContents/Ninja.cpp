@@ -135,6 +135,9 @@ void Ninja::Attack2Start()
 {
 	GameUnit::Attack2Start();
 	MainSpriteRenderer->ChangeAnimation("Ninja_Attack2");
+
+	//사운드
+	GameEngineSound::SoundPlay("Dagger Swing 8.WAV");
 }
 
 void Ninja::Attack2Update(float _Delta)
@@ -163,6 +166,9 @@ void Ninja::SkillStart()
 	MainSpriteRenderer->ChangeAnimation("Ninja_Skill");
 	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("NinjaSkillEffect");
+
+	//사운드
+	GameEngineSound::SoundPlay("Swing 2.WAV");
 }
 
 void Ninja::SkillUpdate(float _Delta)
@@ -227,6 +233,9 @@ void Ninja::Skill2Update(float _Delta)
 					AggroUnit = reinterpret_cast<GameUnit*>(_Collision[i]->GetActor());
 					AggroUnit->DamageHP(UnitAtt * 2.0f, GetDynamic_Cast_This<GameUnit>());
 					SkillTick -= 1;
+
+					//사운드
+					GameEngineSound::SoundPlay("Dagger Stab.WAV");
 					return;
 				}
 			});
@@ -242,6 +251,9 @@ void Ninja::Skill2Update(float _Delta)
 					AggroUnit = reinterpret_cast<GameUnit*>(_Collision[i]->GetActor());
 					AggroUnit->DamageHP(UnitAtt * 2.0f, GetDynamic_Cast_This<GameUnit>());
 					SkillTick -= 1;
+
+					//사운드
+					GameEngineSound::SoundPlay("Dagger Stab.WAV");
 					return;
 				}
 			});
@@ -254,6 +266,9 @@ void Ninja::UltStart()
 	MainSpriteRenderer->ChangeAnimation("Ninja_Ult");
 	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("NinjaUltEffect");
+
+	//사운드
+	GameEngineSound::SoundPlay("WHOOSH_Air_Very_Slow_RR7_mono.WAV");
 
 	GameUnit* NinNin = GetLevel()->CreateActor<NinjaUlt>()->GetPointer();
 	NinNin->EnemyUnitSetting(EnemyGroup);

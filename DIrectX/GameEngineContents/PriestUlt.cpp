@@ -21,6 +21,9 @@ void PriestUlt::Start()
 	AttRangeRenderer->SetImageScale({ 0.0f, 0.0f });
 	AttRangeRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackEffect) });
 
+	// 사운드
+	GameEngineSound::SoundPlay("Buff 10.WAV");
+
 	// 이벤트 셋팅
 	Event.Enter = [=](GameEngineCollision* _this, GameEngineCollision* _Col)
 		{

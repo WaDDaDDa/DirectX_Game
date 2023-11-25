@@ -58,10 +58,10 @@ void Pyromancer::LevelStart(GameEngineLevel* _PrevLevel)
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Unit);
 		MainSpriteRenderer->CreateAnimation("Pyromancer_Idle", "PyromancerAni", 0.2f, 0, 4);
 		MainSpriteRenderer->CreateAnimation("Pyromancer_Move", "PyromancerAni", 0.2f, 5, 8);
-		MainSpriteRenderer->CreateAnimation("Pyromancer_Attack", "PyromancerAni", 0.2f, 9, 12, false);
-		MainSpriteRenderer->CreateAnimation("Pyromancer_Attack2", "PyromancerAni", 0.2f, 13, 16, false);
-		MainSpriteRenderer->CreateAnimation("Pyromancer_Skill", "PyromancerAni", 0.1f, 26, 29, false);
-		MainSpriteRenderer->CreateAnimation("Pyromancer_Skill2", "PyromancerAni", 0.1f, 30, 38, false);
+		MainSpriteRenderer->CreateAnimation("Pyromancer_Attack", "PyromancerAni", 0.1f, 9, 12, false);
+		MainSpriteRenderer->CreateAnimation("Pyromancer_Attack2", "PyromancerAni", 0.1f, 13, 16, false);
+		MainSpriteRenderer->CreateAnimation("Pyromancer_Skill", "PyromancerAni", 0.05f, 26, 29, false);
+		MainSpriteRenderer->CreateAnimation("Pyromancer_Skill2", "PyromancerAni", 0.05f, 30, 38, false);
 		MainSpriteRenderer->CreateAnimation("Pyromancer_Ult", "PyromancerAni", 0.2f, 39, 40, false);
 		MainSpriteRenderer->CreateAnimation("Pyromancer_Ult2", "PyromancerAni", 0.2f, 41, 42, false);
 		MainSpriteRenderer->CreateAnimation("Pyromancer_Die", "PyromancerAni", 0.1f, 17, 25, false);

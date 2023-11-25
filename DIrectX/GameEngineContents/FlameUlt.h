@@ -51,5 +51,7 @@ private:
     float RangeValue = 0.0f;
 
     std::shared_ptr<class GameUnit> Unit;
+    class GameEngineSoundPlayer Sound;
+
 };
 

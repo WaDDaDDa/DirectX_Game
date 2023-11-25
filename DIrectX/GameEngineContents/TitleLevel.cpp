@@ -39,10 +39,10 @@ void TitleLevel::Start()
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	// 카메라의 위치를 화면의 왼쪽맨위에 0,0이 위치하도록 자리를 잡는다.
-	GetMainCamera()->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
+	GetMainCamera()->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y -90.0f, -500.0f });
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Orthographic);
 
-	GetCamera(static_cast<int>(ECAMERAORDER::UI))->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
+	GetCamera(static_cast<int>(ECAMERAORDER::UI))->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y -90.0f, -500.0f });
 
 	{
 		if (nullptr == GameEngineSound::FindSound("StreetLove.wav"))
@@ -53,6 +53,25 @@ void TitleLevel::Start()
 			FilePath.MoveChild("ContentsResources\\Sound\\");
 
 			GameEngineSound::SoundLoad(FilePath.PlusFilePath("StreetLove.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Arrow_Flying_Past.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("VOICE_Martial_Art_Shout_22_mono.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Buff 4.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Heavy sword woosh 11.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Swing 1.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Swing 2.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Buff 2.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Buff 8.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Light Sword Swing 3.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Sword Stab (Flesh).WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("MAGIC_SPELL_Morphing_Synth_Harp_Scales_Subtle_stereo.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Buff 10.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Dagger Swing 8.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Dagger Stab.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Pulling string back (Bow) 2.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("WHOOSH_Air_Very_Slow_RR7_mono.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("MAGIC_SPELL_Flame_04_mono.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Fire bolt 17.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("THRUSTER_Flickering_Flame_loop_mono.WAV"));
 		}
 	}
 

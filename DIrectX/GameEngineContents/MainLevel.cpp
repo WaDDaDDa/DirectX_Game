@@ -133,5 +133,4 @@ void MainLevel::LevelStart(GameEngineLevel* _PrevLevel)
 void MainLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
 	BGMPlayer.Stop();
-
 }

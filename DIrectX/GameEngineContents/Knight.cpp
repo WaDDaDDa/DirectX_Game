@@ -119,6 +119,8 @@ void Knight::AttackStart()
 {
 	GameUnit::AttackStart();
 	MainSpriteRenderer->ChangeAnimation("Knight_Attack");
+
+
 }
 
 void Knight::AttackUpdate(float _Delta)
@@ -134,6 +136,9 @@ void Knight::Attack2Start()
 {
 	GameUnit::Attack2Start();
 	MainSpriteRenderer->ChangeAnimation("Knight_Attack2");
+
+	// 사운드
+	GameEngineSound::SoundPlay("Heavy sword woosh 11.WAV");
 }
 
 void Knight::Attack2Update(float _Delta)
@@ -161,6 +166,10 @@ void Knight::SkillStart()
 	MainSpriteRenderer->ChangeAnimation("Knight_Skill");
 	SkillEffectRenderer->On();
 	SkillEffectRenderer->ChangeAnimation("KnightSkillEffect");
+
+	// 사운드
+	GameEngineSound::SoundPlay("VOICE_Martial_Art_Shout_22_mono.WAV");
+
 	// 어그로를 자신에게 끈다
 
 	for (size_t i = 0; i < EnemyGroup.size(); i++)
@@ -200,6 +209,10 @@ void Knight::UltStart()
 {
 	GameUnit::UltStart();
 	MainSpriteRenderer->ChangeAnimation("Knight_Ult");
+
+	//사운드
+	GameEngineSound::SoundPlay("Buff 4.WAV");
+
 
 	for (size_t i = 0; i < TeamGroup.size(); i++)
 	{
