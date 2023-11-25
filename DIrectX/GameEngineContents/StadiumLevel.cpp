@@ -105,7 +105,6 @@ void StadiumLevel::Start()
 
 	GetCamera(static_cast<int>(ECAMERAORDER::UI))->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 
-	CreateActor<Stadium>();
 }
 
 void StadiumLevel::Update(float _Delta)
@@ -115,6 +114,17 @@ void StadiumLevel::Update(float _Delta)
 
 void StadiumLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
+	std::list<std::shared_ptr<class GamePlayer>>& PlayerGroup = TeamInfo::MyInfo.GetMyPlayer();
+
+	std::list<std::shared_ptr<GamePlayer>>::iterator Start = PlayerGroup.begin();
+	std::list<std::shared_ptr<GamePlayer>>::iterator End = PlayerGroup.end();
+
+	TeamInfo::MyInfo.OnePlayer = (*Start);
+	Start++;
+	TeamInfo::MyInfo.TwoPlayer = (*Start);
+
+	CreateActor<Stadium>();
+
 	for (size_t i = 0; i < 300; i++)
 	{
 		CreateActor<Audience>();

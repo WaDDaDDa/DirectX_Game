@@ -70,6 +70,18 @@ public:
             Def = 99;
         }
 
+        if ("Zeus" == Name)
+        {
+            Att = 77;
+            Def = 77;
+        }
+
+        if ("Chovy" == Name)
+        {
+            Att = 88;
+            Def = 48;
+        }
+
         Cost = Rand.RandomInt(90, 140);
 
         HairNum = Rand.RandomInt(1, 29);
@@ -81,7 +93,6 @@ public:
         Namelist.push_back("Peanut");
         Namelist.push_back("Bdd");
         Namelist.push_back("Ruler");
-        Namelist.push_back("Chovy");
         Namelist.push_back("Score");
         Namelist.push_back("Lehenhs");
         Namelist.push_back("Kiin");
@@ -107,7 +118,6 @@ public:
         Namelist.push_back("Gumayusi");
         Namelist.push_back("Oner");
         Namelist.push_back("Kellin");
-        Namelist.push_back("Zeus");
         Namelist.push_back("UmTi");
         Namelist.push_back("Crown");
         Namelist.push_back("MadLife");
@@ -123,6 +133,7 @@ public:
         Namelist.push_back("Zeka");
         Namelist.push_back("Lucid");
         Namelist.push_back("PeyZ");
+
 
         GameEngineRandom Rand;
         long long RandSeed = reinterpret_cast<long long>(this);
