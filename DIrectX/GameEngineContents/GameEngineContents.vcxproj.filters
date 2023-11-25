@@ -265,6 +265,9 @@
     <ClCompile Include="Title_UI.cpp">
       <Filter>UI\HouseUI</Filter>
     </ClCompile>
+    <ClCompile Include="BanEffect.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
@@ -533,6 +536,9 @@
     </ClInclude>
     <ClInclude Include="Title_UI.h">
       <Filter>UI\HouseUI</Filter>
+    </ClInclude>
+    <ClInclude Include="BanEffect.h">
+      <Filter>Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

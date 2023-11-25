@@ -2,6 +2,8 @@
 #include "BanPickCard.h"
 #include "GameUnitStatus.h"
 #include "UI_Mouse.h"
+#include "BanEffect.h"
+
 
 float BanPickCard::XInter = 0.0f;
 
@@ -160,6 +162,13 @@ void BanPickCard::Init()
 	XInter += 80.0f;
 
 }
+
+void BanPickCard::CreateBanEffect()
+{
+	Effect = GetLevel()->CreateActor<BanEffect>();
+	Effect->Init(Transform.GetWorldPosition());
+}
+
 
 void BanPickCard::LevelEnd(GameEngineLevel* _NextLevel)
 {

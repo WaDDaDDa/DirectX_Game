@@ -60,7 +60,6 @@ private:
     class EventParameter Event;
 
     std::shared_ptr<class GameUnit> Unit;
-    float LifeTime = 8.0f;
 
 };
 

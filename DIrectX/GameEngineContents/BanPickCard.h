@@ -88,6 +88,7 @@ public:
 
     void SetBan()
     {
+        CreateBanEffect();
         Renderer->ChangeAnimation("BanPickCard_Ban");
         Renderer4->ChangeAnimation("Ban");
         Renderer4->On();
@@ -95,6 +96,11 @@ public:
         UnitText->SetText("Galmuri14", UnitStat.KoreaName.data(), 16.0f, float4::ZERO, FW1_CENTER);
         IsBan = true;
     }
+
+    void CreateBanEffect();
+
+    std::shared_ptr<class BanEffect> Effect;
+
 
 protected:
 

@@ -323,6 +323,10 @@ public:
     void SetPlayerSpec(const GamePlayerInfo& _PlayerSpec)
     {
         PlayerSpec = _PlayerSpec;
+
+        UnitAtt += PlayerSpec.Att;
+        UnitDef += PlayerSpec.Def;
+        UnitAbsoluteDef += PlayerSpec.Def;
     }
 
     GamePlayerInfo PlayerSpec;

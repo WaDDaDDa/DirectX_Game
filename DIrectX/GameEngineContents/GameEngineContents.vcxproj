@@ -171,6 +171,7 @@
     </ClCompile>
     <ClCompile Include="Awards.cpp" />
     <ClCompile Include="AwardsLevel.cpp" />
+    <ClCompile Include="BanEffect.cpp" />
     <ClCompile Include="BanPickBoard.cpp" />
     <ClCompile Include="BanPickCard.cpp" />
     <ClCompile Include="BanPickLevel.cpp" />
@@ -325,6 +326,7 @@
     </ClInclude>
     <ClInclude Include="Awards.h" />
     <ClInclude Include="AwardsLevel.h" />
+    <ClInclude Include="BanEffect.h" />
     <ClInclude Include="BanPickBoard.h" />
     <ClInclude Include="BanPickCard.h" />
     <ClInclude Include="BanPickLevel.h" />

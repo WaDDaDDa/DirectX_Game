@@ -21,7 +21,7 @@ public:
 
         for (size_t i = 0; i < 3; i++)
         {
-            NewInfo.Random();
+            NewInfo.CpuRandom();
             NewInfo.HairNum = Rand.RandomInt(1, 29);
             EnemyPlayer.push_back(NewInfo);
         }
