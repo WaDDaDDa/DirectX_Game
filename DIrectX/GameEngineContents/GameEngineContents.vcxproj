@@ -205,6 +205,7 @@
     <ClCompile Include="FlameAttack.cpp" />
     <ClCompile Include="FlameEffect.cpp" />
     <ClCompile Include="FlameUlt.cpp" />
+    <ClCompile Include="FontEffect.cpp" />
     <ClCompile Include="GameBundle.cpp" />
     <ClCompile Include="GamePlayer.cpp" />
     <ClCompile Include="GameUnit.cpp">
@@ -361,6 +362,7 @@
     <ClInclude Include="FlameAttack.h" />
     <ClInclude Include="FlameEffect.h" />
     <ClInclude Include="FlameUlt.h" />
+    <ClInclude Include="FontEffect.h" />
     <ClInclude Include="GameBundle.h" />
     <ClInclude Include="GamePlayer.h" />
     <ClInclude Include="GameUnit.h">

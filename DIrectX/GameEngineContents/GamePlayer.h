@@ -70,18 +70,6 @@ public:
             Def = 99;
         }
 
-        if ("Zeus" == Name)
-        {
-            Att = 77;
-            Def = 77;
-        }
-
-        if ("Chovy" == Name)
-        {
-            Att = 88;
-            Def = 48;
-        }
-
         Cost = Rand.RandomInt(90, 140);
 
         HairNum = Rand.RandomInt(1, 29);

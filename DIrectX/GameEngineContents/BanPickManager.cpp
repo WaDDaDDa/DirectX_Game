@@ -375,7 +375,6 @@ void BanPickManager::Start()
 	BansText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UI) });
 	BansText->SetText("Galmuri14", "BANS", 40.0f, float4::WHITE, FW1_CENTER);
 
-
 	// 현재 턴 컬러.
 	TurnColor = CreateComponent<GameEngineUIRenderer>(ContentsOrder::BackUI);
 	TurnColor->CreateAnimation("Blue", "BanPick", 0.1f, 30, 30, false);
@@ -384,6 +383,10 @@ void BanPickManager::Start()
 	TurnColor->SetImageScale({1280.0f, 60.0f});
 	TurnColor->Transform.AddLocalPosition(TurnColorPos);
 	TurnColor->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackUI) });
+
+	NoticeText = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	NoticeText->Transform.AddLocalPosition({ 640.0f, -110.0f, -static_cast<float>(ContentsOrder::UI) });
+	NoticeText->SetText("Galmuri14", "금지할 챔피언을 선택하세요", 32.0f, float4::WHITE, FW1_CENTER);
 
 }
 
@@ -598,7 +601,7 @@ void BanPickManager::RedBanUpdate(float _Delta)
 	if (true == Cputurn)
 	{
 		GameEngineRandom Rand;
-		int CardNum = Rand.RandomInt(0, UnitCount -1);
+		size_t CardNum = static_cast<size_t>(Rand.RandomInt(0, UnitCount - static_cast<size_t>(1)));
 		while (false != Card[CardNum]->IsSelect)
 		{
 			CardNum = Rand.RandomInt(0, UnitCount -1);
@@ -642,6 +645,7 @@ void BanPickManager::RedBanUpdate(float _Delta)
 void BanPickManager::ChangePickStart()
 {
 	UI_Mouse::GameMouse->MouseCol->Off();
+	NoticeText->SetText("Galmuri14", "사용할 챔피언을 선택하세요", 32.0f, float4::WHITE, FW1_CENTER);
 
 }
 

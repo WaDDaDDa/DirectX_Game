@@ -73,6 +73,8 @@ void TitleLevel::Start()
 			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Fire bolt 17.WAV"));
 			GameEngineSound::SoundLoad(FilePath.PlusFilePath("THRUSTER_Flickering_Flame_loop_mono.WAV"));
 			GameEngineSound::SoundLoad(FilePath.PlusFilePath("MAGIC_SPELL_Spawn_mono.WAV"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Reload_01.WAV"));
+
 		}
 	}
 

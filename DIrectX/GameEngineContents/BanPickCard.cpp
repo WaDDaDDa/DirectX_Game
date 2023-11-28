@@ -257,6 +257,9 @@ void BanPickCard::ClickUpdate(float _Delta)
 
 void BanPickCard::SetPickNum(int _Num)
 {
+	//»ç¿îµå
+	GameEngineSound::SoundPlay("Reload_01.WAV");
+
 	switch (_Num)
 	{
 	case 0:
@@ -279,13 +282,11 @@ void BanPickCard::SetPickNum(int _Num)
 	{
 		Renderer->ChangeAnimation("BanPickCard_Blue");
 		Renderer3->ChangeAnimation("Blue");
-
 	}
 	else if (TeamType::Red == UI_Mouse::GameMouse->GetPlayerTeam())
 	{
 		Renderer->ChangeAnimation("BanPickCard_Red");
 		Renderer3->ChangeAnimation("Red");
-
 	}
 
 	UnitImage->ChangeAnimation(GetUnitNameToString() += "_Att");

@@ -3,6 +3,7 @@
 #include <vector>
 #include "GameUnitStatus.h"
 #include "GamePlayer.h"
+#include "FontEffect.h"
 
 enum class GameUnitState
 {
@@ -215,6 +216,21 @@ public:
             return;
         }
 
+        bool Check = false;
+
+        if (GameUnitDir::Left == Dir)
+        {
+            Check = true;
+
+        }
+        else if (GameUnitDir::Right == Dir)
+        {
+            Check = false;
+
+        }
+
+        GetLevel()->CreateActor<FontEffect>()->Init(Transform.GetWorldPosition(), Result, float4::RED, Check);
+
         UnitHP -= Result;
         _AttUnit->AddAttDamage(Result);
         AddDefDamage(Result);
@@ -243,7 +259,27 @@ public:
 
         float Healling = Result - UnitHP;
 
+        if (0 == Healling)
+        {
+            return;
+        }
+
         _HealUnit->AddHealling(Healling);
+
+        bool Check = false;
+
+        if (GameUnitDir::Left == Dir)
+        {
+            Check = true;
+
+        }
+        else if (GameUnitDir::Right == Dir)
+        {
+            Check = false;
+
+        }
+
+        GetLevel()->CreateActor<FontEffect>()->Init(Transform.GetWorldPosition(), Healling, float4::GREEN, Check);
 
         UnitHP = Result;
     }

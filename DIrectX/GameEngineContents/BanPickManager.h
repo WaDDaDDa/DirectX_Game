@@ -201,6 +201,8 @@ private:
     std::shared_ptr<class GameEngineSpriteRenderer> BansText;
     float4 BansTextPos = { 640.0f, -650.0f };
 
+    std::shared_ptr<class GameEngineSpriteRenderer> NoticeText;
+
     size_t UnitCount = 8;
     std::shared_ptr<class BanPickCard> CurCard;
     std::shared_ptr<class BanPickCard> BlueBanCard;
