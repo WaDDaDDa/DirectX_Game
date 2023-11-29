@@ -21,6 +21,7 @@
 #include "TeamInfo.h"
 #include "EnemyInfo.h"
 #include "Title_UI.h"
+#include "UI_Mouse.h"
 
 
 TitleLevel::TitleLevel()
@@ -89,6 +90,8 @@ void TitleLevel::Update(float _Delta)
 
 void TitleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
+	CreateActor<UI_Mouse>();
+
 	BGMPlayer = GameEngineSound::SoundPlay("StreetLove.WAV");
 	BGMPlayer.SetLoop(100);
 

@@ -120,7 +120,7 @@ GameUnitStatus GameUnitStatus::PyromancerStat
     80.0f,                 // UnitMaxHP
     3.0f,                  // UnitDef
     3.0f,                  //_UnitAbsoluteDef
-    40.0f,                  // _UnitAtt
+    38.0f,                  // _UnitAtt
     2.0f,                   //_AttackSpeed
     6.5f,                   //_SkillCooltime
     32.0f        ,           //_UltCooltime

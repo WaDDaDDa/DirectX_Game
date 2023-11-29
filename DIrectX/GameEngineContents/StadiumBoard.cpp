@@ -84,6 +84,14 @@ void StadiumBoard::Start()
 	RedTeamWinCount = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
 	RedTeamWinCount->SetText("Galmuri14", "0", 32.0f, float4::WHITE, FW1_CENTER);
 	RedTeamWinCount->Transform.AddLocalPosition({ 90.0f, -15.0f, -static_cast<float>(ContentsOrder::UIImage) });
+
+	NumCount1 = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	//NumCount1->SetSprite("Number", 0);
+	//NumCount1->AutoSpriteSizeOn();
+	//NumCount1->SetAutoScaleRatio(3.0f);
+	NumCount1->SetText("Galmuri14", "", 32.0f, float4::WHITE, FW1_CENTER);
+	NumCount1->Transform.AddLocalPosition({ 0.0f, -63.0f });
+	NumCount1->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
 }
 
 void StadiumBoard::LevelStart(GameEngineLevel* _PrevLevel)
@@ -123,6 +131,10 @@ void StadiumBoard::Update(float _Delta)
 
 	BlueDieCount = 0;
 	RedDieCount = 0;
+
+	std::string TimeText = GameEngineString::Format("{:.1f}", GameTime);
+
+	NumCount1->SetText("Galmuri14", TimeText, 16.0f, float4::WHITE, FW1_CENTER);
 
 	// ÆÀ¼³Á¤
 	for (size_t i = 0; i < BlueTeam.size(); i++)

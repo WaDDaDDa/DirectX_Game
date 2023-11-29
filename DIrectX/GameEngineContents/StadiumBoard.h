@@ -54,6 +54,9 @@ private:
     std::shared_ptr<class GameEngineSpriteRenderer> RedTeamName;
     std::shared_ptr<class GameEngineSpriteRenderer> RedTeamWinCount;
 
+    std::shared_ptr<class GameEngineSpriteRenderer> NumCount1;
+
+
     std::vector<class GameUnit*> RedTeam;
     std::vector<class GameUnit*> BlueTeam;
 };
