@@ -12,11 +12,11 @@
   <ItemGroup>
     <ClCompile Include="GameEngineWindow.cpp" />
     <ClCompile Include="GameEngineWindowTexture.cpp" />
-    <ClCompile Include="GameEngineInput.cpp" />
     <ClCompile Include="GameEngineSound.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="FMOD">

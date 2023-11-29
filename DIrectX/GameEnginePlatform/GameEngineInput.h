@@ -77,6 +77,8 @@ public:
 	static void Update(float _DeltaTime);
 	static void Reset();
 
+	static bool IsKeyDown(void* _Ptr);
+
 	static bool IsDown(int _Key, void* _Ptr);
 	static bool IsUp(int _Key, void* _Ptr);
 	static bool IsPress(int _Key, void* _Ptr);

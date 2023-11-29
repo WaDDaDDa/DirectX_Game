@@ -47,6 +47,7 @@ void House_UI::Start()
 	GroundRenderer->SetAutoScaleRatio(3.0f);
 	GroundRenderer->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::BackUI) });
 	GroundRenderer->Transform.AddLocalPosition({ 0.0f, -335.0f , -200.0f});
+
 	{
 		TeamButton = GetLevel()->CreateActor<MenuButton>();
 		TeamButton->SetButtonText("팀 관리");
@@ -56,6 +57,7 @@ void House_UI::Start()
 		TeamPopMenu = GetLevel()->CreateActor<TeamBundle>();
 		TeamButtonPos += ButtonXInter;
 	}
+
 	{
 		ManagerButton = GetLevel()->CreateActor<MenuButton>();
 		ManagerButton->SetButtonText("운영");
@@ -66,6 +68,7 @@ void House_UI::Start()
 		ManagerPopMenu->Transform.AddLocalPosition(ButtonXInter);
 		TeamButtonPos += ButtonXInter;
 	}
+
 	{
 		BattleButton = GetLevel()->CreateActor<MenuButton>();
 		BattleButton->SetButtonText("대회");
@@ -77,6 +80,7 @@ void House_UI::Start()
 
 		TeamButtonPos += ButtonXInter;
 	}
+
 	{
 		GameButton = GetLevel()->CreateActor<MenuButton>();
 		GameButton->SetButtonText("게임");
@@ -88,6 +92,7 @@ void House_UI::Start()
 
 		TeamButtonPos += ButtonXInter;
 	}
+
 	{
 		SystemButton = GetLevel()->CreateActor<MenuButton>();
 		SystemButton->SetButtonText("시스템");
@@ -119,6 +124,11 @@ void House_UI::Start()
 	TeamLogo->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::UIImage) });
 	TeamLogo->Transform.AddLocalPosition({-590.0f, 325.0f});
 
+	Name = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	Name->SetText("Galmuri14", TeamInfo::MyInfo.GetTeamName(), 32.0f, float4::WHITE, FW1_LEFT);
+	Name->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
+	Name->Transform.AddLocalPosition({ -540.0f, 340.0f });
+
 	GameEngineInput::AddInputObject(this);
 }
 
@@ -146,20 +156,7 @@ void House_UI::PopBundle(std::shared_ptr<class MenuButton> _Menu, std::shared_pt
 		_Menu->IsSelectTrue();
 	}
 
-	//else if (true == _Bundle->IsPopUp && true == _Menu->GetIsClick())
-	//{
-	//	if (true == _Bundle->IsButtonsClick())
-	//	{
-	//		return;
-	//	}
-	//	_Bundle->State.ChangeState(BundleState::PopDown);
-	//	_Menu->IsSelectFalse();
-	//}
-	//else if (true == _Bundle->IsPopUp && true == GameEngineInput::IsDown(VK_LBUTTON, this))
-	//{
-	//	//_Bundle->State.ChangeState(BundleState::PopDown);
-	//	//_Menu->IsSelectFalse();
-	//}
+
 }
 
 

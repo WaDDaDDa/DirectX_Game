@@ -122,6 +122,40 @@ void IntroLevel::Start()
 		}
 	}
 
+	{
+		// 싱글 스프라이트 로드
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("GameEngineResources");
+		Dir.MoveChild("ContentsResources\\Stadium");
+
+		std::vector<GameEngineFile> Files = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Files.size(); i++)
+		{
+			GameEngineFile& File = Files[i];
+			GameEngineTexture::Load(File.GetStringPath());
+		}
+
+		GameEngineSprite::CreateSingle("stadium.png");
+		GameEngineSprite::CreateSingle("stadium_sky_bg.png");
+		GameEngineSprite::CreateSingle("stadium_VS.png");
+		GameEngineSprite::CreateSingle("win_indicator_0.png");
+		GameEngineSprite::CreateSingle("win_indicator_1.png");
+		GameEngineSprite::CreateSingle("banpick_ui_bg.png");
+		GameEngineSprite::CreateSingle("stadium_bg.png");
+		GameEngineSprite::CreateSingle("stadium_frame.png");
+		GameEngineSprite::CreateSingle("stadium_chair.png");
+		GameEngineSprite::CreateSingle("stadium_desk.png");
+		GameEngineSprite::CreateSingle("stadium_frame_front.png");
+		GameEngineSprite::CreateSingle("set_result_ui_bg.png");
+		GameEngineSprite::CreateSingle("teamfight_manager_title_bg.png");
+		GameEngineSprite::CreateSingle("logo_tp.png");	
+		GameEngineSprite::CreateSingle("tmouse_curosr.png");
+	}
+
+
+
+
 	EnemyInfo::Info.Init();
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();

@@ -13,15 +13,20 @@ UI_Mouse::~UI_Mouse()
 
 }
 
-
 void UI_Mouse::Start()
 {
 	MouseCol = CreateComponent<GameEngineCollision>(CollisionOrder::Mouse);
 	MouseCol->Transform.SetLocalScale(MouseColScale);
 
+	Renderer = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	Renderer->SetSprite("tmouse_curosr.png");
+	Renderer->AutoSpriteSizeOn();
+	Renderer->Transform.AddLocalPosition({ 14.0f, -14.0f, -static_cast<float>(ContentsOrder::Text) });
+
 	ChangeState(UI_MouseState::Idle);
 
 	GameEngineInput::AddInputObject(this);
+
 
 	GameMouse = GetDynamic_Cast_This<UI_Mouse>();
 

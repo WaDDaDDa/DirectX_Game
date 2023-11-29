@@ -77,6 +77,8 @@ protected:
 
     UI_MouseState State = UI_MouseState::Max;
 private:
+    std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
+
     TeamType PlayerTeam = TeamType::Blue;
 
     float4 MouseColScale = { 2.0f, 2.0f };

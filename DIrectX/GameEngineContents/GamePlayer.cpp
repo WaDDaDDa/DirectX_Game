@@ -39,6 +39,7 @@ void GamePlayer::Start()
 	NameText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
 	NameText->Transform.AddLocalPosition({ 0.0f, 60.0f });
 	NameText->SetText("Galmuri14", Spec.Name, 20.0f, float4::WHITE, FW1_CENTER);
+
 	// 프레임이 바뀔때 호출되는 함수에 헤어위치를 캐릭터의 머리위치에 옮겨질수 있게하는 함수를 만든다.
 	// 엔딩레벨도 만들어야함.
 }
@@ -61,9 +62,7 @@ void GamePlayer::SpecInit(GamePlayerInfo _Spec)
 	Spec = _Spec;
 	HairRenderer->SetSprite("Coach_Hair", Spec.HairNum);
 	NameText->SetText("Galmuri14", Spec.Name, 20.0f, float4::WHITE, FW1_CENTER);
-
 }
-
 
 void GamePlayer::Update(float _Delta)
 {

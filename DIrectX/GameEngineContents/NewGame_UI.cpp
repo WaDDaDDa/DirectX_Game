@@ -178,6 +178,31 @@ void NewGame_UI::Start()
 	CoachHairText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
 	CoachHairText->Transform.AddLocalPosition({ 220.0f, 18.0f });
 
+	NameText1Bg = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	NameText1Bg->CreateAnimation("Null", "ButtonSlot", 0.1f, 0, 0, false);
+	NameText1Bg->ChangeAnimation("Null");
+	NameText1Bg->SetImageScale({ 320.0f, 45.0f });
+	NameText1Bg->Transform.AddLocalPosition({ -360.0f, 85.0f, -static_cast<float>(ContentsOrder::UI) });
+	NameText1Bg->SetPivotType(PivotType::Left);
+
+	NameText1 = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	NameText1->SetText("Galmuri14", TeamInfo::MyInfo.GetTeamName(), 25.0f, float4::WHITE, FW1_LEFT);
+	NameText1->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
+	NameText1->Transform.AddLocalPosition({ -330.0f, 98.0f });
+
+	NameText2Bg = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UI);
+	NameText2Bg->CreateAnimation("Null", "ButtonSlot", 0.1f, 0, 0, false);
+	NameText2Bg->ChangeAnimation("Null");
+	NameText2Bg->SetImageScale({ 320.0f, 45.0f });
+	NameText2Bg->Transform.AddLocalPosition({ 90.0f, 85.0f, -static_cast<float>(ContentsOrder::UI) });
+	NameText2Bg->SetPivotType(PivotType::Left);
+
+	NameText2 = CreateComponent<GameEngineUIRenderer>(ContentsOrder::Text);
+	NameText2->SetText("Galmuri14", TeamInfo::MyInfo.GetCoachName(), 25.0f, float4::WHITE, FW1_LEFT);
+	NameText2->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
+	NameText2->Transform.AddLocalPosition({ 120.0f, 98.0f });
+
+
 }
 
 void NewGame_UI::LevelStart(GameEngineLevel* _PrevLevel)

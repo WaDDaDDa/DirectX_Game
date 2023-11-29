@@ -29,6 +29,11 @@ void Coach::Start()
 
 	BodyRenderer->SetFrameChangeFunctionAll (FrameFunction);
 
+	NameText = CreateComponent<GameEngineSpriteRenderer>(ContentsOrder::Text);
+	NameText->Transform.AddLocalPosition({ 0.0f, 0.0f, -static_cast<float>(ContentsOrder::Text) });
+	NameText->Transform.AddLocalPosition({ 0.0f, 60.0f });
+	NameText->SetText("Galmuri14", TeamInfo::MyInfo.GetCoachName(), 20.0f, float4{27.0f, 144.0f, 255.0f}, FW1_CENTER);
+
 	// 프레임이 바뀔때 호출되는 함수에 헤어위치를 캐릭터의 머리위치에 옮겨질수 있게하는 함수를 만든다.
 	// 엔딩레벨도 만들어야함.
 

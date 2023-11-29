@@ -19,7 +19,6 @@ protected:
     void Start();
     void Update(float _Delta);
 
-
     void LevelStart(GameEngineLevel* _PrevLevel);
 
     void LevelEnd(GameEngineLevel* _NextLevel);
@@ -92,6 +91,11 @@ private:
     std::shared_ptr<class GameEngineSpriteRenderer> TeamLogoText;
     std::shared_ptr<class GameEngineSpriteRenderer> CoachHairText;
     
+    std::shared_ptr<class GameEngineSpriteRenderer> NameText1Bg;
+    std::shared_ptr<class GameEngineSpriteRenderer> NameText1;
+
+    std::shared_ptr<class GameEngineSpriteRenderer> NameText2Bg;
+    std::shared_ptr<class GameEngineSpriteRenderer> NameText2;
 
 };
 

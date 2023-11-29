@@ -24,6 +24,8 @@ private:
     std::shared_ptr<class GameEngineSpriteRenderer> HeaderRenderer;
     std::shared_ptr<class GameEngineSpriteRenderer> GroundRenderer;
     std::shared_ptr<class GameEngineSpriteRenderer> TeamLogo;
+    std::shared_ptr<class GameEngineSpriteRenderer> Name;
+
 
     std::shared_ptr<class MenuButton> TeamButton;
     std::shared_ptr<class MenuButton> ManagerButton;

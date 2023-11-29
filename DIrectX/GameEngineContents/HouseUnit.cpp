@@ -69,7 +69,6 @@ void HouseUnit::Start()
 			return;
 		};
 
-
 	GameEngineInput::AddInputObject(this);
 }
 
@@ -721,40 +720,4 @@ void HouseUnit::Update(float _Delta)
 {
 	State.Update(_Delta);
 
-	float Speed = 100.0f;
-
-	if (GameEngineInput::IsPress('A', this))
-	{
-		Transform.AddLocalPosition(float4::LEFT * _Delta * Speed);
-		BodyRenderer->ChangeAnimation("HandWash");
-	}
-
-	if (GameEngineInput::IsPress('D', this))
-	{
-		Transform.AddLocalPosition(float4::RIGHT * _Delta * Speed);
-		BodyRenderer->ChangeAnimation("WHat");
-	}
-
-	if (GameEngineInput::IsPress('W', this))
-	{
-		Transform.AddLocalPosition(float4::UP * _Delta * Speed);
-		BodyRenderer->ChangeAnimation("Eat");
-	}
-
-	if (GameEngineInput::IsDown('S', this))
-	{
-		State.ChangeState(HouseUnitEnum::Sleep);
-	}
-
-	if (GameEngineInput::IsPress('Q', this))
-	{
-		IsSleep = false;
-		BodyRenderer->ChangeAnimation("Idle");
-	}
-
-	if (GameEngineInput::IsPress('E', this))
-	{
-		IsSleep = true;
-		BodyRenderer->ChangeAnimation("Sleep");
-	}
 }

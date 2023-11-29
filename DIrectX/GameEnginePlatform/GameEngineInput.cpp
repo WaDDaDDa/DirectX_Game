@@ -231,6 +231,7 @@ bool GameEngineInput::IsDown(int _Key, void* _Ptr)
 
 	return AllKeys[_Key].Down;
 }
+
 bool GameEngineInput::IsUp(int _Key, void* _Ptr)
 {
 	if (false == InputObject.contains(_Ptr))
