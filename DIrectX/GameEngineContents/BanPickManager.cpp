@@ -23,7 +23,7 @@ BanPickManager::~BanPickManager()
 
 void BanPickManager::CardIntit()
 {
-	for (size_t i = 0; i < UnitCount; i++)
+	for (size_t i = 0; i < static_cast<size_t>(UnitCount); i++)
 	{
 		Card[i]->Init(i);
 	}
@@ -31,7 +31,7 @@ void BanPickManager::CardIntit()
 
 void BanPickManager::CardValueReset()
 {
-	for (size_t i = 0; i < UnitCount; i++)
+	for (size_t i = 0; i < static_cast<size_t>(UnitCount); i++)
 	{
 		Card[i]->IsStart = false;
 	}
@@ -42,7 +42,7 @@ void BanPickManager::Start()
 {
 	GameBoard = GetLevel()->CreateActor<BanPickBoard>();
 
-	for (size_t i = 0; i < UnitCount; i++)
+	for (size_t i = 0; i < static_cast<size_t>(UnitCount); i++)
 	{
 		Card.push_back(GetLevel()->CreateActor<BanPickCard>());
 	}
@@ -50,7 +50,7 @@ void BanPickManager::Start()
 	CardIntit();
 
 	UnitImage = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
-	for (size_t i = 0; i < UnitCount; i++)
+	for (size_t i = 0; i < static_cast<size_t>(UnitCount); i++)
 	{
 		UnitImage->CreateAnimation(Card[i]->GetUnitNameToString() += "_Idle", Card[i]->GetUnitNameToString() += "CardAni", 0.1f, 0, 0, false);
 	}
@@ -313,7 +313,7 @@ void BanPickManager::Start()
 	BlueBanUnit = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
 	BlueBanUnit->SetMaskTexture("TestMask.png", MaskMode::DynamicMask);
 	BlueBanUnit->RenderBaseInfoValue.MaskPivot = { 0.0f, 35.0f };
-	for (size_t i = 0; i < UnitCount; i++)
+	for (size_t i = 0; i < static_cast<size_t>(UnitCount); i++)
 	{
 		BlueBanUnit->CreateAnimation(Card[i]->GetUnitNameToString() += "_Idle", Card[i]->GetUnitNameToString() += "CardAni", 0.1f, 0, 0, false);
 	}
@@ -345,7 +345,7 @@ void BanPickManager::Start()
 	RedBanUnit = CreateComponent<GameEngineUIRenderer>(ContentsOrder::UIImage);
 	RedBanUnit->SetMaskTexture("TestMask.png", MaskMode::DynamicMask);
 	RedBanUnit->RenderBaseInfoValue.MaskPivot = { 0.0f, 35.0f };
-	for (size_t i = 0; i < UnitCount; i++)
+	for (size_t i = 0; i < static_cast<size_t>(UnitCount); i++)
 	{
 		RedBanUnit->CreateAnimation(Card[i]->GetUnitNameToString() += "_Idle", Card[i]->GetUnitNameToString() += "CardAni", 0.1f, 0, 0, false);
 	}
@@ -400,7 +400,7 @@ void BanPickManager::LevelStart(GameEngineLevel* _PrevLevel)
 void BanPickManager::Update(float _Delta)
 {
 	// CurCard셋팅하는거.
-	for (size_t i = 0; i < UnitCount; i++)
+	for (size_t i = 0; i < static_cast<size_t>(UnitCount); i++)
 	{
 		if (true == Card[i]->IsStart && false == Cputurn)
 		{
@@ -559,7 +559,7 @@ void BanPickManager::BlueBanStart()
 void BanPickManager::BlueBanUpdate(float _Delta)
 {
 
-	for (size_t i = 0; i < UnitCount; i++)
+	for (size_t i = 0; i < static_cast<size_t>(UnitCount); i++)
 	{
 		// 벤 구간
 		if (true == Card[i]->IsPick && 1 > BanCount)
@@ -601,17 +601,18 @@ void BanPickManager::RedBanUpdate(float _Delta)
 	if (true == Cputurn)
 	{
 		GameEngineRandom Rand;
-		size_t CardNum = static_cast<size_t>(Rand.RandomInt(0, UnitCount - static_cast<size_t>(1)));
-		while (false != Card[CardNum]->IsSelect)
+		int CardNum = Rand.RandomInt(0, UnitCount - 1);
+		while (false != Card[static_cast<size_t>(CardNum)]->IsSelect)
 		{
 			CardNum = Rand.RandomInt(0, UnitCount -1);
 		}
 
-		Card[CardNum]->IsPick = true;
-		CurCard = Card[CardNum];
+		Card[static_cast<size_t>(CardNum)]->IsPick = true;
+		CurCard = Card[static_cast<size_t>(CardNum)];
 	}
 
-	for (size_t i = 0; i < UnitCount; i++)
+	
+	for (size_t i = 0; i < static_cast<size_t>(UnitCount); i++)
 	{
 		// 벤 구간
 		if (true == Card[i]->IsPick && 2 > BanCount)
@@ -667,7 +668,7 @@ void BanPickManager::BluePickStart()
 void BanPickManager::BluePickUpdate(float _Delta)
 {
 	// 처음 들어온 카드 설정
-	for (size_t i = 0; i < UnitCount; i++)
+	for (size_t i = 0; i < static_cast<size_t>(UnitCount); i++)
 	{
 		if (true == Card[i]->IsPick)
 		{
@@ -718,7 +719,7 @@ void BanPickManager::RedPickUpdate(float _Delta)
 	}
 
 	// 처음 들어온 카드 설정
-	for (size_t i = 0; i < UnitCount; i++)
+	for (size_t i = 0; i < static_cast<size_t>(UnitCount); i++)
 	{
 		if (true == Card[i]->IsPick)
 		{

@@ -203,7 +203,7 @@ private:
 
     std::shared_ptr<class GameEngineSpriteRenderer> NoticeText;
 
-    size_t UnitCount = 8;
+    int UnitCount = 8;
     std::shared_ptr<class BanPickCard> CurCard;
     std::shared_ptr<class BanPickCard> BlueBanCard;
     std::shared_ptr<class BanPickCard> RedBanCard;
